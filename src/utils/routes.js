@@ -13,7 +13,7 @@ export const ROUTES = [
 	{ name: "Friends", path: "/friends" },
 	{ name: "Add to group", path: "/:id/add-to-group" },
 	{ name: "Gifts", path: "/gifts" },
-	{ name: "New gift", path: "/new-gift" },
+	{ name: "New gift", path: "/gifts/new" },
 	{ name: "New gift for friend", path: "/:id/new-gift-for-friend" },
 	{ name: "Edit gift", path: "/gifts/:id/edit-gift" },
 	{ name: "Profile", path: "/:id" },

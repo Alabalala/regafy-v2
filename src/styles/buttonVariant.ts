@@ -1,22 +1,24 @@
 import { tv } from "tailwind-variants";
 
+export type variant = "primary" | "secondary" | "delete";
+
 export const buttonVariants = tv({
 	base:
-		"px-2 h-10 w-52 rounded-md text-base border cursor-pointer transition-colors disabled:cursor-not-allowed disabled:pointer-events-none disabled:bg-gray-400 disabled:text-black disabled:opacity-60",
+		"px-2 py-1 text-center rounded-md border-2 cursor-pointer transition-colors disabled:cursor-not-allowed disabled:pointer-events-none disabled:bg-gray-400 disabled:text-black disabled:opacity-60",
 
 	variants: {
 		variant: {
 			primary:
-				"bg-accent text-on-accent border border-transparent hover:bg-tertiary hover:text-on-tertiary hover:border-white active:bg-tertiary-darker active:text-on-tertiary",
+				"bg-accent text-on-accent hover:bg-tertiary hover:text-on-tertiary hover:border-white active:bg-tertiary-darker active:text-on-tertiary",
 			secondary:
-				"bg-secondary-accent text-on-secondary-accent border border-transparent hover:bg-white hover:text-secondary-accent hover:border-secondary-accent active:bg-secondary-accent-dark active:text-on-secondary-accent",
+				"bg-secondary-accent text-on-secondary-accent hover:bg-white hover:text-secondary-accent hover:border-secondary-accent active:bg-secondary-accent-dark active:text-on-secondary-accent",
 			delete:
-				"bg-red-600 text-white border border-transparent hover:bg-red-700 hover:border-white active:bg-red-800 active:border-white",
+				"bg-red-600 text-white hover:bg-red-700 hover:border-white active:bg-red-800 active:border-white",
 		},
 
 		floating: {
 			true:
-				"sticky right-4 ml-auto self-end justify-self-end z-10 shadow-md hover:shadow-lg",
+				"sticky bottom-0 right-0 ml-auto self-end justify-self-end z-10 shadow-md hover:shadow-lg",
 		},
 
 		size: {
