@@ -1,5 +1,11 @@
+import GiftForm from "@/components/GiftForm/GiftForm";
+
 const NewGift = () => {
-	return <div>NewGift</div>;
+	return (
+		<main>
+			<GiftForm></GiftForm>
+		</main>
+	);
 };
 
 export default NewGift;
