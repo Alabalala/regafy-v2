@@ -6,5 +6,10 @@ interface Props {
 }
 
 export const NextLink = ({ href, children, variant }: Props) => (
-	<Link href={href}>{children}</Link>
+	<Link
+		className={""}
+		href={href}
+	>
+		{children}
+	</Link>
 );

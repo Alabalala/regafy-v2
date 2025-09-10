@@ -3,29 +3,29 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
-  --color-background: #FFF7E6;
-  --color-secondary: #D6C2E0;
-  --color-tertiary: #B9E3D6;
-  --color-tertiary-darker: #90b8ab;
-  --color-accent: #FFD966;
-  --color-secondary-accent: #FF6F61;
+	--color-background: #fff7e6;
+	--color-secondary: #d6c2e0;
+	--color-tertiary: #b9e3d6;
+	--color-tertiary-darker: #90b8ab;
+	--color-accent: #ffd966;
+	--color-secondary-accent: #ff8c94;
 
-    --color-on-background: #000000; 
-  --color-on-secondary: #000000; 
-  --color-on-tertiary: #000000; 
-  --color-on-accent: #000000;           
-  --color-on-secondary-accent: #ffffff;
+	--color-on-background: #000000;
+	--color-on-secondary: #000000;
+	--color-on-tertiary: #000000;
+	--color-on-accent: #000000;
+	--color-on-secondary-accent: #ffffff;
 
-    --color-background-dark: #1A1A1A;
-  --color-secondary-dark: #3E3A4E;
-  --color-tertiary-dark: #2D4A3B;
-  --color-tertiary-darker-dark: #1F3A2B;
-  --color-accent-dark: #FFD966;
-  --color-secondary-accent-dark: #FF6F61;
+	--color-background-dark: #1a1a1a;
+	--color-secondary-dark: #3e3a4e;
+	--color-tertiary-dark: #2d4a3b;
+	--color-tertiary-darker-dark: #1f3a2b;
+	--color-accent-dark: #ffd966;
+	--color-secondary-accent-dark: #2aa198;
 
-  --color-on-background-dark: #ffffff;
-  --color-on-secondary-dark: #ffffff;
-  --color-on-tertiary-dark: #ffffff;
-  --color-on-accent-dark: #000000;
-  --color-on-secondary-accent-dark: #000000;
+	--color-on-background-dark: #ffffff;
+	--color-on-secondary-dark: #ffffff;
+	--color-on-tertiary-dark: #ffffff;
+	--color-on-accent-dark: #000000;
+	--color-on-secondary-accent-dark: #000000;
 }
