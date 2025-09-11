@@ -2,7 +2,7 @@ import { InputType } from "../../../.next/types/forms";
 import AddDocumentSVG from "../SVGs/AddDocumentSVG";
 
 interface Props {
-	value: string;
+	value: string | number;
 	input: InputType;
 	onChange: (
 		e: React.ChangeEvent<

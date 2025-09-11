@@ -4,7 +4,7 @@ import Input from "../Input/Input";
 import { useState } from "react";
 
 const GiftForm = () => {
-	const [formData, setFormData] = useState<Record<string, string>>({
+	const [formData, setFormData] = useState<Record<string, string | number>>({
 		...GIFT_FORM_INITIAL_VALUES,
 	});
 
