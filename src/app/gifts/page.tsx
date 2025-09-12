@@ -1,7 +1,7 @@
-import GiftListClient from "@/components/GiftListClient/GiftListClient";
-import { getCurrentUser } from "@/utils/supabase/auth";
-import { getGifts } from "@/utils/supabase/gifts";
-import { createClient } from "@/utils/supabase/server";
+import GiftListClient from "@/features/gifts/components/GiftListClient/GiftListClient";
+import { getCurrentUser } from "@/shared/utils/supabase/auth";
+import { getGifts } from "@/features/gifts/services/supabase";
+import { createClient } from "@/shared/utils/supabase/server";
 
 export default async function Gifts({}) {
 	const supabase = await createClient();

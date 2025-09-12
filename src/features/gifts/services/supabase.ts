@@ -1,6 +1,6 @@
 import { SupabaseClient } from "@supabase/supabase-js";
-import { Database } from "../../../database.types";
-import { FormDataWithFileType, GiftFormData } from "../../../.next/types/forms";
+import { Database } from "../../../shared/types/database.types";
+import { FormDataWithFileType } from "../types/form";
 
 export async function getGifts(
 	userId: string,

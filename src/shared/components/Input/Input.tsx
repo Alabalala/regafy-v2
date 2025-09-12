@@ -1,4 +1,4 @@
-import { InputType } from "../../../.next/types/forms";
+import { InputType } from "@/shared/types/forms";
 
 interface Props {
 	value: string;

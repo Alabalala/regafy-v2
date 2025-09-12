@@ -3,19 +3,19 @@ import {
 	GIFT_FORM_FIELDS,
 	GIFT_FORM_INITIAL_VALUES,
 	FILE_INPUT_INITIAL_VALUES,
-} from "@/constants/forms";
-import Input from "../Input/Input";
+} from "@/features/gifts/constants/form";
+import Input from "../../../../shared/components/Input/Input";
 import { useEffect, useState } from "react";
-import FileInput from "../FileInput/FileInput";
+import FileInput from "../../../../shared/components/FileInput/FileInput";
+import { Button } from "../../../../shared/components/Button/Button";
+import { validateGiftForm } from "@/features/gifts/services/validateGiftForm";
+import { giftFormScheme } from "@/features/gifts/services/giftFormScheme";
 import {
 	FieldErrors,
-	FileInputDataType,
 	FormDataWithFileType,
 	GiftFormData,
-} from "../../../.next/types/forms";
-import { Button } from "../Button/Button";
-import { validateGiftForm } from "@/utils/formValidation/validateGiftForm";
-import { giftFormScheme } from "@/utils/formValidation/giftFormScheme";
+} from "../../types/form";
+import { FileInputDataType } from "@/shared/types/forms";
 
 const GiftForm = () => {
 	const [formData, setFormData] = useState<GiftFormData>(

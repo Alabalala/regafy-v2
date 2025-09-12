@@ -1,4 +1,4 @@
-import GiftForm from "@/components/GiftForm/GiftForm";
+import GiftForm from "@/features/gifts/components/GiftForm/GiftForm";
 
 const NewGift = () => {
 	return (

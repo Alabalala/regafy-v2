@@ -1,6 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { SupabaseClient } from "@supabase/supabase-js";
-import { Database } from "../../../database.types";
+import { Database } from "../../types/database.types";
 
 export async function getCurrentUser(supabase: SupabaseClient<Database>) {
 	const { data, error } = await supabase.auth.getUser();

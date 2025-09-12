@@ -1,6 +1,6 @@
 import z, { success } from "zod";
-import { GiftFormData, ValidationResult } from "../../../.next/types/forms";
 import { giftFormScheme } from "./giftFormScheme";
+import { GiftFormData, ValidationResult } from "../types/form";
 
 export const validateGiftForm = (formData: GiftFormData): ValidationResult => {
 	const result = giftFormScheme.safeParse(formData);

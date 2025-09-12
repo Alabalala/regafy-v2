@@ -1,4 +1,4 @@
-import GiftPost from "@/components/GiftPost/GiftPost";
+import GiftPost from "@/features/gifts/components/GiftPost/GiftPost";
 
 export default function Home() {
 	return (

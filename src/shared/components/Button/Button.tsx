@@ -1,4 +1,4 @@
-import { buttonVariants, variant } from "@/styles/buttonVariant";
+import { buttonVariants, variant } from "@/shared/styles/buttonVariant";
 
 interface Props {
 	children: React.ReactNode;

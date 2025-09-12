@@ -1,4 +1,4 @@
-import { buttonVariants, variant } from "@/styles/buttonVariant";
+import { buttonVariants, variant } from "@/shared/styles/buttonVariant";
 import Link from "next/link";
 
 interface Props {

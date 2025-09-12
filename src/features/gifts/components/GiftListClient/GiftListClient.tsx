@@ -1,11 +1,11 @@
 "use client";
 import { useEffect } from "react";
-import { Gift } from "../../../.next/types/supabase/Gifts";
-import { useGiftStore } from "@/stores/giftStore";
 import GiftPost from "../GiftPost/GiftPost";
-import { useUserStore } from "@/stores/userStore";
-import { NextLink } from "../Link/Link";
-import { getPath } from "@/utils/getPath";
+import { useUserStore } from "@/shared/stores/userStore";
+import { NextLink } from "../../../../shared/components/Link/Link";
+import { getPath } from "@/shared/utils/getPath";
+import { useGiftStore } from "../../stores/giftStore";
+import { Gift } from "@/shared/types/supabase/supabase";
 
 interface Props {
 	gifts: Gift[];

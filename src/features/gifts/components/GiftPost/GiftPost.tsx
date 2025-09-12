@@ -1,10 +1,10 @@
-import { poppins } from "@/fonts/fonts";
+import { poppins } from "@/shared/fonts/fonts";
 import Image from "next/image";
 import Link from "next/link";
-import ShareSVG from "../SVGs/ShareSVG";
-import QuestionChatSVG from "../SVGs/QuestionChatSVG";
-import BookMarkSVG from "../SVGs/BookMarkSVG";
-import { Gift } from "../../../.next/types/supabase/Gifts";
+import ShareSVG from "../../../../shared/components/SVGs/ShareSVG";
+import QuestionChatSVG from "../../../../shared/components/SVGs/QuestionChatSVG";
+import BookMarkSVG from "../../../../shared/components/SVGs/BookMarkSVG";
+import { Gift } from "../../../../../.next/types/supabase/supabase";
 
 interface Props {
 	gift: Gift;
