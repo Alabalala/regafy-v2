@@ -16,13 +16,16 @@ export const giftFormScheme = z.object({
 		.max(400, "Description must be at most 300 characters.")
 		.optional()
 		.or(z.literal("")),
-	price: z.string().refine((val) => !isNaN(Number(val)) && Number(val) >= 0, {
-		message: "Price must be a positive number",
-	}),
+	price: z
+		.string()
+		.refine((val) => !isNaN(Number(val)) && Number(val) >= 0 && val !== "", {
+			message: "Price must be a positive number",
+		}),
 	image: z
 		.file()
 		.refine((file) => file.type.startsWith("image/"), "File must be an image")
 		.max(5_000_000, "File must be less than 10MB")
+		.nullable()
 		.optional(),
 	rating: z
 		.string()
