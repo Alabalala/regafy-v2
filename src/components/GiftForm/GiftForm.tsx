@@ -100,6 +100,7 @@ const GiftForm = () => {
 							onChange={onChange}
 							input={input}
 							value={formData[input.name as keyof GiftFormData]}
+							error={!!errors[input.name]?.length}
 						/>
 					)}
 					<div className="text-red-500 text-sm">{errors[input.name]?.[0]}</div>

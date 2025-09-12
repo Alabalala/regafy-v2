@@ -10,9 +10,15 @@ interface Props {
 	) => void;
 	required?: boolean;
 	preview?: string;
+	error: boolean;
 }
 
-export default function Input({ value, input, onChange }: Props) {
+export default function Input({
+	value,
+	input,
+	onChange,
+	error = false,
+}: Props) {
 	const commonProps = {
 		name: input.name,
 		value,
@@ -22,11 +28,13 @@ export default function Input({ value, input, onChange }: Props) {
 		disabled: input.disabled ?? false,
 	};
 
+	const commonStyle = `border-2 rounded-md p-2 focus:outline-accent ${error && "border-red-600 focus:border-red-800"} `;
+
 	if (input.type === "textarea") {
 		return (
 			<textarea
 				rows={5}
-				className={"border-2 rounded-md p-2 "}
+				className={commonStyle}
 				{...commonProps}
 			/>
 		);
@@ -34,7 +42,10 @@ export default function Input({ value, input, onChange }: Props) {
 
 	if (input.type === "select") {
 		return (
-			<select {...commonProps}>
+			<select
+				{...commonProps}
+				className={commonStyle}
+			>
 				{input.options?.map((opt) => (
 					<option
 						key={opt.value}
@@ -49,7 +60,7 @@ export default function Input({ value, input, onChange }: Props) {
 
 	return (
 		<input
-			className={"border-2 rounded-md p-2"}
+			className={commonStyle}
 			type={input.type}
 			{...commonProps}
 			accept={input.accept ?? ""}
