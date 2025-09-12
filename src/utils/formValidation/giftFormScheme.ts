@@ -19,5 +19,9 @@ export const giftFormScheme = z.object({
 	price: z.string().refine((val) => !isNaN(Number(val)) && Number(val) >= 0, {
 		message: "Price must be a positive number",
 	}),
-	file: z.file().max(10_000_000, "File must be less than 10MB").optional(),
+	image: z
+		.file()
+		.refine((file) => file.type.startsWith("image/"), "File must be an image")
+		.max(5_000_000, "File must be less than 10MB")
+		.optional(),
 });

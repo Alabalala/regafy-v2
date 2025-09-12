@@ -8,6 +8,7 @@ interface Props {
 	onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 	preview?: string;
 	setFile: React.Dispatch<React.SetStateAction<FileInputDataType>>;
+	error?: boolean;
 }
 
 export default function FileInput({
@@ -15,6 +16,7 @@ export default function FileInput({
 	onChange,
 	preview,
 	setFile,
+	error = false,
 }: Props) {
 	const onClick = () => {
 		setFile((prev) => ({ ...prev, file: null, preview: null }));
@@ -25,7 +27,7 @@ export default function FileInput({
 			{!preview ? (
 				<label
 					htmlFor={"fileInput"}
-					className={"flex flex-col gap-2 border-2 border-dashed p-10"}
+					className={`flex flex-col gap-2 border-2 border-dashed p-10`}
 				>
 					<input
 						id={"fileInput"}
@@ -33,6 +35,7 @@ export default function FileInput({
 						type={input.type}
 						accept={input.accept ?? ""}
 						onChange={onChange}
+						name={input.name}
 					/>
 					<div className={"mx-auto flex flex-col gap-2 justify-center items-center"}>
 						<AddDocumentSVG
@@ -44,18 +47,22 @@ export default function FileInput({
 				</label>
 			) : (
 				<div
-					className={
-						"flex flex-col gap-2 border-2 border-dashed justify-center items-center p-10 relative"
-					}
+					className={`flex flex-col gap-2 border-2 border-dashed justify-center items-center p-10 relative ${error && "border-red-600"}`}
 				>
-					<p>Your image</p>
-					<Image
-						width={100}
-						height={100}
-						className={"object-cover rounded"}
-						src={preview}
-						alt={"Preview of your image"}
-					/>
+					{error ? (
+						<p className="text-red-600">Wrong file type</p>
+					) : (
+						<p>Your image</p>
+					)}
+					{!error && (
+						<Image
+							width={100}
+							height={100}
+							className={"object-cover rounded"}
+							src={preview}
+							alt={"Preview of your image"}
+						/>
+					)}
 
 					<Button
 						onClick={onClick}

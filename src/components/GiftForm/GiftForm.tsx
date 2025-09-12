@@ -29,6 +29,7 @@ const GiftForm = () => {
 		>,
 	) => {
 		const { name, value, type, files } = e.target as HTMLInputElement;
+		console.log("name ", name);
 		const normalisedValue = value.replace(/^ +/, "");
 		let fieldValue: string | File | null = normalisedValue;
 
@@ -94,6 +95,7 @@ const GiftForm = () => {
 							onChange={onChange}
 							input={input}
 							preview={file.preview ?? ""}
+							error={!!errors[input.name]?.length}
 						></FileInput>
 					) : (
 						<Input
