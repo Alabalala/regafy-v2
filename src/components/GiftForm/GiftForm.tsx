@@ -10,6 +10,7 @@ import FileInput from "../FileInput/FileInput";
 import {
 	FieldErrors,
 	FileInputDataType,
+	FormDataWithFileType,
 	GiftFormData,
 } from "../../../.next/types/forms";
 import { Button } from "../Button/Button";
@@ -66,9 +67,9 @@ const GiftForm = () => {
 	}, [errors]);
 
 	const onSubmit = () => {
-		const formDataWithFile = {
+		const formDataWithFile: FormDataWithFileType = {
 			...formData,
-			file: file.file,
+			image: file.file,
 		};
 
 		const validationResult = validateGiftForm(formDataWithFile);
@@ -79,6 +80,11 @@ const GiftForm = () => {
 		}
 
 		setErrors({});
+		try {
+			console.log("Form submitted:", formDataWithFile);
+		} catch (err) {
+			console.error("Unexpected error:", err);
+		}
 	};
 
 	return (

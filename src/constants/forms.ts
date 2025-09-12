@@ -33,6 +33,9 @@ export const GIFT_FORM_INITIAL_VALUES = {
 	title: "",
 	description: "",
 	price: "",
+	image: null,
+	userId: "",
+	createdById: "",
 };
 
 export const FILE_INPUT_INITIAL_VALUES = {

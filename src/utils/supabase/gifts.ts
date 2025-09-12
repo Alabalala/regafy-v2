@@ -1,5 +1,6 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { Database } from "../../../database.types";
+import { FormDataWithFileType, GiftFormData } from "../../../.next/types/forms";
 
 export async function getGifts(
 	userId: string,
@@ -35,11 +36,14 @@ export async function getGiftInfo(giftId, supabase) {
 	return data;
 }
 
-export async function createGift(giftData, supabase) {
+export async function createGift(
+	giftData: FormDataWithFileType,
+	supabase: SupabaseClient<Database>,
+) {
 	const { data: maxPositionData, error: maxPositionError } = await supabase
 		.from("gifts")
 		.select("position")
-		.eq("profile_id", giftData.profile_id)
+		.eq("profile_id", giftData.userId)
 		.order("position", { ascending: false })
 		.limit(1);
 
