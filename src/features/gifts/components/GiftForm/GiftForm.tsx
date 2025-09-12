@@ -16,6 +16,7 @@ import {
 	GiftFormData,
 } from "../../types/form";
 import { FileInputDataType } from "@/shared/types/forms";
+import StarRateInput from "../StarRateInput/StarRateInput";
 
 const GiftForm = () => {
 	const [formData, setFormData] = useState<GiftFormData>(
@@ -23,6 +24,7 @@ const GiftForm = () => {
 	);
 	const [file, setFile] = useState<FileInputDataType>(FILE_INPUT_INITIAL_VALUES);
 	const [errors, setErrors] = useState<FieldErrors>({});
+	const [rating, setRating] = useState<string>("1");
 
 	const onChange = (
 		e: React.ChangeEvent<
@@ -70,6 +72,7 @@ const GiftForm = () => {
 		const formDataWithFile: FormDataWithFileType = {
 			...formData,
 			image: file.file,
+			rating: rating,
 		};
 
 		const validationResult = validateGiftForm(formDataWithFile);
@@ -114,6 +117,12 @@ const GiftForm = () => {
 					<div className="text-red-500 text-sm">{errors[input.name]?.[0]}</div>
 				</div>
 			))}
+
+			<p className={"font-bold"}>Rate how much you want this gift</p>
+			<StarRateInput
+				rating={rating}
+				setRating={setRating}
+			/>
 			<div className={"flex justify-center"}>
 				<Button
 					type={"button"}

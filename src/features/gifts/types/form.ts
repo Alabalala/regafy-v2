@@ -8,6 +8,7 @@ export interface GiftFormData {
 
 export interface FormDataWithFileType extends GiftFormData {
 	image: File | null;
+	rating: string;
 }
 
 export type FieldErrors = Record<string, string[] | undefined>;

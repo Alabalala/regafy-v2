@@ -24,4 +24,9 @@ export const giftFormScheme = z.object({
 		.refine((file) => file.type.startsWith("image/"), "File must be an image")
 		.max(5_000_000, "File must be less than 10MB")
 		.optional(),
+	rating: z
+		.string()
+		.refine((val) => !isNaN(Number(val)) && Number(val) > 0 && Number(val) <= 5, {
+			message: "Error with ratings",
+		}),
 });
