@@ -1,7 +1,6 @@
 import Footer from "@/shared/components/Footer/Footer";
 import { NavBar } from "@/shared/components/NavBar/NavBar";
-import { openSans } from "@/shared/fonts/fonts";
-import "@/styles/globals.css";
+import "@/shared/styles/globals.css";
 
 export const metadata = {
 	title: "Create Next App",
