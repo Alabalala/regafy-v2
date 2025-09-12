@@ -16,7 +16,7 @@ export const GIFT_FORM_FIELDS = [
 	{
 		name: "price",
 		label: "Price",
-		type: "number",
+		type: "string",
 		required: true,
 		placeholder: "Help people know how much it will cost",
 	},
@@ -32,7 +32,7 @@ export const GIFT_FORM_FIELDS = [
 export const GIFT_FORM_INITIAL_VALUES = {
 	title: "",
 	description: "",
-	price: 0,
+	price: "",
 };
 
 export const FILE_INPUT_INITIAL_VALUES = {

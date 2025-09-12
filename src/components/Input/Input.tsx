@@ -1,7 +1,7 @@
 import { InputType } from "../../../.next/types/forms";
 
 interface Props {
-	value: string | number;
+	value: string;
 	input: InputType;
 	onChange: (
 		e: React.ChangeEvent<

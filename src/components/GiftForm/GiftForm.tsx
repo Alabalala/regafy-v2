@@ -7,13 +7,21 @@ import {
 import Input from "../Input/Input";
 import { useEffect, useState } from "react";
 import FileInput from "../FileInput/FileInput";
-import { FileInputDataType, GiftFormData } from "../../../.next/types/forms";
+import {
+	FieldErrors,
+	FileInputDataType,
+	GiftFormData,
+} from "../../../.next/types/forms";
+import { Button } from "../Button/Button";
+import { validateGiftForm } from "@/utils/formValidation/validateGiftForm";
+import { giftFormScheme } from "@/utils/formValidation/giftFormScheme";
 
 const GiftForm = () => {
 	const [formData, setFormData] = useState<GiftFormData>(
 		GIFT_FORM_INITIAL_VALUES,
 	);
 	const [file, setFile] = useState<FileInputDataType>(FILE_INPUT_INITIAL_VALUES);
+	const [errors, setErrors] = useState<FieldErrors>({});
 
 	const onChange = (
 		e: React.ChangeEvent<
@@ -21,24 +29,55 @@ const GiftForm = () => {
 		>,
 	) => {
 		const { name, value, type, files } = e.target as HTMLInputElement;
+		const normalisedValue = value.replace(/^ +/, "");
+		let fieldValue: string | File | null = normalisedValue;
 
 		if (type === "file" && files) {
 			const file = files[0];
-			setFormData({
-				...formData,
-				[name]: file,
-			});
+			fieldValue = file;
+
 			setFile((prev) => ({
 				...prev,
 				file,
 				preview: file ? URL.createObjectURL(file) : null,
 			}));
-		} else {
-			setFormData({
-				...formData,
-				[name]: value,
-			});
 		}
+
+		setFormData({
+			...formData,
+			[name]: fieldValue,
+		});
+
+		const result = giftFormScheme
+			.pick({ [name]: true })
+			.safeParse({ [name]: fieldValue });
+
+		setErrors((prev) => ({
+			...prev,
+			[name]: result.success
+				? []
+				: result.error.issues.map((issue) => issue.message),
+		}));
+	};
+
+	useEffect(() => {
+		console.log(errors);
+	}, [errors]);
+
+	const onSubmit = () => {
+		const formDataWithFile = {
+			...formData,
+			file: file.file,
+		};
+
+		const validationResult = validateGiftForm(formDataWithFile);
+
+		if (!validationResult.success) {
+			setErrors(validationResult.errors);
+			return;
+		}
+
+		setErrors({});
 	};
 
 	return (
@@ -63,8 +102,17 @@ const GiftForm = () => {
 							value={formData[input.name as keyof GiftFormData]}
 						/>
 					)}
+					<div className="text-red-500 text-sm">{errors[input.name]?.[0]}</div>
 				</div>
 			))}
+			<div className={"flex justify-center"}>
+				<Button
+					type={"button"}
+					onClick={onSubmit}
+				>
+					Save gift
+				</Button>
+			</div>
 		</form>
 	);
 };
