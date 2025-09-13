@@ -14,8 +14,7 @@ export async function getGifts(
       profiles!gifts_added_by_fkey(name)
     `,
 		)
-		.eq("profile_id", userId)
-		.order("position", { ascending: true });
+		.eq("profile_id", userId);
 
 	if (error) throw error;
 
