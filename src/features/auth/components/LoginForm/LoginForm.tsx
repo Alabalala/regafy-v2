@@ -20,7 +20,7 @@ const LoginForm = () => {
 		LOGIN_FORM_INITIAL_DATA,
 	);
 	const [errors, setErrors] = useState<FieldErrors>({});
-	const [supabaseError, setSupabaseErrors] = useState<string | undefined>("");
+	const [supabaseToast, setsupabaseToast] = useState<string | undefined>("");
 	const [isLoading, setIsLoading] = useState(false);
 	const { user, setUser } = useUserStore();
 	const router = useRouter();
@@ -60,7 +60,7 @@ const LoginForm = () => {
 		const supabaseResult = await login(formData);
 
 		if (!supabaseResult.success) {
-			setSupabaseErrors(supabaseResult.error);
+			setsupabaseToast(supabaseResult.error);
 			setIsLoading(false);
 			return;
 		}
@@ -90,8 +90,8 @@ const LoginForm = () => {
 				</div>
 			))}
 
-			{supabaseError && (
-				<div className="text-red-500 text-sm">{supabaseError}</div>
+			{supabaseToast && (
+				<div className="text-red-500 text-sm">{supabaseToast}</div>
 			)}
 
 			<div className={"flex justify-center"}>

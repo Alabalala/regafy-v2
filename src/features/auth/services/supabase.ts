@@ -11,11 +11,11 @@ export async function login(formData: LoginFormTypes) {
 
 	if (error) {
 		let errorMessage = error.message;
-		switch (error.message) {
-			case "Invalid login credentials":
+		switch (error.code) {
+			case "invalid_credentials":
 				errorMessage = "Login error: wrong email or password";
 				break;
-			case "Email not confirmed":
+			case "email_not_confirmed":
 				errorMessage = "You need to confirm your email first";
 				break;
 			default:
