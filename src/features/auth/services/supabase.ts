@@ -1,5 +1,7 @@
 "use server";
+import { Database } from "@/shared/types/database.types";
 import { createClient } from "@/shared/utils/supabase/server";
+import { SupabaseClient } from "@supabase/supabase-js";
 
 export async function login(formData: LoginFormTypes) {
 	const supabase = await createClient();
@@ -117,3 +119,12 @@ export async function signOut() {
 
 // 	return data;
 // }
+
+export async function getCurrentUser(supabase: SupabaseClient<Database>) {
+	const { data, error } = await supabase.auth.getUser();
+
+	if (error) throw error;
+
+	const user = data.user;
+	return user;
+}
