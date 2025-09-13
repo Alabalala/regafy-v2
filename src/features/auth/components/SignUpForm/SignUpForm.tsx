@@ -9,7 +9,7 @@ import { FieldErrors } from "@/shared/types/forms";
 import Input from "@/shared/components/Input/Input";
 import { Button } from "@/shared/components/Button/Button";
 import { resendConfirmationEmail, signup } from "../../services/supabase";
-import { useUserStore } from "@/shared/stores/userStore";
+import { useUserStore } from "@/features/auth/stores/userStore";
 import { useRouter } from "next/navigation";
 import { getPath } from "@/shared/utils/getPath";
 import { NextLink } from "@/shared/components/Link/Link";

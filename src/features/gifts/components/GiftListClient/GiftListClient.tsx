@@ -1,7 +1,7 @@
 "use client";
 import { useEffect } from "react";
 import GiftPost from "../GiftPost/GiftPost";
-import { useUserStore } from "@/shared/stores/userStore";
+import { useUserStore } from "@/features/auth/stores/userStore";
 import { NextLink } from "../../../../shared/components/Link/Link";
 import { getPath } from "@/shared/utils/getPath";
 import { useGiftStore } from "../../stores/giftStore";
