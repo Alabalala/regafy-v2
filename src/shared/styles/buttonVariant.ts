@@ -8,10 +8,8 @@ export const buttonVariants = tv({
 
 	variants: {
 		variant: {
-			primary:
-				"bg-accent text-on-accent hover:bg-tertiary hover:text-on-tertiary hover:border-white active:bg-tertiary-darker active:text-on-tertiary",
-			secondary:
-				"bg-secondary-accent text-on-secondary-accent hover:bg-white hover:text-secondary-accent hover:border-secondary-accent active:bg-secondary-accent-dark active:text-on-secondary-accent",
+			primary: `bg-accent text-on-accent hover:bg-accent-50 hover:text-on-accent active:bg-accent-100 active:text-on-accent`,
+			secondary: `bg-secondary text-on-secondary hover:bg-secondary-50 hover:text-on-secondary active:bg-secondary-100 active:text-on-secondary`,
 			delete:
 				"bg-red-600 text-white hover:bg-red-700 hover:border-white active:bg-red-800 active:border-white",
 		},
