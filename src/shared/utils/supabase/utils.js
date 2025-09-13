@@ -1,5 +1,28 @@
 import { createClient } from "./server";
 
+import { Database } from "@/shared/types/database.types";
+import { createServerClient } from "@supabase/ssr";
+import { SupabaseClient } from "@supabase/supabase-js";
+
+export async function getCurrentUser(supabase: SupabaseClient<Database>) {
+	const { data, error } = await supabase.auth.getUser();
+
+	if (error) throw error;
+
+	const user = data.user;
+	return user;
+}
+
+// export async function getCurrentUserServer() {
+// 	const supabase = await createServerClient();
+// 	const { data, error } = await supabase.auth.getUser();
+
+// 	if (error) throw error;
+
+// 	const user = data.user;
+// 	return user;
+// }
+
 //Create a profile for the auth user
 export async function createProfile(formData, supabase) {
 	const { name, userName, avatar, birthday } = formData;

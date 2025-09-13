@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	LOGIN_FORM_INITIAL_DATA,
 	LOGIN_FORM_INPUTS,
@@ -9,14 +9,26 @@ import { FieldErrors } from "@/shared/types/forms";
 import Input from "@/shared/components/Input/Input";
 import { Button } from "@/shared/components/Button/Button";
 import { validateLoginForm } from "../../services/validateLoginForm";
-import { set } from "zod";
+import { login } from "../../services/supabase";
+import { useUserStore } from "@/shared/stores/userStore";
+import { useRouter } from "next/navigation";
+import { getPath } from "@/shared/utils/getPath";
 
 const LoginForm = () => {
 	const [formData, setFormData] = useState<LoginFormTypes>(
 		LOGIN_FORM_INITIAL_DATA,
 	);
 	const [errors, setErrors] = useState<FieldErrors>({});
+	const [supabaseError, setSupabaseErrors] = useState<string | undefined>("");
 	const [isLoading, setIsLoading] = useState(false);
+	const { user, setUser } = useUserStore();
+	const router = useRouter();
+
+	useEffect(() => {
+		if (user) {
+			router.push(getPath("Home"));
+		}
+	}, [user]);
 
 	const onChange = (
 		e: React.ChangeEvent<
@@ -32,7 +44,7 @@ const LoginForm = () => {
 		});
 	};
 
-	const onSubmit = () => {
+	const onSubmit = async () => {
 		setIsLoading(true);
 		const validationResult = validateLoginForm(formData);
 
@@ -41,6 +53,22 @@ const LoginForm = () => {
 			setIsLoading(false);
 			return;
 		}
+
+		setErrors({});
+
+		const supabaseResult = await login(formData);
+
+		if (!supabaseResult.success) {
+			setSupabaseErrors(supabaseResult.error);
+			setIsLoading(false);
+			return;
+		}
+
+		if (supabaseResult.user) {
+			setUser(supabaseResult.user);
+		}
+
+		router.push(getPath("Home"));
 	};
 
 	return (
@@ -61,9 +89,14 @@ const LoginForm = () => {
 				</div>
 			))}
 
+			{supabaseError && (
+				<div className="text-red-500 text-sm">{supabaseError}</div>
+			)}
+
 			<div className={"flex justify-center"}>
 				<Button
-					disabled={isLoading}
+					loading={isLoading}
+					loadingText="Logging in..."
 					type={"button"}
 					onClick={onSubmit}
 				>
