@@ -3,7 +3,7 @@ import { LoginFormSchema } from "../schemas/loginForm";
 import z from "zod";
 import { SingupFormSchema } from "../schemas/signupForm";
 
-export const validateLoginForm = (
+export const validateSignUpForm = (
 	formData: SignUpFormTypes,
 ): ValidationResult => {
 	const result = SingupFormSchema.safeParse(formData);

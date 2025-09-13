@@ -2,28 +2,29 @@
 
 import { useEffect, useState } from "react";
 import {
-	LOGIN_FORM_INITIAL_DATA,
-	LOGIN_FORM_INPUTS,
+	SIGNUP_FORM_INITIAL_DATA,
+	SIGNUP_FORM_INPUTS,
 } from "../../constants/forms";
 import { FieldErrors } from "@/shared/types/forms";
 import Input from "@/shared/components/Input/Input";
 import { Button } from "@/shared/components/Button/Button";
-import { validateLoginForm } from "../../services/validateLoginForm";
-import { login } from "../../services/supabase";
+import { resendConfirmationEmail, signup } from "../../services/supabase";
 import { useUserStore } from "@/shared/stores/userStore";
 import { useRouter } from "next/navigation";
 import { getPath } from "@/shared/utils/getPath";
 import { NextLink } from "@/shared/components/Link/Link";
+import { validateSignUpForm } from "../../services/validateSignUpForm";
 
 const SingUpForm = () => {
-	const [formData, setFormData] = useState<LoginFormTypes>(
-		LOGIN_FORM_INITIAL_DATA,
+	const [formData, setFormData] = useState<SignUpFormTypes>(
+		SIGNUP_FORM_INITIAL_DATA,
 	);
 	const [errors, setErrors] = useState<FieldErrors>({});
 	const [supabaseToast, setSupabaseToast] = useState<string | undefined>("");
 	const [isLoading, setIsLoading] = useState(false);
-	const { user, setUser } = useUserStore();
+	const { user } = useUserStore();
 	const router = useRouter();
+	const [singupComplete, setSingupComplete] = useState(false);
 
 	useEffect(() => {
 		if (user) {
@@ -46,8 +47,9 @@ const SingUpForm = () => {
 	};
 
 	const onSubmit = async () => {
+		setSupabaseToast("");
 		setIsLoading(true);
-		const validationResult = validateLoginForm(formData);
+		const validationResult = validateSignUpForm(formData);
 
 		if (!validationResult.success) {
 			setErrors(validationResult.errors);
@@ -57,7 +59,7 @@ const SingUpForm = () => {
 
 		setErrors({});
 
-		const supabaseResult = await login(formData);
+		const supabaseResult = await signup(formData);
 
 		if (!supabaseResult.success) {
 			setSupabaseToast(supabaseResult.error);
@@ -65,55 +67,87 @@ const SingUpForm = () => {
 			return;
 		}
 
-		if (supabaseResult.user) {
-			setUser(supabaseResult.user);
+		setSingupComplete(true);
+	};
+
+	const handleEmailresend = async () => {
+		setIsLoading(true);
+		const result = await resendConfirmationEmail(formData.email);
+
+		if (!result.success) {
+			setSupabaseToast(result.error);
+			setIsLoading(false);
+			return;
 		}
 
-		router.push(getPath("Home"));
+		setIsLoading(false);
+		setSupabaseToast("Email resent");
 	};
 
 	return (
-		<form className={"flex flex-col gap-4"}>
-			{LOGIN_FORM_INPUTS.map((input) => (
-				<div
-					key={input.name}
-					className={"flex flex-col gap-2"}
-				>
-					<p className={"font-bold"}>{input.label}</p>
-					<Input
-						onChange={onChange}
-						input={input}
-						value={formData[input.name as keyof LoginFormTypes]}
-						error={!!errors[input.name]?.length}
-					/>
-					<div className="text-red-500 text-sm">{errors[input.name]?.[0]}</div>
+		<form>
+			{singupComplete ? (
+				<div>
+					<p className={"font-bold"}>
+						Sign up complete! Check your email to verify your account.
+					</p>
+					<Button
+						loading={isLoading}
+						onClick={handleEmailresend}
+						variant="primary"
+					>
+						Resend email
+					</Button>
 				</div>
-			))}
+			) : (
+				<div className={"flex flex-col gap-4"}>
+					{SIGNUP_FORM_INPUTS.map((input) => (
+						<div
+							key={input.name}
+							className={"flex flex-col gap-2"}
+						>
+							<p className={"font-bold"}>{input.label}</p>
+							<Input
+								onChange={onChange}
+								input={input}
+								value={formData[input.name as keyof SignUpFormTypes]}
+								error={!!errors[input.name]?.length}
+							/>
+							<div className="text-red-500 text-sm">{errors[input.name]?.[0]}</div>
+						</div>
+					))}
 
-			{supabaseToast && (
-				<div className="text-red-500 text-sm">{supabaseToast}</div>
+					<p className="text-sm text-gray-400">
+						Password must be at least 6 characters, contain at least one uppercase
+						letter, one lowercase letter, one number and one special character.{" "}
+					</p>
+
+					{supabaseToast && (
+						<div className="text-red-500 text-sm">{supabaseToast}</div>
+					)}
+
+					<div className={"flex justify-center"}>
+						<Button
+							loading={isLoading}
+							loadingText="Signing up..."
+							type={"button"}
+							onClick={onSubmit}
+						>
+							Sign up
+						</Button>
+					</div>
+
+					<div className={"flex flex-col items-center gap-2"}>
+						<p>Already have an account?</p>
+						<NextLink
+							variant="secondary"
+							href={getPath("Login")}
+						>
+							Log in
+						</NextLink>
+					</div>
+				</div>
 			)}
-
-			<div className={"flex justify-center"}>
-				<Button
-					loading={isLoading}
-					loadingText="Signing up..."
-					type={"button"}
-					onClick={onSubmit}
-				>
-					Sign up
-				</Button>
-			</div>
-
-			<div className={"flex flex-col items-center gap-2"}>
-				<p>Already have an account?</p>
-				<NextLink
-					variant="secondary"
-					href={getPath("Sign up")}
-				>
-					Log in
-				</NextLink>
-			</div>
 		</form>
 	);
 };

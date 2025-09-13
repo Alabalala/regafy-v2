@@ -44,10 +44,11 @@ export async function resetPassword(email: string) {
 export async function signup(formData: SignUpFormTypes) {
 	const supabase = await createClient();
 
-	const { error } = await supabase.auth.signInWithPassword(formData);
+	const { error } = await supabase.auth.signUp(formData);
 
 	if (error) {
-		let errorMessage = error.message;
+		let errorMessage =
+			"Error signing up. Try again later or check email isn't already registered";
 		switch (error.code) {
 			case "email_exists":
 				errorMessage = "Email is already registered";
@@ -61,9 +62,22 @@ export async function signup(formData: SignUpFormTypes) {
 			default:
 				break;
 		}
+		console.log(error.code, ": ", error.message);
 		return { success: false, error: errorMessage };
 	}
 
+	return { success: true };
+}
+
+export async function resendConfirmationEmail(email: string) {
+	const supabase = await createClient();
+	const { error } = await supabase.auth.resend({
+		type: "signup",
+		email: email,
+	});
+	if (error) {
+		return { success: false, error: "Error resending confirmation email" };
+	}
 	return { success: true };
 }
 
