@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import { getPath } from "@/shared/utils/getPath";
 import { NextLink } from "@/shared/components/Link/Link";
 import { validateSignUpForm } from "../../services/validateSignUpForm";
+import { get } from "http";
 
 const SingUpForm = () => {
 	const [formData, setFormData] = useState<SignUpFormTypes>(
@@ -68,6 +69,7 @@ const SingUpForm = () => {
 		}
 
 		setSingupComplete(true);
+		setIsLoading(false);
 	};
 
 	const handleEmailresend = async () => {
@@ -81,23 +83,26 @@ const SingUpForm = () => {
 		}
 
 		setIsLoading(false);
-		setSupabaseToast("Email resent");
+		setSupabaseToast("Email resent! Check your inbox.");
 	};
 
 	return (
 		<form>
 			{singupComplete ? (
-				<div>
+				<div className="flex flex-col gap-4 items-center">
 					<p className={"font-bold"}>
 						Sign up complete! Check your email to verify your account.
 					</p>
+					{supabaseToast && <div className="text-sm">{supabaseToast}</div>}
 					<Button
 						loading={isLoading}
 						onClick={handleEmailresend}
 						variant="primary"
+						loadingText="Resending..."
 					>
 						Resend email
 					</Button>
+					<NextLink href={getPath("Login")}>Go back to Login</NextLink>
 				</div>
 			) : (
 				<div className={"flex flex-col gap-4"}>
