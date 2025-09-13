@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 import { getPath } from "@/shared/utils/getPath";
 import { NextLink } from "@/shared/components/Link/Link";
 
-const LoginForm = () => {
+const SingUpForm = () => {
 	const [formData, setFormData] = useState<LoginFormTypes>(
 		LOGIN_FORM_INITIAL_DATA,
 	);
@@ -97,25 +97,25 @@ const LoginForm = () => {
 			<div className={"flex justify-center"}>
 				<Button
 					loading={isLoading}
-					loadingText="Logging in..."
+					loadingText="Signing up..."
 					type={"button"}
 					onClick={onSubmit}
 				>
-					Log in
+					Sign up
 				</Button>
 			</div>
 
 			<div className={"flex flex-col items-center gap-2"}>
-				<p>Don&apos;t have an account?</p>
+				<p>Already have an account?</p>
 				<NextLink
 					variant="secondary"
 					href={getPath("Sign up")}
 				>
-					Sign up now
+					Log in
 				</NextLink>
 			</div>
 		</form>
 	);
 };
 
-export default LoginForm;
+export default SingUpForm;

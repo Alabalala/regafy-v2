@@ -41,21 +41,30 @@ export async function resetPassword(email: string) {
 	return { success: true, data };
 }
 
-export async function signup(email, password) {
+export async function signup(formData: SignUpFormTypes) {
 	const supabase = await createClient();
 
-	// type-casting here for convenience
-	// in practice, you should validate your inputs
-	const data = {
-		email: email,
-		password: password,
-	};
-
-	const { error } = await supabase.auth.signUp(data);
+	const { error } = await supabase.auth.signInWithPassword(formData);
 
 	if (error) {
-		console.error("Signup Error:", error.message);
+		let errorMessage = error.message;
+		switch (error.code) {
+			case "email_exists":
+				errorMessage = "Email is already registered";
+				break;
+			case "email_not_confirmed":
+				errorMessage = "You need to confirm your email first";
+				break;
+			case "user_already_exists":
+				errorMessage = "User already exists";
+				break;
+			default:
+				break;
+		}
+		return { success: false, error: errorMessage };
 	}
+
+	return { success: true };
 }
 
 export async function signOut() {
