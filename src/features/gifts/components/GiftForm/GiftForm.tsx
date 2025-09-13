@@ -17,6 +17,8 @@ import {
 } from "../../types/form";
 import { FileInputDataType } from "@/shared/types/forms";
 import StarRateInput from "../StarRateInput/StarRateInput";
+import { createGift } from "../../services/supabase";
+import { createClient } from "@/shared/utils/supabase/server";
 
 const GiftForm = () => {
 	const [formData, setFormData] = useState<GiftFormData>(
@@ -68,7 +70,7 @@ const GiftForm = () => {
 		console.log(errors);
 	}, [errors]);
 
-	const onSubmit = () => {
+	const onSubmit = async () => {
 		const formDataWithFile: FormDataWithFileType = {
 			...formData,
 			image: file.file,
@@ -83,8 +85,20 @@ const GiftForm = () => {
 		}
 
 		setErrors({});
+
+		const test_user_id = "742c65a7-0bc5-4e81-a17a-ee20efe03f21";
+		const test_profile_id = "742c65a7-0bc5-4e81-a17a-ee20efe03f21";
+
+		const giftData = {
+			...formDataWithFile,
+			user_id: test_user_id,
+			profile_id: test_profile_id,
+		};
+		const supabase = await createClient();
+
+		//TODO
 		try {
-			console.log("Form submitted:", formDataWithFile);
+			const success = await createGift(giftData, supabase);
 		} catch (err) {
 			console.error("Unexpected error:", err);
 		}

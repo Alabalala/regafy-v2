@@ -22,44 +22,24 @@ export async function getGifts(
 	return data;
 }
 
-export async function getGiftInfo(giftId, supabase) {
-	const { data, error } = await supabase
-		.from("gifts")
-		.select("*")
-		.eq("id", giftId)
-		.single();
+// export async function getGiftInfo(giftId, supabase) {
+// 	const { data, error } = await supabase
+// 		.from("gifts")
+// 		.select("*")
+// 		.eq("id", giftId)
+// 		.single();
 
-	if (error) {
-		console.log(error);
-	}
+// 	if (error) {
+// 		console.log(error);
+// 	}
 
-	return data;
-}
+// 	return data;
+// }
 
 export async function createGift(
 	giftData: FormDataWithFileType,
 	supabase: SupabaseClient<Database>,
 ) {
-	const { data: maxPositionData, error: maxPositionError } = await supabase
-		.from("gifts")
-		.select("position")
-		.eq("profile_id", giftData.userId)
-		.order("position", { ascending: false })
-		.limit(1);
-
-	if (maxPositionError) {
-		console.log(maxPositionError);
-		return;
-	}
-
-	// Set the position for the new gift
-	const newPosition =
-		maxPositionData.length > 0 ? maxPositionData[0].position + 1 : 1;
-
-	// Add the calculated position to giftData
-	giftData = { ...giftData, position: newPosition };
-
-	// Insert the new gift with the updated position
 	const { data, error } = await supabase
 		.from("gifts")
 		.insert(giftData)
