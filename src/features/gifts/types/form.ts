@@ -10,9 +10,3 @@ export interface FormDataWithFileType extends GiftFormData {
 	image: File | null;
 	rating: string;
 }
-
-export type FieldErrors = Record<string, string[] | undefined>;
-
-export type ValidationResult =
-	| { success: true }
-	| { success: false; errors: FieldErrors };
