@@ -94,11 +94,11 @@ const GiftForm = () => {
 			user_id: test_user_id,
 			profile_id: test_profile_id,
 		};
-		const supabase = await createClient();
+		// const supabase = await createClient();
 
 		//TODO
 		try {
-			const success = await createGift(giftData, supabase);
+			// const success = await createGift(giftData, supabase);
 		} catch (err) {
 			console.error("Unexpected error:", err);
 		}
