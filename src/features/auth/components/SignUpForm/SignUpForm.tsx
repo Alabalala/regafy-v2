@@ -14,9 +14,8 @@ import { useRouter } from "next/navigation";
 import { getPath } from "@/shared/utils/getPath";
 import { NextLink } from "@/shared/components/Link/Link";
 import { validateSignUpForm } from "../../services/validateSignUpForm";
-import { get } from "http";
 
-const SingUpForm = () => {
+const SignUpForm = () => {
 	const [formData, setFormData] = useState<SignUpFormTypes>(
 		SIGNUP_FORM_INITIAL_DATA,
 	);
@@ -157,4 +156,4 @@ const SingUpForm = () => {
 	);
 };
 
-export default SingUpForm;
+export default SignUpForm;
