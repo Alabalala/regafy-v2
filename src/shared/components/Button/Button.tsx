@@ -6,6 +6,7 @@ interface Props {
 	floating?: boolean;
 	onClick?: () => void;
 	type?: "button" | "submit";
+	disabled?: boolean;
 }
 
 export const Button = ({
@@ -14,12 +15,14 @@ export const Button = ({
 	variant,
 	floating = false,
 	type = "button",
+	disabled = false,
 }: Props) => {
 	return (
 		<button
 			type={type}
 			className={buttonVariants({ variant: variant, floating: floating })}
 			onClick={onClick}
+			disabled={disabled}
 		>
 			{children}
 		</button>
