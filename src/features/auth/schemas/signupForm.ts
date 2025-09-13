@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const LoginFormScheme = z.object({
+export const SingupFormSchema = z.object({
 	email: z.email(),
 	password: z
 		.string()

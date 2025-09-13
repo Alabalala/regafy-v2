@@ -8,12 +8,15 @@ import {
 import { FieldErrors } from "@/shared/types/forms";
 import Input from "@/shared/components/Input/Input";
 import { Button } from "@/shared/components/Button/Button";
+import { validateLoginForm } from "../../services/validateLoginForm";
+import { set } from "zod";
 
-const GiftForm = () => {
+const LoginForm = () => {
 	const [formData, setFormData] = useState<LoginFormTypes>(
 		LOGIN_FORM_INITIAL_DATA,
 	);
 	const [errors, setErrors] = useState<FieldErrors>({});
+	const [isLoading, setIsLoading] = useState(false);
 
 	const onChange = (
 		e: React.ChangeEvent<
@@ -29,7 +32,16 @@ const GiftForm = () => {
 		});
 	};
 
-	const onSubmit = () => {};
+	const onSubmit = () => {
+		setIsLoading(true);
+		const validationResult = validateLoginForm(formData);
+
+		if (!validationResult.success) {
+			setErrors(validationResult.errors);
+			setIsLoading(false);
+			return;
+		}
+	};
 
 	return (
 		<form className={"flex flex-col gap-4"}>
@@ -49,18 +61,17 @@ const GiftForm = () => {
 				</div>
 			))}
 
-			<p className={"font-bold"}>Rate how much you want this gift</p>
-
 			<div className={"flex justify-center"}>
 				<Button
+					disabled={isLoading}
 					type={"button"}
 					onClick={onSubmit}
 				>
-					Save gift
+					Log in
 				</Button>
 			</div>
 		</form>
 	);
 };
 
-export default GiftForm;
+export default LoginForm;
