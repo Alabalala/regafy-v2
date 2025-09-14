@@ -1,12 +1,13 @@
 import Footer from "@/shared/components/Footer/Footer";
 import { NavBar } from "@/shared/components/NavBar/NavBar";
+import React from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<main className={"flex-1 overflow-y-auto p-4"}>
+		<div className={"flex flex-col h-screen"}>
 			<NavBar />
-			{children}
+			<main className={"flex-1 overflow-y-auto p-4"}>{children}</main>
 			<Footer />
-		</main>
+		</div>
 	);
 }
