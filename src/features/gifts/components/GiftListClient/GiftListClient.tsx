@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import GiftPost from "../GiftPost/GiftPost";
 import { useUserStore } from "@/features/auth/stores/userStore";
 import { NextLink } from "../../../../shared/components/Link/Link";
-import { getPath } from "@/shared/utils/getPath";
+import { getPath } from "@/shared/services/getPath";
 import { useGiftStore } from "../../stores/giftStore";
 import { Gift } from "@/shared/types/supabase/supabase";
 

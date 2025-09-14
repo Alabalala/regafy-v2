@@ -1,6 +1,6 @@
 "use server";
 import { Database } from "@/shared/types/database.types";
-import { createClient } from "@/shared/utils/supabase/server";
+import { createClient } from "@/shared/services/supabase/server";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 export async function login(formData: LoginFormTypes) {

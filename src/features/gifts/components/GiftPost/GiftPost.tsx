@@ -4,7 +4,8 @@ import ShareSVG from "../../../../shared/components/SVGs/ShareSVG";
 import QuestionChatSVG from "../../../../shared/components/SVGs/QuestionChatSVG";
 import BookMarkSVG from "../../../../shared/components/SVGs/BookMarkSVG";
 import { Gift } from "@/shared/types/supabase/supabase";
-import { poppins } from "@/shared/utils/fonts";
+import { poppins } from "@/shared/services/fonts";
+import { ContextMenu } from "@/shared/components/ContextMenu/ContextMenu";
 
 interface Props {
 	gift: Gift;
@@ -18,6 +19,7 @@ export default function GiftPost({ gift, isOwnGift }: Props) {
 				"flex flex-col bg-tertiary dark:bg-tertiary-dark w-full p-4 border-2 rounded-md gap-4"
 			}
 		>
+			<ContextMenu />
 			<div className={"flex flex-row justify-between"}>
 				{!isOwnGift && (
 					<div className={"flex flex-row gap-4"}>
@@ -42,7 +44,6 @@ export default function GiftPost({ gift, isOwnGift }: Props) {
 					<p>TODO 1h</p>
 				</div>
 			</div>
-
 			<div className={"flex flex-col gap-3"}>
 				<div className={"flex flex-row justify-between font-bold text-md"}>
 					<p className={`${poppins.className} `}>{gift.name}</p>
@@ -61,7 +62,6 @@ export default function GiftPost({ gift, isOwnGift }: Props) {
 					<span>Shein</span>
 				</p> */}
 			</div>
-
 			{gift.image_link && (
 				<div className={"border-2"}>
 					<Image
@@ -73,7 +73,6 @@ export default function GiftPost({ gift, isOwnGift }: Props) {
 					/>
 				</div>
 			)}
-
 			<div className={"flex flex-row justify-between"}>
 				<Link
 					href={""}

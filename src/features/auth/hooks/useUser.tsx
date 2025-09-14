@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useUserStore } from "../stores/userStore";
 
 import { getCurrentUser } from "../services/supabase";
-import { createClient } from "@/shared/utils/supabase/client";
+import { createClient } from "@/shared/services/supabase/client";
 
 export function useUser() {
 	const user = useUserStore((state) => state.user);

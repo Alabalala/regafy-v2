@@ -11,7 +11,7 @@ import { Button } from "@/shared/components/Button/Button";
 import { resendConfirmationEmail, signup } from "../../services/supabase";
 import { useUserStore } from "@/features/auth/stores/userStore";
 import { useRouter } from "next/navigation";
-import { getPath } from "@/shared/utils/getPath";
+import { getPath } from "@/shared/services/getPath";
 import { NextLink } from "@/shared/components/Link/Link";
 import { validateSignUpForm } from "../../services/validateSignUpForm";
 
