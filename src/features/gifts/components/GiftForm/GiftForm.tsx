@@ -10,15 +10,10 @@ import FileInput from "../../../../shared/components/FileInput/FileInput";
 import { Button } from "../../../../shared/components/Button/Button";
 import { validateGiftForm } from "@/features/gifts/services/validateGiftForm";
 import { giftFormScheme } from "@/features/gifts/services/giftFormScheme";
-import {
-	FieldErrors,
-	FormDataWithFileType,
-	GiftFormData,
-} from "../../types/form";
-import { FileInputDataType } from "@/shared/types/forms";
+import { FormDataWithFileType, GiftFormData } from "../../types/form";
+import { FieldErrors, FileInputDataType } from "@/shared/types/forms";
 import StarRateInput from "../StarRateInput/StarRateInput";
-import { createGift } from "../../services/supabase";
-import { createClient } from "@/shared/utils/supabase/server";
+import { useUser } from "@/features/auth/hooks/useUser";
 
 const GiftForm = () => {
 	const [formData, setFormData] = useState<GiftFormData>(
@@ -27,6 +22,11 @@ const GiftForm = () => {
 	const [file, setFile] = useState<FileInputDataType>(FILE_INPUT_INITIAL_VALUES);
 	const [errors, setErrors] = useState<FieldErrors>({});
 	const [rating, setRating] = useState<string>("1");
+	const [user] = useUser();
+
+	if (!user) {
+		return <p>Loading</p>;
+	}
 
 	const onChange = (
 		e: React.ChangeEvent<
@@ -86,12 +86,9 @@ const GiftForm = () => {
 
 		setErrors({});
 
-		const test_user_id = "742c65a7-0bc5-4e81-a17a-ee20efe03f21";
-		const test_profile_id = "742c65a7-0bc5-4e81-a17a-ee20efe03f21";
-
 		const giftData = {
 			...formDataWithFile,
-			user_id: test_user_id,
+			user_id: user.id,
 			profile_id: test_profile_id,
 		};
 		// const supabase = await createClient();

@@ -28,7 +28,7 @@ export default function FileInput({
 			{!preview ? (
 				<label
 					htmlFor={"fileInput"}
-					className={`flex flex-col gap-2 border-2 border-dashed p-10`}
+					className={`flex flex-col gap-2 border-2 border-dashed p-10 cursor-pointer`}
 				>
 					<input
 						id={"fileInput"}

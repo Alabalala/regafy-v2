@@ -27,5 +27,5 @@ export function useUser() {
 		}
 	}, [user, setUser]);
 
-	return user;
+	return [user];
 }
