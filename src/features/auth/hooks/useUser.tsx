@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import { useUserStore } from "../stores/userStore";
-import { createClient } from "@/shared/utils/supabase/client";
+
 import { getCurrentUser } from "../services/supabase";
+import { createClient } from "@/shared/utils/supabase/client";
 
 export function useUser() {
 	const user = useUserStore((state) => state.user);
@@ -11,8 +12,8 @@ export function useUser() {
 	useEffect(() => {
 		if (!user) {
 			const fetchUser = async () => {
-				const supabaseUser = await getCurrentUser(supabase);
-				if (supabaseUser) setUser(supabaseUser);
+				const { data, error } = await supabase.auth.getUser();
+				if (data?.user) setUser(data.user);
 			};
 
 			fetchUser();
@@ -23,7 +24,9 @@ export function useUser() {
 				},
 			);
 
-			return () => listener.subscription.unsubscribe();
+			return () => {
+				listener.subscription.unsubscribe();
+			};
 		}
 	}, [user, setUser]);
 
