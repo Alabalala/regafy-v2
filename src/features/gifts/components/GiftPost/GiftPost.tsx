@@ -6,6 +6,7 @@ import BookMarkSVG from "../../../../shared/components/SVGs/BookMarkSVG";
 import { Gift } from "@/shared/types/supabase/supabase";
 import { poppins } from "@/shared/services/fonts";
 import { ContextMenu } from "@/shared/components/ContextMenu/ContextMenu";
+import { giftContextMenuHelper } from "@/shared/services/contextMenuHelper";
 
 interface Props {
 	gift: Gift;
@@ -19,7 +20,9 @@ export default function GiftPost({ gift, isOwnGift }: Props) {
 				"flex flex-col bg-tertiary dark:bg-tertiary-dark w-full p-4 border-2 rounded-md gap-4"
 			}
 		>
-			<ContextMenu />
+			<ContextMenu
+				helperFunction={() => giftContextMenuHelper(gift.id, gift.profileId)}
+			/>
 			<div className={"flex flex-row justify-between"}>
 				{!isOwnGift && (
 					<div className={"flex flex-row gap-4"}>
