@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import ShareSVG from "../../../../shared/components/SVGs/ShareSVG";
 import QuestionChatSVG from "../../../../shared/components/SVGs/QuestionChatSVG";
 import BookMarkSVG from "../../../../shared/components/SVGs/BookMarkSVG";
@@ -7,14 +6,15 @@ import { Gift } from "@/shared/types/supabase/supabase";
 import { poppins } from "@/shared/services/fonts";
 import { ContextMenu } from "@/shared/components/ContextMenu/ContextMenu";
 import { getTimeAgo } from "@/shared/services/getTimeAgo";
-import { get } from "http";
 import {
 	FriendGiftContextMenuHelper,
 	OwnGiftContextMenuHelper,
 } from "../../services/GiftContextMenuHelper";
 import { Button } from "@/shared/components/Button/Button";
-import { reserveGift } from "../../services/supabase";
+
 import StarRate from "../StarRate/StarRate";
+import { useUser } from "@/features/auth/hooks/useUser";
+import { useState } from "react";
 
 interface Props {
 	gift: Gift;
@@ -24,6 +24,8 @@ interface Props {
 export default function GiftPost({ gift, changeReserve }: Props) {
 	const isOwnGift = gift.profile_id === gift.added_by;
 	const timeAgo = getTimeAgo(gift.created_at);
+	const [user] = useUser();
+	const [isCommentsOpen, setIsCommentsOpen] = useState(false);
 
 	getTimeAgo(gift.created_at);
 
@@ -86,31 +88,41 @@ export default function GiftPost({ gift, changeReserve }: Props) {
 			<div className={`flex flex-row justify-around`}>
 				{isOwnGift && (
 					<Button
+						disabled={gift.reserved && gift.added_by !== user?.id}
+						isGroup
 						isPlain
 						variant="primary"
 						onClick={() => changeReserve(gift.id)}
 					>
 						<div className={"flex flex-col items-center"}>
-							<BookMarkSVG />
-							<p>Reserve</p>
+							<BookMarkSVG filled={gift.reserved} />
+							<p>Reserve{gift.reserved && "d"}</p>
 						</div>
 					</Button>
 				)}
-				<Link
-					href={""}
-					className={"flex flex-col items-center"}
+				<Button
+					isGroup
+					isPlain
+					variant="primary"
+					onClick={() => setIsCommentsOpen(!isCommentsOpen)}
 				>
-					<QuestionChatSVG />
-					<p>Questions</p>
-				</Link>
-				<Link
-					href={""}
-					className={"flex flex-col items-center"}
+					<div className={"flex flex-col items-center"}>
+						<QuestionChatSVG />
+						<p>Questions</p>
+					</div>
+				</Button>
+				<Button
+					isGroup
+					isPlain
+					variant="primary"
 				>
-					<ShareSVG />
-					<p>Share</p>
-				</Link>
+					<div className={"flex flex-col items-center"}>
+						<ShareSVG />
+						<p>Share</p>
+					</div>
+				</Button>
 			</div>
+			{isCommentsOpen && <Comments giftId={gift.id} />}
 		</article>
 	);
 }
