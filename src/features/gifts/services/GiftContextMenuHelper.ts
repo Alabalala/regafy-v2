@@ -1,8 +1,8 @@
 import { useRouter } from "next/navigation";
 import { getPath } from "@/shared/services/getPath";
-import { MenuItem } from "../types/helperFunction.types";
+import { MenuItem } from "../../../shared/types/helperFunction.types";
 
-export const giftContextMenuHelper = (
+export const OwnGiftContextMenuHelper = (
 	giftId: string,
 	profileId: string,
 ): MenuItem[] => {
@@ -19,6 +19,22 @@ export const giftContextMenuHelper = (
 			label: "Delete Gift",
 			onClick: () => {},
 		},
+		{
+			label: "Go to user profile",
+			onClick: () => {
+				router.push(getPath("Profile", profileId));
+			},
+		},
+	];
+};
+
+export const FriendGiftContextMenuHelper = (
+	giftId: string,
+	profileId: string,
+): MenuItem[] => {
+	const router = useRouter();
+
+	return [
 		{
 			label: "Go to user profile",
 			onClick: () => {
