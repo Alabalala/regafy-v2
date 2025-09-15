@@ -2,6 +2,8 @@ import { tv } from "tailwind-variants";
 
 export type variant = "primary" | "secondary" | "delete";
 
+const buttonCommonStyle = "flex items-center justify-center";
+
 export const buttonVariants = tv({
 	base:
 		"px-2 py-1 text-center rounded-md border-2 cursor-pointer transition-colors disabled:cursor-not-allowed disabled:pointer-events-none disabled:bg-gray-400 disabled:text-black disabled:opacity-60",
