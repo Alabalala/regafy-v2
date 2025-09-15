@@ -87,31 +87,23 @@ export async function updateGift(formData, supabase) {
 
 	return data;
 }
-export async function reserveGift(giftId, userId, supabase) {
+export async function reserveGift(
+	giftId: string,
+	supabase: SupabaseClient<Database>,
+	isReserved: boolean,
+	reservedById?: string,
+) {
 	const { error, data } = await supabase
 		.from("gifts")
-		.update({ reserved: true, reserved_by: userId })
-		.eq("id", giftId)
-		.select("*");
+		.update({
+			reserved: isReserved,
+			reserved_by: isReserved ? reservedById : null,
+		})
+		.eq("id", giftId);
 
 	if (error) {
 		console.error("Error reserving gift:", error);
 	}
-
-	return data;
-}
-export async function unreserveGift(giftId, supabase) {
-	const { error, data } = await supabase
-		.from("gifts")
-		.update({ reserved: false, reserved_by: null })
-		.eq("id", giftId)
-		.select("*");
-
-	if (error) {
-		console.error("Error unreserving gift:", error);
-	}
-
-	return data;
 }
 
 export async function updateGiftPositions(gifts, supabase) {
