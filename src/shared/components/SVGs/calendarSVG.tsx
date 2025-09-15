@@ -1,24 +1,25 @@
 interface Props {
 	className?: string;
+	filled?: boolean;
 }
 
-const CalendarSVG = ({ className }: Props) => {
+const CalendarSVG = ({ className, filled }: Props) => {
 	return (
 		<svg
-			className={className}
 			viewBox={"0 0 33 33"}
 			fill={"none"}
 			xmlns={"http://www.w3.org/2000/svg"}
+			className={`${className} ${!filled && "active:animate-bounce duration-200"}`}
 		>
 			<path
 				d={
 					"M3 30C3 31.6569 4.34315 33 6 33H30C31.6569 33 33 31.6569 33 30V13.5H3V30Z"
 				}
-				fill={"#FFF7E6"}
+				className={`${filled ? "fill-background dark:fill-background-dark" : "fill-none"} group-hover:fill-background-50 group-hover:dark:fill-background-dark-50 group-active:fill-background-100 group-active:dark:fill-background-dark-100`}
 			/>
 			<path
 				d={"M33 9C33 7.34315 31.6569 6 30 6H6C4.34315 6 3 7.34315 3 9V13.5H33V9Z"}
-				fill={"#FFD966"}
+				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 			/>
 			<path
 				d={
@@ -31,7 +32,7 @@ const CalendarSVG = ({ className }: Props) => {
 				d={
 					"M18.0336 20.0627C18.3397 19.1462 19.2234 17.1669 20.3199 18.3853C21.4176 19.6049 19.2538 20.0117 18.0336 20.0627Z"
 				}
-				fill={"#FFD966"}
+				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 			/>
 			<path
 				d={
@@ -44,7 +45,7 @@ const CalendarSVG = ({ className }: Props) => {
 				d={
 					"M16.965 20.2153C16.6775 19.2988 15.8439 17.3131 14.809 18.5351C13.7741 19.7571 15.8151 20.1644 16.965 20.2153Z"
 				}
-				fill={"#FFD966"}
+				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 				stroke={"black"}
 				strokeWidth={"0.5"}
 			/>
@@ -52,7 +53,7 @@ const CalendarSVG = ({ className }: Props) => {
 				cx={"17.4225"}
 				cy={"19.7578"}
 				r={"0.457494"}
-				fill={"#FFD966"}
+				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 				stroke={"black"}
 				strokeWidth={"0.5"}
 			/>
@@ -62,11 +63,11 @@ const CalendarSVG = ({ className }: Props) => {
 				d={
 					"M16.8124 21.7403H13.61V25.9252C13.61 26.4775 14.0577 26.9252 14.61 26.9252H16.8124V21.7403ZM18.1849 21.7403V26.9252H20.5399C21.0922 26.9252 21.5399 26.4775 21.5399 25.9252V21.7403H18.1849Z"
 				}
-				fill={"#B9E3D6"}
+				fill={filled ? "#B9E3D6" : "none"}
 			/>
 			<path
 				d={"M18.1849 21.7403H16.8124V26.9252H18.1849V21.7403Z"}
-				fill={"#FFD966"}
+				fill={filled ? "#FFD966" : "none"}
 			/>
 			<path
 				d={
@@ -81,11 +82,11 @@ const CalendarSVG = ({ className }: Props) => {
 				d={
 					"M16.8124 19.9103H14C13.4477 19.9103 13 20.358 13 20.9103V22.3503H16.8124V19.9103ZM18.1849 22.3503H21.1499C21.7022 22.3503 22.1499 21.9025 22.1499 21.3503V20.9103C22.1499 20.358 21.7022 19.9103 21.1499 19.9103H18.1849V22.3503Z"
 				}
-				fill={"#B9E3D6"}
+				fill={filled ? "#B9E3D6" : "none"}
 			/>
 			<path
 				d={"M16.8124 19.9103V22.3503H18.1849V19.9103H16.8124Z"}
-				fill={"#FFD966"}
+				fill={filled ? "#FFD966" : "none"}
 			/>
 			<path
 				d={
@@ -100,7 +101,7 @@ const CalendarSVG = ({ className }: Props) => {
 				width={"3"}
 				height={"7"}
 				rx={"1.5"}
-				fill={"#FFD966"}
+				fill={filled ? "#FFD966" : "none"}
 			/>
 			<rect
 				x={"9"}
@@ -126,7 +127,7 @@ const CalendarSVG = ({ className }: Props) => {
 				width={"3"}
 				height={"7"}
 				rx={"1.5"}
-				fill={"#FFD966"}
+				fill={filled ? "#FFD966" : "none"}
 			/>
 			<rect
 				x={"24"}

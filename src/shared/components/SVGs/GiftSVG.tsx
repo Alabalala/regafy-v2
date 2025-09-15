@@ -1,11 +1,12 @@
 interface Props {
 	className?: string;
+	filled?: boolean;
 }
 
-const GiftSVG = ({ className }: Props) => {
+const GiftSVG = ({ className, filled = false }: Props) => {
 	return (
 		<svg
-			className={className}
+			className={`${className} ${!filled && "active:animate-bounce duration-200"}`}
 			width={"35"}
 			height={"35"}
 			viewBox={"0 0 35 35"}
@@ -16,7 +17,7 @@ const GiftSVG = ({ className }: Props) => {
 				d={
 					"M19.5039 9.76319C20.5074 6.75808 23.4046 0.268475 27 4.26335C30.5988 8.26207 23.5046 9.59583 19.5039 9.76319Z"
 				}
-				fill={"#FFD966"}
+				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 			/>
 			<path
 				d={
@@ -29,7 +30,7 @@ const GiftSVG = ({ className }: Props) => {
 				d={
 					"M16 10.2634C15.0575 7.25849 12.3242 0.747924 8.93115 4.75443C5.5381 8.76094 12.2299 10.0964 16 10.2634Z"
 				}
-				fill={"#FFD966"}
+				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 				stroke={"black"}
 				strokeWidth={"2"}
 			/>
@@ -37,7 +38,7 @@ const GiftSVG = ({ className }: Props) => {
 				cx={"18"}
 				cy={"8"}
 				r={"2.5"}
-				fill={"#FFD966"}
+				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 				stroke={"black"}
 			/>
 			<path
@@ -46,11 +47,11 @@ const GiftSVG = ({ className }: Props) => {
 				d={
 					"M14 15.2634H5V29.2634C5 30.9202 6.34315 32.2634 8 32.2634H14V15.2634ZM21 15.2634V32.2634H28C29.6569 32.2634 31 30.9202 31 29.2634V15.2634H21Z"
 				}
-				fill={"#B9E3D6"}
+				className={`${filled ? "fill-tertiary dark:fill-tertiary-dark" : "fill-none"} group-hover:fill-tertiary-50 group-hover:dark:fill-tertiary-dark-50 group-active:fill-tertiary-100 group-active:dark:fill-accent-dark-100`}
 			/>
 			<path
 				d={"M21 15.2634H14V32.2634H21V15.2634Z"}
-				fill={"#FFD966"}
+				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 			/>
 			<path
 				d={
@@ -65,11 +66,11 @@ const GiftSVG = ({ className }: Props) => {
 				d={
 					"M14 9.26337H5C3.89543 9.26337 3 10.1588 3 11.2634V17.2634H14V9.26337ZM21 17.2634H31C32.1046 17.2634 33 16.3679 33 15.2634V11.2634C33 10.1588 32.1046 9.26337 31 9.26337H21V17.2634Z"
 				}
-				fill={"#B9E3D6"}
+				className={`${filled ? "fill-tertiary dark:fill-tertiary-dark" : "fill-none"} group-hover:fill-tertiary-50 group-hover:dark:fill-tertiary-dark-50 group-active:fill-tertiary-100 group-active:dark:fill-accent-dark-100`}
 			/>
 			<path
 				d={"M14 9.26337V17.2634H21V9.26337H14Z"}
-				fill={"#FFD966"}
+				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 			/>
 			<path
 				d={
