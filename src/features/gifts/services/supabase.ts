@@ -11,7 +11,12 @@ export async function getGifts(
 		.select(
 			`
       *,
-      profiles!gifts_added_by_fkey(name)
+      profiles!gifts_added_by_fkey(name),
+	  questions!questions_gift_id_fkey(
+      *,
+      answers!answers_question_id_fkey(*)
+    )
+		)
     `,
 		)
 		.eq("profile_id", userId);
@@ -130,6 +135,39 @@ export async function updateGiftPositions(gifts, supabase) {
 
 export async function deleteGift(giftId, supabase) {
 	const { data, error } = await supabase.from("gifts").delete().eq("id", giftId);
+
+	if (error) throw error;
+
+	return data;
+}
+
+export async function addGiftQuestion(
+	question: string,
+	giftId: string,
+	userId: string,
+	supabase: SupabaseClient<Database>,
+) {
+	const { data, error } = await supabase
+		.from("questions")
+		.insert({ content: question, gift_id: giftId, asked_by: userId })
+		.select("*")
+		.single();
+
+	if (error) throw error;
+
+	return data;
+}
+
+export async function addAnswer(
+	answer: string,
+	questionId: string,
+	supabase: SupabaseClient<Database>,
+) {
+	const { data, error } = await supabase
+		.from("answers")
+		.insert({ content: answer, question_id: Number(questionId) })
+		.select("*")
+		.single();
 
 	if (error) throw error;
 

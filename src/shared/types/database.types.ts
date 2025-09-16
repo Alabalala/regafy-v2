@@ -14,6 +14,35 @@ export type Database = {
   }
   public: {
     Tables: {
+      answers: {
+        Row: {
+          content: string
+          created_at: string
+          id: number
+          question_id: number
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: number
+          question_id: number
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: number
+          question_id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "answers_question_id_fkey"
+            columns: ["question_id"]
+            isOneToOne: false
+            referencedRelation: "questions"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       event_secret_friend: {
         Row: {
           assignee_id: string | null
@@ -135,48 +164,42 @@ export type Database = {
       gifts: {
         Row: {
           added_by: string
-          comments: string | null
           created_at: string
+          description: string | null
           id: string
           image_link: string | null
           name: string
-          position: number | null
           price: string | null
           profile_id: string
+          rating: number
           reserved: boolean | null
           reserved_by: string | null
-          shop_link: string | null
-          size: string | null
         }
         Insert: {
           added_by: string
-          comments?: string | null
           created_at?: string
+          description?: string | null
           id?: string
           image_link?: string | null
           name: string
-          position?: number | null
           price?: string | null
           profile_id: string
+          rating?: number
           reserved?: boolean | null
           reserved_by?: string | null
-          shop_link?: string | null
-          size?: string | null
         }
         Update: {
           added_by?: string
-          comments?: string | null
           created_at?: string
+          description?: string | null
           id?: string
           image_link?: string | null
           name?: string
-          position?: number | null
           price?: string | null
           profile_id?: string
+          rating?: number
           reserved?: boolean | null
           reserved_by?: string | null
-          shop_link?: string | null
-          size?: string | null
         }
         Relationships: [
           {
@@ -385,6 +408,45 @@ export type Database = {
           userName?: string
         }
         Relationships: []
+      }
+      questions: {
+        Row: {
+          asked_by: string | null
+          content: string | null
+          created_at: string
+          gift_id: string | null
+          id: number
+        }
+        Insert: {
+          asked_by?: string | null
+          content?: string | null
+          created_at?: string
+          gift_id?: string | null
+          id?: number
+        }
+        Update: {
+          asked_by?: string | null
+          content?: string | null
+          created_at?: string
+          gift_id?: string | null
+          id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "questions_asked_by_fkey"
+            columns: ["asked_by"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "questions_gift_id_fkey"
+            columns: ["gift_id"]
+            isOneToOne: false
+            referencedRelation: "gifts"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
