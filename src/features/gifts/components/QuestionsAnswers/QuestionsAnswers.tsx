@@ -1,8 +1,4 @@
-import { Button } from "@/shared/components/Button/Button";
-import Input from "@/shared/components/Input/Input";
 import { QuestionWithAnswers } from "@/shared/types/supabase/supabase";
-import { useState } from "react";
-import { ANSWER_INPUT_FIELDS } from "../../constants/form";
 import QuestionForm from "../QuestionForm/QuestionForm";
 import { QuestionItem } from "../QuestionItem/QuestionItem";
 import { AnswerItem } from "../AnswerItem/AnswerItem";
@@ -22,19 +18,6 @@ const QuestionsAnswers = ({
 	userId,
 	giftId,
 }: Props) => {
-	const [value, setValue] = useState("");
-	const [error, setError] = useState(false);
-	const [errorMessage, setErrorMessage] = useState("");
-
-	const handleChange = (
-		e: React.ChangeEvent<
-			HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-		>,
-	) => {
-		const targetValue = e.target.value;
-		setValue((prev) => targetValue);
-	};
-
 	if (questions.length === 0)
 		return (
 			<div className="flex flex-col items-center gap-2 w-full">
