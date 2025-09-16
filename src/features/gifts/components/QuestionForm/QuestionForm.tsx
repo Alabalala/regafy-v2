@@ -1,7 +1,7 @@
 import { Button } from "@/shared/components/Button/Button";
 import Input from "@/shared/components/Input/Input";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { QUESTION_INPUT_FIELDS } from "../../constants/form";
 import { validateQuestionForm } from "../../services/validateQuestionForm";
 import { ValidationError } from "next/dist/compiled/amphtml-validator";
