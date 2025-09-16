@@ -6,6 +6,7 @@ export interface InputType {
 	disabled?: boolean;
 	accept?: string;
 	options?: { value: string; label: string }[];
+	fullWidth?: boolean;
 }
 
 export interface FileInputDataType {

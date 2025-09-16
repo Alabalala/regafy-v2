@@ -26,9 +26,10 @@ export default function Input({
 		placeholder: input.placeholder,
 		required: input.required ?? false,
 		disabled: input.disabled ?? false,
+		fullWidth: input.fullWidth ?? false,
 	};
 
-	const commonStyle = `border-2 rounded-md p-2 focus:outline-accent ${error && "border-red-600 focus:border-red-800"} `;
+	const commonStyle = `border-2 rounded-md p-2 focus:outline-accent ${error && "border-red-600 focus:border-red-800"} ${commonProps.fullWidth && "w-full"}`;
 
 	if (input.type === "textarea") {
 		return (

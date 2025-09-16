@@ -1,5 +1,5 @@
+import { Gift } from "@/shared/types/supabase/supabase";
 import { create } from "zustand";
-import { Gift } from "../../.next/types/supabase/Gifts";
 
 interface GiftsState {
 	gifts: Gift[];

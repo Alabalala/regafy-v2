@@ -1,3 +1,5 @@
+import { maxLength } from "zod";
+
 export const GIFT_FORM_FIELDS = [
 	{
 		name: "title",
@@ -41,4 +43,34 @@ export const GIFT_FORM_INITIAL_VALUES = {
 export const FILE_INPUT_INITIAL_VALUES = {
 	file: null,
 	preview: null,
+};
+
+export const QUESTION_INPUT_FIELDS = [
+	{
+		text: "",
+		name: "question",
+		type: "text",
+		required: true,
+		placeholder: "Your question here",
+		fullWidth: true,
+	},
+];
+
+export const QUESTION_INITIAL_VALUES = {
+	answer: "",
+};
+
+export const ANSWER_INPUT_FIELDS = [
+	{
+		text: "",
+		name: "answer",
+		type: "text",
+		required: true,
+		placeholder: "Your answer here",
+		fullWidth: true,
+	},
+];
+
+export const ANSWER__INITIAL_VALUES = {
+	answer: "",
 };
