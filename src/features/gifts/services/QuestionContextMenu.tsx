@@ -4,16 +4,12 @@ import { Database } from "@/shared/types/database.types";
 
 export const QuestionContextMenu = (
 	questionId: string,
-	onDelete: (questionId: string) => void,
-	supabase: SupabaseClient<Database>,
+	onDelete: () => void,
 ) => {
 	return [
 		{
 			label: "Delete question",
-			onClick: async () => {
-				await deleteQuestion(questionId, supabase);
-				onDelete(questionId);
-			},
+			onClick: onDelete,
 		},
 	];
 };
