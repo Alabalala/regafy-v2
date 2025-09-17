@@ -11,13 +11,7 @@ interface Props {
 	giftId: string;
 }
 
-const QuestionsAnswers = ({
-	questions,
-
-	createdBy,
-	userId,
-	giftId,
-}: Props) => {
+const QuestionsAnswers = ({ questions, createdBy, userId, giftId }: Props) => {
 	if (questions.length === 0)
 		return (
 			<div className="flex flex-col items-center gap-2 w-full">
