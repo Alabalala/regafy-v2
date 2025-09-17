@@ -49,6 +49,7 @@ const QuestionsAnswers = ({
 							></QuestionItem>
 							{q.answers.length > 0 ? (
 								<AnswerItem
+									id={String(q.answers[0].id)}
 									answer={q.answers[0].content}
 									canEdit={createdBy === userId}
 								></AnswerItem>
