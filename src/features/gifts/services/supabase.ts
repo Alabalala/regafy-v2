@@ -173,3 +173,31 @@ export async function addAnswer(
 
 	return data;
 }
+
+export async function deleteQuestion(
+	questionId: string,
+	supabase: SupabaseClient<Database>,
+) {
+	const { data, error } = await supabase
+		.from("questions")
+		.delete()
+		.eq("id", Number(questionId));
+
+	if (error) throw error;
+
+	return data;
+}
+
+export async function deleteAnswer(
+	answerId: string,
+	supabase: SupabaseClient<Database>,
+) {
+	const { data, error } = await supabase
+		.from("answers")
+		.delete()
+		.eq("id", Number(answerId));
+
+	if (error) throw error;
+
+	return data;
+}

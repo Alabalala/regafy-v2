@@ -42,9 +42,16 @@ const QuestionsAnswers = ({
 							key={q.id}
 						>
 							<p>{`Question ${index + 1}`}</p>
-							<QuestionItem question={q.content}></QuestionItem>
+							<QuestionItem
+								id={String(q.id)}
+								question={q.content}
+								canEdit={createdBy === userId || userId === q.asked_by}
+							></QuestionItem>
 							{q.answers.length > 0 ? (
-								<AnswerItem answer={q.answers[0].content}></AnswerItem>
+								<AnswerItem
+									answer={q.answers[0].content}
+									canEdit={createdBy === userId}
+								></AnswerItem>
 							) : (
 								<div>
 									{createdBy === userId && (
