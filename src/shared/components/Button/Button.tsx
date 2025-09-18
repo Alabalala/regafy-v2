@@ -32,11 +32,12 @@ export const Button = ({
 	return (
 		<button
 			type={type}
-			className={
-				isPlain
-					? plainButtonVariants({ variant: variant, size: size, isGroup: isGroup })
-					: buttonVariants({ variant: variant, floating: floating })
-			}
+			className={`
+				${
+					isPlain
+						? plainButtonVariants({ variant: variant, size: size, isGroup: isGroup })
+						: buttonVariants({ variant: variant, floating: floating })
+				} ${loading && "flex flex-row justify-center items-center gap-2"}`}
 			onClick={onClick}
 			disabled={loading || disabled}
 		>
