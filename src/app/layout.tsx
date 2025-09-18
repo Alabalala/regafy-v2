@@ -10,7 +10,11 @@ export const metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang={"en"}>
-			<body className={"bg-background dark:bg-background-dark h-screen font-sans"}>
+			<body
+				className={
+					"bg-background dark:bg-background-dark h-screen font-sans overflow-clip"
+				}
+			>
 				{children}
 			</body>
 		</html>
