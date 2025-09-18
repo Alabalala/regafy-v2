@@ -1,32 +1,88 @@
+"use client";
+import { getPath } from "@/shared/services/getPath";
+import { NextLink } from "../Link/Link";
 import CalendarSVG from "../SVGs/calendarSVG";
 import FriendsSVG from "../SVGs/FriendsSVG";
 import GiftSVG from "../SVGs/GiftSVG";
 import GroupsSVG from "../SVGs/GroupsSVG";
+import { usePathname } from "next/navigation";
+import NewGiftSVG from "../SVGs/NewGiftSVG";
 
+export default function Footer({}) {
+	const pathName = usePathname();
 
-export default function Footer ({}) {
-return (
-<footer className={"flex justify-around items-center p-2 bg-secondary dark:bg-secondary-dark border-t-2"}>
-    <div className={"flex flex-col items-center"}>
-        <GiftSVG className={"w-8 h-8"} />
-        <p className={"text-sm"}>Gifts</p>
-    </div>
+	return (
+		<footer
+			className={
+				"flex justify-around items-center p-2 bg-secondary dark:bg-secondary-dark border-t-2"
+			}
+		>
+			<NextLink
+				isGroup
+				isPlain
+				href={getPath("Gifts")}
+			>
+				<div className={"flex flex-col items-center"}>
+					<GiftSVG
+						filled={pathName === getPath("Gifts")}
+						className={"w-8 h-8"}
+					/>
+					<p className={"text-sm"}>Gifts</p>
+				</div>
+			</NextLink>
 
-    <div className={"flex flex-col items-center"}>
-        <FriendsSVG className={"w-8 h-8"} />
-        <p className={"text-sm"}>Friends</p>
-    </div>
+			<NextLink
+				isGroup
+				isPlain
+				href={getPath("Friends")}
+			>
+				<div className={"flex flex-col items-center"}>
+					<FriendsSVG
+						filled={pathName === getPath("Friends")}
+						className={"w-8 h-8"}
+					/>
+					<p className={"text-sm"}>Friends</p>
+				</div>
+			</NextLink>
 
-    <div className={"flex flex-col items-center"}>
-        <GroupsSVG className={"w-8 h-8"} />
-        <p className={"text-sm"}>Groups</p>
-    </div>
+			<NextLink
+				isGroup
+				isPlain
+				href={getPath("New gift")}
+			>
+				<div className={"flex flex-col items-center"}>
+					<NewGiftSVG className={"w-8 h-8"} />
+					<p className={"text-sm"}>New Gift</p>
+				</div>
+			</NextLink>
 
-    <div className={"flex flex-col items-center"}>
-        <CalendarSVG className={"w-8 h-8"} />
-        <p className={"text-sm"}>Calendar</p>
-    </div>
+			<NextLink
+				isGroup
+				isPlain
+				href={getPath("Groups")}
+			>
+				<div className={"flex flex-col items-center"}>
+					<GroupsSVG
+						filled={pathName === getPath("Groups")}
+						className={"w-8 h-8"}
+					/>
+					<p className={"text-sm"}>Groups</p>
+				</div>
+			</NextLink>
 
-</footer>
-)
+			<NextLink
+				isGroup
+				isPlain
+				href={getPath("Calendar")}
+			>
+				<div className={"flex flex-col items-center"}>
+					<CalendarSVG
+						filled={pathName === getPath("Calendar")}
+						className={"w-8 h-8"}
+					/>
+					<p className={"text-sm"}>Calendar</p>
+				</div>
+			</NextLink>
+		</footer>
+	);
 }
