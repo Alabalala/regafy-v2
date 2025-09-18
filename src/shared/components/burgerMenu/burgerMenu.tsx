@@ -3,6 +3,7 @@ import Hamburger from "hamburger-react";
 import { NextLink } from "../Link/Link";
 import { Button } from "../Button/Button";
 import { useLogout } from "@/features/auth/hooks/useLogout";
+import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
 
 interface Props {
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,7 +14,7 @@ export const BurgerMenu = ({ setIsOpen, isOpen }: Props) => {
 	const { logout } = useLogout();
 	return (
 		<div
-			className={`flex flex-col gap-10 p-4 left-0 top-20 bg-secondary fixed h-full w-full z-20 transition-transform duration-500 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+			className={`flex flex-col gap-10 p-4 left-0 top-20 bg-secondary dark:bg-secondary-dark fixed h-full w-full z-20 transition-transform duration-500 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
 		>
 			<div
 				className="flex flex-col gap-4"
@@ -40,6 +41,11 @@ export const BurgerMenu = ({ setIsOpen, isOpen }: Props) => {
 				>
 					Log out
 				</Button>
+			</div>
+
+			<div className="h-full flex flex-col justify-center items-center gap-4">
+				<p>Switch Theme</p>
+				<ThemeSwitcher></ThemeSwitcher>
 			</div>
 		</div>
 	);
