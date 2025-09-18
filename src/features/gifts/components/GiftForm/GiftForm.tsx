@@ -5,7 +5,7 @@ import {
 	FILE_INPUT_INITIAL_VALUES,
 } from "@/features/gifts/constants/form";
 import Input from "../../../../shared/components/Input/Input";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import FileInput from "../../../../shared/components/FileInput/FileInput";
 import { Button } from "../../../../shared/components/Button/Button";
 import { validateGiftForm } from "@/features/gifts/services/validateGiftForm";
@@ -14,6 +14,14 @@ import { FormDataWithFileType, GiftFormData } from "../../types/form";
 import { FieldErrors, FileInputDataType } from "@/shared/types/forms";
 import StarRateInput from "../StarRateInput/StarRateInput";
 import { useUser } from "@/features/auth/hooks/useUser";
+import { useParams, useRouter } from "next/navigation";
+import {
+	addImageToGift,
+	createGift,
+	uploadImageFile,
+} from "../../services/supabase";
+import { createClient } from "@/shared/services/supabase/client";
+import { getPath } from "@/shared/services/getPath";
 
 const GiftForm = () => {
 	const [formData, setFormData] = useState<GiftFormData>(
@@ -21,8 +29,14 @@ const GiftForm = () => {
 	);
 	const [file, setFile] = useState<FileInputDataType>(FILE_INPUT_INITIAL_VALUES);
 	const [errors, setErrors] = useState<FieldErrors>({});
+	const [formError, setFormError] = useState<string>("");
+	const [isLoading, setIsLoading] = useState(false);
 	const [rating, setRating] = useState<string>("1");
 	const [user] = useUser();
+	const params = useParams();
+	const { friendId } = params;
+	const supabase = createClient();
+	const router = useRouter();
 
 	if (!user) {
 		return <p>Loading</p>;
@@ -34,7 +48,6 @@ const GiftForm = () => {
 		>,
 	) => {
 		const { name, value, type, files } = e.target as HTMLInputElement;
-		console.log("name ", name);
 		const normalisedValue = value.replace(/^ +/, "");
 		let fieldValue: string | File | null = normalisedValue;
 
@@ -66,11 +79,8 @@ const GiftForm = () => {
 		}));
 	};
 
-	useEffect(() => {
-		console.log(errors);
-	}, [errors]);
-
 	const onSubmit = async () => {
+		setIsLoading(true);
 		const formDataWithFile: FormDataWithFileType = {
 			...formData,
 			image: file.file,
@@ -78,26 +88,49 @@ const GiftForm = () => {
 		};
 
 		const validationResult = validateGiftForm(formDataWithFile);
-
 		if (!validationResult.success) {
 			setErrors(validationResult.errors);
+			setIsLoading(false);
 			return;
 		}
 
 		setErrors({});
 
-		const giftData = {
-			...formDataWithFile,
-			user_id: user.id,
-			profile_id: test_profile_id,
+		const {
+			image,
+			rating: stringRating,
+			...formDataWithoutFile
+		} = formDataWithFile;
+		const normalisedGiftData = {
+			...formDataWithoutFile,
+			added_by: user.id,
+			profile_id: Array.isArray(friendId) ? friendId[0] : (friendId ?? user.id),
+			rating: Number(stringRating),
 		};
-		// const supabase = await createClient();
 
-		//TODO
 		try {
-			// const success = await createGift(giftData, supabase);
+			const newGift = await createGift(normalisedGiftData, supabase);
+			if (newGift && image) {
+				try {
+					const newImageLink = await uploadImageFile(newGift.id, image, supabase);
+					await addImageToGift(newGift.id, newImageLink, supabase);
+				} catch (uploadErr) {
+					setFormError(
+						"Something went wrong. Please try again: " + (uploadErr as Error).message,
+					);
+				}
+			}
 		} catch (err) {
-			console.error("Unexpected error:", err);
+			setFormError(
+				"Something went wrong. Please try again: " + (err as Error).message,
+			);
+		} finally {
+			setIsLoading(false);
+			if (friendId) {
+				router.push(getPath("Friend profile", friendId[0]));
+			} else {
+				router.push(getPath("Gifts"));
+			}
 		}
 	};
 
@@ -136,12 +169,15 @@ const GiftForm = () => {
 			/>
 			<div className={"flex justify-center"}>
 				<Button
-					type={"button"}
 					onClick={onSubmit}
+					disabled={isLoading}
+					loading={isLoading}
+					loadingText={"Saving..."}
 				>
 					Save gift
 				</Button>
 			</div>
+			{formError && <div className="text-red-500 text-sm">{formError}</div>}
 		</form>
 	);
 };

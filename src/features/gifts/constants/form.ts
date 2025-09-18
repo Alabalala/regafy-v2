@@ -36,8 +36,8 @@ export const GIFT_FORM_INITIAL_VALUES = {
 	description: "",
 	price: "",
 	image: null,
-	userId: "",
-	createdById: "",
+	profile_id: "",
+	added_by: "",
 };
 
 export const FILE_INPUT_INITIAL_VALUES = {
