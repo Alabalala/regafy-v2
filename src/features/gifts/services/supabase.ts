@@ -1,6 +1,7 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { Database } from "../../../shared/types/database.types";
-import { FormDataWithFileType } from "../types/form";
+import { FormDataWithFileType, GiftFormNoFile } from "../types/form";
+import { Gift } from "@/shared/types/supabase/supabase";
 
 export async function getGifts(
 	userId: string,
@@ -41,18 +42,16 @@ export async function getGifts(
 // }
 
 export async function createGift(
-	giftData: FormDataWithFileType,
+	giftData: GiftFormNoFile,
 	supabase: SupabaseClient<Database>,
 ) {
 	const { data, error } = await supabase
 		.from("gifts")
 		.insert(giftData)
-		.select("*");
+		.select("*")
+		.single();
 
-	if (error) {
-		console.log(error);
-	}
-
+	if (error) throw error;
 	return data;
 }
 
@@ -65,6 +64,44 @@ export async function createFriendGift(giftData, supabase) {
 	if (error) {
 		console.log(error);
 	}
+
+	return data;
+}
+
+export async function uploadImageFile(
+	giftId: string,
+	file: File,
+	supabase: SupabaseClient<Database>,
+) {
+	const fileName = giftId;
+	const { error } = await supabase.storage
+		.from("gift-images")
+		.upload(fileName, file, {
+			cacheControl: "no-store",
+			upsert: true,
+		});
+
+	if (error) throw error;
+
+	const publicUrl = supabase.storage.from("gift-images").getPublicUrl(fileName)
+		.data.publicUrl;
+
+	return publicUrl;
+}
+
+export async function addImageToGift(
+	giftId: string,
+	image_link: string,
+	supabase: SupabaseClient<Database>,
+) {
+	const { error, data } = await supabase
+		.from("gifts")
+		.update({ image_link })
+		.eq("id", giftId)
+		.select("*")
+		.single();
+
+	if (error) throw error;
 
 	return data;
 }
