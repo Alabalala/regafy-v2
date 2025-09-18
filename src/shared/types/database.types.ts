@@ -168,12 +168,12 @@ export type Database = {
           description: string | null
           id: string
           image_link: string | null
-          name: string
           price: string | null
           profile_id: string
           rating: number
           reserved: boolean | null
           reserved_by: string | null
+          title: string
         }
         Insert: {
           added_by: string
@@ -181,12 +181,12 @@ export type Database = {
           description?: string | null
           id?: string
           image_link?: string | null
-          name: string
           price?: string | null
           profile_id: string
           rating?: number
           reserved?: boolean | null
           reserved_by?: string | null
+          title: string
         }
         Update: {
           added_by?: string
@@ -194,12 +194,12 @@ export type Database = {
           description?: string | null
           id?: string
           image_link?: string | null
-          name?: string
           price?: string | null
           profile_id?: string
           rating?: number
           reserved?: boolean | null
           reserved_by?: string | null
+          title?: string
         }
         Relationships: [
           {
