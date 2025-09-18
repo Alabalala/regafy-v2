@@ -16,6 +16,7 @@ import StarRate from "../StarRate/StarRate";
 import { useUser } from "@/features/auth/hooks/useUser";
 import { useState } from "react";
 import QuestionsAnswers from "../QuestionsAnswers/QuestionsAnswers";
+import { getOptimizedImageUrl } from "@/shared/services/getOptimisedImageUrl";
 
 interface Props {
 	gift: Gift;
@@ -27,8 +28,7 @@ export default function GiftPost({ gift, changeReserve }: Props) {
 	const timeAgo = getTimeAgo(gift.created_at);
 	const [user] = useUser();
 	const [isCommentsOpen, setIsCommentsOpen] = useState(false);
-
-	getTimeAgo(gift.created_at);
+	console.log(gift.image_link);
 
 	if (!user) return <p>Loading...</p>;
 
@@ -44,8 +44,8 @@ export default function GiftPost({ gift, changeReserve }: Props) {
 					<ContextMenu
 						helperFunction={() =>
 							isOwnGift
-								? OwnGiftContextMenuHelper(gift.id, gift.profileId)
-								: FriendGiftContextMenuHelper(gift.id, gift.profileId)
+								? OwnGiftContextMenuHelper(gift.id, gift.profile_id)
+								: FriendGiftContextMenuHelper(gift.id, gift.profile_id)
 						}
 					/>
 				</div>
@@ -69,37 +69,36 @@ export default function GiftPost({ gift, changeReserve }: Props) {
 				</div>
 				<div className={"flex flex-col gap-3"}>
 					<div className={"flex flex-row justify-between font-bold text-md"}>
-						<p className={`${poppins.className} `}>{gift.name}</p>
-						<p>{gift.price}</p>
+						<p className={`${poppins.className} `}>{gift.title}</p>
+						<p>{gift.price} €</p>
 					</div>
 
 					<p>{gift.description}</p>
 				</div>
 				{gift.image_link && (
-					<div className={"border-2"}>
+					<div className={"border-2 relative w-full h-50"}>
 						<Image
-							src={`/${gift.image_link}?t=${Date.now()}`}
-							width={400}
-							height={400}
+							src={`${getOptimizedImageUrl(gift.image_link)}?t=${Date.now()}`}
+							fill
 							className={"object-cover"}
 							alt={"Imagen del regalo"}
 						/>
 					</div>
 				)}
 
-				<StarRate rating={gift.rating}></StarRate>
+				<StarRate rating={String(gift.rating)}></StarRate>
 				<hr />
 				<div className={`flex flex-row justify-around`}>
 					{isOwnGift && (
 						<Button
-							disabled={gift.reserved && gift.added_by !== user?.id}
+							disabled={(gift.reserved ?? false) && gift.added_by !== user?.id}
 							isGroup
 							isPlain
 							variant="primary"
 							onClick={() => changeReserve(gift.id)}
 						>
 							<div className={"flex flex-col items-center"}>
-								<BookMarkSVG filled={gift.reserved} />
+								<BookMarkSVG filled={gift.reserved ?? false} />
 								<p>Reserve{gift.reserved && "d"}</p>
 							</div>
 						</Button>

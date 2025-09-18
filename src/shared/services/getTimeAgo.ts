@@ -1,6 +1,5 @@
-export function getTimeAgo(date: Date) {
+export function getTimeAgo(date: string) {
 	const createdDate = new Date(date).getTime();
-	console.log(createdDate);
 	const today = new Date().getTime();
 	const timeDifference = today - createdDate;
 
