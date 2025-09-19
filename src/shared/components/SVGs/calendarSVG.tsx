@@ -9,53 +9,47 @@ const CalendarSVG = ({ className, filled }: Props) => {
 			viewBox={"0 0 33 33"}
 			fill={"none"}
 			xmlns={"http://www.w3.org/2000/svg"}
-			className={`${className} ${!filled && "active:animate-bounce duration-200"}`}
+			className={`stroke-black dark:stroke-white ${className} ${!filled && "active:animate-bounce duration-200"}`}
 		>
 			<path
 				d={
 					"M3 30C3 31.6569 4.34315 33 6 33H30C31.6569 33 33 31.6569 33 30V13.5H3V30Z"
 				}
-				className={`${filled ? "fill-background dark:fill-background-dark" : "fill-none"} group-hover:fill-background-50 group-hover:dark:fill-background-dark-50 group-active:fill-background-100 group-active:dark:fill-background-dark-100`}
+				className={` stroke-black dark:stroke-white ${filled ? "fill-background dark:fill-tertiary-dark" : "fill-none"} group-hover:fill-background-50 group-hover:dark:fill-tertiary-dark-50 group-active:fill-background-100 group-active:dark:fill-tertiary-dark-100`}
 			/>
 			<path
 				d={"M33 9C33 7.34315 31.6569 6 30 6H6C4.34315 6 3 7.34315 3 9V13.5H33V9Z"}
-				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
+				className={` stroke-black dark:stroke-white ${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 			/>
 			<path
 				d={
 					"M32 14.5V30C32 31.1046 31.1046 32 30 32H6C4.89543 32 4 31.1046 4 30V14.5H32ZM6 7H30C31.1046 7 32 7.89543 32 9V12.5H4V9C4 7.89543 4.89543 7 6 7Z"
 				}
-				stroke={"black"}
-				strokeWidth={"2"}
+				className="stroke-2 stroke-black dark:stroke-white"
 			/>
 			<path
 				d={
 					"M18.0336 20.0627C18.3397 19.1462 19.2234 17.1669 20.3199 18.3853C21.4176 19.6049 19.2538 20.0117 18.0336 20.0627Z"
 				}
-				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
+				className={` stroke-black dark:stroke-white ${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 			/>
 			<path
 				d={
 					"M18.0325 20.0663C18.3375 19.1513 19.222 17.1653 20.3199 18.3853C21.4179 19.6053 19.2525 20.012 18.0325 20.0628"
 				}
-				stroke={"black"}
-				strokeWidth={"0.5"}
+				className="stroke-0.5 stroke-black dark:stroke-white"
 			/>
 			<path
 				d={
 					"M16.965 20.2153C16.6775 19.2988 15.8439 17.3131 14.809 18.5351C13.7741 19.7571 15.8151 20.1644 16.965 20.2153Z"
 				}
-				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
-				stroke={"black"}
-				strokeWidth={"0.5"}
+				className={`stroke-0.5 stroke-black dark:stroke-white ${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 			/>
 			<circle
 				cx={"17.4225"}
 				cy={"19.7578"}
 				r={"0.457494"}
-				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
-				stroke={"black"}
-				strokeWidth={"0.5"}
+				className={`stroke-0.5 stroke-black dark:stroke-white ${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 			/>
 			<path
 				fillRule={"evenodd"}
@@ -63,18 +57,17 @@ const CalendarSVG = ({ className, filled }: Props) => {
 				d={
 					"M16.8124 21.7403H13.61V25.9252C13.61 26.4775 14.0577 26.9252 14.61 26.9252H16.8124V21.7403ZM18.1849 21.7403V26.9252H20.5399C21.0922 26.9252 21.5399 26.4775 21.5399 25.9252V21.7403H18.1849Z"
 				}
-				fill={filled ? "#B9E3D6" : "none"}
+				className={`${filled ? "fill-tertiary dark:fill-tertiary-dark" : "fill-none"}`}
 			/>
 			<path
 				d={"M18.1849 21.7403H16.8124V26.9252H18.1849V21.7403Z"}
-				fill={filled ? "#FFD966" : "none"}
+				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"}`}
 			/>
 			<path
 				d={
 					"M13.61 21.7403H21.5399M13.61 21.7403V25.9252C13.61 26.4775 14.0577 26.9252 14.61 26.9252H16.8124M13.61 21.7403H16.8124M21.5399 21.7403V25.9252C21.5399 26.4775 21.0922 26.9252 20.5399 26.9252H18.1849M21.5399 21.7403H18.1849M16.8124 21.7403V26.9252M16.8124 21.7403H18.1849M16.8124 26.9287V26.9252M18.1849 21.7403V26.9252M18.1849 26.9287V26.9252M16.8124 26.9252H18.1849"
 				}
-				stroke={"black"}
-				strokeWidth={"0.5"}
+				className={`stroke-0.5 stroke-black dark:stroke-white ${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 			/>
 			<path
 				fillRule={"evenodd"}
@@ -82,18 +75,16 @@ const CalendarSVG = ({ className, filled }: Props) => {
 				d={
 					"M16.8124 19.9103H14C13.4477 19.9103 13 20.358 13 20.9103V22.3503H16.8124V19.9103ZM18.1849 22.3503H21.1499C21.7022 22.3503 22.1499 21.9025 22.1499 21.3503V20.9103C22.1499 20.358 21.7022 19.9103 21.1499 19.9103H18.1849V22.3503Z"
 				}
-				fill={filled ? "#B9E3D6" : "none"}
+				className={`${filled ? "fill-tertiary dark:fill-tertiary-dark" : "fill-none"}`}
 			/>
 			<path
 				d={"M16.8124 19.9103V22.3503H18.1849V19.9103H16.8124Z"}
-				fill={filled ? "#FFD966" : "none"}
+				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"}`}
 			/>
 			<path
 				d={
 					"M13 22.3503V20.9103C13 20.358 13.4477 19.9103 14 19.9103H16.8124M13 22.3503H18.1849M13 22.3503H16.8124M16.8124 19.9103V22.3503M16.8124 19.9103H18.1849M16.8124 22.3503H18.1849M18.1849 19.9103H21.1499C21.7022 19.9103 22.1499 20.358 22.1499 20.9103V21.3503C22.1499 21.9025 21.7022 22.3503 21.1499 22.3503H18.1849M18.1849 19.9103V22.3503"
 				}
-				stroke={"black"}
-				strokeWidth={"0.5"}
 			/>
 			<rect
 				x={"9"}
@@ -101,7 +92,7 @@ const CalendarSVG = ({ className, filled }: Props) => {
 				width={"3"}
 				height={"7"}
 				rx={"1.5"}
-				fill={filled ? "#FFD966" : "none"}
+				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"}`}
 			/>
 			<rect
 				x={"9"}
@@ -109,8 +100,7 @@ const CalendarSVG = ({ className, filled }: Props) => {
 				width={"3"}
 				height={"7"}
 				rx={"1.5"}
-				stroke={"black"}
-				strokeWidth={"2"}
+				className="stroke-2 stroke-black dark:stroke-white"
 			/>
 			<rect
 				x={"9"}
@@ -118,8 +108,7 @@ const CalendarSVG = ({ className, filled }: Props) => {
 				width={"3"}
 				height={"7"}
 				rx={"1.5"}
-				stroke={"black"}
-				strokeWidth={"2"}
+				className="stroke-2 stroke-black dark:stroke-white"
 			/>
 			<rect
 				x={"24"}
@@ -127,7 +116,7 @@ const CalendarSVG = ({ className, filled }: Props) => {
 				width={"3"}
 				height={"7"}
 				rx={"1.5"}
-				fill={filled ? "#FFD966" : "none"}
+				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"}`}
 			/>
 			<rect
 				x={"24"}
@@ -135,8 +124,7 @@ const CalendarSVG = ({ className, filled }: Props) => {
 				width={"3"}
 				height={"7"}
 				rx={"1.5"}
-				stroke={"black"}
-				strokeWidth={"2"}
+				className="stroke-2 stroke-black dark:stroke-white"
 			/>
 			<rect
 				x={"24"}
@@ -144,8 +132,7 @@ const CalendarSVG = ({ className, filled }: Props) => {
 				width={"3"}
 				height={"7"}
 				rx={"1.5"}
-				stroke={"black"}
-				strokeWidth={"2"}
+				className="stroke-2 stroke-black dark:stroke-white"
 			/>
 		</svg>
 	);

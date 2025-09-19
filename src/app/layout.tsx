@@ -12,7 +12,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 		<html lang={"en"}>
 			<body
 				className={
-					"bg-background dark:bg-background-dark h-screen font-sans overflow-clip"
+					"bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark h-screen font-sans overflow-clip"
 				}
 			>
 				{children}

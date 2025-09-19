@@ -6,7 +6,7 @@ interface Props {
 const SunSVG = ({ className, filled = false }: Props) => {
 	return (
 		<svg
-			className={`${className} ${!filled && "active:animate-bounce duration-200"}`}
+			className={`stroke-2 stroke-black dark:stroke-white ${className} ${!filled && "active:animate-bounce duration-200"}`}
 			width={"35"}
 			height={"35"}
 			viewBox={"0 0 35 35"}
@@ -17,9 +17,9 @@ const SunSVG = ({ className, filled = false }: Props) => {
 				cx="18"
 				cy="17"
 				r="13"
-				className={`${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
+				className={`stroke-2 stroke-black dark:stroke-white ${filled ? "fill-accent dark:fill-accent-dark" : "fill-none"} group-hover:fill-accent-50 group-hover:dark:fill-accent-dark-50 group-active:fill-accent-100 group-active:dark:fill-accent-dark-100`}
 				stroke="black"
-				stroke-width="2"
+				strokeWidth="2"
 			/>
 		</svg>
 	);

@@ -1,21 +1,16 @@
 interface Props {
-	fill?: string;
 	height?: string;
 	width?: string;
 }
 
-const AddDocumentSVG = ({
-	fill = "#000000",
-	height = "24px",
-	width = "24px",
-}: Props) => {
+const AddDocumentSVG = ({ height = "24px", width = "24px" }: Props) => {
 	return (
 		<svg
 			xmlns={"http://www.w3.org/2000/svg"}
 			height={height}
 			viewBox={"0 -960 960 960"}
 			width={width}
-			fill={fill}
+			className="stroke-black dark:stroke-white fill-black dark:fill-white"
 		>
 			<path
 				d={
