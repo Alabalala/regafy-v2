@@ -384,27 +384,27 @@ export type Database = {
       }
       profiles: {
         Row: {
-          avatar: string
           birthday: string
           created_at: string
           id: string
           name: string
+          profileImage: string | null
           userName: string
         }
         Insert: {
-          avatar: string
           birthday: string
           created_at?: string
           id?: string
           name: string
+          profileImage?: string | null
           userName: string
         }
         Update: {
-          avatar?: string
           birthday?: string
           created_at?: string
           id?: string
           name?: string
+          profileImage?: string | null
           userName?: string
         }
         Relationships: []
