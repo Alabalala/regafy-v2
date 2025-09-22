@@ -4,6 +4,7 @@ import { NextLink } from "../Link/Link";
 import { Button } from "../Button/Button";
 import { useLogout } from "@/features/auth/hooks/useLogout";
 import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
+import { getPath } from "@/shared/services/getPath";
 
 interface Props {
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -24,7 +25,7 @@ export const BurgerMenu = ({ setIsOpen, isOpen }: Props) => {
 					<NextLink
 						key={item.name}
 						isPlain
-						href={item.pathName}
+						href={getPath(item.pathName)}
 						variant="primary"
 					>
 						{item.name}
