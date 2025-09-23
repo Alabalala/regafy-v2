@@ -34,9 +34,10 @@ const GiftForm = () => {
 	const [rating, setRating] = useState<string>("1");
 	const [user] = useUser();
 	const params = useParams();
-	const { friendId } = params;
+	const { id: friendId } = params;
 	const supabase = createClient();
 	const router = useRouter();
+	const normalisedFriendId = Array.isArray(friendId) ? friendId[0] : friendId;
 
 	if (!user) {
 		return <p>Loading</p>;
@@ -127,7 +128,7 @@ const GiftForm = () => {
 		} finally {
 			setIsLoading(false);
 			if (friendId) {
-				router.push(getPath("Friend profile", friendId[0]));
+				router.push(getPath("Friend profile", normalisedFriendId));
 			} else {
 				router.push(getPath("Gifts"));
 			}
@@ -162,11 +163,15 @@ const GiftForm = () => {
 				</div>
 			))}
 
-			<p className={"font-bold"}>Rate how much you want this gift</p>
-			<StarRateInput
-				rating={rating}
-				setRating={setRating}
-			/>
+			{!friendId && (
+				<div className={"flex flex-col gap-2"}>
+					<p className={"font-bold"}>Rate how much you want this gift</p>
+					<StarRateInput
+						rating={rating}
+						setRating={setRating}
+					/>
+				</div>
+			)}
 			<div className={"flex justify-center"}>
 				<Button
 					onClick={onSubmit}

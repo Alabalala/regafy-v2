@@ -1,3 +1,4 @@
+"use client";
 import { Profile } from "../../types/supabase.types";
 import ProfileImage from "../ProfileImage/ProfileImage";
 

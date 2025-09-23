@@ -6,7 +6,7 @@ import { Gift } from "@/shared/types/supabase/supabase";
 export async function getGifts(
 	userId: string,
 	supabase: SupabaseClient<Database>,
-) {
+): Promise<Gift[]> {
 	const { data, error } = await supabase
 		.from("gifts")
 		.select(
@@ -24,7 +24,7 @@ export async function getGifts(
 
 	if (error) throw error;
 
-	return data;
+	return (data as unknown as Gift[]) ?? [];
 }
 
 // export async function getGiftInfo(giftId, supabase) {

@@ -12,9 +12,10 @@ import { createClient } from "@/shared/services/supabase/client";
 
 interface Props {
 	gifts: Gift[];
+	friendId?: string;
 }
 
-const GiftListClient = ({ gifts }: Props) => {
+const GiftListClient = ({ gifts, friendId }: Props) => {
 	const { setGifts } = useGiftStore();
 	const { gifts: storeGifts } = useGiftStore();
 	const [user] = useUser();
@@ -49,7 +50,9 @@ const GiftListClient = ({ gifts }: Props) => {
 			<NextLink
 				variant={"primary"}
 				floating
-				href={getPath("New gift")}
+				href={
+					friendId ? getPath("New gift for friend", friendId) : getPath("New gift")
+				}
 			>
 				New gift
 			</NextLink>
