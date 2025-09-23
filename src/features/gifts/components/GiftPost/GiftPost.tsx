@@ -17,6 +17,7 @@ import { useUser } from "@/features/auth/hooks/useUser";
 import { useState } from "react";
 import QuestionsAnswers from "../QuestionsAnswers/QuestionsAnswers";
 import { getOptimizedImageUrl } from "@/shared/services/getOptimisedImageUrl";
+import ProfileInfo from "@/features/profile/components/ProfileInfo/ProfileInfo";
 
 interface Props {
 	gift: Gift;
@@ -28,18 +29,16 @@ export default function GiftPost({ gift, changeReserve }: Props) {
 	const timeAgo = getTimeAgo(gift.created_at);
 	const [user] = useUser();
 	const [isCommentsOpen, setIsCommentsOpen] = useState(false);
-	console.log(gift.image_link);
-
 	if (!user) return <p>Loading...</p>;
 
 	return (
 		<article className={"border-2 rounded-md"}>
 			<div
-				className={`flex flex-col bg-tertiary dark:bg-tertiary-dark p-4 w-full gap-4 relative ${isCommentsOpen ? "rounded-t-md" : "rounded-md"}`}
+				className={`flex flex-col bg-tertiary dark:bg-tertiary-dark p-4 w-full gap-6 relative ${isCommentsOpen ? "rounded-t-md" : "rounded-md"}`}
 			>
-				<div className="absolute top-4 right-4 flex flex-row gap-3">
-					<div className={"flex items-center"}>
-						<p>{timeAgo}</p>
+				<div className="absolute top-4 right-0 flex flex-row gap-3">
+					<div className={"flex items-center text-xs"}>
+						<p>{timeAgo} ago</p>
 					</div>
 					<ContextMenu
 						helperFunction={() =>
@@ -50,22 +49,10 @@ export default function GiftPost({ gift, changeReserve }: Props) {
 					/>
 				</div>
 				<div className={"flex flex-row justify-between"}>
-					<div className={"flex flex-row gap-4"}>
-						<div
-							className={"relative w-12 h-12 overflow-hidden rounded-4xl border-2"}
-						>
-							<Image
-								src={"/test-image-profile.png"}
-								fill
-								className={"object-cover"}
-								alt={"sdfsdf"}
-							/>
-						</div>
-						<div className={""}>
-							<p className={"font-bold"}>Cady Lover</p>
-							<p className={"font-light"}>@cady</p>
-						</div>
-					</div>
+					<ProfileInfo
+						sided
+						profile={gift.profiles}
+					></ProfileInfo>
 				</div>
 				<div className={"flex flex-col gap-3"}>
 					<div className={"flex flex-row justify-between font-bold text-md"}>

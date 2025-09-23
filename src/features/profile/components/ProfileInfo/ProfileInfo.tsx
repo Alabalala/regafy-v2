@@ -1,16 +1,28 @@
 import { Profile } from "../../types/supabase.types";
 import ProfileImage from "../ProfileImage/ProfileImage";
 
-const ProfileInfo = ({ profile }: { profile: Profile }) => {
-	console.log(profile);
+interface Props {
+	profile: Profile;
+	canEdit?: boolean;
+	sided?: boolean;
+}
+
+const ProfileInfo = ({ profile, canEdit, sided }: Props) => {
 	return (
-		<div className="flex flex-col justify-center items-center">
+		<div
+			className={`flex ${sided ? "flex-row gap-1" : "flex-col"} justify-center items-center`}
+		>
 			<ProfileImage
-				canEdit
+				small={sided}
+				canEdit={canEdit}
 				profileImage={profile.profileImage}
 			></ProfileImage>
-			<div className="font-bold">{profile.name}</div>
-			<div className="font-light">@{profile.userName}</div>
+			<div className={`${sided ? "flex flex-col" : ""}`}>
+				<div className={`font-bold ${sided && "text-sm"}`}>{profile.name}</div>
+				<div className={`font-light ${sided && "text-sm"}`}>
+					@{profile.userName}
+				</div>
+			</div>
 		</div>
 	);
 };

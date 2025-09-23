@@ -12,9 +12,10 @@ import { Profile } from "../../types/supabase.types";
 interface Props {
 	profileImage: string | null;
 	canEdit?: boolean;
+	small?: boolean;
 }
 
-const ProfileImage = ({ profileImage, canEdit = false }: Props) => {
+const ProfileImage = ({ profileImage, canEdit = false, small }: Props) => {
 	const supabase = createClient();
 	const [user] = useUser();
 	const { profile, setProfile } = useProfileStore();
@@ -62,7 +63,9 @@ const ProfileImage = ({ profileImage, canEdit = false }: Props) => {
 					></EditSVG>
 				</div>
 			)}
-			<div className="relative overflow-clip w-20 h-20 bg-background-100 dark:bg-background-dark-100 rounded-full border-2">
+			<div
+				className={`relative overflow-clip ${small ? "w-10 h-10" : "w-20 h-20"} bg-background-100 dark:bg-background-dark-100 rounded-full border-2`}
+			>
 				<Image
 					alt="Profile image"
 					src={

@@ -24,7 +24,10 @@ export const ProfileSettings = ({}) => {
 	return (
 		<div className="flex flex-col gap-5">
 			<div className="bg-tertiary p-2 border-2 flex flex-col gap-5 pb-6 border-b-2 ">
-				<ProfileInfo profile={profile}></ProfileInfo>
+				<ProfileInfo
+					canEdit
+					profile={profile}
+				></ProfileInfo>
 
 				<ProfileBirthday birthday={profile.birthday}></ProfileBirthday>
 

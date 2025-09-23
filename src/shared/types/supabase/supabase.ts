@@ -9,6 +9,6 @@ export type QuestionWithAnswers =
 
 export type Questions = Database["public"]["Tables"]["questions"]["Row"];
 export type Gift = Database["public"]["Tables"]["gifts"]["Row"] & {
-	profiles: { name: string } | null;
+	profiles: Database["public"]["Tables"]["profiles"]["Row"];
 	questions: QuestionWithAnswers[];
 };

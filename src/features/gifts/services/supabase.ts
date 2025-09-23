@@ -12,7 +12,7 @@ export async function getGifts(
 		.select(
 			`
       *,
-      profiles!gifts_added_by_fkey(name),
+      profiles!gifts_added_by_fkey(*),
 	  questions!questions_gift_id_fkey(
       *,
       answers!answers_question_id_fkey(*)
@@ -145,28 +145,6 @@ export async function reserveGift(
 
 	if (error) {
 		console.error("Error reserving gift:", error);
-	}
-}
-
-export async function updateGiftPositions(gifts, supabase) {
-	try {
-		const updates = await Promise.all(
-			gifts.map(({ id, position }) =>
-				supabase.from("gifts").update({ position }).eq("id", id),
-			),
-		);
-
-		const errors = updates.filter(({ error }) => error);
-		if (errors.length > 0) {
-			console.error("Errors updating some gifts:", errors);
-			return { success: false, errors };
-		}
-
-		console.log("All gifts updated successfully");
-		return { success: true };
-	} catch (err) {
-		console.error("Unexpected error:", err);
-		return { success: false, error: err };
 	}
 }
 
