@@ -1,7 +1,7 @@
 import { ValidationResult } from "@/shared/types/forms";
-import { LoginFormSchema } from "../schemas/loginForm";
 import z from "zod";
 import { SingupFormSchema } from "../schemas/signupForm";
+import { SignUpFormTypes } from "../types/forms";
 
 export const validateSignUpForm = (
 	formData: SignUpFormTypes,

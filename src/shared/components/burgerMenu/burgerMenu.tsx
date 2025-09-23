@@ -15,7 +15,7 @@ export const BurgerMenu = ({ setIsOpen, isOpen }: Props) => {
 	const { logout } = useLogout();
 	return (
 		<div
-			className={`flex flex-col gap-10 p-4 left-0 top-20 bg-secondary dark:bg-secondary-dark fixed h-full w-full z-20 transition-transform duration-500 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
+			className={`flex flex-col gap-10 p-4 left-0 top-20 bg-secondary dark:bg-secondary-dark fixed h-full w-full z-30 transition-transform duration-500 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
 		>
 			<div
 				className="flex flex-col gap-4"

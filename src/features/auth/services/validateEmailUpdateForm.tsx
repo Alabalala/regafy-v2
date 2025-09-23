@@ -1,12 +1,12 @@
 import { ValidationResult } from "@/shared/types/forms";
-import { LoginFormSchema } from "../schemas/loginForm";
 import z from "zod";
-import { LoginFormTypes } from "../types/forms";
+import { UpdateEmailFormTypes } from "../types/forms";
+import { updateEmailFormSchema } from "../schemas/updateEmail";
 
-export const validateLoginForm = (
-	formData: LoginFormTypes,
+export const validateUpdateEmailForm = (
+	formData: UpdateEmailFormTypes,
 ): ValidationResult => {
-	const result = LoginFormSchema.safeParse(formData);
+	const result = updateEmailFormSchema.safeParse(formData);
 
 	if (!result.success) {
 		const { fieldErrors } = z.flattenError(result.error);

@@ -1,24 +1,23 @@
 "use client";
 
-import { Profile as ProfileType } from "../../types/supabase.types";
-import Image from "next/image";
 import { NextLink } from "@/shared/components/Link/Link";
 import { useState } from "react";
 import { Button } from "@/shared/components/Button/Button";
 import ProfileForm from "../ProfileForm/ProfileForm";
-import CalendarSVG from "@/shared/components/SVGs/calendarSVG";
 import { useUser } from "@/features/auth/hooks/useUser";
 import { useLogout } from "@/features/auth/hooks/useLogout";
 import { getPath } from "@/shared/services/getPath";
 import ProfileBirthday from "../ProfileBirthday/ProfileBirthday";
 import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import useProfile from "../../store/hooks/useProfile";
+import UpdateEmailForm from "@/features/auth/components/UpdateEmailForm";
+import UpdatePasswordForm from "@/features/auth/components/UpdatePasswordForm";
 
 export const ProfileSettings = ({}) => {
 	const [profile] = useProfile();
 	const [isProfileFormOpen, setIsProfileFormOpen] = useState(false);
 	const [user] = useUser();
-	const logout = useLogout();
+	const { logout } = useLogout();
 
 	if (!profile || !user) return <p>Loading...</p>;
 
@@ -49,29 +48,37 @@ export const ProfileSettings = ({}) => {
 			</div>
 			<div className="flex flex-col gap-5">
 				<div className="flex flex-col gap-2">
-					<h2 className="font-bold">Email</h2>
+					<h2 className="font-bold uppercase">Change your email</h2>
 					<p>Your email: {user.email}</p>
 					<div>
-						<Button
-							isPlain
-							variant="secondary"
-						>
-							Change email
-						</Button>
+						<UpdateEmailForm></UpdateEmailForm>
 					</div>
 				</div>
 
 				<hr />
 
 				<div className="flex flex-col gap-2">
+					<h2 className="font-bold uppercase">Change your password</h2>
+					<div>
+						<UpdatePasswordForm></UpdatePasswordForm>
+					</div>
+				</div>
+
+				<hr />
+				<div className="flex flex-col gap-2">
 					<h2 className="font-bold">Logout</h2>
+					<p>
+						You can log out from here, but you will need to log in again with your
+						email and password.
+					</p>
 					<div className="w-fit mx-auto">
-						<Button onClick={() => logout}>Log out</Button>
+						<Button onClick={() => logout()}>Log out</Button>
 					</div>
 				</div>
 
 				<hr />
 
+				{/*TODO*/}
 				<div className="flex flex-col gap-2">
 					<h2 className="font-bold">Delete account</h2>
 					<div className="flex justify-center">

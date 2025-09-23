@@ -2,6 +2,7 @@
 import { Database } from "@/shared/types/database.types";
 import { createClient } from "@/shared/services/supabase/server";
 import { SupabaseClient } from "@supabase/supabase-js";
+import { LoginFormTypes, SignUpFormTypes } from "../types/forms";
 
 export async function login(formData: LoginFormTypes) {
 	const supabase = await createClient();
@@ -88,16 +89,21 @@ export async function signOut() {
 	}
 }
 
-// export async function updatePassword(newPassword) {
-// 	const supabase = await createClient();
-// 	const { data, error } = await supabase.auth.updateUser({
-// 		password: newPassword,
-// 	});
-// 	if (error) {
-// 		console.log(error);
-// 	}
-// 	return data;
-// }
+export async function updateEmail(newEmail: string) {
+	const supabase = await createClient();
+	const { error } = await supabase.auth.updateUser({
+		email: newEmail,
+	});
+	if (error) throw error;
+}
+
+export async function updatePassword(newPassword: string) {
+	const supabase = await createClient();
+	const { error } = await supabase.auth.updateUser({
+		password: newPassword,
+	});
+	if (error) throw error;
+}
 
 // export async function deleteUser(userId) {
 // 	const supabase = await createClient();
