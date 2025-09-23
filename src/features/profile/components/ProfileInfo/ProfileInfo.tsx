@@ -10,7 +10,7 @@ interface Props {
 const ProfileInfo = ({ profile, canEdit, sided }: Props) => {
 	return (
 		<div
-			className={`flex ${sided ? "flex-row gap-1" : "flex-col"} justify-center items-center`}
+			className={`flex ${sided ? "flex-row gap-2" : "flex-col"} justify-center items-center`}
 		>
 			<ProfileImage
 				small={sided}
