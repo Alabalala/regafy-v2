@@ -23,42 +23,7 @@ export async function getCurrentUser(supabase: SupabaseClient<Database>) {
 // 	return user;
 // }
 
-//Create a profile for the auth user
-export async function createProfile(formData, supabase) {
-	const { name, userName, avatar, birthday } = formData;
 
-	const { error: profilesError } = await supabase
-		.from("profiles")
-		.insert({ name: name, userName: userName, avatar: avatar, birthday });
-
-	profilesError && console.error(profilesError);
-}
-
-export async function updateProfile(formData, supabase) {
-	const { name, userName, avatar, id, birthday } = formData;
-
-	const { error: profilesError } = await supabase
-		.from("profiles")
-		.update({ name, userName, avatar, birthday })
-		.eq("id", id);
-
-	profilesError && console.error(profilesError);
-}
-
-//Get profile info
-export async function getProfile(userId, supabase) {
-	const { data: profileData, error: profileError } = await supabase
-		.from("profiles")
-		.select("*")
-		.eq("id", userId)
-		.single();
-
-	if (profileError) {
-		console.error("Profile error: ", profileError);
-	}
-
-	return profileData;
-}
 
 export async function checkUsername(username, supabase) {
 	const { data, error } = await supabase

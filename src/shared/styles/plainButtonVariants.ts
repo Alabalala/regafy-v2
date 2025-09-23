@@ -15,8 +15,8 @@ export const plainButtonVariants = tv({
 				"text-red-600 hover:text-red-700 active:text-red-800 dark:text-red-500 dark:hover:text-red-600 dark:active:text-red-700",
 		},
 		size: {
-			default: "text-base px-2 py-1",
-			small: "text-sm px-1 py-0.5",
+			default: "text-base",
+			small: "text-sm",
 			icon: "w-6 h-6 p-0",
 		},
 		isGroup: {

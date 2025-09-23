@@ -11,7 +11,7 @@ export interface InputType {
 
 export interface FileInputDataType {
 	file: File | null;
-	preview: string | null;
+	preview?: string | null;
 }
 
 export type FieldErrors = Record<string, string[] | undefined>;

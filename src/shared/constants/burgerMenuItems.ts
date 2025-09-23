@@ -1,7 +1,7 @@
 export const BURGER_MENU_ITEMS = [
 	{
-		name: "Profile",
-		pathName: "Profile",
+		name: "Profile settings",
+		pathName: "Profile settings",
 	},
 	{
 		name: "Help",

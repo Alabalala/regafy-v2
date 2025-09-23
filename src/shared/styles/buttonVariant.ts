@@ -24,12 +24,12 @@ export const buttonVariants = tv({
            dark:hover:bg-secondary-dark-50 dark:hover:text-on-secondary-dark
            dark:active:bg-secondary-dark-100 dark:active:text-on-secondary-dark`,
 
-			delete: `bg-red-600 text-white 
-        hover:bg-red-700 hover:border-white 
-        active:bg-red-800 active:border-white
-        dark:bg-red-500 dark:text-white
-        dark:hover:bg-red-600 dark:hover:border-white
-        dark:active:bg-red-700 dark:active:border-white`,
+			delete: `bg-secondary-accent text-on-secondary-accent 
+        hover:bg-secondary-accent-50 hover:text-on-secondary-accent 
+        active:bg-secondary-accent-100 active:text-on-secondary-accent
+        dark:bg-secondary-accent-dark dark:text-on-secondary-accent-dark
+        dark:hover:bg-secondary-accent-dark-50 dark:hover:text-on-secondary-accent-dark
+        dark:active:bg-secondary-accent-dark-100 dark:active:text-on-secondary-accent-dark`,
 		},
 
 		floating: {

@@ -13,7 +13,7 @@ const CalendarSVG = ({ className, filled }: Props) => {
 		>
 			<path
 				d="M3 30C3 31.6569 4.34315 33 6 33H30C31.6569 33 33 31.6569 33 30V13.5H3V30Z"
-				className={`${filled ? "fill-background dark:fill-background-dark" : "fill-none"} group-hover:fill-background-50 group-hover:dark:fill-background-dark-50 group-active:fill-background-100 group-active:dark:fill-background-dark-100`}
+				className={`${filled ? "fill-tertiary dark:fill-tertiary-dark" : "fill-none"} group-hover:fill-tertiary-50 group-hover:dark:fill-tertiary-dark-50 group-active:fill-tertiary-100 group-active:dark:fill-tertiary-dark-100`}
 			/>
 			<path
 				d="M33 9C33 7.34315 31.6569 6 30 6H6C4.34315 6 3 7.34315 3 9V13.5H33V9Z"
