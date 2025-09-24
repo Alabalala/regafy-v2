@@ -5,6 +5,7 @@ import ProfileInfo from "@/features/profile/components/ProfileInfo/ProfileInfo";
 import { getProfile } from "@/features/profile/services/supabase";
 import { Profile } from "@/features/profile/types/supabase.types";
 import { Button } from "@/shared/components/Button/Button";
+import LoadingComponent from "@/shared/components/loadingModule";
 import { createClient } from "@/shared/services/supabase/server";
 import { Gift } from "@/shared/types/supabase/supabase";
 
@@ -23,7 +24,7 @@ export default async function FriendProfile({ params }: Props) {
 	} catch (err) {
 		console.log(err);
 	}
-	if (!id || !profile) return <p>Loading...</p>;
+	if (!id || !profile || !gifts) return <LoadingComponent />;
 
 	return (
 		<div className="flex flex-col gap-4">

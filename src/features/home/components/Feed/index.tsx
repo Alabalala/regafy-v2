@@ -10,6 +10,7 @@ import { Button } from "@/shared/components/Button/Button";
 import GiftList from "@/features/gifts/components/GiftList";
 import { useChangeReserve } from "@/features/gifts/hooks/useChangeReserve";
 import LoadingSVG from "@/shared/components/SVGs/LoadingSVG";
+import LoadingComponent from "@/shared/components/loadingModule";
 
 const Feed = () => {
 	const [feed, setFeed] = useState<Gift[]>([]);
@@ -70,11 +71,7 @@ const Feed = () => {
 				gifts={feed}
 				changeReserve={changeReserve}
 			/>
-			{loading && (
-				<div className="flex justify-center items-center mt-5">
-					<LoadingSVG className="animate-spin h-8 w-8"></LoadingSVG>
-				</div>
-			)}
+			{loading && <LoadingComponent />}
 		</div>
 	);
 };

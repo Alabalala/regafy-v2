@@ -12,6 +12,7 @@ import ProfileInfo from "../ProfileInfo/ProfileInfo";
 import useProfile from "../../store/hooks/useProfile";
 import UpdateEmailForm from "@/features/auth/components/UpdateEmailForm";
 import UpdatePasswordForm from "@/features/auth/components/UpdatePasswordForm";
+import LoadingComponent from "@/shared/components/loadingModule";
 
 export const ProfileSettings = ({}) => {
 	const [profile] = useProfile();
@@ -19,7 +20,7 @@ export const ProfileSettings = ({}) => {
 	const [user] = useUser();
 	const { logout } = useLogout();
 
-	if (!profile || !user) return <p>Loading...</p>;
+	if (!profile || !user) return <LoadingComponent />;
 
 	return (
 		<div className="flex flex-col gap-5">

@@ -22,6 +22,7 @@ import {
 } from "../../services/supabase";
 import { createClient } from "@/shared/services/supabase/client";
 import { getPath } from "@/shared/services/getPath";
+import LoadingComponent from "@/shared/components/loadingModule";
 
 const GiftForm = () => {
 	const [formData, setFormData] = useState<GiftFormData>(
@@ -40,7 +41,7 @@ const GiftForm = () => {
 	const normalisedFriendId = Array.isArray(friendId) ? friendId[0] : friendId;
 
 	if (!user) {
-		return <p>Loading</p>;
+		return <LoadingComponent />;
 	}
 
 	const onChange = (

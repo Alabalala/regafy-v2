@@ -1,31 +1,14 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { getFriendsWithProfile } from "../../services/supabase";
-import { useUser } from "@/features/auth/hooks/useUser";
-import { createClient } from "@/shared/services/supabase/client";
 import { Profile } from "@/features/profile/types/supabase.types";
-import Link from "next/link";
 import { NextLink } from "@/shared/components/Link/Link";
 import FriendLink from "../friendLink";
 
-const FriendsList = () => {
-	const [friends, setFriends] = useState<Profile[]>([]);
-	const [user] = useUser();
-	const supabase = createClient();
+interface Props {
+	friends: Profile[];
+}
 
-	useEffect(() => {
-		const fetchFriends = async () => {
-			if (user) {
-				const fetchedFriends = await getFriendsWithProfile(user?.id, supabase);
-				setFriends(fetchedFriends);
-			}
-		};
-		fetchFriends();
-	});
-
-	if (!user || !friends) return <p>Loading...</p>;
-
+const FriendsList = ({ friends }: Props) => {
 	return (
 		<div className="flex flex-col gap-2">
 			{friends.length === 0 ? (

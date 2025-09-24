@@ -18,6 +18,7 @@ import { useState } from "react";
 import QuestionsAnswers from "../QuestionsAnswers/QuestionsAnswers";
 import { getOptimizedImageUrl } from "@/shared/services/getOptimisedImageUrl";
 import ProfileInfo from "@/features/profile/components/ProfileInfo/ProfileInfo";
+import LoadingComponent from "@/shared/components/loadingModule";
 
 interface Props {
 	gift: Gift;
@@ -29,7 +30,7 @@ export default function GiftPost({ gift, changeReserve }: Props) {
 	const timeAgo = getTimeAgo(gift.created_at);
 	const [user] = useUser();
 	const [isCommentsOpen, setIsCommentsOpen] = useState(false);
-	if (!user) return <p>Loading...</p>;
+	if (!user) return <LoadingComponent />;
 
 	return (
 		<article className={"border-2 rounded-md"}>
