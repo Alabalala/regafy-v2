@@ -1,4 +1,4 @@
-import { ContextMenu } from "@/shared/components/ContextMenu/ContextMenu";
+import { ContextMenu } from "@/shared/components/ContextMenu";
 import { QuestionContextMenu } from "../../services/QuestionContextMenu";
 import { createClient } from "@/shared/services/supabase/client";
 import { useGiftStore } from "../../stores/giftStore";

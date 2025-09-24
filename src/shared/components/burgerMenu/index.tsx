@@ -1,7 +1,7 @@
 import { BURGER_MENU_ITEMS } from "@/shared/constants/burgerMenuItems";
 import Hamburger from "hamburger-react";
-import { NextLink } from "../Link/Link";
-import { Button } from "../Button/Button";
+import { NextLink } from "../Link";
+import { Button } from "../Button";
 import { useLogout } from "@/features/auth/hooks/useLogout";
 import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
 import { getPath } from "@/shared/services/getPath";

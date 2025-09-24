@@ -6,7 +6,7 @@ import { createClient } from "@/shared/services/supabase/client";
 import { useUser } from "@/features/auth/hooks/useUser";
 import { getFriendsIds } from "@/features/friends/services/supabase";
 import GiftListClient from "@/features/gifts/components/UserGiftList";
-import { Button } from "@/shared/components/Button/Button";
+import { Button } from "@/shared/components/Button";
 import GiftList from "@/features/gifts/components/GiftList";
 import { useChangeReserve } from "@/features/gifts/hooks/useChangeReserve";
 import LoadingSVG from "@/shared/components/SVGs/LoadingSVG";

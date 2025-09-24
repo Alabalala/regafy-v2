@@ -1,7 +1,7 @@
 import Image from "next/image";
 import AddDocumentSVG from "../SVGs/AddDocumentSVG";
 
-import { Button } from "../Button/Button";
+import { Button } from "../Button";
 import { FileInputDataType, InputType } from "@/shared/types/forms";
 
 interface Props {

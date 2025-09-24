@@ -6,14 +6,14 @@ import {
 	LOGIN_FORM_INPUTS,
 } from "../../constants/forms";
 import { FieldErrors } from "@/shared/types/forms";
-import Input from "@/shared/components/Input/Input";
-import { Button } from "@/shared/components/Button/Button";
+import Input from "@/shared/components/Input";
+import { Button } from "@/shared/components/Button";
 import { validateLoginForm } from "../../services/validateLoginForm";
 import { login } from "../../services/supabase";
 import { useUserStore } from "@/features/auth/stores/userStore";
 import { useRouter } from "next/navigation";
 import { getPath } from "@/shared/services/getPath";
-import { NextLink } from "@/shared/components/Link/Link";
+import { NextLink } from "@/shared/components/Link";
 
 const LoginForm = () => {
 	const [formData, setFormData] = useState<LoginFormTypes>(

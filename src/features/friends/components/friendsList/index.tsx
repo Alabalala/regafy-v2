@@ -1,7 +1,7 @@
 "use client";
 
 import { Profile } from "@/features/profile/types/supabase.types";
-import { NextLink } from "@/shared/components/Link/Link";
+import { NextLink } from "@/shared/components/Link";
 import FriendLink from "../friendLink";
 
 interface Props {

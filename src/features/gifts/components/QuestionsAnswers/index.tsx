@@ -1,8 +1,8 @@
 import { QuestionWithAnswers } from "@/shared/types/supabase/supabase";
-import QuestionForm from "../QuestionForm/QuestionForm";
-import { QuestionItem } from "../QuestionItem/QuestionItem";
-import { AnswerItem } from "../AnswerItem/AnswerItem";
-import AnswerForm from "../AnswerForm/AnswerForm";
+import QuestionForm from "../QuestionForm";
+import { QuestionItem } from "../QuestionItem";
+import { AnswerItem } from "../AnswerItem";
+import AnswerForm from "../AnswerForm";
 
 interface Props {
 	questions: QuestionWithAnswers[];

@@ -6,8 +6,8 @@ import {
 	INITIAL_CHANGE_EMAIL_FORM_DATA,
 } from "../../constants/forms";
 import { FieldErrors } from "@/shared/types/forms";
-import Input from "@/shared/components/Input/Input";
-import { Button } from "@/shared/components/Button/Button";
+import Input from "@/shared/components/Input";
+import { Button } from "@/shared/components/Button";
 import { validateUpdateEmailForm } from "../../services/validateEmailUpdateForm";
 import { updateEmail } from "../../services/supabase";
 import { UpdateEmailFormTypes } from "../../types/forms";

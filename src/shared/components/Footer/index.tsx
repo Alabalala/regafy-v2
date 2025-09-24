@@ -1,6 +1,6 @@
 "use client";
 import { getPath } from "@/shared/services/getPath";
-import { NextLink } from "../Link/Link";
+import { NextLink } from "../Link";
 import CalendarSVG from "../SVGs/calendarSVG";
 import FriendsSVG from "../SVGs/FriendsSVG";
 import GiftSVG from "../SVGs/GiftSVG";

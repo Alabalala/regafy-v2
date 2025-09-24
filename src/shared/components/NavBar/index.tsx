@@ -2,7 +2,7 @@
 import { useState } from "react";
 import LogoSVG from "../SVGs/LogoSVG";
 import Hamburger from "hamburger-react";
-import { BurgerMenu } from "../burgerMenu/burgerMenu";
+import { BurgerMenu } from "../burgerMenu";
 
 export const NavBar = () => {
 	const [isOpen, setOpen] = useState(false);

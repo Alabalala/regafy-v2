@@ -4,15 +4,15 @@ import {
 	GIFT_FORM_INITIAL_VALUES,
 	FILE_INPUT_INITIAL_VALUES,
 } from "@/features/gifts/constants/form";
-import Input from "../../../../shared/components/Input/Input";
+import Input from "../../../../shared/components/Input";
 import { useState } from "react";
-import FileInput from "../../../../shared/components/FileInput/FileInput";
-import { Button } from "../../../../shared/components/Button/Button";
+import FileInput from "../../../../shared/components/FileInput";
+import { Button } from "../../../../shared/components/Button";
 import { validateGiftForm } from "@/features/gifts/services/validateGiftForm";
 import { giftFormScheme } from "@/features/gifts/services/giftFormScheme";
 import { FormDataWithFileType, GiftFormData } from "../../types/form";
 import { FieldErrors, FileInputDataType } from "@/shared/types/forms";
-import StarRateInput from "../StarRateInput/StarRateInput";
+import StarRateInput from "../StarRateInput";
 import { useUser } from "@/features/auth/hooks/useUser";
 import { useParams, useRouter } from "next/navigation";
 import {

@@ -4,20 +4,20 @@ import QuestionChatSVG from "../../../../shared/components/SVGs/QuestionChatSVG"
 import BookMarkSVG from "../../../../shared/components/SVGs/BookMarkSVG";
 import { Gift } from "@/shared/types/supabase/supabase";
 import { poppins } from "@/shared/services/fonts";
-import { ContextMenu } from "@/shared/components/ContextMenu/ContextMenu";
+import { ContextMenu } from "@/shared/components/ContextMenu";
 import { getTimeAgo } from "@/shared/services/getTimeAgo";
 import {
 	FriendGiftContextMenuHelper,
 	OwnGiftContextMenuHelper,
 } from "../../services/GiftContextMenuHelper";
-import { Button } from "@/shared/components/Button/Button";
+import { Button } from "@/shared/components/Button";
 
-import StarRate from "../StarRate/StarRate";
+import StarRate from "../StarRate";
 import { useUser } from "@/features/auth/hooks/useUser";
 import { useState } from "react";
-import QuestionsAnswers from "../QuestionsAnswers/QuestionsAnswers";
+import QuestionsAnswers from "../QuestionsAnswers";
 import { getOptimizedImageUrl } from "@/shared/services/getOptimisedImageUrl";
-import ProfileInfo from "@/features/profile/components/ProfileInfo/ProfileInfo";
+import ProfileInfo from "@/features/profile/components/ProfileInfo";
 import LoadingComponent from "@/shared/components/loadingModule";
 
 interface Props {

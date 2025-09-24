@@ -1,4 +1,4 @@
-import { ContextMenu } from "@/shared/components/ContextMenu/ContextMenu";
+import { ContextMenu } from "@/shared/components/ContextMenu";
 import { AnswerContextHelper } from "../../services/AnswerContextHelper";
 import { deleteAnswer } from "../../services/supabase";
 import { createClient } from "@/shared/services/supabase/client";

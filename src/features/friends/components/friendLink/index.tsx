@@ -1,6 +1,6 @@
-import ProfileInfo from "@/features/profile/components/ProfileInfo/ProfileInfo";
+import ProfileInfo from "@/features/profile/components/ProfileInfo";
 import { Profile } from "@/features/profile/types/supabase.types";
-import { NextLink } from "@/shared/components/Link/Link";
+import { NextLink } from "@/shared/components/Link";
 import { getPath } from "@/shared/services/getPath";
 
 const FriendLink = ({ friend }: { friend: Profile }) => {

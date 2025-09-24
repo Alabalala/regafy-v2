@@ -1,5 +1,5 @@
-import GiftForm from "@/features/gifts/components/GiftForm/GiftForm";
-import H1WithExit from "@/shared/components/H1WithExit/H1WithExit";
+import GiftForm from "@/features/gifts/components/GiftForm";
+import H1WithExit from "@/shared/components/H1WithExit";
 import { getPath } from "@/shared/services/getPath";
 
 const NewGift = () => {

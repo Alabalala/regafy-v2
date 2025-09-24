@@ -1,7 +1,7 @@
 "use client";
-import Input from "../../../../shared/components/Input/Input";
+import Input from "../../../../shared/components/Input";
 import { useState } from "react";
-import { Button } from "../../../../shared/components/Button/Button";
+import { Button } from "../../../../shared/components/Button";
 import { FieldErrors } from "@/shared/types/forms";
 import { useUser } from "@/features/auth/hooks/useUser";
 import { useRouter } from "next/navigation";

@@ -6,8 +6,8 @@ import {
 	UPDATE_PASSWORD_FORM_INPUTS,
 } from "../../constants/forms";
 import { FieldErrors } from "@/shared/types/forms";
-import Input from "@/shared/components/Input/Input";
-import { Button } from "@/shared/components/Button/Button";
+import Input from "@/shared/components/Input";
+import { Button } from "@/shared/components/Button";
 import { updatePassword } from "../../services/supabase";
 import { UpdatePasswordFormTypes } from "../../types/forms";
 import { validateUpdatePasswordForm } from "../../services/validatePasswordUpdateForm";

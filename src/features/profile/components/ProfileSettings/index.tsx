@@ -1,14 +1,14 @@
 "use client";
 
-import { NextLink } from "@/shared/components/Link/Link";
+import { NextLink } from "@/shared/components/Link";
 import { useState } from "react";
-import { Button } from "@/shared/components/Button/Button";
-import ProfileForm from "../ProfileForm/ProfileForm";
+import { Button } from "@/shared/components/Button";
+import ProfileForm from "../ProfileForm";
 import { useUser } from "@/features/auth/hooks/useUser";
 import { useLogout } from "@/features/auth/hooks/useLogout";
 import { getPath } from "@/shared/services/getPath";
-import ProfileBirthday from "../ProfileBirthday/ProfileBirthday";
-import ProfileInfo from "../ProfileInfo/ProfileInfo";
+import ProfileBirthday from "../ProfileBirthday";
+import ProfileInfo from "../ProfileInfo";
 import useProfile from "../../store/hooks/useProfile";
 import UpdateEmailForm from "@/features/auth/components/UpdateEmailForm";
 import UpdatePasswordForm from "@/features/auth/components/UpdatePasswordForm";

@@ -1,8 +1,8 @@
-import GiftForm from "@/features/gifts/components/GiftForm/GiftForm";
-import ProfileInfo from "@/features/profile/components/ProfileInfo/ProfileInfo";
+import GiftForm from "@/features/gifts/components/GiftForm";
+import ProfileInfo from "@/features/profile/components/ProfileInfo";
 import { getProfile } from "@/features/profile/services/supabase";
 import { Profile } from "@/features/profile/types/supabase.types";
-import H1WithExit from "@/shared/components/H1WithExit/H1WithExit";
+import H1WithExit from "@/shared/components/H1WithExit";
 import LoadingComponent from "@/shared/components/loadingModule";
 import { getPath } from "@/shared/services/getPath";
 import { createClient } from "@/shared/services/supabase/server";

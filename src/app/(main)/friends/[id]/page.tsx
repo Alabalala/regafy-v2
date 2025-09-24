@@ -1,10 +1,10 @@
 import FriendGiftList from "@/features/gifts/components/FriendGiftList";
 import { getGifts } from "@/features/gifts/services/supabase";
-import ProfileBirthday from "@/features/profile/components/ProfileBirthday/ProfileBirthday";
-import ProfileInfo from "@/features/profile/components/ProfileInfo/ProfileInfo";
+import ProfileBirthday from "@/features/profile/components/ProfileBirthday";
+import ProfileInfo from "@/features/profile/components/ProfileInfo";
 import { getProfile } from "@/features/profile/services/supabase";
 import { Profile } from "@/features/profile/types/supabase.types";
-import { Button } from "@/shared/components/Button/Button";
+import { Button } from "@/shared/components/Button";
 import LoadingComponent from "@/shared/components/loadingModule";
 import { createClient } from "@/shared/services/supabase/server";
 import { Gift } from "@/shared/types/supabase/supabase";

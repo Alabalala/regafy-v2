@@ -1,6 +1,6 @@
 import { Gift } from "@/shared/types/supabase/supabase";
-import GiftPost from "../GiftPost/GiftPost";
-import { NextLink } from "@/shared/components/Link/Link";
+import GiftPost from "../GiftPost";
+import { NextLink } from "@/shared/components/Link";
 import { Ref } from "react";
 
 interface Props {
