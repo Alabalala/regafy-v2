@@ -1,16 +1,13 @@
 "use client";
-import { Gift } from "@/shared/types/supabase/supabase";
-import { use, useEffect, useRef, useState } from "react";
-import { getFeed } from "../../services/supabase";
-import { createClient } from "@/shared/services/supabase/client";
 import { useUser } from "@/features/auth/hooks/useUser";
 import { getFriendsIds } from "@/features/friends/services/supabase";
-import GiftListClient from "@/features/gifts/components/UserGiftList";
-import { Button } from "@/shared/components/Button";
 import GiftList from "@/features/gifts/components/GiftList";
 import { useChangeReserve } from "@/features/gifts/hooks/useChangeReserve";
-import LoadingSVG from "@/shared/components/SVGs/LoadingSVG";
 import LoadingComponent from "@/shared/components/loadingModule";
+import { createClient } from "@/shared/services/supabase/client";
+import { Gift } from "@/shared/types/supabase/supabase";
+import { useEffect, useRef, useState } from "react";
+import { getFeed } from "../../services/supabase";
 
 const Feed = () => {
 	const [feed, setFeed] = useState<Gift[]>([]);
@@ -38,10 +35,10 @@ const Feed = () => {
 			if (!user) return;
 			setLoading(true);
 			const friends = await getFriendsIds(user.id, supabase);
-			const gifts = await getFeed(user.id, friends, 0, 10, supabase); // page 0
+			const gifts = await getFeed(user.id, friends, 0, 10, supabase);
 			setFeed(gifts);
 			setHasMore(gifts.length === 10);
-			setPage(1); // next page to load
+			setPage(1);
 			setLoading(false);
 		};
 		loadInitial();

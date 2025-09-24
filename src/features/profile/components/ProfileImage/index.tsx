@@ -13,9 +13,15 @@ interface Props {
 	profileImage: string | null;
 	canEdit?: boolean;
 	small?: boolean;
+	xs?: boolean;
 }
 
-const ProfileImage = ({ profileImage, canEdit = false, small }: Props) => {
+const ProfileImage = ({
+	profileImage,
+	canEdit = false,
+	small,
+	xs = false,
+}: Props) => {
 	const supabase = createClient();
 	const [user] = useUser();
 	const { profile, setProfile } = useProfileStore();
@@ -64,7 +70,9 @@ const ProfileImage = ({ profileImage, canEdit = false, small }: Props) => {
 				</div>
 			)}
 			<div
-				className={`relative overflow-clip ${small ? "w-10 h-10" : "w-20 h-20"} bg-background-100 dark:bg-background-dark-100 rounded-full border-2`}
+				className={`relative overflow-clip ${
+					xs ? "w-6 h-6" : small ? "w-10 h-10" : "w-20 h-20"
+				} bg-background-100 dark:bg-background-dark-100 rounded-full border-2`}
 			>
 				<Image
 					alt="Profile image"

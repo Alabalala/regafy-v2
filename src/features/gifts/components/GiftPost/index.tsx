@@ -14,11 +14,15 @@ import { Button } from "@/shared/components/Button";
 
 import StarRate from "../StarRate";
 import { useUser } from "@/features/auth/hooks/useUser";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import QuestionsAnswers from "../QuestionsAnswers";
 import { getOptimizedImageUrl } from "@/shared/services/getOptimisedImageUrl";
 import ProfileInfo from "@/features/profile/components/ProfileInfo";
 import LoadingComponent from "@/shared/components/loadingModule";
+import { createClient } from "@/shared/services/supabase/client";
+import { getProfile } from "@/features/profile/services/supabase";
+import { Profile } from "@/features/profile/types/supabase.types";
+import ProfileImage from "@/features/profile/components/ProfileImage";
 
 interface Props {
 	gift: Gift;
@@ -26,11 +30,42 @@ interface Props {
 }
 
 export default function GiftPost({ gift, changeReserve }: Props) {
-	const isOwnGift = gift.profile_id === gift.added_by;
 	const timeAgo = getTimeAgo(gift.created_at);
 	const [user] = useUser();
 	const [isCommentsOpen, setIsCommentsOpen] = useState(false);
-	if (!user) return <LoadingComponent />;
+	const [reserver, setReserver] = useState<Profile | null>(null);
+	const supabase = createClient();
+
+	useEffect(() => {
+		const getReserverProfile = async () => {
+			if (!gift.reserved_by) return;
+			const profile = await getProfile(gift.reserved_by, supabase);
+			setReserver(profile);
+		};
+		getReserverProfile();
+	}, [gift.reserved_by, supabase]);
+
+	if (!user || !gift || !gift.owner) return <LoadingComponent />;
+	const isOwnGift = gift.profile_id === user.id;
+
+	const handleShare = async () => {
+		const giftText = `${gift.profiles.name} wants this gift: ${gift.title}`;
+		const giftUrl = `${window.location.origin}/friends/${gift.profile_id}`;
+
+		if (navigator.share) {
+			try {
+				await navigator.share({
+					title: "Get this gift for your friend!",
+					text: giftText,
+					url: giftUrl,
+				});
+			} catch (err) {
+				console.error("Error sharing", err);
+			}
+		} else {
+			alert("Sharing not supported on this browser.");
+		}
+	};
 
 	return (
 		<article className={"border-2 rounded-md"}>
@@ -43,7 +78,7 @@ export default function GiftPost({ gift, changeReserve }: Props) {
 					</div>
 					<ContextMenu
 						helperFunction={() =>
-							isOwnGift
+							isOwnGift || user.id === gift.added_by
 								? OwnGiftContextMenuHelper(gift.id, gift.profile_id)
 								: FriendGiftContextMenuHelper(gift.id, gift.profile_id)
 						}
@@ -55,10 +90,26 @@ export default function GiftPost({ gift, changeReserve }: Props) {
 						profile={gift.profiles}
 					></ProfileInfo>
 				</div>
+				{gift.profile_id !== gift.added_by && (
+					<div
+						className={
+							"flex flex-col gap-2 border-2 p-2 rounded-md bg-secondary dark:bg-secondary-dark"
+						}
+					>
+						<p>Ha añadido un regalo para</p>
+						<div className={"flex flex-row "}>
+							<ProfileInfo
+								sided
+								profile={gift.owner}
+							></ProfileInfo>
+						</div>
+					</div>
+				)}
+
 				<div className={"flex flex-col gap-3"}>
-					<div className={"flex flex-row justify-between font-bold text-md"}>
+					<div className={"flex flex-col justify-between font-bold text-md"}>
 						<p className={`${poppins.className} `}>{gift.title}</p>
-						<p>{gift.price} €</p>
+						<p>🏷️ {gift.price} €</p>
 					</div>
 
 					<p>{gift.description}</p>
@@ -77,17 +128,27 @@ export default function GiftPost({ gift, changeReserve }: Props) {
 				<StarRate rating={String(gift.rating)}></StarRate>
 				<hr />
 				<div className={`flex flex-row justify-around`}>
-					{isOwnGift && (
+					{!isOwnGift && (
 						<Button
-							disabled={(gift.reserved ?? false) && gift.added_by !== user?.id}
+							disabled={(gift.reserved ?? false) || gift.added_by === user?.id}
 							isGroup
 							isPlain
 							variant="primary"
 							onClick={() => changeReserve(gift.id)}
 						>
-							<div className={"flex flex-col items-center"}>
-								<BookMarkSVG filled={gift.reserved ?? false} />
-								<p>Reserve{gift.reserved && "d"}</p>
+							<div className="relative">
+								<div className={"flex flex-col items-center z-20 relative"}>
+									<BookMarkSVG filled={gift.reserved ?? false} />
+									<p>Reserve{gift.reserved && "d"}</p>
+								</div>
+								{reserver && (
+									<div className="absolute top-0 right-0 z-10">
+										<ProfileImage
+											xs
+											profileImage={reserver?.profileImage}
+										/>
+									</div>
+								)}
 							</div>
 						</Button>
 					)}
@@ -106,6 +167,7 @@ export default function GiftPost({ gift, changeReserve }: Props) {
 						isGroup
 						isPlain
 						variant="primary"
+						onClick={handleShare}
 					>
 						<div className={"flex flex-col items-center"}>
 							<ShareSVG />

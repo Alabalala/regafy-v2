@@ -17,6 +17,7 @@ export async function getFeed(
 			`
         *,
         profiles!gifts_added_by_fkey(*),
+		owner:profiles!gifts_profile_id_fkey(*),
         questions!questions_gift_id_fkey(
             *,
             answers!answers_question_id_fkey(*)
@@ -27,7 +28,9 @@ export async function getFeed(
 		.order("created_at", { ascending: false })
 		.range(page * pageSize, (page + 1) * pageSize - 1);
 
-	if (error) throw error;
+	if (error) {
+		throw error;
+	}
 
 	return (data as unknown as Gift[]) ?? [];
 }

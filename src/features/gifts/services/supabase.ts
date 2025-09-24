@@ -12,8 +12,9 @@ export async function getGifts(
 		.select(
 			`
       *,
-      profiles!gifts_added_by_fkey(*),
-	  questions!questions_gift_id_fkey(
+   	profiles!gifts_added_by_fkey(*),
+    owner:profiles!gifts_profile_id_fkey(*),
+    questions!questions_gift_id_fkey(
       *,
       answers!answers_question_id_fkey(*)
     )
