@@ -38,8 +38,8 @@ const GiftSVG = ({ className, filled = false }: Props) => {
 				className="fill-black dark:fill-white"
 			/>
 			<path
-				fill-rule="evenodd"
-				clip-rule="evenodd"
+				fillRule="evenodd"
+				clipRule="evenodd"
 				d="M14 16H8C6.34315 16 5 17.3431 5 19V29.1765C5 30.7359 6.34315 32 8 32H14V16ZM21 16V32H28C29.6569 32 31 30.7359 31 29.1765V19C31 17.3431 29.6569 16 28 16H21Z"
 				className={`${filled ? "fill-tertiary dark:fill-tertiary-dark" : "fill-none"} group-hover:fill-tertiary-50 group-hover:dark:fill-tertiary-dark-50 group-active:fill-tertiary-100 group-active:dark:fill-accent-dark-100 `}
 			/>
@@ -52,8 +52,8 @@ const GiftSVG = ({ className, filled = false }: Props) => {
 				className="fill-black dark:fill-white"
 			/>
 			<path
-				fill-rule="evenodd"
-				clip-rule="evenodd"
+				fillRule="evenodd"
+				clipRule="evenodd"
 				d="M14 9.26337H5C3.89543 9.26337 3 10.1588 3 11.2634V15.2634C3 16.3679 3.89543 17.2634 5 17.2634H14V9.26337ZM21 17.2634H31C32.1046 17.2634 33 16.3679 33 15.2634V11.2634C33 10.1588 32.1046 9.26337 31 9.26337H21V17.2634Z"
 				className={`${filled ? "fill-tertiary dark:fill-tertiary-dark" : "fill-none"} group-hover:fill-tertiary-50 group-hover:dark:fill-tertiary-dark-50 group-active:fill-tertiary-100 group-active:dark:fill-accent-dark-100 `}
 			/>
