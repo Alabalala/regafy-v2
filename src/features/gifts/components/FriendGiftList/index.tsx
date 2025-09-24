@@ -1,7 +1,6 @@
 "use client";
 import { Ref, useEffect, useState } from "react";
 import { getPath } from "@/shared/services/getPath";
-import { useGiftStore } from "../../stores/giftStore";
 import { Gift } from "@/shared/types/supabase/supabase";
 import { useChangeReserve } from "../../hooks/useChangeReserve";
 import GiftList from "../GiftList";
