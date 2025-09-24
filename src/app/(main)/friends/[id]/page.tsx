@@ -1,6 +1,4 @@
-import GiftList from "@/features/gifts/components/GiftList";
-import GiftListClient from "@/features/gifts/components/UserGiftList";
-import { useChangeReserve } from "@/features/gifts/hooks/useChangeReserve";
+import FriendGiftList from "@/features/gifts/components/FriendGiftList";
 import { getGifts } from "@/features/gifts/services/supabase";
 import ProfileBirthday from "@/features/profile/components/ProfileBirthday/ProfileBirthday";
 import ProfileInfo from "@/features/profile/components/ProfileInfo/ProfileInfo";
@@ -36,7 +34,7 @@ export default async function FriendProfile({ params }: Props) {
 
 			<div>
 				<h2 className="text-xl font-bold">Gift list</h2>
-				<GiftList gifts={gifts}></GiftList>
+				<FriendGiftList gifts={gifts}></FriendGiftList>
 			</div>
 			<hr />
 			<div className="w-fit mx-auto my-auto">
