@@ -1,5 +1,5 @@
 import { getCurrentUser } from "@/features/auth/services/supabase";
-import GiftListClient from "@/features/gifts/components/GiftListClient/GiftListClient";
+import GiftListClient from "@/features/gifts/components/UserGiftList";
 
 import { getGifts } from "@/features/gifts/services/supabase";
 import { createClient } from "@/shared/services/supabase/server";
