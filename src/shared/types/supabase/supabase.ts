@@ -13,3 +13,5 @@ export type Gift = Database["public"]["Tables"]["gifts"]["Row"] & {
 	questions: QuestionWithAnswers[];
 	owner?: Database["public"]["Tables"]["profiles"]["Row"];
 };
+
+export type SingleGift = Database["public"]["Tables"]["gifts"]["Row"];

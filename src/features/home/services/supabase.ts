@@ -34,3 +34,18 @@ export async function getFeed(
 
 	return (data as unknown as Gift[]) ?? [];
 }
+
+export async function getSingleGift(
+	giftId: string,
+	supabase: SupabaseClient<Database>,
+) {
+	const { data, error } = await supabase
+		.from("gifts")
+		.select("*")
+		.eq("id", giftId)
+		.single();
+
+	if (error) throw error;
+
+	return data;
+}

@@ -1,30 +1,39 @@
 "use client";
+import { useUser } from "@/features/auth/hooks/useUser";
 import {
+	FILE_INPUT_INITIAL_VALUES,
 	GIFT_FORM_FIELDS,
 	GIFT_FORM_INITIAL_VALUES,
-	FILE_INPUT_INITIAL_VALUES,
 } from "@/features/gifts/constants/form";
-import Input from "../../../../shared/components/Input";
-import { useState } from "react";
-import FileInput from "../../../../shared/components/FileInput";
-import { Button } from "../../../../shared/components/Button";
-import { validateGiftForm } from "@/features/gifts/services/validateGiftForm";
 import { giftFormScheme } from "@/features/gifts/services/giftFormScheme";
-import { FormDataWithFileType, GiftFormData } from "../../types/form";
+import { validateGiftForm } from "@/features/gifts/services/validateGiftForm";
+import LoadingComponent from "@/shared/components/loadingModule";
+import { getPath } from "@/shared/services/getPath";
+import { createClient } from "@/shared/services/supabase/client";
 import { FieldErrors, FileInputDataType } from "@/shared/types/forms";
-import StarRateInput from "../StarRateInput";
-import { useUser } from "@/features/auth/hooks/useUser";
+import { SingleGift } from "@/shared/types/supabase/supabase";
 import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Button } from "../../../../shared/components/Button";
+import FileInput from "../../../../shared/components/FileInput";
+import Input from "../../../../shared/components/Input";
 import {
 	addImageToGift,
 	createGift,
+	updateGift,
 	uploadImageFile,
 } from "../../services/supabase";
-import { createClient } from "@/shared/services/supabase/client";
-import { getPath } from "@/shared/services/getPath";
-import LoadingComponent from "@/shared/components/loadingModule";
+import { FormDataWithFileType, GiftFormData } from "../../types/form";
+import StarRateInput from "../StarRateInput";
 
-const GiftForm = () => {
+const GiftForm = ({ gift }: { gift?: SingleGift }) => {
+	const toGiftFormData = (gift: SingleGift): GiftFormData => {
+		return {
+			title: gift.title,
+			description: gift.description ?? "",
+			price: gift.price?.toString() ?? "",
+		};
+	};
 	const [formData, setFormData] = useState<GiftFormData>(
 		GIFT_FORM_INITIAL_VALUES,
 	);
@@ -36,9 +45,32 @@ const GiftForm = () => {
 	const [user] = useUser();
 	const params = useParams();
 	const { id: friendId } = params;
+	const { giftId } = params;
 	const supabase = createClient();
 	const router = useRouter();
 	const normalisedFriendId = Array.isArray(friendId) ? friendId[0] : friendId;
+	const normalisedGiftId = Array.isArray(giftId) ? giftId[0] : giftId;
+
+	useEffect(() => {
+		if (gift && gift.image_link) {
+			setFile((prev) => ({
+				...prev,
+				preview: gift.image_link,
+			}));
+		}
+	}, [gift]);
+
+	useEffect(() => {
+		if (gift?.rating) {
+			setRating(gift.rating.toString());
+		}
+	}, [gift]);
+
+	useEffect(() => {
+		if (gift) {
+			setFormData(toGiftFormData(gift));
+		}
+	}, [gift]);
 
 	if (!user) {
 		return <LoadingComponent />;
@@ -111,15 +143,35 @@ const GiftForm = () => {
 		};
 
 		try {
-			const newGift = await createGift(normalisedGiftData, supabase);
-			if (newGift && image) {
-				try {
-					const newImageLink = await uploadImageFile(newGift.id, image, supabase);
-					await addImageToGift(newGift.id, newImageLink, supabase);
-				} catch (uploadErr) {
-					setFormError(
-						"Something went wrong. Please try again: " + (uploadErr as Error).message,
-					);
+			if (normalisedGiftId) {
+				await updateGift(normalisedGiftData, normalisedGiftId, supabase);
+				if (image) {
+					try {
+						const newImageLink = await uploadImageFile(
+							normalisedGiftId,
+							image,
+							supabase,
+						);
+						await addImageToGift(normalisedGiftId, newImageLink, supabase);
+					} catch (uploadErr) {
+						setFormError(
+							"Something went wrong. Please try again: " +
+								(uploadErr as Error).message,
+						);
+					}
+				}
+			} else {
+				const newGift = await createGift(normalisedGiftData, supabase);
+				if (newGift && image) {
+					try {
+						const newImageLink = await uploadImageFile(newGift.id, image, supabase);
+						await addImageToGift(newGift.id, newImageLink, supabase);
+					} catch (uploadErr) {
+						setFormError(
+							"Something went wrong. Please try again: " +
+								(uploadErr as Error).message,
+						);
+					}
 				}
 			}
 		} catch (err) {

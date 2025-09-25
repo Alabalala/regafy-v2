@@ -21,26 +21,13 @@ export async function getGifts(
 		)
     `,
 		)
-		.eq("profile_id", userId);
+		.eq("profile_id", userId)
+		.order("rating", { ascending: false });
 
 	if (error) throw error;
 
 	return (data as unknown as Gift[]) ?? [];
 }
-
-// export async function getGiftInfo(giftId, supabase) {
-// 	const { data, error } = await supabase
-// 		.from("gifts")
-// 		.select("*")
-// 		.eq("id", giftId)
-// 		.single();
-
-// 	if (error) {
-// 		console.log(error);
-// 	}
-
-// 	return data;
-// }
 
 export async function createGift(
 	giftData: GiftFormNoFile,
@@ -56,77 +43,20 @@ export async function createGift(
 	return data;
 }
 
-export async function createFriendGift(giftData, supabase) {
-	const { data, error } = await supabase
-		.from("gifts")
-		.insert(giftData)
-		.select("*");
-
-	if (error) {
-		console.log(error);
-	}
-
-	return data;
-}
-
-export async function uploadImageFile(
+export async function updateGift(
+	formData: GiftFormNoFile,
 	giftId: string,
-	file: File,
 	supabase: SupabaseClient<Database>,
 ) {
-	const fileName = giftId;
-	const { error } = await supabase.storage
-		.from("gift-images")
-		.upload(fileName, file, {
-			cacheControl: "no-store",
-			upsert: true,
-		});
+	const { title, price, rating, description } = formData;
 
-	if (error) throw error;
-
-	const publicUrl = supabase.storage.from("gift-images").getPublicUrl(fileName)
-		.data.publicUrl;
-
-	return publicUrl;
-}
-
-export async function addImageToGift(
-	giftId: string,
-	image_link: string,
-	supabase: SupabaseClient<Database>,
-) {
 	const { error, data } = await supabase
 		.from("gifts")
-		.update({ image_link })
+		.update({ title, description, price, rating })
 		.eq("id", giftId)
-		.select("*")
-		.single();
-
-	if (error) throw error;
-
-	return data;
-}
-
-export async function updateGift(formData, supabase) {
-	const {
-		name,
-		price,
-		comments,
-		shop_link: shopLink,
-		size,
-		id,
-		image_link,
-	} = formData;
-
-	const { error, data } = await supabase
-		.from("gifts")
-		.update({ name, price, comments, shop_link: shopLink, size, image_link })
-		.eq("id", id)
 		.select("*");
 
-	if (error) {
-		console.error("Error updating gift:", error);
-	}
+	if (error) throw error;
 
 	return data;
 }
@@ -215,5 +145,57 @@ export async function deleteAnswer(
 
 	if (error) throw error;
 
+	return data;
+}
+
+export async function uploadImageFile(
+	giftId: string,
+	file: File,
+	supabase: SupabaseClient<Database>,
+) {
+	const fileName = giftId;
+	const { error } = await supabase.storage
+		.from("gift-images")
+		.upload(fileName, file, {
+			cacheControl: "no-store",
+			upsert: true,
+		});
+
+	if (error) throw error;
+
+	const publicUrl = supabase.storage.from("gift-images").getPublicUrl(fileName)
+		.data.publicUrl;
+
+	return publicUrl;
+}
+
+export async function addImageToGift(
+	giftId: string,
+	image_link: string,
+	supabase: SupabaseClient<Database>,
+) {
+	const { error, data } = await supabase
+		.from("gifts")
+		.update({ image_link })
+		.eq("id", giftId)
+		.select("*")
+		.single();
+
+	if (error) throw error;
+
+	return data;
+}
+
+export async function deleteImageFromGift(
+	giftId: string,
+	supabase: SupabaseClient<Database>,
+) {
+	const { error, data } = await supabase
+		.from("gifts")
+		.update({ image_link: null })
+		.eq("id", giftId)
+		.select("*")
+		.single();
+	if (error) throw error;
 	return data;
 }
