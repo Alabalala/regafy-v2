@@ -3,16 +3,18 @@ import { AnswerContextHelper } from "../../services/AnswerContextHelper";
 import { deleteAnswer } from "../../services/supabase";
 import { createClient } from "@/shared/services/supabase/client";
 import { useGiftStore } from "../../stores/giftStore";
+import { Gift } from "@/shared/types/supabase/supabase";
 
 interface Props {
 	answer: string;
 	id: string;
 	canEdit: boolean;
+	gifts: Gift[];
+	setGifts: (gifts: Gift[]) => void;
 }
 
-export const AnswerItem = ({ answer, id, canEdit }: Props) => {
+export const AnswerItem = ({ answer, id, canEdit, gifts, setGifts }: Props) => {
 	const supabase = createClient();
-	const { gifts, setGifts } = useGiftStore();
 	const onDelete = async () => {
 		await deleteAnswer(id, supabase);
 		const newGifts = gifts.map((g) => {

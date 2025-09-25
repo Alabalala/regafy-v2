@@ -13,14 +13,15 @@ import { Gift } from "@/shared/types/supabase/supabase";
 interface Props {
 	userId: string;
 	giftId: string;
+	gifts: Gift[];
+	setGifts: (gifts: Gift[]) => void;
 }
 
-const QuestionForm = ({ userId, giftId }: Props) => {
+const QuestionForm = ({ userId, giftId, gifts, setGifts }: Props) => {
 	const [value, setValue] = useState("");
 	const [error, setError] = useState(false);
 	const [errorMessage, setErrorMessage] = useState<ValidationError>([]);
 	const supabase = createClient();
-	const { setGifts, gifts } = useGiftStore();
 	const [loading, setLoading] = useState(false);
 
 	const handleChange = (

@@ -27,9 +27,16 @@ import ProfileImage from "@/features/profile/components/ProfileImage";
 interface Props {
 	gift: Gift;
 	changeReserve: (giftId: string) => void;
+	gifts: Gift[];
+	setGifts: (gifts: Gift[]) => void;
 }
 
-export default function GiftPost({ gift, changeReserve }: Props) {
+export default function GiftPost({
+	gift,
+	changeReserve,
+	gifts,
+	setGifts,
+}: Props) {
 	const timeAgo = getTimeAgo(gift.created_at);
 	const [user] = useUser();
 	const [isCommentsOpen, setIsCommentsOpen] = useState(false);
@@ -179,6 +186,8 @@ export default function GiftPost({ gift, changeReserve }: Props) {
 			{isCommentsOpen && (
 				<div className="flex inset-shadow-black inset-shadow-sm/40 flex-col gap-5 border-t-1 rounded-b-md p-4 bg-tertiary-100">
 					<QuestionsAnswers
+						gifts={gifts}
+						setGifts={setGifts}
 						questions={gift.questions}
 						createdBy={gift.added_by}
 						userId={user?.id}

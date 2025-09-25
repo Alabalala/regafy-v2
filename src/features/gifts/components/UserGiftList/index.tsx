@@ -21,6 +21,7 @@ const UserGiftList = ({ gifts, loadMoreRef }: Props) => {
 
 	return (
 		<GiftList
+			setGifts={setGifts}
 			gifts={storeGifts}
 			changeReserve={changeReserve}
 			loadMoreRef={loadMoreRef}

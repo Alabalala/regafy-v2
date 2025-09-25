@@ -1,4 +1,4 @@
-import { QuestionWithAnswers } from "@/shared/types/supabase/supabase";
+import { Gift, QuestionWithAnswers } from "@/shared/types/supabase/supabase";
 import QuestionForm from "../QuestionForm";
 import { QuestionItem } from "../QuestionItem";
 import { AnswerItem } from "../AnswerItem";
@@ -9,15 +9,26 @@ interface Props {
 	createdBy: string;
 	userId: string;
 	giftId: string;
+	gifts: Gift[];
+	setGifts: (gifts: Gift[]) => void;
 }
 
-const QuestionsAnswers = ({ questions, createdBy, userId, giftId }: Props) => {
+const QuestionsAnswers = ({
+	questions,
+	createdBy,
+	userId,
+	giftId,
+	gifts,
+	setGifts,
+}: Props) => {
 	if (questions.length === 0)
 		return (
 			<div className="flex flex-col items-center gap-2 w-full">
 				<p>No questions yet </p>
 				{createdBy !== userId && (
 					<QuestionForm
+						gifts={gifts}
+						setGifts={setGifts}
 						userId={userId}
 						giftId={giftId}
 					></QuestionForm>
@@ -43,6 +54,8 @@ const QuestionsAnswers = ({ questions, createdBy, userId, giftId }: Props) => {
 							></QuestionItem>
 							{q.answers.length > 0 ? (
 								<AnswerItem
+									gifts={gifts}
+									setGifts={setGifts}
 									id={String(q.answers[0].id)}
 									answer={q.answers[0].content}
 									canEdit={createdBy === userId}
@@ -61,6 +74,8 @@ const QuestionsAnswers = ({ questions, createdBy, userId, giftId }: Props) => {
 			<div>
 				{questions.length < 3 && createdBy !== userId && (
 					<QuestionForm
+						gifts={gifts}
+						setGifts={setGifts}
 						userId={userId}
 						giftId={giftId}
 					></QuestionForm>

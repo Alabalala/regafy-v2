@@ -8,9 +8,11 @@ interface Props {
 	changeReserve: (giftId: string) => void;
 	newGiftLink?: string;
 	loadMoreRef?: Ref<HTMLDivElement> | null;
+	setGifts: (gifts: Gift[]) => void;
 }
 
 const GiftList = ({
+	setGifts,
 	gifts,
 	changeReserve,
 	newGiftLink,
@@ -22,6 +24,8 @@ const GiftList = ({
 				{gifts.map((gift, index) => (
 					<div key={gift.id}>
 						<GiftPost
+							gifts={gifts}
+							setGifts={setGifts}
 							gift={gift}
 							changeReserve={() => changeReserve(gift.id)}
 						></GiftPost>

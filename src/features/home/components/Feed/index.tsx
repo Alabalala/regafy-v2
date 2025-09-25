@@ -64,6 +64,7 @@ const Feed = () => {
 		<div className="flex min-h-screen flex-col">
 			<h1 className="text-xl font-bold">Feed</h1>
 			<GiftList
+				setGifts={setFeed}
 				loadMoreRef={loadMoreRef}
 				gifts={feed}
 				changeReserve={changeReserve}
