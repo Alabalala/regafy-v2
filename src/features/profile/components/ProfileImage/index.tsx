@@ -1,3 +1,4 @@
+"use client";
 import EditSVG from "@/shared/components/SVGs/EditSVG";
 import Image from "next/image";
 import React from "react";

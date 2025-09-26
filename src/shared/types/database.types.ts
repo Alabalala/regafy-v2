@@ -43,6 +43,42 @@ export type Database = {
           },
         ]
       }
+      event_guests: {
+        Row: {
+          created_at: string
+          event_id: number
+          guest_id: string
+          id: number
+        }
+        Insert: {
+          created_at?: string
+          event_id: number
+          guest_id: string
+          id?: number
+        }
+        Update: {
+          created_at?: string
+          event_id?: number
+          guest_id?: string
+          id?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "event_guests_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "event_guests_guest_id_fkey"
+            columns: ["guest_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       event_secret_friend: {
         Row: {
           assignee_id: string | null
@@ -71,15 +107,46 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "event_secret_friend_event_id_fkey"
-            columns: ["event_id"]
-            isOneToOne: false
-            referencedRelation: "group_event"
-            referencedColumns: ["id"]
-          },
-          {
             foreignKeyName: "event_secret_friend_user_id_fkey"
             columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      events: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          date: string
+          description: string
+          event_image_link: string | null
+          id: number
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          date: string
+          description: string
+          event_image_link?: string | null
+          id?: number
+          title: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          date?: string
+          description?: string
+          event_image_link?: string | null
+          id?: number
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "events_created_by_fkey"
+            columns: ["created_by"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
@@ -219,128 +286,6 @@ export type Database = {
           {
             foreignKeyName: "gifts_reserved_by_fkey"
             columns: ["reserved_by"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      group_event: {
-        Row: {
-          created_at: string
-          created_by: string
-          date: string
-          description: string | null
-          group_id: number
-          hasSecretFriend: boolean | null
-          id: string
-          isActive: boolean | null
-          name: string
-        }
-        Insert: {
-          created_at?: string
-          created_by?: string
-          date: string
-          description?: string | null
-          group_id: number
-          hasSecretFriend?: boolean | null
-          id?: string
-          isActive?: boolean | null
-          name: string
-        }
-        Update: {
-          created_at?: string
-          created_by?: string
-          date?: string
-          description?: string | null
-          group_id?: number
-          hasSecretFriend?: boolean | null
-          id?: string
-          isActive?: boolean | null
-          name?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "group_event_created_by_fkey"
-            columns: ["created_by"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "group_event_group_id_fkey"
-            columns: ["group_id"]
-            isOneToOne: false
-            referencedRelation: "groups"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      group_members: {
-        Row: {
-          created_at: string
-          group_id: number | null
-          id: number
-          user_id: string | null
-        }
-        Insert: {
-          created_at?: string
-          group_id?: number | null
-          id?: number
-          user_id?: string | null
-        }
-        Update: {
-          created_at?: string
-          group_id?: number | null
-          id?: number
-          user_id?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "group_members_group_id_fkey"
-            columns: ["group_id"]
-            isOneToOne: false
-            referencedRelation: "groups"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "group_members_user_id_fkey"
-            columns: ["user_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      groups: {
-        Row: {
-          cover_photo: string
-          created_at: string
-          creator: string
-          description: string | null
-          id: number
-          name: string
-        }
-        Insert: {
-          cover_photo: string
-          created_at?: string
-          creator: string
-          description?: string | null
-          id?: number
-          name: string
-        }
-        Update: {
-          cover_photo?: string
-          created_at?: string
-          creator?: string
-          description?: string | null
-          id?: number
-          name?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "groups_creator_fkey"
-            columns: ["creator"]
             isOneToOne: false
             referencedRelation: "profiles"
             referencedColumns: ["id"]
