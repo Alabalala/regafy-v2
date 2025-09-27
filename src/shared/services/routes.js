@@ -16,7 +16,7 @@ export const ROUTES = [
 	{ name: "New gift", path: "/gifts/new" },
 	{ name: "Edit gift", path: "/gifts/:id/edit" },
 	{ name: "Calendar", path: "/calendar" },
-	{ name: "Create event", path: "/group/:id/create-event" },
+	{ name: "New event", path: "calendar/new-event" },
 	{ name: "Event", path: "/event/:id" },
 	{ name: "Edit event", path: "/event/:id/edit-event" },
 	{ name: "Delete event", path: "/event/:id/delete-event" },
