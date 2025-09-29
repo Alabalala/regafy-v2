@@ -41,6 +41,10 @@ export const buttonVariants = tv({
 			default: "h-10 w-52 text-base",
 			mobile: "h-auto max-w-52 text-sm",
 		},
+
+		shrink: {
+			true: "w-fit px-8 shrink-0",
+		},
 	},
 
 	defaultVariants: {

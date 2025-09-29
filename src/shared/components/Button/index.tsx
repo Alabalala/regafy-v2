@@ -14,6 +14,7 @@ interface Props {
 	isPlain?: boolean;
 	size?: "default" | "small" | "icon";
 	disabled?: boolean;
+	shrink?: boolean;
 }
 
 export const Button = ({
@@ -28,6 +29,7 @@ export const Button = ({
 	loadingText,
 	isPlain = false,
 	size = "default",
+	shrink = false,
 }: Props) => {
 	return (
 		<button
@@ -36,7 +38,7 @@ export const Button = ({
 				${
 					isPlain
 						? plainButtonVariants({ variant: variant, size: size, isGroup: isGroup })
-						: buttonVariants({ variant: variant, floating: floating })
+						: buttonVariants({ variant: variant, floating: floating, shrink: shrink })
 				} ${loading && "flex flex-row justify-center items-center gap-2"}`}
 			onClick={onClick}
 			disabled={loading || disabled}

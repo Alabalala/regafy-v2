@@ -1,6 +1,6 @@
 import { Database } from "@/shared/types/database.types";
-import { Event } from "@/shared/types/supabase/supabase";
 import { SupabaseClient } from "@supabase/supabase-js";
+import { EventFormData, EventFormPayload } from "../types/events";
 
 export const getEvents = async (
 	userId: string,
@@ -18,5 +18,167 @@ export const getEvents = async (
 
 	if (error) throw error;
 
-	return data?.map((d) => d.events) ?? [];
+	const { data: createdByMeEvents, error: createdByMeEventsError } =
+		await supabase
+			.from("events")
+			.select("*")
+			.eq("created_by", userId)
+			.order("created_at", { ascending: false });
+
+	if (createdByMeEventsError) throw createdByMeEventsError;
+
+	const events = [
+		...(data?.map((d) => d.events) ?? []),
+		...(createdByMeEvents ?? []),
+	];
+
+	return events;
+};
+
+export const getSingleEvent = async (
+	eventId: number,
+	supabase: SupabaseClient<Database>,
+) => {
+	const { data, error } = await supabase
+		.from("events")
+		.select(
+			`
+    *,
+    guests:event_guests (
+      profile:profiles (*)
+    )
+  `,
+		)
+		.eq("id", Number(eventId))
+		.single();
+
+	if (error) throw error;
+
+	return data;
+};
+
+export const createEvent = async (
+	event: EventFormPayload,
+	supabase: SupabaseClient<Database>,
+) => {
+	const { guests, image, ...eventData } = event;
+	const { data: newEventData, error: eventError } = await supabase
+		.from("events")
+		.insert(eventData)
+		.select("*")
+		.single();
+
+	if (eventError) throw eventError;
+
+	try {
+		await addGuestsToEvent(newEventData.id, guests, supabase);
+	} catch (guestError) {
+		throw guestError;
+	}
+
+	return newEventData;
+};
+
+export const deleteEvent = async (
+	eventId: string,
+	supabase: SupabaseClient<Database>,
+) => {
+	const { data, error } = await supabase
+		.from("events")
+		.delete()
+		.eq("id", Number(eventId));
+
+	if (error) throw error;
+
+	return data;
+};
+
+export const updateEvent = async (
+	eventId: number,
+	event: EventFormData,
+	newGuests: string[],
+	deletedGuests: string[],
+	supabase: SupabaseClient<Database>,
+) => {
+	const { data, error } = await supabase
+		.from("events")
+		.update(event)
+		.eq("id", Number(eventId))
+		.select("*")
+		.single();
+
+	if (error) throw error;
+
+	try {
+		await addGuestsToEvent(eventId, newGuests, supabase);
+		await deleteGuestFromEvent(eventId, deletedGuests, supabase);
+	} catch (guestError) {
+		throw guestError;
+	}
+
+	return data;
+};
+
+export async function uploadEventImageFile(
+	eventId: number,
+	file: File,
+	supabase: SupabaseClient<Database>,
+) {
+	const fileName = eventId.toString();
+	const { error } = await supabase.storage
+		.from("event-images")
+		.upload(fileName, file, {
+			cacheControl: "no-store",
+			upsert: true,
+		});
+
+	if (error) throw error;
+
+	const publicUrl = supabase.storage.from("event-images").getPublicUrl(fileName)
+		.data.publicUrl;
+
+	return publicUrl;
+}
+export const addImageToEvent = async (
+	eventId: number,
+	event_image_link: string,
+	supabase: SupabaseClient<Database>,
+) => {
+	const { error, data } = await supabase
+		.from("events")
+		.update({ event_image_link })
+		.eq("id", eventId)
+		.select("*")
+		.single();
+	if (error) throw error;
+	return data;
+};
+
+export const addGuestsToEvent = async (
+	eventId: number,
+	guests: string[],
+	supabase: SupabaseClient<Database>,
+) => {
+	const { error, data } = await supabase
+		.from("event_guests")
+		.insert(guests.map((guest) => ({ event_id: eventId, guest_id: guest })))
+		.select("*");
+
+	if (error) throw error;
+	return data;
+};
+
+export const deleteGuestFromEvent = async (
+	eventId: number,
+	guests: string[],
+	supabase: SupabaseClient<Database>,
+) => {
+	const { error } = await supabase
+		.from("event_guests")
+		.delete()
+		.eq("event_id", eventId)
+		.in("guest_id", guests)
+		.select("*");
+
+	if (error) throw error;
 };

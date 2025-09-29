@@ -9,7 +9,7 @@ interface HeadingWithExitProps {
 export default function H1WithExit({ children, href }: HeadingWithExitProps) {
 	return (
 		<div className="flex justify-between items-center">
-			<h1 className="text-xl font-bold">{children}</h1>
+			<h1 className="text-xl font-bold uppercase">{children}</h1>
 			<Link
 				href={href}
 				className=" text-gray-500 hover:text-gray-800"

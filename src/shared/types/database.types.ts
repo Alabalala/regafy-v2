@@ -118,7 +118,7 @@ export type Database = {
       events: {
         Row: {
           created_at: string
-          created_by: string | null
+          created_by: string
           date: string
           description: string
           event_image_link: string | null
@@ -127,7 +127,7 @@ export type Database = {
         }
         Insert: {
           created_at?: string
-          created_by?: string | null
+          created_by: string
           date: string
           description: string
           event_image_link?: string | null
@@ -136,7 +136,7 @@ export type Database = {
         }
         Update: {
           created_at?: string
-          created_by?: string | null
+          created_by?: string
           date?: string
           description?: string
           event_image_link?: string | null

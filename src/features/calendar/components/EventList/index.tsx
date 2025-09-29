@@ -11,7 +11,7 @@ const EventsList = ({ events }: Props) => {
 	const currentYear = new Date().getFullYear();
 	return (
 		<div>
-			<div className="text-lg flex flex-col gap-3">
+			<div className="text-lg flex flex-col gap-6">
 				{Object.entries(events).map(([year, days]) => {
 					return (
 						<div

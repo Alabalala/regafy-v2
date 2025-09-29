@@ -17,4 +17,23 @@ export const EVENT_FORM_FIELDS = [
 		type: "date",
 		required: true,
 	},
+	{
+		name: "image",
+		label: "Event image",
+		type: "file",
+		required: false,
+	},
 ];
+
+export const INITIAL_EVENT_FORM_DATA = {
+	title: "",
+	description: "",
+	date: "",
+	created_by: "",
+	event_image_link: "",
+};
+
+export const FILE_INPUT_INITIAL_VALUES = {
+	file: null,
+	preview: null,
+};

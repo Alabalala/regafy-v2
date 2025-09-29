@@ -16,4 +16,6 @@ export type Gift = Database["public"]["Tables"]["gifts"]["Row"] & {
 
 export type SingleGift = Database["public"]["Tables"]["gifts"]["Row"];
 
-export type Event = Database["public"]["Tables"]["events"]["Row"];
+export type Event = Database["public"]["Tables"]["events"]["Row"] & {
+	guests: Database["public"]["Tables"]["profiles"]["Row"][];
+};

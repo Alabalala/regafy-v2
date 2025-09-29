@@ -11,3 +11,15 @@ export type EventsGroupedByDateType = {
 		[day: string]: normalisedEvent[];
 	};
 };
+
+export type EventFormData = {
+	title: string;
+	description: string;
+	date: string;
+	created_by: string;
+};
+
+export type EventFormPayload = EventFormData & {
+	guests: string[];
+	image?: File | null;
+};

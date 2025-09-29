@@ -8,13 +8,23 @@ import { useState } from "react";
 import { FIND_PEOPLE_FORM_INPUTS } from "../../constants/form";
 import useSearchFriends from "../../hooks/useSearchFriends";
 import FriendsList from "../friendsList";
+import { Event } from "@/shared/types/supabase/supabase";
 
 interface Props {
 	friends: Profile[];
 	isEvent?: boolean;
+	event?: Event;
+	onClick?: (guest: Profile) => void;
+	guests?: Profile[];
 }
 
-const FriendsPanel = ({ friends, isEvent = false }: Props) => {
+const FriendsPanel = ({
+	friends,
+	isEvent = false,
+	event,
+	onClick,
+	guests,
+}: Props) => {
 	const [query, setQuery] = useState("");
 	const supabase = createClient();
 	const { searchResults, error, errorMessage, loading } = useSearchFriends({
@@ -27,7 +37,9 @@ const FriendsPanel = ({ friends, isEvent = false }: Props) => {
 	return (
 		<div className="flex flex-col gap-5">
 			<div className={"flex flex-col gap-5"}>
-				<h1 className="text-xl font-bold">Find people</h1>
+				<h1 className="text-xl font-bold">
+					{event ? "Invite friends" : "Find people"}
+				</h1>
 				<div>
 					<div className="flex flex-row relative">
 						<Input
@@ -66,13 +78,20 @@ const FriendsPanel = ({ friends, isEvent = false }: Props) => {
 			</div>
 			<div className={"flex flex-col gap-5"}>
 				<h1 className="text-xl font-bold">
-					{searchResults !== undefined ? "Results" : "Friends"}
+					{isEvent && !query && !searchResults
+						? "Suggested friends"
+						: searchResults !== undefined
+							? "Results"
+							: "Friends"}
 				</h1>
 				<FriendsList
+					guests={guests}
 					isSearching={loading}
 					searchResults={searchResults}
 					friends={friends}
+					event={event}
 					isEvent={isEvent}
+					onClick={onClick}
 				></FriendsList>
 			</div>
 		</div>
