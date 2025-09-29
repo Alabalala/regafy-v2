@@ -34,6 +34,7 @@ const FriendCard = ({ friend, isEvent, onClick, isInvited }: Props) => {
 				) : (
 					<NextLink
 						variant="primary"
+						shrink
 						href={getPath("Friend profile", friend.id)}
 					>
 						View Profile

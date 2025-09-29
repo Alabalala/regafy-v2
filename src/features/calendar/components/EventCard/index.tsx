@@ -6,28 +6,28 @@ import { getPath } from "@/shared/services/getPath";
 
 const EventCard = ({ event }: { event: normalisedEvent }) => {
 	return (
-		<div className="w-full border-2 rounded-md overflow-hidden flex bg-background-50 dark:bg-background-dark-50">
-			<div
-				className={`w-4 ${event.type === "event" ? `bg-accent dark:bg-accent-dark` : "bg-tertiary dark:bg-tertiary-dark"}`}
-			></div>
+		<NextLink
+			href={
+				event.type === "event"
+					? getPath("Event", String(event.id))
+					: getPath("Friend profile", String(event.id))
+			}
+			isPlain
+		>
+			<div className="w-full border-2 rounded-md overflow-hidden flex bg-background-50 dark:bg-background-dark-50">
+				<div
+					className={`w-4 ${event.type === "event" ? `bg-accent dark:bg-accent-dark` : "bg-tertiary dark:bg-tertiary-dark"}`}
+				></div>
 
-			<div className="w-full p-2 flex flex-row gap-6 justify-between items-center">
-				<div className="flex flex-row gap-2 items-center">
-					<ProfileImage
-						small
-						profileImage={event.image ?? "/illustrations/caddy.webp"}
-					></ProfileImage>
-					<div className="text-sm font-normal">{event.title}</div>
-				</div>
+				<div className="w-full p-2 flex flex-row gap-6 justify-between items-center">
+					<div className="flex flex-row gap-2 items-center">
+						<ProfileImage
+							small
+							profileImage={event.image ?? "/illustrations/caddy.webp"}
+						></ProfileImage>
+						<div className="text-sm font-normal">{event.title}</div>
+					</div>
 
-				<NextLink
-					href={
-						event.type === "event"
-							? getPath("Event", String(event.id))
-							: getPath("Friend profile", String(event.id))
-					}
-					isPlain
-				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						height="24px"
@@ -37,9 +37,9 @@ const EventCard = ({ event }: { event: normalisedEvent }) => {
 					>
 						<path d="m256-240-56-56 384-384H240v-80h480v480h-80v-344L256-240Z" />
 					</svg>
-				</NextLink>
+				</div>
 			</div>
-		</div>
+		</NextLink>
 	);
 };
 

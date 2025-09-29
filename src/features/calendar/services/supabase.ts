@@ -54,7 +54,10 @@ export const getSingleEvent = async (
 
 	if (error) throw error;
 
-	return data;
+	return {
+		...data,
+		guests: data.guests.map((g) => g.profile),
+	};
 };
 
 export const createEvent = async (

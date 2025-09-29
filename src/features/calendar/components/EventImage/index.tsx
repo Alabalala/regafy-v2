@@ -1,0 +1,92 @@
+"use client";
+import EditSVG from "@/shared/components/SVGs/EditSVG";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import { addImageToEvent, uploadEventImageFile } from "../../services/supabase";
+import { createClient } from "@/shared/services/supabase/client";
+
+import { getOptimizedImageUrl } from "@/shared/services/getOptimisedImageUrl";
+import { ValidateEventImage } from "../../services/validateEventImage";
+
+interface Props {
+	eventImage?: string | null;
+	eventId: number;
+	canEdit?: boolean;
+	small?: boolean;
+	xs?: boolean;
+}
+
+const EventImage = ({
+	eventImage,
+	eventId,
+	canEdit = false,
+	small,
+	xs = false,
+}: Props) => {
+	const supabase = createClient();
+	const [image, setImage] = useState("");
+
+	useEffect(() => {
+		if (eventImage) {
+			setImage(eventImage);
+		}
+	}, [eventImage]);
+
+	const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (!e.target.files) {
+			return;
+		}
+
+		const file = e.target.files[0];
+		const result = await ValidateEventImage(file);
+
+		if (result.success) {
+			try {
+				const imageLink = await uploadEventImageFile(eventId, file, supabase);
+				await addImageToEvent(eventId, imageLink, supabase);
+				setImage(imageLink);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	};
+
+	return (
+		<label
+			className="relative"
+			htmlFor="eventImage"
+		>
+			<input
+				type="file"
+				name="eventImage"
+				id="eventImage"
+				accept="image/*"
+				onChange={onChange}
+				className="sr-only"
+			></input>
+			{canEdit && (
+				<div className="absolute z-20 bottom-0 right-0 cursor-pointer bg-secondary p-1 rounded-full border-2">
+					<EditSVG
+						width="15"
+						height="15"
+					></EditSVG>
+				</div>
+			)}
+			<div
+				className={`relative overflow-clip ${
+					xs ? "w-6 h-6" : small ? "w-10 h-10" : "w-20 h-20"
+				} bg-background-100 dark:bg-background-dark-100 rounded-full border-2`}
+			>
+				<Image
+					alt="Profile image"
+					src={image ? getOptimizedImageUrl(image) : "/illustrations/caddy.webp"}
+					fill
+					sizes="100px"
+					className="object-cover object-center rounded-full"
+				></Image>
+			</div>
+		</label>
+	);
+};
+
+export default EventImage;

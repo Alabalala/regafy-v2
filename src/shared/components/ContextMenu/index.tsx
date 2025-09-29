@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useState } from "react";
 import MoreVerticalSVG from "../SVGs/MoreVerticalSVG";
 import { MenuItem } from "@/shared/types/helperFunction.types";

@@ -10,6 +10,7 @@ interface Props {
 	floating?: boolean;
 	isGroup?: boolean;
 	size?: "default" | "small" | "icon";
+	shrink?: boolean;
 }
 
 export const NextLink = ({
@@ -20,13 +21,14 @@ export const NextLink = ({
 	floating = false,
 	size = "default",
 	isGroup = false,
+	shrink = false,
 }: Props) => {
 	return (
 		<Link
 			className={
 				isPlain
 					? plainButtonVariants({ variant: variant, size: size, isGroup: isGroup })
-					: buttonVariants({ variant: variant, floating: floating })
+					: buttonVariants({ variant: variant, floating: floating, shrink: shrink })
 			}
 			href={href}
 		>

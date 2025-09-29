@@ -152,7 +152,7 @@ const EventForm = ({ event, friends }: Props) => {
 						addImageToEvent(event.id, imageLink, supabase);
 					}
 				}
-				router.push(getPath("Calendar"));
+				router.push(getPath("Event", String(event.id)));
 			} else {
 				const newEvent = await createEvent(formPayload, supabase);
 				if (newEvent && file.file) {
@@ -165,7 +165,7 @@ const EventForm = ({ event, friends }: Props) => {
 						addImageToEvent(newEvent.id, imageLink, supabase);
 					}
 				}
-				router.push(getPath("Calendar"));
+				router.push(getPath("Event", String(newEvent.id)));
 			}
 		} catch (err) {
 			console.log(err);
