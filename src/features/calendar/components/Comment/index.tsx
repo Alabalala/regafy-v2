@@ -21,7 +21,9 @@ const EventComment = ({
 }: Props) => {
 	return (
 		<div className={`${isOwner && "w-fit ml-auto mr-0"}`}>
-			<div className={`flex ${isOwner ? "flex-row-reverse" : "flex-row"}  gap-2`}>
+			<div
+				className={`flex ${isOwner ? "flex-row-reverse" : "flex-row"} items-end gap-2`}
+			>
 				<ProfileImage
 					small
 					profileImage={profileImage}

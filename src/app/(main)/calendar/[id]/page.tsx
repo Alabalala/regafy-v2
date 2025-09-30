@@ -53,6 +53,7 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 				message={event.description}
 				profileImage={createdByProfile.profileImage}
 				profileName={createdByProfile.name}
+				messageTime={event.created_at}
 			></EventComment>
 
 			<hr />

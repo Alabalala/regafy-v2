@@ -1,4 +1,5 @@
 import { getCurrentUser } from "@/features/auth/services/supabase";
+import Calendar from "@/features/calendar/components/Calendar";
 import EventsList from "@/features/calendar/components/EventList/index";
 import getNextBirthday from "@/features/calendar/services/getNextBirthday";
 import { getEvents } from "@/features/calendar/services/supabase";
@@ -64,7 +65,8 @@ const CalendarPage = async () => {
 	return (
 		<div className="flex flex-col gap-5">
 			<h1 className="text-xl font-bold ">CALENDAR</h1>
-
+			<Calendar events={eventsGroupedByDate}></Calendar>
+			<h2 className="text-xl font-bold ">UPCOMING EVENTS</h2>
 			<EventsList events={eventsGroupedByDate}></EventsList>
 			<NextLink
 				variant="primary"

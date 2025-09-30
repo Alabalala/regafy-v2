@@ -24,7 +24,7 @@ import {
 	uploadEventImageFile,
 } from "../../services/supabase";
 import { createClient } from "@/shared/services/supabase/client";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { getPath } from "@/shared/services/getPath";
 import { useUser } from "@/features/auth/hooks/useUser";
 import LoadingComponent from "@/shared/components/loadingModule";
@@ -55,6 +55,8 @@ const EventForm = ({ event, friends }: Props) => {
 	const supabase = createClient();
 	const router = useRouter();
 	const [user] = useUser();
+	const searchParams = useSearchParams();
+	const date = searchParams.get("date");
 
 	useEffect(() => {
 		if (event && event.event_image_link) {
@@ -71,6 +73,15 @@ const EventForm = ({ event, friends }: Props) => {
 			setGuests(event.guests);
 		}
 	}, [event]);
+
+	useEffect(() => {
+		if (date) {
+			setFormData((prev) => ({
+				...prev,
+				date: date,
+			}));
+		}
+	}, [date]);
 
 	if (!user) return <LoadingComponent />;
 

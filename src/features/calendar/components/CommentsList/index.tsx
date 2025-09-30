@@ -7,13 +7,10 @@ import Input from "@/shared/components/Input";
 import { COMMENT_FORM_FIELDS } from "../../constants/form";
 import { Button } from "@/shared/components/Button";
 import { ValidateCommentForm } from "../../services/validateCommentForm";
-import { C } from "vitest/dist/chunks/reporters.d.BFLkQcL6.js";
-import { FieldErrors } from "@/shared/types/forms";
 import { createEventComment } from "../../services/supabase";
 import { useParams } from "next/navigation";
 import { createClient } from "@/shared/services/supabase/client";
 import LoadingComponent from "@/shared/components/loadingModule";
-import { set } from "zod";
 
 interface Props {
 	comments: Comments[];
