@@ -110,7 +110,10 @@ export const updateEvent = async (
 		.select("*")
 		.single();
 
-	if (error) throw error;
+	if (error) {
+		console.error("updating event error:", error);
+		throw error;
+	}
 
 	try {
 		await addGuestsToEvent(eventId, newGuests, supabase);
@@ -167,7 +170,10 @@ export const addGuestsToEvent = async (
 		.insert(guests.map((guest) => ({ event_id: eventId, guest_id: guest })))
 		.select("*");
 
-	if (error) throw error;
+	if (error) {
+		console.error("adding friends error:", error);
+		throw error;
+	}
 	return data;
 };
 
@@ -183,5 +189,40 @@ export const deleteGuestFromEvent = async (
 		.in("guest_id", guests)
 		.select("*");
 
+	if (error) {
+		console.error("deleting friends error:", error);
+		throw error;
+	}
+};
+
+export const getEventComments = async (
+	eventId: number,
+	supabase: SupabaseClient<Database>,
+) => {
+	const { data, error } = await supabase
+		.from("event_comments")
+		.select("*, profiles(*)")
+		.eq("event_id", eventId)
+		.order("created_at", { ascending: true });
+
 	if (error) throw error;
+
+	return data;
+};
+
+export const createEventComment = async (
+	eventId: number,
+	content: string,
+	userId: string,
+	supabase: SupabaseClient<Database>,
+) => {
+	const { data, error } = await supabase
+		.from("event_comments")
+		.insert({ event_id: eventId, content, user_id: userId })
+		.select("*, profiles(*)")
+		.single();
+
+	if (error) throw error;
+
+	return data;
 };

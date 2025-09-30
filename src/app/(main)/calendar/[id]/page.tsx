@@ -1,7 +1,11 @@
 import EventComment from "@/features/calendar/components/Comment";
+import CommentsList from "@/features/calendar/components/CommentsList";
 import EventDate from "@/features/calendar/components/EventDate";
 import EventInfo from "@/features/calendar/components/EventInfo";
-import { getSingleEvent } from "@/features/calendar/services/supabase";
+import {
+	getEventComments,
+	getSingleEvent,
+} from "@/features/calendar/services/supabase";
 import FriendsList from "@/features/friends/components/friendsList";
 
 import { getProfile } from "@/features/profile/services/supabase";
@@ -18,7 +22,7 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 	const { id } = await params;
 	const event = await getSingleEvent(Number(id), supabase);
 	const createdByProfile = await getProfile(event.created_by, supabase);
-
+	const comments = await getEventComments(Number(id), supabase);
 	if (!event) return <LoadingComponent />;
 
 	return (
@@ -54,6 +58,8 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 			<hr />
 			<h2 className="text-xl font-bold">Guests</h2>
 			<FriendsList friends={event.guests}></FriendsList>
+			<hr />
+			<CommentsList comments={comments}></CommentsList>
 		</div>
 	);
 };

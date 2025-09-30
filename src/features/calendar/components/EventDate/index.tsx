@@ -11,7 +11,6 @@ const EventDate = ({ date }: { date: string }) => {
 					filled
 				></CalendarSVG>
 				<div className="flex flex-col items-center">
-					<div className="font-bold">Date</div>
 					<div>{newDate}</div>
 				</div>
 			</div>

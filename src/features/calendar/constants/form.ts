@@ -37,3 +37,12 @@ export const FILE_INPUT_INITIAL_VALUES = {
 	file: null,
 	preview: null,
 };
+
+export const COMMENT_FORM_FIELDS = {
+	name: "newComment",
+	type: "textarea",
+	required: true,
+	placeholder: "Write a comment",
+	fullWidth: true,
+	label: "Comment",
+};

@@ -1,29 +1,42 @@
+"use client";
 import ProfileImage from "@/features/profile/components/ProfileImage";
+import { getPrettyDate } from "../../services/getPrettyDate";
 
 interface Props {
 	message: string;
 	profileImage: string | null;
 	profileName: string;
 	isDescription?: boolean;
+	isOwner?: boolean;
+	messageTime: string;
 }
-
+//todo add message time
 const EventComment = ({
+	messageTime,
 	message,
 	profileImage,
 	profileName,
 	isDescription,
+	isOwner,
 }: Props) => {
 	return (
-		<div>
-			<div className="flex flex-row gap-2">
+		<div className={`${isOwner && "w-fit ml-auto mr-0"}`}>
+			<div className={`flex ${isOwner ? "flex-row-reverse" : "flex-row"}  gap-2`}>
 				<ProfileImage
 					small
 					profileImage={profileImage}
 				></ProfileImage>
 				<div>
-					<p>{profileName}</p>
+					<p
+						className={`flex ${isOwner ? "flex-row-reverse" : "flex-row"} items-center justify-between gap-4 ${isOwner ? "text-right" : "text-left"}`}
+					>
+						{profileName}
+						<span className="text-xs text-gray-600">
+							{getPrettyDate(new Date(messageTime), "en-UK", true)}
+						</span>
+					</p>
 					<div
-						className={`border-2 rounded-md p-3 ${isDescription ? "bg-accent dark:bg-accent-dark" : " bg-tertiary dark:bg-tertiary-dark"}`}
+						className={`border-2 rounded-md p-3  ${isDescription ? "bg-accent dark:bg-accent-dark" : isOwner ? "bg-secondary dark:bg-secondary-dark" : " bg-tertiary dark:bg-tertiary-dark"}`}
 					>
 						<p>{message}</p>
 					</div>

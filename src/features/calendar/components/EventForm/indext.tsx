@@ -68,10 +68,15 @@ const EventForm = ({ event, friends }: Props) => {
 	useEffect(() => {
 		if (event) {
 			setFormData(toEventFormData(event));
+			setGuests(event.guests);
 		}
 	}, [event]);
 
 	if (!user) return <LoadingComponent />;
+
+	if (event && event.created_by !== user.id) {
+		router.push(getPath("Event", String(event.id)));
+	}
 
 	const onChange = (
 		e: React.ChangeEvent<
@@ -134,7 +139,11 @@ const EventForm = ({ event, friends }: Props) => {
 				const newGuests = guests
 					.filter((guest) => !event.guests.some((g) => g.id === guest.id))
 					.map((guest) => guest.id);
-				const { image: event_image_link, ...eventWithoutImage } = formPayload;
+				const {
+					image: event_image_link,
+					guests: formGuests,
+					...eventWithoutImage
+				} = formPayload;
 				await updateEvent(
 					event.id,
 					eventWithoutImage,
