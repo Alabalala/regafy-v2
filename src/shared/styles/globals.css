@@ -3,6 +3,9 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme inline {
+	--color-black: #000000;
+	--color-white: #ffffff;
+
 	--color-background-50: #fffdf5;
 	--color-background: #fff7e6;
 	--color-background-100: #fff1d9;
