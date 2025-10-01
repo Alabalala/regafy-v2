@@ -10,7 +10,7 @@ interface Props {
 	isOwner?: boolean;
 	messageTime: string;
 }
-//todo add message time
+
 const EventComment = ({
 	messageTime,
 	message,

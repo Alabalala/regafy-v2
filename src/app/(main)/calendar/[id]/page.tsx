@@ -9,12 +9,11 @@ import {
 import FriendsList from "@/features/friends/components/friendsList";
 
 import { getProfile } from "@/features/profile/services/supabase";
-import { ContextMenu } from "@/shared/components/ContextMenu";
 import { NextLink } from "@/shared/components/Link";
 import LoadingComponent from "@/shared/components/loadingModule";
+import Modal from "@/shared/components/Modal";
 import { getPath } from "@/shared/services/getPath";
 import { createClient } from "@/shared/services/supabase/server";
-import Link from "next/link";
 
 const EventPage = async ({ params }: { params: { id: string } }) => {
 	const supabase = await createClient();
@@ -33,19 +32,33 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 			></EventInfo>
 			<EventDate date={event.date}></EventDate>
 
-			<div className="flex flex-row gap-2">
+			<div className="flex flex-row gap-2 justify-around">
 				<NextLink
+					shrink
 					variant="secondary"
 					href={getPath("Edit event", String(event.id))}
 				>
 					Edit event
 				</NextLink>
-				<NextLink
-					variant="delete"
-					href={getPath("Edit event", String(event.id))}
-				>
-					Delete event
-				</NextLink>
+				<Modal
+					modalTitle={"Delete event?"}
+					modalContent={
+						"Are you sure you want to delete this event? This is irreversible. The event will be deleted for ever."
+					}
+					buttons={{
+						initial: { text: "Delete event", variant: "delete", shrink: true },
+						leftButton: {
+							text: "Cancel",
+							isPlain: true,
+							href: "#",
+						},
+						rightButton: {
+							text: "Confirm delete",
+							href: "#",
+							variant: "delete",
+						},
+					}}
+				></Modal>
 			</div>
 
 			<EventComment
