@@ -23,6 +23,7 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 	const createdByProfile = await getProfile(event.created_by, supabase);
 	const comments = await getEventComments(Number(id), supabase);
 	if (!event) return <LoadingComponent />;
+	const eventPath = getPath("Event", String(event.id));
 
 	return (
 		<div className="flex flex-col gap-5">
@@ -50,14 +51,16 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 						leftButton: {
 							text: "Cancel",
 							isPlain: true,
-							href: "#",
+							isCancel: true,
 						},
 						rightButton: {
 							text: "Confirm delete",
-							href: "#",
+							apiRoute: "/api/events/delete/" + String(event.id),
+							method: "DELETE",
 							variant: "delete",
 						},
 					}}
+					redirect={getPath("Calendar")}
 				></Modal>
 			</div>
 

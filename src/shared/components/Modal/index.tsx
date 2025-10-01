@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Button } from "../Button";
-import { NextLink } from "../Link";
 import CloseSVG from "../SVGs/CloseSVG";
+import LoadingComponent from "../loadingModule";
+import { useRouter } from "next/navigation";
 
 interface Props {
 	buttons: {
@@ -14,28 +15,56 @@ interface Props {
 		};
 		leftButton: {
 			text: string;
-			href: string;
 			shrink?: boolean;
 			isPlain?: boolean;
+			isCancel?: boolean;
+			apiRoute?: string;
+			method?: string;
 			variant?: "primary" | "secondary" | "delete";
 		};
 		rightButton: {
 			text: string;
-			href: string;
 			shrink?: boolean;
 			isPlain?: boolean;
+			apiRoute: string;
+			method: string;
 			variant?: "primary" | "secondary" | "delete";
 		};
 	};
 	modalTitle: string;
 	modalContent: string;
+	redirect?: string;
 }
 
-const Modal = ({ buttons, modalTitle, modalContent }: Props) => {
+const Modal = ({ buttons, modalTitle, modalContent, redirect }: Props) => {
 	const [isOpen, setIsOpen] = useState(false);
-	useEffect(() => {
-		console.log(isOpen);
-	}, [isOpen]);
+	const [loading, setLoading] = useState(false);
+	const [errorText, setErrorText] = useState("");
+	const router = useRouter();
+
+	const handleClick = async (api: string, method: string) => {
+		setLoading(true);
+		try {
+			const res = await fetch(api, { method });
+
+			if (res.ok) {
+				setIsOpen(false);
+				if (redirect) router.replace(redirect);
+			} else {
+				setErrorText("There's been a problem. Try again later.");
+			}
+		} catch (err) {
+			setErrorText("Network error. Try again later.");
+		}
+	};
+
+	console.log(buttons.rightButton.apiRoute, buttons.rightButton.method);
+
+	const handleClose = () => {
+		setIsOpen(false);
+		setErrorText("");
+		setLoading(false);
+	};
 
 	return (
 		<div>
@@ -43,14 +72,15 @@ const Modal = ({ buttons, modalTitle, modalContent }: Props) => {
 				<Button
 					shrink={buttons.initial.shrink}
 					variant={buttons.initial.variant}
-					onClick={() => setIsOpen(!isOpen)}
+					onClick={() => setIsOpen(true)}
 				>
 					{buttons.initial.text}
 				</Button>
 			</div>
 			{isOpen && (
 				<button
-					onClick={() => setIsOpen(false)}
+					onClick={handleClose}
+					disabled={loading}
 					className="fixed h-full w-full top-0 left-0 opacity-70 bg-black z-30"
 				></button>
 			)}
@@ -60,27 +90,44 @@ const Modal = ({ buttons, modalTitle, modalContent }: Props) => {
 						<div className="flex flex-row justify-between items-center">
 							<p className="font-bold uppercase">{modalTitle}</p>
 							<Button
-								onClick={() => setIsOpen(false)}
+								onClick={handleClose}
+								disabled={loading}
 								isPlain
 							>
 								<CloseSVG />
 							</Button>
 						</div>
 						<div>{modalContent}</div>
+						{loading && <LoadingComponent onlySpinner />}
+						{errorText && <p className="text-red-500">{errorText}</p>}
 						<div className="flex flex-row gap-5">
-							<NextLink
-								isPlain
+							<Button
+								isPlain={buttons.leftButton.isPlain}
 								variant={buttons.leftButton.variant}
-								href={buttons.leftButton.href}
+								onClick={
+									buttons.leftButton.isCancel
+										? handleClose
+										: () =>
+												handleClick(
+													buttons.leftButton.apiRoute ?? "",
+													buttons.leftButton.method ?? "",
+												)
+								}
+								disabled={loading}
 							>
-								{buttons.leftButton.text}
-							</NextLink>
-							<NextLink
+								Cancel
+							</Button>
+
+							<Button
+								isPlain={buttons.rightButton.isPlain}
 								variant={buttons.rightButton.variant}
-								href={buttons.rightButton.href}
+								onClick={() =>
+									handleClick(buttons.rightButton.apiRoute, buttons.rightButton.method)
+								}
+								disabled={loading}
 							>
 								{buttons.rightButton.text}
-							</NextLink>
+							</Button>
 						</div>
 					</div>
 				</div>
