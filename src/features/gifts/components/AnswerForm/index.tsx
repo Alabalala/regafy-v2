@@ -13,7 +13,7 @@ import { validateAnswerForm } from "../../services/validateAnswerForm";
 interface Props {
 	questionId: string;
 }
-//TODO add delete functions
+//TODO add delete functions - fix forms
 const AnswerForm = ({ questionId }: Props) => {
 	const [value, setValue] = useState("");
 	const [error, setError] = useState(false);

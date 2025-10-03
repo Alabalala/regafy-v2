@@ -7,6 +7,7 @@ export interface InputType {
 	accept?: string;
 	options?: { value: string; label: string }[];
 	fullWidth?: boolean;
+	maxLength?: number;
 }
 
 export interface FileInputDataType {

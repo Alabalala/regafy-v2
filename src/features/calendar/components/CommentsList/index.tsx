@@ -107,12 +107,6 @@ const CommentsList = ({ comments }: Props) => {
 						input={COMMENT_FORM_FIELDS}
 						error={commentError}
 					></Input>
-					<div className="absolute bottom-2 right-2 text-sm bg-background">
-						<span className={newComment.length > 300 ? "text-red-600" : ""}>
-							{newComment.length}
-						</span>{" "}
-						/ 300
-					</div>
 				</div>
 				{errorMessage && <p className="text-red-600">{errorMessage}</p>}
 				<Button

@@ -1,15 +1,19 @@
+import { maxLength } from "zod";
+
 export const EVENT_FORM_FIELDS = [
 	{
 		name: "title",
 		label: "Title",
 		type: "text",
 		required: true,
+		maxLength: 30,
 	},
 	{
 		name: "description",
 		label: "Description",
 		type: "textarea",
 		required: false,
+		maxLength: 500,
 	},
 	{
 		name: "date",
@@ -45,4 +49,5 @@ export const COMMENT_FORM_FIELDS = {
 	placeholder: "Write a comment",
 	fullWidth: true,
 	label: "Comment",
+	maxLength: 300,
 };

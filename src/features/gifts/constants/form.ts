@@ -7,6 +7,8 @@ export const GIFT_FORM_FIELDS = [
 		type: "text",
 		required: true,
 		placeholder: "E. g. Shoes",
+		maxLength: 30,
+		fullWidth: true,
 	},
 	{
 		name: "description",
@@ -14,6 +16,8 @@ export const GIFT_FORM_FIELDS = [
 		type: "textarea",
 		required: false,
 		placeholder: "Here you can write as much as you want",
+		maxLength: 400,
+		fullWidth: true,
 	},
 	{
 		name: "price",
@@ -21,6 +25,7 @@ export const GIFT_FORM_FIELDS = [
 		type: "string",
 		required: true,
 		placeholder: "Help people know how much it will cost",
+		fullWidth: true,
 	},
 	{
 		name: "image",
@@ -28,6 +33,7 @@ export const GIFT_FORM_FIELDS = [
 		type: "file",
 		required: false,
 		accept: "image/*",
+		fullWidth: true,
 	},
 ];
 
@@ -53,6 +59,7 @@ export const QUESTION_INPUT_FIELDS = [
 		required: true,
 		placeholder: "Your question here",
 		fullWidth: true,
+		maxLength: 100,
 	},
 ];
 
@@ -68,6 +75,7 @@ export const ANSWER_INPUT_FIELDS = [
 		required: true,
 		placeholder: "Your answer here",
 		fullWidth: true,
+		maxLength: 100,
 	},
 ];
 

@@ -1,3 +1,5 @@
+import { maxLength } from "zod";
+
 export const LOGIN_FORM_INPUTS = [
 	{
 		name: "email",
@@ -30,6 +32,7 @@ export const SIGNUP_FORM_INPUTS = [
 		label: "Password",
 		type: "password",
 		required: true,
+		maxLength: 30,
 	},
 ];
 
@@ -65,6 +68,7 @@ export const UPDATE_PASSWORD_FORM_INPUTS = [
 		label: "New password",
 		type: "password",
 		required: true,
+		maxLength: 30,
 		placeholder: "P. ej. youremail@email.com",
 	},
 	{

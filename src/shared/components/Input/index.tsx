@@ -32,11 +32,20 @@ export default function Input({
 
 	if (input.type === "textarea") {
 		return (
-			<textarea
-				rows={5}
-				className={commonStyle}
-				{...commonProps}
-			/>
+			<div className="relative">
+				<textarea
+					rows={5}
+					className={`${input.maxLength && "pb-10"} ${commonStyle}`}
+					{...commonProps}
+				/>
+				{input.maxLength && (
+					<div
+						className={`text-xs absolute bottom-2 right-2 -translate-y-1/2 ${commonProps.value.length > input.maxLength && "text-red-600"}`}
+					>
+						{commonProps.value.length}/{input.maxLength}{" "}
+					</div>
+				)}
+			</div>
 		);
 	}
 
@@ -59,11 +68,20 @@ export default function Input({
 	}
 
 	return (
-		<input
-			className={commonStyle}
-			type={input.type}
-			{...commonProps}
-			accept={input.accept ?? ""}
-		/>
+		<div className="relative">
+			<input
+				className={`${(input.type === "text" || input.type === "password") && "pr-10"} ${commonStyle}`}
+				type={input.type}
+				{...commonProps}
+				accept={input.accept ?? ""}
+			/>
+			{input.maxLength && (
+				<div
+					className={`text-xs absolute top-1/2 right-2 -translate-y-1/2 ${commonProps.value.length > input.maxLength && "text-red-600"}`}
+				>
+					{commonProps.value.length}/{input.maxLength}{" "}
+				</div>
+			)}
+		</div>
 	);
 }
