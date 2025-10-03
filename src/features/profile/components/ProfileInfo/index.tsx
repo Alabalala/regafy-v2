@@ -4,7 +4,7 @@ import ProfileImage from "../ProfileImage";
 
 interface Props {
 	profile: Profile;
-	canEdit?: boolean;
+	canEdit: boolean;
 	sided?: boolean;
 }
 

@@ -58,8 +58,6 @@ const Modal = ({ buttons, modalTitle, modalContent, redirect }: Props) => {
 		}
 	};
 
-	console.log(buttons.rightButton.apiRoute, buttons.rightButton.method);
-
 	const handleClose = () => {
 		setIsOpen(false);
 		setErrorText("");

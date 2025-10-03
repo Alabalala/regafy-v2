@@ -28,6 +28,9 @@ const ProfileImage = ({
 	const { profile, setProfile } = useProfileStore();
 
 	const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (canEdit === false) {
+			return;
+		}
 		if (!e.target.files) {
 			return;
 		}
@@ -55,6 +58,7 @@ const ProfileImage = ({
 			htmlFor="profileImage"
 		>
 			<input
+				disabled={!canEdit}
 				type="file"
 				name="profileImage"
 				id="profileImage"

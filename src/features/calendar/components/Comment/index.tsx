@@ -10,7 +10,7 @@ interface Props {
 	isOwner?: boolean;
 	messageTime: string;
 }
-
+//Todo fix comments
 const EventComment = ({
 	messageTime,
 	message,
@@ -38,7 +38,7 @@ const EventComment = ({
 						</span>
 					</p>
 					<div
-						className={`border-2 rounded-md p-3  ${isDescription ? "bg-accent dark:bg-accent-dark" : isOwner ? "bg-secondary dark:bg-secondary-dark" : " bg-tertiary dark:bg-tertiary-dark"}`}
+						className={`min-w-60 w-fit border-2 rounded-md p-3  ${isDescription ? "bg-accent dark:bg-accent-dark" : isOwner ? "bg-secondary dark:bg-secondary-dark text-right ml-auto mr-0" : " bg-tertiary dark:bg-tertiary-dark"}`}
 					>
 						<p>{message}</p>
 					</div>

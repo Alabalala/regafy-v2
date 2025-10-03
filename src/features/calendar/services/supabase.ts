@@ -1,6 +1,7 @@
 import { Database } from "@/shared/types/database.types";
 import { SupabaseClient } from "@supabase/supabase-js";
-import { EventFormData, EventFormPayload } from "../types/events";
+import { Assigments, EventFormData, EventFormPayload } from "../types/events";
+import { SecretFriendType } from "@/shared/types/supabase/supabase";
 
 export const getEvents = async (
 	userId: string,
@@ -10,8 +11,10 @@ export const getEvents = async (
 		.from("event_guests")
 		.select(
 			`
-            events!event_guests_event_id_fkey(*)
-            `,
+		events!event_guests_event_id_fkey (
+			*
+		)
+		`,
 		)
 		.eq("guest_id", userId)
 		.order("created_at", { ascending: false });
@@ -21,7 +24,7 @@ export const getEvents = async (
 	const { data: createdByMeEvents, error: createdByMeEventsError } =
 		await supabase
 			.from("events")
-			.select("*")
+			.select(`*`)
 			.eq("created_by", userId)
 			.order("created_at", { ascending: false });
 
@@ -43,13 +46,14 @@ export const getSingleEvent = async (
 		.from("events")
 		.select(
 			`
-    *,
-    guests:event_guests (
-      profile:profiles (*)
-    )
-  `,
+      *,
+      guests:event_guests (
+        profile:profiles (*)
+      ),
+      secret_friends:event_secret_friend (*)
+    `,
 		)
-		.eq("id", Number(eventId))
+		.eq("id", eventId)
 		.single();
 
 	if (error) throw error;
@@ -225,4 +229,62 @@ export const createEventComment = async (
 	if (error) throw error;
 
 	return data;
+};
+
+// assigments
+
+export async function addAssignment(
+	eventId: number,
+	assignments: Assigments[],
+	supabase: SupabaseClient<Database>,
+) {
+	const { data, error } = await supabase
+		.from("event_secret_friend")
+		.insert(
+			assignments.map((assignment) => ({
+				user_id: assignment.user_id,
+				assignee_id: assignment.assignee_id,
+				event_id: eventId,
+			})),
+		)
+		.select();
+
+	if (error) throw error;
+
+	const { error: updatingEventError } = await supabase
+		.from("events")
+		.update({ hasSecretFriend: true })
+		.eq("id", eventId);
+
+	if (updatingEventError) throw updatingEventError;
+
+	return data as SecretFriendType[];
+}
+
+export const updateAssigments = async (
+	eventId: number,
+	assignments: Assigments[],
+	supabase: SupabaseClient<Database>,
+) => {
+	const { error: deleteError } = await supabase
+		.from("event_secret_friend")
+		.delete()
+		.eq("event_id", eventId);
+
+	if (deleteError) throw deleteError;
+
+	const { data, error } = await supabase
+		.from("event_secret_friend")
+		.insert(
+			assignments.map((assignment) => ({
+				user_id: assignment.user_id,
+				assignee_id: assignment.assignee_id,
+				event_id: eventId,
+			})),
+		)
+		.select();
+
+	if (error) throw error;
+
+	return data as SecretFriendType[];
 };

@@ -23,3 +23,8 @@ export type EventFormPayload = EventFormData & {
 	guests: string[];
 	image?: File | null;
 };
+
+export type Assigments = {
+	assignee_id: string;
+	user_id: string;
+};

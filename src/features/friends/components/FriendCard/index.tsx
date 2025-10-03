@@ -19,6 +19,7 @@ const FriendCard = ({ friend, isEvent, onClick, isInvited }: Props) => {
 	return (
 		<div className="flex flex-row justify-between border-2 px-5 py-2 items-center rounded-lg">
 			<ProfileInfo
+				canEdit={false}
 				sided
 				profile={friend}
 			></ProfileInfo>
