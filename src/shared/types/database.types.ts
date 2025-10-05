@@ -209,22 +209,22 @@ export type Database = {
 				Row: {
 					created_at: string;
 					id: number;
-					receiver_id: string | null;
-					sender_id: string | null;
+					receiver_id: string;
+					sender_id: string;
 					status: string | null;
 				};
 				Insert: {
 					created_at?: string;
 					id?: number;
-					receiver_id?: string | null;
-					sender_id?: string | null;
+					receiver_id: string;
+					sender_id: string;
 					status?: string | null;
 				};
 				Update: {
 					created_at?: string;
 					id?: number;
-					receiver_id?: string | null;
-					sender_id?: string | null;
+					receiver_id?: string;
+					sender_id?: string;
 					status?: string | null;
 				};
 				Relationships: [

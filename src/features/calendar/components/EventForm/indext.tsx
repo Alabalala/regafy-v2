@@ -232,7 +232,7 @@ const EventForm = ({ event, friends }: Props) => {
 				</div>
 			))}
 			<FriendsPanel
-				isEvent
+				type="event"
 				friends={friends}
 				onClick={onFriendClick}
 				guests={guests}
@@ -243,7 +243,7 @@ const EventForm = ({ event, friends }: Props) => {
 					friends={guests}
 					onClick={onFriendClick}
 					guests={guests}
-					isEvent
+					type="event"
 				></FriendsList>
 			</div>
 			{formError && <div className="text-red-500 text-sm">{formError}</div>}

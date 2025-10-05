@@ -12,7 +12,7 @@ import { Event } from "@/shared/types/supabase/supabase";
 
 interface Props {
 	friends: Profile[];
-	isEvent?: boolean;
+	type: "event" | "link" | "request";
 	event?: Event;
 	onClick?: (guest: Profile) => void;
 	guests?: Profile[];
@@ -20,7 +20,7 @@ interface Props {
 
 const FriendsPanel = ({
 	friends,
-	isEvent = false,
+	type = "link",
 	event,
 	onClick,
 	guests,
@@ -29,7 +29,7 @@ const FriendsPanel = ({
 	const supabase = createClient();
 	const { searchResults, error, errorMessage, loading } = useSearchFriends({
 		query,
-		isEvent,
+		type,
 		friends,
 		supabase,
 	});
@@ -78,7 +78,7 @@ const FriendsPanel = ({
 			</div>
 			<div className={"flex flex-col gap-5"}>
 				<h1 className="text-xl font-bold">
-					{isEvent && !query && !searchResults
+					{type === "event" && !query && !searchResults
 						? "Suggested friends"
 						: searchResults !== undefined
 							? "Results"
@@ -90,7 +90,7 @@ const FriendsPanel = ({
 					searchResults={searchResults}
 					friends={friends}
 					event={event}
-					isEvent={isEvent}
+					type={type}
 					onClick={onClick}
 				></FriendsList>
 			</div>

@@ -7,14 +7,14 @@ import { useDebounce } from "./useDebounce";
 
 interface Props {
 	query: string;
-	isEvent?: boolean;
+	type: "event" | "link" | "request";
 	friends: Profile[];
 	supabase: SupabaseClient<Database>;
 }
 
 export default function useSearchFriends({
 	query,
-	isEvent,
+	type,
 	friends,
 	supabase,
 }: Props) {
@@ -31,7 +31,7 @@ export default function useSearchFriends({
 			return;
 		}
 
-		if (isEvent) {
+		if (type === "event") {
 			const foundFriends = friends
 				.filter(
 					(friend) =>
@@ -69,7 +69,7 @@ export default function useSearchFriends({
 		};
 
 		fetchResults();
-	}, [query, debouncedValue, isEvent, friends, supabase]);
+	}, [query, debouncedValue, type, friends, supabase]);
 
 	return { searchResults, error, errorMessage, loading };
 }

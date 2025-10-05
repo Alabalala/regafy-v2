@@ -27,3 +27,11 @@ export type Comments = Database["public"]["Tables"]["event_comments"]["Row"] & {
 
 export type SecretFriendType =
 	Database["public"]["Tables"]["event_secret_friend"]["Row"];
+
+export type FriendRequestType =
+	Database["public"]["Tables"]["friend_request"]["Row"];
+
+export type allFriendRequests =
+	Database["public"]["Tables"]["friend_request"]["Row"] & {
+		sender: Database["public"]["Tables"]["profiles"]["Row"];
+	};

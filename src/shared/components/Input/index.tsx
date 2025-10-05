@@ -32,7 +32,7 @@ export default function Input({
 
 	if (input.type === "textarea") {
 		return (
-			<div className="relative">
+			<div className="relative w-full">
 				<textarea
 					rows={5}
 					className={`${input.maxLength && "pb-10"} ${commonStyle}`}
@@ -68,7 +68,7 @@ export default function Input({
 	}
 
 	return (
-		<div className="relative">
+		<div className="relative w-full">
 			<input
 				className={`${(input.type === "text" || input.type === "password") && "pr-10"} ${commonStyle}`}
 				type={input.type}

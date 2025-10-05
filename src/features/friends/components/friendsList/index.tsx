@@ -9,9 +9,11 @@ interface Props {
 	searchResults?: Profile[] | null;
 	isSearching?: boolean;
 	event?: Event;
-	isEvent?: boolean;
+	type?: "event" | "link" | "request";
 	onClick?: (guest: Profile) => void;
+	onClickRequest?: (index: number) => void;
 	guests?: Profile[];
+	loading?: { [key: number]: boolean };
 }
 
 const FriendsList = ({
@@ -19,11 +21,14 @@ const FriendsList = ({
 	searchResults,
 	isSearching,
 	event,
-	isEvent,
+	type,
 	onClick,
 	guests,
+	loading,
+	onClickRequest,
 }: Props) => {
-	const list = searchResults ?? (isEvent ? friends.slice(0, 3) : friends);
+	const list =
+		searchResults ?? (type === "event" ? friends.slice(0, 3) : friends);
 	return (
 		<div className="flex flex-col gap-2 relative">
 			{list.length === 0 ? (
@@ -37,13 +42,16 @@ const FriendsList = ({
 					</div>
 				</div>
 			) : (
-				list.map((friend) => (
+				list.map((friend, index) => (
 					<FriendCard
+						loading={loading && Object.values(loading)[index]}
 						onClick={onClick}
-						isEvent={isEvent}
+						onClickRequest={onClickRequest}
+						type={type}
 						event={event}
 						key={friend.id}
 						friend={friend}
+						index={index}
 						isInvited={guests?.some((guest) => guest.id === friend.id)}
 					></FriendCard>
 				))

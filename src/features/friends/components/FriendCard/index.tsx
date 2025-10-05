@@ -10,12 +10,23 @@ interface Props {
 	friend: Profile;
 	isFriend?: boolean;
 	event?: Event;
-	isEvent?: boolean;
+	type?: "event" | "link" | "request";
 	onClick?: (guest: Profile) => void;
+	onClickRequest?: (index: number) => void;
 	isInvited?: boolean;
+	loading?: boolean;
+	index?: number;
 }
 
-const FriendCard = ({ friend, isEvent, onClick, isInvited }: Props) => {
+const FriendCard = ({
+	friend,
+	type = "link",
+	onClick,
+	onClickRequest,
+	isInvited,
+	loading,
+	index,
+}: Props) => {
 	return (
 		<div className="flex flex-row justify-between border-2 px-5 py-2 items-center rounded-lg">
 			<ProfileInfo
@@ -24,15 +35,17 @@ const FriendCard = ({ friend, isEvent, onClick, isInvited }: Props) => {
 				profile={friend}
 			></ProfileInfo>
 			<div className="flex flex-shrink-0">
-				{isEvent ? (
+				{type === "event" && (
 					<Button
-						onClick={() => onClick?.(friend)}
+						onClick={() => onClick?.(friend as Profile)}
 						shrink
+						loading={loading}
 						variant={isInvited ? "delete" : "primary"}
 					>
 						{isInvited ? "Uninvite" : "Invite"}
 					</Button>
-				) : (
+				)}
+				{type === "link" && (
 					<NextLink
 						variant="primary"
 						shrink
@@ -40,6 +53,16 @@ const FriendCard = ({ friend, isEvent, onClick, isInvited }: Props) => {
 					>
 						View Profile
 					</NextLink>
+				)}
+				{type === "request" && (
+					<Button
+						loading={loading}
+						onClick={() => onClickRequest?.(Number(index))}
+						shrink
+						variant={"primary"}
+					>
+						Accept
+					</Button>
 				)}
 			</div>
 		</div>
