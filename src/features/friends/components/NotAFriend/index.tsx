@@ -7,6 +7,7 @@ import {
 import { Profile } from "@/features/profile/types/supabase.types";
 import { Button } from "@/shared/components/Button";
 import { createClient } from "@/shared/services/supabase/client";
+import { useToastStore } from "@/shared/stores/toastStore";
 import { FriendRequestType } from "@/shared/types/supabase/supabase";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -23,6 +24,7 @@ const NotAFriend = ({ userId, profile }: Props) => {
 	const [errorMessage, setErrorMessage] = useState("");
 	const [loading, setLoading] = useState(true);
 	const router = useRouter();
+	const { setMessage } = useToastStore();
 
 	useEffect(() => {
 		const checkFriendRequest = async () => {
@@ -39,6 +41,7 @@ const NotAFriend = ({ userId, profile }: Props) => {
 		try {
 			const request = await sendFriendRequest(profile.id, userId, supabase);
 			setHasFriendRequest(request);
+			setMessage("Friend request sent!");
 		} catch (err) {
 			console.log(err);
 			setErrorMessage("There's been an error, try again later.");
@@ -56,6 +59,7 @@ const NotAFriend = ({ userId, profile }: Props) => {
 		try {
 			await acceptFriendRequest(userId, profile.id, hasFriendRequest.id, supabase);
 			router.refresh();
+			setMessage("Friend added!");
 		} catch (err) {
 			console.log(err);
 			setErrorMessage("There's been an error, try again later.");

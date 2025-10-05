@@ -9,6 +9,8 @@ import { useUser } from "@/features/auth/hooks/useUser";
 import { getOptimizedImageUrl } from "@/shared/services/getOptimisedImageUrl";
 import { useProfileStore } from "../../store/profileStore";
 import { Profile } from "../../types/supabase.types";
+import { useToastStore } from "@/shared/stores/toastStore";
+import ClientToaster from "@/shared/components/ClientToaster";
 
 interface Props {
 	profileImage: string | null;
@@ -26,6 +28,7 @@ const ProfileImage = ({
 	const supabase = createClient();
 	const [user] = useUser();
 	const { profile, setProfile } = useProfileStore();
+	const { setMessage } = useToastStore();
 
 	const onChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
 		if (canEdit === false) {
@@ -46,6 +49,7 @@ const ProfileImage = ({
 					profileImage: `${imageLink}?t=${Date.now()}`,
 				};
 				setProfile(newProfile as Profile);
+				setMessage("Profile image updated!");
 			} catch (error) {
 				console.log(error);
 			}
@@ -57,6 +61,7 @@ const ProfileImage = ({
 			className="relative"
 			htmlFor="profileImage"
 		>
+			<ClientToaster />
 			<input
 				disabled={!canEdit}
 				type="file"

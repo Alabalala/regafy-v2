@@ -1,5 +1,4 @@
 import CalendarSVG from "@/shared/components/SVGs/calendarSVG";
-
 const EventDate = ({ date }: { date: string }) => {
 	const newDate = new Date(date).toLocaleDateString("en-GB");
 

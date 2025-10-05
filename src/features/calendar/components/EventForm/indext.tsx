@@ -1,33 +1,34 @@
 "use client";
 
+import { useUser } from "@/features/auth/hooks/useUser";
+import FriendsList from "@/features/friends/components/friendsList";
+import FriendsPanel from "@/features/friends/components/FriendsPanel";
+import { Profile } from "@/features/profile/types/supabase.types";
+import { Button } from "@/shared/components/Button";
+import FileInput from "@/shared/components/FileInput";
+import Input from "@/shared/components/Input";
+import LoadingComponent from "@/shared/components/loadingModule";
+import { getPath } from "@/shared/services/getPath";
+import { createClient } from "@/shared/services/supabase/client";
+import { useToastStore } from "@/shared/stores/toastStore";
+import { FieldErrors, FileInputDataType } from "@/shared/types/forms";
+import { Event } from "@/shared/types/supabase/supabase";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { EventFormData, EventFormPayload } from "../../types/events";
 import {
 	EVENT_FORM_FIELDS,
 	FILE_INPUT_INITIAL_VALUES,
 	INITIAL_EVENT_FORM_DATA,
 } from "../../constants/form";
-import { FieldErrors, FileInputDataType } from "@/shared/types/forms";
-import FileInput from "@/shared/components/FileInput";
-import Input from "@/shared/components/Input";
-import { Button } from "@/shared/components/Button";
-import FriendsList from "@/features/friends/components/friendsList";
-import { Profile } from "@/features/profile/types/supabase.types";
-import FriendsPanel from "@/features/friends/components/FriendsPanel";
 import { eventFormSchema } from "../../schemas/eventFormSchema";
-import { Event } from "@/shared/types/supabase/supabase";
-import { validateEventForm } from "../../services/validateEventForm";
 import {
 	addImageToEvent,
 	createEvent,
 	updateEvent,
 	uploadEventImageFile,
 } from "../../services/supabase";
-import { createClient } from "@/shared/services/supabase/client";
-import { useParams, useRouter, useSearchParams } from "next/navigation";
-import { getPath } from "@/shared/services/getPath";
-import { useUser } from "@/features/auth/hooks/useUser";
-import LoadingComponent from "@/shared/components/loadingModule";
+import { validateEventForm } from "../../services/validateEventForm";
+import { EventFormData, EventFormPayload } from "../../types/events";
 
 interface Props {
 	event?: Event;
@@ -57,6 +58,7 @@ const EventForm = ({ event, friends }: Props) => {
 	const [user] = useUser();
 	const searchParams = useSearchParams();
 	const date = searchParams.get("date");
+	const { setMessage } = useToastStore();
 
 	useEffect(() => {
 		if (event && event.event_image_link) {
@@ -187,6 +189,7 @@ const EventForm = ({ event, friends }: Props) => {
 				}
 				router.push(getPath("Event", String(newEvent.id)));
 			}
+			setMessage(`Event successfully ${event ? "updated" : "created"}!`);
 		} catch (err) {
 			console.log(err);
 			setFormError((err as Error).message);

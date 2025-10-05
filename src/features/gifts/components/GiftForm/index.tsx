@@ -25,6 +25,7 @@ import {
 } from "../../services/supabase";
 import { FormDataWithFileType, GiftFormData } from "../../types/form";
 import StarRateInput from "../StarRateInput";
+import { useToastStore } from "@/shared/stores/toastStore";
 
 const GiftForm = ({ gift }: { gift?: SingleGift }) => {
 	const toGiftFormData = (gift: SingleGift): GiftFormData => {
@@ -50,6 +51,7 @@ const GiftForm = ({ gift }: { gift?: SingleGift }) => {
 	const router = useRouter();
 	const normalisedFriendId = Array.isArray(friendId) ? friendId[0] : friendId;
 	const normalisedGiftId = Array.isArray(giftId) ? giftId[0] : giftId;
+	const { setMessage } = useToastStore();
 
 	useEffect(() => {
 		if (gift && gift.image_link) {
@@ -174,6 +176,7 @@ const GiftForm = ({ gift }: { gift?: SingleGift }) => {
 					}
 				}
 			}
+			setMessage(`Gift ${gift ? "updated" : "added"}!`);
 		} catch (err) {
 			setFormError(
 				"Something went wrong. Please try again: " + (err as Error).message,

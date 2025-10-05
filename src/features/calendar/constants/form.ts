@@ -1,5 +1,3 @@
-import { maxLength } from "zod";
-
 export const EVENT_FORM_FIELDS = [
 	{
 		name: "title",
@@ -7,6 +5,7 @@ export const EVENT_FORM_FIELDS = [
 		type: "text",
 		required: true,
 		maxLength: 30,
+		fullWidth: true,
 	},
 	{
 		name: "description",
@@ -14,18 +13,21 @@ export const EVENT_FORM_FIELDS = [
 		type: "textarea",
 		required: false,
 		maxLength: 500,
+		fullWidth: true,
 	},
 	{
 		name: "date",
 		label: "Date",
 		type: "date",
 		required: true,
+		fullWidth: true,
 	},
 	{
 		name: "image",
 		label: "Event image",
 		type: "file",
 		required: false,
+		fullWidth: true,
 	},
 ];
 

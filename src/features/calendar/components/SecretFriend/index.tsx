@@ -12,6 +12,7 @@ import { createAssignments } from "../../services/createAssignments";
 import { addAssignment, updateAssigments } from "../../services/supabase";
 import { g } from "vitest/dist/chunks/suite.d.FvehnV49.js";
 import { isEveryoneIncluded } from "../../services/isEveryoneIncluded";
+import { useToastStore } from "@/shared/stores/toastStore";
 
 interface Props {
 	guests: Profile[];
@@ -39,6 +40,7 @@ const SecretFriend = ({
 	const [isUserIncluded, setIsUserIncluded] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
 	const [isFlipped, setIsFlipped] = useState(false);
+	const { setMessage } = useToastStore();
 
 	useEffect(() => {
 		if (secretFriend) {
@@ -92,6 +94,7 @@ const SecretFriend = ({
 				);
 				setIsUserIncluded(userIncluded);
 				setIsAllIncluded(allIncluded);
+				setMessage(`Secret friend assignment ${mode}d successfully`);
 			}
 		} catch (error) {
 			console.log(error);

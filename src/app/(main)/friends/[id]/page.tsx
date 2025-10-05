@@ -10,6 +10,7 @@ import {
 } from "@/features/profile/services/supabase";
 import { Profile } from "@/features/profile/types/supabase.types";
 import { Button } from "@/shared/components/Button";
+import ClientToaster from "@/shared/components/ClientToaster";
 import LoadingComponent from "@/shared/components/loadingModule";
 import Modal from "@/shared/components/Modal";
 import { getPath } from "@/shared/services/getPath";
@@ -40,6 +41,7 @@ export default async function FriendProfile({ params }: Props) {
 	}
 	return (
 		<div className="flex flex-col gap-4">
+			<ClientToaster />
 			<div className="flex flex-col gap-4">
 				<ProfileInfo
 					canEdit={false}

@@ -3,8 +3,10 @@ import { acceptFriendRequest } from "@/features/profile/services/supabase";
 import { createClient } from "@/shared/services/supabase/client";
 import { allFriendRequests } from "@/shared/types/supabase/supabase";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import FriendsList from "../friendsList";
+import { useToastStore } from "@/shared/stores/toastStore";
+import toast from "react-hot-toast";
 
 interface Props {
 	friendRequests: allFriendRequests[];
@@ -19,6 +21,8 @@ const FriendsRequests = ({ friendRequests, userId }: Props) => {
 		(profile) => profile !== null,
 	);
 	const router = useRouter();
+	const { message, setMessage, clearMessage } = useToastStore();
+
 	const acceptRequest = (index: number) => {
 		setLoading({ [index]: true });
 		try {
@@ -28,11 +32,20 @@ const FriendsRequests = ({ friendRequests, userId }: Props) => {
 				friendRequests[index].id,
 				supabase,
 			);
+			setMessage("Friend added!");
 			router.refresh();
 		} catch (err) {
 			console.log(err);
 		}
 	};
+
+	useEffect(() => {
+		if (message) {
+			toast.dismiss();
+			toast.success(message);
+			clearMessage();
+		}
+	}, [message, clearMessage]);
 
 	return (
 		<div className="flex flex-col gap-5">

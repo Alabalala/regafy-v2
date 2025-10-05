@@ -12,6 +12,8 @@ import { getPrettyDate } from "../../services/getPrettyDate";
 import { NextLink } from "@/shared/components/Link";
 import { getPath } from "@/shared/services/getPath";
 import { padNumber } from "../../services/padNumber";
+import { useToastStore } from "@/shared/stores/toastStore";
+import toast from "react-hot-toast";
 
 interface Props {
 	events: EventsGroupedByDateType;
@@ -24,6 +26,15 @@ const Calendar = ({ events }: Props) => {
 	const [chosenDate, setChosenDate] = useState({ day: 0, type: "" });
 	const [isFading, setIsFading] = useState(false);
 	const [chosenDayEvents, setChosenDayEvents] = useState<normalisedEvent[]>([]);
+
+	const { message, clearMessage } = useToastStore();
+	useEffect(() => {
+		if (message) {
+			toast.dismiss();
+			toast.success(message);
+			clearMessage();
+		}
+	}, [message, clearMessage]);
 
 	useEffect(() => {
 		if (events && chosenDate.type === "current") {

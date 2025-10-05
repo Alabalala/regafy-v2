@@ -11,7 +11,7 @@ import {
 import FriendsList from "@/features/friends/components/friendsList";
 
 import { getProfile } from "@/features/profile/services/supabase";
-import { Button } from "@/shared/components/Button";
+import ClientToaster from "@/shared/components/ClientToaster";
 import { NextLink } from "@/shared/components/Link";
 import LoadingComponent from "@/shared/components/loadingModule";
 import Modal from "@/shared/components/Modal";
@@ -34,6 +34,7 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 				canEdit
 				event={event}
 			></EventInfo>
+			<ClientToaster />
 			<EventDate date={event.date}></EventDate>
 			<div className="flex flex-row gap-2 justify-around">
 				<NextLink

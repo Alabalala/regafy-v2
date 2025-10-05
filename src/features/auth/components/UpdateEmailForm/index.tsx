@@ -11,6 +11,7 @@ import { Button } from "@/shared/components/Button";
 import { validateUpdateEmailForm } from "../../services/validateEmailUpdateForm";
 import { updateEmail } from "../../services/supabase";
 import { UpdateEmailFormTypes } from "../../types/forms";
+import { useToastStore } from "@/shared/stores/toastStore";
 
 const UpdateEmailForm = () => {
 	const [formData, setFormData] = useState<UpdateEmailFormTypes>(
@@ -19,6 +20,7 @@ const UpdateEmailForm = () => {
 	const [errors, setErrors] = useState<FieldErrors>({});
 	const [supabaseToast, setsupabaseToast] = useState<string | undefined>("");
 	const [isLoading, setIsLoading] = useState(false);
+	const { setMessage } = useToastStore();
 
 	const onChange = (
 		e: React.ChangeEvent<
@@ -48,6 +50,7 @@ const UpdateEmailForm = () => {
 
 		try {
 			await updateEmail(formData.email);
+			setMessage("Email updated!");
 		} catch (err) {
 			setsupabaseToast(
 				"Something went wrong. Please try again: " + (err as Error).message,
@@ -56,7 +59,6 @@ const UpdateEmailForm = () => {
 			return;
 		} finally {
 			setIsLoading(false);
-			setsupabaseToast("Email updated!");
 			setFormData(INITIAL_CHANGE_EMAIL_FORM_DATA);
 		}
 	};

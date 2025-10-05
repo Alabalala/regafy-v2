@@ -11,6 +11,7 @@ import { Button } from "@/shared/components/Button";
 import { updatePassword } from "../../services/supabase";
 import { UpdatePasswordFormTypes } from "../../types/forms";
 import { validateUpdatePasswordForm } from "../../services/validatePasswordUpdateForm";
+import { useToastStore } from "@/shared/stores/toastStore";
 
 const UpdatePasswordForm = () => {
 	const [formData, setFormData] = useState<UpdatePasswordFormTypes>(
@@ -19,6 +20,7 @@ const UpdatePasswordForm = () => {
 	const [errors, setErrors] = useState<FieldErrors>({});
 	const [supabaseToast, setsupabaseToast] = useState<string | undefined>("");
 	const [isLoading, setIsLoading] = useState(false);
+	const { setMessage } = useToastStore();
 
 	const onChange = (
 		e: React.ChangeEvent<
@@ -48,15 +50,14 @@ const UpdatePasswordForm = () => {
 
 		try {
 			await updatePassword(formData.password);
+			setMessage("Password updated!");
 		} catch (err) {
 			setsupabaseToast(
 				"Something went wrong. Please try again: " + (err as Error).message,
 			);
-			setIsLoading(false);
 			return;
 		} finally {
 			setIsLoading(false);
-			setsupabaseToast("Password updated!");
 			setFormData(INITIAL_UPDATE_PASSWORD_FORM_DATA);
 		}
 	};

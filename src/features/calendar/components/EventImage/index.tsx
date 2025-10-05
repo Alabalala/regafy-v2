@@ -7,6 +7,7 @@ import { createClient } from "@/shared/services/supabase/client";
 
 import { getOptimizedImageUrl } from "@/shared/services/getOptimisedImageUrl";
 import { ValidateEventImage } from "../../services/validateEventImage";
+import { useToastStore } from "@/shared/stores/toastStore";
 
 interface Props {
 	eventImage?: string | null;
@@ -25,7 +26,7 @@ const EventImage = ({
 }: Props) => {
 	const supabase = createClient();
 	const [image, setImage] = useState("");
-
+	const { setMessage } = useToastStore();
 	useEffect(() => {
 		if (eventImage) {
 			setImage(eventImage);
@@ -45,6 +46,7 @@ const EventImage = ({
 				const imageLink = await uploadEventImageFile(eventId, file, supabase);
 				await addImageToEvent(eventId, imageLink, supabase);
 				setImage(imageLink);
+				setMessage("Event image updated!");
 			} catch (error) {
 				console.log(error);
 			}
