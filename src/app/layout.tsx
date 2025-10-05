@@ -1,6 +1,5 @@
-import Footer from "@/shared/components/Footer";
-import { NavBar } from "@/shared/components/NavBar";
 import "@/shared/styles/globals.css";
+import { Toaster } from "react-hot-toast";
 
 export const metadata = {
 	title: "Create Next App",
@@ -15,6 +14,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 					"bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark h-screen font-sans overflow-clip"
 				}
 			>
+				<Toaster
+					toastOptions={{
+						className:
+							"bg-background-100! dark:bg-background-dark-100! text-on-background! dark:text-on-background-dark! border-2 dark:border-white",
+					}}
+				></Toaster>
 				{children}
 			</body>
 		</html>
