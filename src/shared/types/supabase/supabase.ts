@@ -1,4 +1,4 @@
-import { Database } from "../../../shared/types/database.types";
+import { Database } from "../database.types";
 
 export type AnswerWithRow = Database["public"]["Tables"]["answers"]["Row"];
 
@@ -33,5 +33,10 @@ export type FriendRequestType =
 
 export type allFriendRequests =
 	Database["public"]["Tables"]["friend_request"]["Row"] & {
+		sender: Database["public"]["Tables"]["profiles"]["Row"];
+	};
+
+export type NotificationWithSender =
+	Database["public"]["Tables"]["notifications"]["Row"] & {
 		sender: Database["public"]["Tables"]["profiles"]["Row"];
 	};

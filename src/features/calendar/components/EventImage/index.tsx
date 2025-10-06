@@ -67,7 +67,7 @@ const EventImage = ({
 				className="sr-only"
 			></input>
 			{canEdit && (
-				<div className="absolute z-20 bottom-0 right-0 cursor-pointer bg-secondary p-1 rounded-full border-2">
+				<div className="absolute z-10 bottom-0 right-0 cursor-pointer bg-secondary p-1 rounded-full border-2">
 					<EditSVG
 						width="15"
 						height="15"
