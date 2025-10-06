@@ -36,6 +36,8 @@ export type allFriendRequests =
 		sender: Database["public"]["Tables"]["profiles"]["Row"];
 	};
 
+export type Notification = Database["public"]["Tables"]["notifications"]["Row"];
+
 export type NotificationWithSender =
 	Database["public"]["Tables"]["notifications"]["Row"] & {
 		sender: Database["public"]["Tables"]["profiles"]["Row"];
