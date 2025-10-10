@@ -1,35 +1,25 @@
 import { InputType } from "@/shared/types/forms";
+import { InputHTMLAttributes } from "react";
 
-interface Props {
-	value: string;
+interface Props
+	extends InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement> {
 	input: InputType;
-	onChange: (
-		e: React.ChangeEvent<
-			HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-		>,
-	) => void;
-	required?: boolean;
-	preview?: string;
 	error: boolean;
+	preview?: string;
+	currentValue: string;
 }
 
 export default function Input({
-	value,
 	input,
-	onChange,
 	error = false,
+	currentValue,
+	...rhfProps
 }: Props) {
+	const commonStyle = `border-2 rounded-md p-2 focus:outline-accent ${error && "border-red-600 focus:border-red-800"} ${input.fullWidth && "w-full"}`;
 	const commonProps = {
-		name: input.name,
-		value,
-		onChange,
 		placeholder: input.placeholder,
-		required: input.required ?? false,
 		disabled: input.disabled ?? false,
 	};
-
-	const commonStyle = `border-2 rounded-md p-2 focus:outline-accent ${error && "border-red-600 focus:border-red-800"} ${input.fullWidth && "w-full"}`;
-
 	if (input.type === "textarea") {
 		return (
 			<div className="relative w-full">
@@ -37,33 +27,16 @@ export default function Input({
 					rows={5}
 					className={`${input.maxLength && "pb-10"} ${commonStyle}`}
 					{...commonProps}
+					{...rhfProps}
 				/>
 				{input.maxLength && (
 					<div
-						className={`text-xs absolute bottom-2 right-2 -translate-y-1/2 ${commonProps.value.length > input.maxLength && "text-red-600"}`}
+						className={`text-xs absolute bottom-2 right-2 -translate-y-1/2 ${(currentValue?.length || 0) > input.maxLength && "text-red-600"}`}
 					>
-						{commonProps.value.length}/{input.maxLength}{" "}
+						{currentValue?.length || 0}/{input.maxLength}
 					</div>
 				)}
 			</div>
-		);
-	}
-
-	if (input.type === "select") {
-		return (
-			<select
-				{...commonProps}
-				className={commonStyle}
-			>
-				{input.options?.map((opt) => (
-					<option
-						key={opt.value}
-						value={opt.value}
-					>
-						{opt.label}
-					</option>
-				))}
-			</select>
 		);
 	}
 
@@ -72,14 +45,15 @@ export default function Input({
 			<input
 				className={`${(input.type === "text" || input.type === "password") && "pr-10"} ${commonStyle}`}
 				type={input.type}
-				{...commonProps}
 				accept={input.accept ?? ""}
+				{...commonProps}
+				{...rhfProps}
 			/>
 			{input.maxLength && (
 				<div
-					className={`text-xs absolute top-1/2 right-2 -translate-y-1/2 ${commonProps.value.length > input.maxLength && "text-red-600"}`}
+					className={`text-xs absolute top-1/2 right-2 -translate-y-1/2 ${(currentValue?.length || 0) > input.maxLength && "text-red-600"}`}
 				>
-					{commonProps.value.length}/{input.maxLength}{" "}
+					{currentValue?.length || 0}/{input.maxLength}
 				</div>
 			)}
 		</div>

@@ -16,12 +16,11 @@ export type EventFormData = {
 	title: string;
 	description: string;
 	date: string;
-	created_by: string;
 };
 
 export type EventFormPayload = EventFormData & {
 	guests: string[];
-	image?: File | null;
+	created_by: string;
 };
 
 export type Assigments = {

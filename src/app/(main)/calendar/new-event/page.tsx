@@ -13,7 +13,10 @@ const NewEventPage = async () => {
 	return (
 		<div className={"flex flex-col gap-5"}>
 			<H1WithExit href={getPath("Calendar")}>New event</H1WithExit>
-			<EventForm friends={friends}></EventForm>
+			<EventForm
+				type={"create"}
+				friends={friends}
+			></EventForm>
 		</div>
 	);
 };
