@@ -8,8 +8,6 @@ import {
 	uploadEventImageFile,
 } from "../services/supabase";
 import { createClient } from "@/shared/services/supabase/server";
-import { eventFormSchema } from "../schemas/eventFormSchema";
-import { validateForm } from "@/shared/services/validateData";
 
 export const updateEventAction = async (
 	formData: EventFormPayload,
@@ -37,11 +35,12 @@ export const updateEventAction = async (
 			deletedGuests,
 			supabase,
 		);
-		if (image instanceof File) {
+		if (image) {
 			const imageLink = await uploadEventImageFile(eventId, image, supabase);
-			if (imageLink) await addImageToEvent(eventId, imageLink, supabase);
+			if (imageLink) {
+				await addImageToEvent(eventId, imageLink, supabase);
+			}
 		}
-
 		return { success: true };
 	} catch (error) {
 		return {
