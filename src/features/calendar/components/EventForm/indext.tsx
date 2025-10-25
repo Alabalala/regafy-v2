@@ -27,6 +27,7 @@ import {
 import { eventFormSchema } from "../../schemas/eventFormSchema";
 import { ValidateEventImage } from "../../services/validateEventImage";
 import { EventFormData, EventFormPayload } from "../../types/events";
+import { addImageToEvent, uploadEventImageFile } from "../../services/supabase";
 
 interface Props {
 	event?: Event;
@@ -63,6 +64,7 @@ const EventForm = ({ event, type, friends }: Props) => {
 	const searchParams = useSearchParams();
 	const date = searchParams.get("date");
 	const { setMessage } = useToastStore();
+	const supabase = createClient();
 
 	useEffect(() => {
 		if (event && event.event_image_link) {
@@ -126,6 +128,14 @@ const EventForm = ({ event, type, friends }: Props) => {
 			const createResult = await createEventAction(formPayload);
 
 			if (createResult.success) {
+				if (createResult.data?.id) {
+					const img = await uploadEventImageFile(
+						createResult.data?.id,
+						file.file!,
+						supabase,
+					);
+					await addImageToEvent(createResult.data?.id, img, supabase);
+				}
 				setMessage("Event created!");
 				router.push(getPath("Event", String(createResult.data?.id)));
 			} else {
@@ -143,6 +153,10 @@ const EventForm = ({ event, type, friends }: Props) => {
 				event.id,
 			);
 			if (updateResult.success) {
+				if (file.file) {
+					const img = await uploadEventImageFile(event.id, file.file!, supabase);
+					await addImageToEvent(event.id, img, supabase);
+				}
 				setMessage("Event updated!");
 				router.push(getPath("Event", String(event.id)));
 			} else {

@@ -1,15 +1,11 @@
 "use server";
 
 import { Profile } from "@/features/profile/types/supabase.types";
-import { EventFormPayload } from "../types/events";
-import {
-	addImageToEvent,
-	updateEvent,
-	uploadEventImageFile,
-} from "../services/supabase";
 import { createClient } from "@/shared/services/supabase/server";
 import { validateForm } from "@/shared/services/validateData";
 import { eventFormSchema } from "../schemas/eventFormSchema";
+import { updateEvent } from "../services/supabase";
+import { EventFormPayload } from "../types/events";
 
 export const updateEventAction = async (
 	formData: EventFormPayload,
@@ -21,7 +17,7 @@ export const updateEventAction = async (
 	if (!result.success)
 		return { success: false, errors: { root: "Invalid data." } };
 
-	const { image, guests, ...eventWithoutImage } = formData;
+	const { guests, ...eventWithoutImage } = formData;
 
 	const deletedGuests = oldGuests
 		.filter((g) => !guests.includes(g.id))
@@ -37,12 +33,6 @@ export const updateEventAction = async (
 			deletedGuests,
 			supabase,
 		);
-		if (image) {
-			const imageLink = await uploadEventImageFile(eventId, image, supabase);
-			if (imageLink) {
-				await addImageToEvent(eventId, imageLink, supabase);
-			}
-		}
 		return { success: true };
 	} catch (error) {
 		return {
