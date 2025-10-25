@@ -8,6 +8,8 @@ import {
 	uploadEventImageFile,
 } from "../services/supabase";
 import { createClient } from "@/shared/services/supabase/server";
+import { validateForm } from "@/shared/services/validateData";
+import { eventFormSchema } from "../schemas/eventFormSchema";
 
 export const updateEventAction = async (
 	formData: EventFormPayload,

@@ -3,11 +3,7 @@
 import { createClient } from "@/shared/services/supabase/server";
 import { validateForm } from "@/shared/services/validateData";
 import { eventFormSchema } from "../schemas/eventFormSchema";
-import {
-	addImageToEvent,
-	createEvent,
-	uploadEventImageFile,
-} from "../services/supabase";
+import { createEvent } from "../services/supabase";
 import { EventFormPayload } from "../types/events";
 
 export const createEventAction = async (formData: EventFormPayload) => {

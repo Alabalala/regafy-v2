@@ -68,7 +68,7 @@ export const createEvent = async (
 	event: EventFormPayload,
 	supabase: SupabaseClient<Database>,
 ) => {
-	const { guests, image, ...eventData } = event;
+	const { guests, ...eventData } = event;
 	const { data: newEventData, error: eventError } = await supabase
 		.from("events")
 		.insert(eventData)
