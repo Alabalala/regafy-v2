@@ -6,53 +6,61 @@ import {
 	GIFT_FORM_INITIAL_VALUES,
 } from "@/features/gifts/constants/form";
 import { giftFormScheme } from "@/features/gifts/services/giftFormScheme";
-import { validateGiftForm } from "@/features/gifts/services/validateGiftForm";
 import LoadingComponent from "@/shared/components/loadingModule";
 import { getPath } from "@/shared/services/getPath";
 import { createClient } from "@/shared/services/supabase/client";
-import { FieldErrors, FileInputDataType } from "@/shared/types/forms";
+import { useToastStore } from "@/shared/stores/toastStore";
+import { FileInputDataType } from "@/shared/types/forms";
 import { SingleGift } from "@/shared/types/supabase/supabase";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Button } from "../../../../shared/components/Button";
 import FileInput from "../../../../shared/components/FileInput";
 import Input from "../../../../shared/components/Input";
-import {
-	addImageToGift,
-	createGift,
-	updateGift,
-	uploadImageFile,
-} from "../../services/supabase";
-import { FormDataWithFileType, GiftFormData } from "../../types/form";
+import { createGiftAction } from "../../actions/createGift";
+import { updateGiftAction } from "../../actions/updateGifts";
+import { addImageToGift, uploadImageFile } from "../../services/supabase";
+import { validateGiftImage } from "../../services/validateGiftImage";
+import { FormPayloadType, GiftFormData } from "../../types/form";
 import StarRateInput from "../StarRateInput";
-import { useToastStore } from "@/shared/stores/toastStore";
 
-const GiftForm = ({ gift }: { gift?: SingleGift }) => {
+interface Props {
+	gift?: SingleGift;
+	type: "create" | "update";
+}
+
+const GiftForm = ({ gift, type }: Props) => {
 	const toGiftFormData = (gift: SingleGift): GiftFormData => {
 		return {
 			title: gift.title,
 			description: gift.description ?? "",
 			price: gift.price?.toString() ?? "",
+			rating: gift.rating.toString() ?? "1",
 		};
 	};
-	const [formData, setFormData] = useState<GiftFormData>(
-		GIFT_FORM_INITIAL_VALUES,
-	);
+
+	const {
+		register,
+		handleSubmit,
+		setError,
+		setValue,
+		watch,
+		formState: { errors, isSubmitting },
+	} = useForm<GiftFormData>({
+		resolver: zodResolver(giftFormScheme),
+		defaultValues: gift ? toGiftFormData(gift) : GIFT_FORM_INITIAL_VALUES,
+	});
+
 	const [file, setFile] = useState<FileInputDataType>(FILE_INPUT_INITIAL_VALUES);
-	const [errors, setErrors] = useState<FieldErrors>({});
-	const [formError, setFormError] = useState<string>("");
-	const [isLoading, setIsLoading] = useState(false);
-	const [rating, setRating] = useState<string>("1");
 	const [user] = useUser();
 	const params = useParams();
 	const { id: friendId } = params;
-	const { giftId } = params;
 	const supabase = createClient();
 	const router = useRouter();
-	const normalisedFriendId = Array.isArray(friendId) ? friendId[0] : friendId;
-	const normalisedGiftId = Array.isArray(giftId) ? giftId[0] : giftId;
 	const { setMessage } = useToastStore();
-
+	const [fileError, setFileError] = useState<string>("");
 	useEffect(() => {
 		if (gift && gift.image_link) {
 			setFile((prev) => ({
@@ -62,183 +70,141 @@ const GiftForm = ({ gift }: { gift?: SingleGift }) => {
 		}
 	}, [gift]);
 
-	useEffect(() => {
-		if (gift?.rating) {
-			setRating(gift.rating.toString());
-		}
-	}, [gift]);
-
-	useEffect(() => {
-		if (gift) {
-			setFormData(toGiftFormData(gift));
-		}
-	}, [gift]);
-
 	if (!user) {
 		return <LoadingComponent />;
 	}
 
-	const onChange = (
-		e: React.ChangeEvent<
-			HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-		>,
-	) => {
-		const { name, value, type, files } = e.target as HTMLInputElement;
-		const normalisedValue = value.replace(/^ +/, "");
-		let fieldValue: string | File | null = normalisedValue;
+	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const files = e.target.files;
+		const file = files?.[0] ?? null;
+		const result = validateGiftImage(file!);
 
-		if (type === "file" && files) {
-			const file = files[0];
-			fieldValue = file;
+		setFileError("");
 
-			setFile((prev) => ({
-				...prev,
-				file,
-				preview: file ? URL.createObjectURL(file) : null,
-			}));
+		if (!file) {
+			setFile({ file: null, preview: null });
+			return;
 		}
-
-		setFormData({
-			...formData,
-			[name]: fieldValue,
-		});
-
-		const result = giftFormScheme
-			.pick({ [name]: true })
-			.safeParse({ [name]: fieldValue });
-
-		setErrors((prev) => ({
-			...prev,
-			[name]: result.success
-				? []
-				: result.error.issues.map((issue) => issue.message),
-		}));
-	};
-
-	const onSubmit = async () => {
-		setIsLoading(true);
-		const formDataWithFile: FormDataWithFileType = {
-			...formData,
-			image: file.file,
-			rating: rating,
-		};
-
-		const validationResult = validateGiftForm(formDataWithFile);
-		if (!validationResult.success) {
-			setErrors(validationResult.errors);
-			setIsLoading(false);
+		if (!result.success) {
+			setFileError(result.errors.file?.[0] ?? "");
 			return;
 		}
 
-		setErrors({});
+		setFile({
+			file,
+			preview: file ? URL.createObjectURL(file) : null,
+		});
+	};
 
-		const {
-			image,
-			rating: stringRating,
-			...formDataWithoutFile
-		} = formDataWithFile;
-		const normalisedGiftData = {
-			...formDataWithoutFile,
+	const onSubmit = async (data: GiftFormData) => {
+		const formPayload: FormPayloadType = {
+			...data,
 			added_by: user.id,
 			profile_id: Array.isArray(friendId) ? friendId[0] : (friendId ?? user.id),
-			rating: Number(stringRating),
 		};
 
-		try {
-			if (normalisedGiftId) {
-				await updateGift(normalisedGiftData, normalisedGiftId, supabase);
-				if (image) {
-					try {
-						const newImageLink = await uploadImageFile(
-							normalisedGiftId,
-							image,
+		if (type === "create") {
+			const createResult = await createGiftAction(formPayload);
+			try {
+				if (createResult.success && createResult.data?.id) {
+					if (file.file) {
+						const img = await uploadImageFile(
+							createResult.data.id,
+							file.file,
 							supabase,
 						);
-						await addImageToGift(normalisedGiftId, newImageLink, supabase);
-					} catch (uploadErr) {
-						setFormError(
-							"Something went wrong. Please try again: " +
-								(uploadErr as Error).message,
-						);
+						await addImageToGift(createResult.data.id, img, supabase);
 					}
+					setMessage("Gift created!");
+					const path = friendId
+						? getPath("Profile", String(friendId))
+						: getPath("Gifts");
+
+					router.push(path);
 				}
-			} else {
-				const newGift = await createGift(normalisedGiftData, supabase);
-				if (newGift && image) {
-					try {
-						const newImageLink = await uploadImageFile(newGift.id, image, supabase);
-						await addImageToGift(newGift.id, newImageLink, supabase);
-					} catch (uploadErr) {
-						setFormError(
-							"Something went wrong. Please try again: " +
-								(uploadErr as Error).message,
-						);
-					}
-				}
+			} catch (err) {
+				setError("root", { type: "server", message: "Failed to create gift" });
 			}
-			setMessage(`Gift ${gift ? "updated" : "added"}!`);
-		} catch (err) {
-			setFormError(
-				"Something went wrong. Please try again: " + (err as Error).message,
-			);
-		} finally {
-			setIsLoading(false);
-			if (friendId) {
-				router.push(getPath("Friend profile", normalisedFriendId));
+		}
+
+		if (type === "update" && gift) {
+			const updateResult = await updateGiftAction(formPayload, gift.id);
+			if (updateResult.success) {
+				if (file.file) {
+					const img = await uploadImageFile(gift.id, file.file!, supabase);
+					await addImageToGift(gift.id, img, supabase);
+				}
+				setMessage("Gift updated!");
+				router.push(getPath("Gift", String(gift.id)));
 			} else {
-				router.push(getPath("Gifts"));
+				setError("root", {
+					type: "server",
+					message: updateResult.errors?.root?.[0] ?? "",
+				});
 			}
 		}
 	};
 
 	return (
-		<form className={"flex flex-col gap-4"}>
-			{GIFT_FORM_FIELDS.map((input) => (
-				<div
-					key={input.name}
-					className={"flex flex-col gap-2"}
-				>
-					<p className={"font-bold"}>{input.label}</p>
-					{input.type === "file" ? (
-						<FileInput
-							setFile={setFile}
-							onChange={onChange}
-							input={input}
-							preview={file.preview ?? ""}
-							error={!!errors[input.name]?.length}
-						></FileInput>
-					) : (
-						<Input
-							onChange={onChange}
-							input={input}
-							value={formData[input.name as keyof GiftFormData]}
-							error={!!errors[input.name]?.length}
-						/>
-					)}
-					<div className="text-red-500 text-sm">{errors[input.name]?.[0]}</div>
-				</div>
-			))}
+		<form
+			className={"flex flex-col gap-4"}
+			onSubmit={handleSubmit(onSubmit)}
+		>
+			{GIFT_FORM_FIELDS.map((input) => {
+				const fieldName = input.name as keyof GiftFormData;
+				return (
+					<div
+						key={fieldName}
+						className={"flex flex-col gap-2"}
+					>
+						<p className={"font-bold"}>{input.label}</p>
+
+						{input.type === "file" ? (
+							<div className="flex flex-col gap-2">
+								<FileInput
+									onChange={handleFileChange}
+									setFile={setFile}
+									input={input}
+									preview={file.preview ?? ""}
+									error={!!fileError}
+								/>
+								{fileError && <div className="text-red-500 text-sm">{fileError}</div>}
+							</div>
+						) : (
+							<Input
+								{...register(fieldName)}
+								input={input}
+								currentValue={watch(fieldName) || ""}
+								error={!!errors[fieldName]}
+							/>
+						)}
+						<div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
+					</div>
+				);
+			})}
 
 			{!friendId && (
 				<div className={"flex flex-col gap-2"}>
 					<p className={"font-bold"}>Rate how much you want this gift</p>
 					<StarRateInput
-						rating={rating}
-						setRating={setRating}
+						watch={watch}
+						setValue={setValue}
 					/>
 				</div>
 			)}
+			{errors.root && (
+				<div className="text-red-500 text-sm">{errors.root.message}</div>
+			)}
 			<div className={"flex justify-center"}>
 				<Button
-					onClick={onSubmit}
-					disabled={isLoading}
-					loading={isLoading}
+					type="submit"
+					disabled={isSubmitting}
+					loading={isSubmitting}
 					loadingText={"Saving..."}
 				>
-					Save gift
+					Save event
 				</Button>
 			</div>
-			{formError && <div className="text-red-500 text-sm">{formError}</div>}
 		</form>
 	);
 };
