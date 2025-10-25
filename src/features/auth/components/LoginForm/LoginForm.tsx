@@ -18,7 +18,7 @@ import { LoginFormSchema } from "../../schemas/loginForm";
 import { loginAction } from "../../actions/login";
 
 const LoginForm = () => {
-	const [supabaseToast, setsupabaseToast] = useState<string | undefined>("");
+	const [supabaseToast, setSupabaseToast] = useState<string | undefined>("");
 	const { user } = useUserStore();
 	const router = useRouter();
 
@@ -39,10 +39,11 @@ const LoginForm = () => {
 	}, [user, router]);
 
 	const onSubmit = async (formData: LoginFormTypes) => {
+		setSupabaseToast("");
 		const result = await loginAction(formData);
 		console.log(result);
 		if (!result.success) {
-			setsupabaseToast(result.errors?.root);
+			setSupabaseToast(result.errors?.root);
 			return;
 		}
 
