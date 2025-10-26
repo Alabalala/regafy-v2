@@ -129,26 +129,6 @@ export const updateEvent = async (
 	return data;
 };
 
-export async function uploadEventImageFile(
-	eventId: number,
-	file: File,
-	supabase: SupabaseClient<Database>,
-) {
-	const fileName = eventId.toString();
-	const { error } = await supabase.storage
-		.from("event-images")
-		.upload(fileName, file, {
-			cacheControl: "no-store",
-			upsert: true,
-		});
-
-	if (error) throw error;
-
-	const publicUrl = supabase.storage.from("event-images").getPublicUrl(fileName)
-		.data.publicUrl;
-
-	return publicUrl;
-}
 export const addImageToEvent = async (
 	eventId: number,
 	event_image_link: string,

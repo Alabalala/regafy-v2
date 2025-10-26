@@ -2,12 +2,13 @@
 import EditSVG from "@/shared/components/SVGs/EditSVG";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { addImageToEvent, uploadEventImageFile } from "../../services/supabase";
+import { addImageToEvent } from "../../services/supabase";
 import { createClient } from "@/shared/services/supabase/client";
 
 import { getOptimizedImageUrl } from "@/shared/services/getOptimisedImageUrl";
-import { ValidateEventImage } from "../../services/validateEventImage";
 import { useToastStore } from "@/shared/stores/toastStore";
+import { validateImage } from "@/shared/services/validateImage";
+import { uploadImageFile } from "@/shared/services/supabase/globals";
 
 interface Props {
 	eventImage?: string | null;
@@ -39,11 +40,16 @@ const EventImage = ({
 		}
 
 		const file = e.target.files[0];
-		const result = await ValidateEventImage(file);
+		const result = await validateImage(file);
 
 		if (result.success) {
 			try {
-				const imageLink = await uploadEventImageFile(eventId, file, supabase);
+				const imageLink = await uploadImageFile(
+					eventId,
+					file,
+					supabase,
+					"event-images",
+				);
 				await addImageToEvent(eventId, imageLink, supabase);
 				setImage(imageLink);
 				setMessage("Event image updated!");

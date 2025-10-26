@@ -1,5 +1,11 @@
 export const PROFILE_FORM_INPUTS = [
 	{
+		name: "image",
+		label: "Profile image",
+		type: "file",
+		required: true,
+	},
+	{
 		name: "name",
 		label: "Name",
 		type: "text",

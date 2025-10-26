@@ -28,7 +28,8 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"src/shared/services/supabase/server.js"
+		"src/shared/services/supabase/server.js",
+		"src/features/profile/actions/updateProfilets"
 	],
 	"exclude": ["node_modules"]
 }

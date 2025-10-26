@@ -18,10 +18,7 @@ export const ProfileFormSchema = z.object({
 		.max(20, "Username must be at most 20 characters")
 		.regex(/^[a-z0-9]+$/, "Only lowercase letters and numbers, no spaces")
 		.transform((val) => val.toLowerCase()),
-	birthday: z
-		.string()
-		.transform((val) => new Date(val))
-		.refine((date) => date <= eighteenYearsAgo, {
-			message: "You need to be over 18 to create an account.",
-		}),
+	birthday: z.string().refine((val) => new Date(val) <= eighteenYearsAgo, {
+		message: "You need to be over 18 to create an account.",
+	}),
 });

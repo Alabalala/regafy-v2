@@ -21,10 +21,11 @@ import FileInput from "../../../../shared/components/FileInput";
 import Input from "../../../../shared/components/Input";
 import { createGiftAction } from "../../actions/createGift";
 import { updateGiftAction } from "../../actions/updateGifts";
-import { addImageToGift, uploadImageFile } from "../../services/supabase";
+import { addImageToGift } from "../../services/supabase";
 import { FormPayloadType, GiftFormData } from "../../types/form";
 import StarRateInput from "../StarRateInput";
 import { validateImage } from "@/shared/services/validateImage";
+import { uploadImageFile } from "@/shared/services/supabase/globals";
 
 interface Props {
 	gift?: SingleGift;
@@ -112,6 +113,7 @@ const GiftForm = ({ gift, type }: Props) => {
 							createResult.data.id,
 							file.file,
 							supabase,
+							"gift-images",
 						);
 						await addImageToGift(createResult.data.id, img, supabase);
 					}
@@ -131,7 +133,12 @@ const GiftForm = ({ gift, type }: Props) => {
 			const updateResult = await updateGiftAction(formPayload, gift.id);
 			if (updateResult.success) {
 				if (file.file) {
-					const img = await uploadImageFile(gift.id, file.file!, supabase);
+					const img = await uploadImageFile(
+						gift.id,
+						file.file!,
+						supabase,
+						"gift-images",
+					);
 					await addImageToGift(gift.id, img, supabase);
 				}
 				setMessage("Gift updated!");

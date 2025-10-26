@@ -26,8 +26,9 @@ import {
 } from "../../constants/form";
 import { eventFormSchema } from "../../schemas/eventFormSchema";
 import { EventFormData, EventFormPayload } from "../../types/events";
-import { addImageToEvent, uploadEventImageFile } from "../../services/supabase";
+import { addImageToEvent } from "../../services/supabase";
 import { validateImage } from "@/shared/services/validateImage";
+import { uploadImageFile } from "@/shared/services/supabase/globals";
 
 interface Props {
 	event?: Event;
@@ -129,10 +130,11 @@ const EventForm = ({ event, type, friends }: Props) => {
 
 			if (createResult.success) {
 				if (createResult.data?.id) {
-					const img = await uploadEventImageFile(
+					const img = await uploadImageFile(
 						createResult.data?.id,
 						file.file!,
 						supabase,
+						"event-images",
 					);
 					await addImageToEvent(createResult.data?.id, img, supabase);
 				}
@@ -154,7 +156,12 @@ const EventForm = ({ event, type, friends }: Props) => {
 			);
 			if (updateResult.success) {
 				if (file.file) {
-					const img = await uploadEventImageFile(event.id, file.file!, supabase);
+					const img = await uploadImageFile(
+						event.id,
+						file.file!,
+						supabase,
+						"event-images",
+					);
 					await addImageToEvent(event.id, img, supabase);
 				}
 				setMessage("Event updated!");
