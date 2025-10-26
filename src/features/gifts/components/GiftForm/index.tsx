@@ -22,9 +22,9 @@ import Input from "../../../../shared/components/Input";
 import { createGiftAction } from "../../actions/createGift";
 import { updateGiftAction } from "../../actions/updateGifts";
 import { addImageToGift, uploadImageFile } from "../../services/supabase";
-import { validateGiftImage } from "../../services/validateGiftImage";
 import { FormPayloadType, GiftFormData } from "../../types/form";
 import StarRateInput from "../StarRateInput";
+import { validateImage } from "@/shared/services/validateImage";
 
 interface Props {
 	gift?: SingleGift;
@@ -77,7 +77,7 @@ const GiftForm = ({ gift, type }: Props) => {
 	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const files = e.target.files;
 		const file = files?.[0] ?? null;
-		const result = validateGiftImage(file!);
+		const result = validateImage(file!);
 
 		setFileError("");
 

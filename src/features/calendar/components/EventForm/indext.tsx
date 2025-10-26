@@ -25,9 +25,9 @@ import {
 	INITIAL_EVENT_FORM_DATA,
 } from "../../constants/form";
 import { eventFormSchema } from "../../schemas/eventFormSchema";
-import { ValidateEventImage } from "../../services/validateEventImage";
 import { EventFormData, EventFormPayload } from "../../types/events";
 import { addImageToEvent, uploadEventImageFile } from "../../services/supabase";
+import { validateImage } from "@/shared/services/validateImage";
 
 interface Props {
 	event?: Event;
@@ -98,7 +98,7 @@ const EventForm = ({ event, type, friends }: Props) => {
 	const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const files = e.target.files;
 		const file = files?.[0] ?? null;
-		const result = ValidateEventImage(file!);
+		const result = validateImage(file!);
 
 		setFileError("");
 

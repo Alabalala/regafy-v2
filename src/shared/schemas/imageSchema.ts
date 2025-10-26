@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const GiftImageSchema = z.object({
+export const imageSchema = z.object({
 	file: z
 		.file()
 		.refine((file) => file.type.startsWith("image/"), "File must be an image")
