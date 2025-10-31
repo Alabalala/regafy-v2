@@ -45,8 +45,9 @@ export const ProfileSettings = ({}) => {
 
 				{isProfileFormOpen && (
 					<ProfileForm
-						setIsFormOpen={setIsProfileFormOpen}
+						type="update"
 						profile={profile}
+						setIsProfileFormOpen={setIsProfileFormOpen}
 					></ProfileForm>
 				)}
 			</div>

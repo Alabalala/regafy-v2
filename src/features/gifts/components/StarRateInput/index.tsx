@@ -1,33 +1,27 @@
 import StarSVG from "@/shared/components/SVGs/StarSVG";
+import { UseFormSetValue, UseFormWatch } from "react-hook-form";
+import { GiftFormData } from "../../types/form";
 
 interface Props {
-	setRating: React.Dispatch<React.SetStateAction<string>>;
-	rating: string;
+	watch: UseFormWatch<GiftFormData>;
+	setValue: UseFormSetValue<GiftFormData>;
 }
 
-const StarRateInput = ({ setRating, rating }: Props) => {
+const StarRateInput = ({ watch, setValue }: Props) => {
+	const rating = watch("rating");
 	const options = [1, 2, 3, 4, 5];
 
-	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setRating(e.target.value);
-		console.log(e.target.value);
-	};
-
 	return (
-		<div className={"flex gap-2 justify-around"}>
-			{options.map((value, index) => (
-				<label key={value}>
-					<input
-						name={`rate-${index}`}
-						id={`rate-${index}`}
-						type="radio"
-						checked={rating === String(value)}
-						value={value}
-						hidden
-						onChange={onChange}
-					/>
-					<StarSVG filled={index + 1 <= Number(rating)} />
-				</label>
+		<div className="flex gap-2 justify-around">
+			{options.map((value) => (
+				<button
+					type="button"
+					key={value}
+					onClick={() => setValue("rating", value.toString())}
+					className="focus:outline-none"
+				>
+					<StarSVG filled={Number(rating) >= value} />
+				</button>
 			))}
 		</div>
 	);

@@ -1,101 +1,85 @@
 "use client";
 
+import { useUserStore } from "@/features/auth/stores/userStore";
+import { Button } from "@/shared/components/Button";
+import Input from "@/shared/components/Input";
+import { NextLink } from "@/shared/components/Link";
+import { getPath } from "@/shared/services/getPath";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { signupAction } from "../../actions/signup";
 import {
 	SIGNUP_FORM_INITIAL_DATA,
 	SIGNUP_FORM_INPUTS,
 } from "../../constants/forms";
-import { FieldErrors } from "@/shared/types/forms";
-import Input from "@/shared/components/Input";
-import { Button } from "@/shared/components/Button";
-import { resendConfirmationEmail, signup } from "../../services/supabase";
-import { useUserStore } from "@/features/auth/stores/userStore";
-import { useRouter } from "next/navigation";
-import { getPath } from "@/shared/services/getPath";
-import { NextLink } from "@/shared/components/Link";
-import { validateSignUpForm } from "../../services/validateSignUpForm";
+import { SingupFormSchema } from "../../schemas/signupForm";
+import { resendConfirmationEmail } from "../../services/supabase";
+import { SignUpFormTypes } from "../../types/forms";
 
 const SignUpForm = () => {
-	const [formData, setFormData] = useState<SignUpFormTypes>(
-		SIGNUP_FORM_INITIAL_DATA,
-	);
-	const [errors, setErrors] = useState<FieldErrors>({});
-	const [supabaseToast, setSupabaseToast] = useState<string | undefined>("");
-	const [isLoading, setIsLoading] = useState(false);
+	const [message, setMessage] = useState<string | undefined>("");
 	const { user } = useUserStore();
 	const router = useRouter();
 	const [singupComplete, setSingupComplete] = useState(false);
-
+	const [resendLoading, setResendLoading] = useState(false);
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors, isSubmitting },
+	} = useForm<SignUpFormTypes>({
+		resolver: zodResolver(SingupFormSchema),
+		defaultValues: SIGNUP_FORM_INITIAL_DATA,
+	});
+	console.log(errors);
 	useEffect(() => {
 		if (user) {
 			router.push(getPath("Home"));
 		}
-	}, [user]);
+	}, [user, router]);
+	const email = watch("email");
 
-	const onChange = (
-		e: React.ChangeEvent<
-			HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-		>,
-	) => {
-		const { name, value } = e.target as HTMLInputElement;
-		const normalisedValue = value.replace(/^ +/, "");
+	const onSubmit = async (formData: SignUpFormTypes) => {
+		setMessage("");
 
-		setFormData({
-			...formData,
-			[name]: normalisedValue,
-		});
-	};
-
-	const onSubmit = async () => {
-		setSupabaseToast("");
-		setIsLoading(true);
-		const validationResult = validateSignUpForm(formData);
-
-		if (!validationResult.success) {
-			setErrors(validationResult.errors);
-			setIsLoading(false);
-			return;
-		}
-
-		setErrors({});
-
-		const supabaseResult = await signup(formData);
-
-		if (!supabaseResult.success) {
-			setSupabaseToast(supabaseResult.error);
-			setIsLoading(false);
-			return;
-		}
-
-		setSingupComplete(true);
-		setIsLoading(false);
-	};
-
-	const handleEmailresend = async () => {
-		setIsLoading(true);
-		const result = await resendConfirmationEmail(formData.email);
-
+		const result = await signupAction(formData);
 		if (!result.success) {
-			setSupabaseToast(result.error);
-			setIsLoading(false);
+			setMessage(result.errors?.root);
 			return;
 		}
 
-		setIsLoading(false);
-		setSupabaseToast("Email resent! Check your inbox.");
+		if (result.success) {
+			setSingupComplete(true);
+		}
+	};
+
+	const handleEmailResend = async () => {
+		if (!email) return; // safeguard
+
+		setResendLoading(true);
+		const result = await resendConfirmationEmail(email);
+		if (!result.success) {
+			setMessage(result.error);
+		} else {
+			setMessage("Email resent! Check your inbox.");
+		}
+
+		setResendLoading(false);
 	};
 
 	return (
-		<form>
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className={"flex flex-col gap-4"}
+		>
 			{singupComplete ? (
 				<div className="flex flex-col gap-4 items-center">
-					<p className={"font-bold"}>
-						Sign up complete! Check your email to verify your account.
-					</p>
-					{supabaseToast && <div className="text-sm">{supabaseToast}</div>}
+					<p>Sign up complete! Check your email to verify your account.</p>
 					<Button
-						loading={isLoading}
-						onClick={handleEmailresend}
+						loading={resendLoading}
+						onClick={handleEmailResend}
 						variant="primary"
 						loadingText="Resending..."
 					>
@@ -105,46 +89,47 @@ const SignUpForm = () => {
 				</div>
 			) : (
 				<div className={"flex flex-col gap-4"}>
-					{SIGNUP_FORM_INPUTS.map((input) => (
-						<div
-							key={input.name}
-							className={"flex flex-col gap-2"}
-						>
-							<p className={"font-bold"}>{input.label}</p>
-							<Input
-								onChange={onChange}
-								input={input}
-								value={formData[input.name as keyof SignUpFormTypes]}
-								error={!!errors[input.name]?.length}
-							/>
-							<div className="text-red-500 text-sm">{errors[input.name]?.[0]}</div>
-						</div>
-					))}
+					{SIGNUP_FORM_INPUTS.map((input) => {
+						const fieldName = input.name as keyof SignUpFormTypes;
+						return (
+							<div
+								key={fieldName}
+								className={"flex flex-col gap-2"}
+							>
+								<p className={"font-bold"}>{input.label}</p>
+
+								<Input
+									{...register(fieldName)}
+									input={input}
+									currentValue={watch(fieldName) || ""}
+									error={!!errors[fieldName]}
+								/>
+								<div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
+							</div>
+						);
+					})}
 
 					<p className="text-sm text-gray-400">
 						Password must be at least 6 characters, contain at least one uppercase
 						letter, one lowercase letter, one number and one special character.{" "}
 					</p>
 
-					{supabaseToast && (
-						<div className="text-red-500 text-sm">{supabaseToast}</div>
-					)}
-
 					<div className={"flex justify-center"}>
 						<Button
-							loading={isLoading}
-							loadingText="Signing up..."
-							type={"button"}
-							onClick={onSubmit}
+							type="submit"
+							disabled={isSubmitting}
+							loading={isSubmitting}
+							loadingText={"Logging in..."}
 						>
 							Sign up
 						</Button>
 					</div>
 
-					<div className={"flex flex-col items-center gap-2"}>
+					<div className={"flex flex-row justify-center items-center gap-2"}>
 						<p>Already have an account?</p>
 						<NextLink
-							variant="secondary"
+							isPlain
+							variant="primary"
 							href={getPath("Login")}
 						>
 							Log in
@@ -152,6 +137,7 @@ const SignUpForm = () => {
 					</div>
 				</div>
 			)}
+			{message && <div className="text-red-500 text-sm">{message}</div>}
 		</form>
 	);
 };

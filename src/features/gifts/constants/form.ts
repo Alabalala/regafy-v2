@@ -53,6 +53,7 @@ export const FILE_INPUT_INITIAL_VALUES = {
 
 export const QUESTION_INPUT_FIELDS = [
 	{
+		label: "Your question",
 		text: "",
 		name: "question",
 		type: "text",
@@ -64,11 +65,12 @@ export const QUESTION_INPUT_FIELDS = [
 ];
 
 export const QUESTION_INITIAL_VALUES = {
-	answer: "",
+	question: "",
 };
 
 export const ANSWER_INPUT_FIELDS = [
 	{
+		label: "Your answer",
 		text: "",
 		name: "answer",
 		type: "text",
@@ -79,6 +81,6 @@ export const ANSWER_INPUT_FIELDS = [
 	},
 ];
 
-export const ANSWER__INITIAL_VALUES = {
+export const ANSWER_INITIAL_VALUES = {
 	answer: "",
 };

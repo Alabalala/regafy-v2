@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const answerSchema = z.object({
-	content: z
+	answer: z
 		.string()
 		.trim()
 		.min(3, "Answer must be at least 3 characters long")

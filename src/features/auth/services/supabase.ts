@@ -91,10 +91,12 @@ export async function signOut() {
 
 export async function updateEmail(newEmail: string) {
 	const supabase = await createClient();
-	const { error } = await supabase.auth.updateUser({
+	const { error, data } = await supabase.auth.updateUser({
 		email: newEmail,
 	});
 	if (error) throw error;
+
+	return data;
 }
 
 export async function updatePassword(newPassword: string) {

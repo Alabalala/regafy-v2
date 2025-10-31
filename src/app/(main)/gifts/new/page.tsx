@@ -6,7 +6,7 @@ const NewGift = () => {
 	return (
 		<div className={"flex flex-col gap-5"}>
 			<H1WithExit href={getPath("Gifts")}>New gift</H1WithExit>
-			<GiftForm></GiftForm>
+			<GiftForm type={"create"}></GiftForm>
 		</div>
 	);
 };

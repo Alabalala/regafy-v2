@@ -16,6 +16,7 @@ const EditEventPage = async ({ params }: { params: { id: string } }) => {
 		<div>
 			<H1WithExit href={getPath("Event", id)}>Edit event</H1WithExit>
 			<EventForm
+				type={"update"}
 				friends={friends}
 				event={event}
 			></EventForm>

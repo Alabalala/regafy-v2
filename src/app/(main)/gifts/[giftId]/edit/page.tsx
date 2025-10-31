@@ -21,7 +21,10 @@ const EditGift = async ({ params }: { params: { giftId: string } }) => {
 	return (
 		<div className={"flex flex-col gap-5"}>
 			<H1WithExit href={getPath("Gifts")}>Edit gift</H1WithExit>
-			<GiftForm gift={gift}></GiftForm>
+			<GiftForm
+				type={"update"}
+				gift={gift}
+			></GiftForm>
 		</div>
 	);
 };

@@ -3,21 +3,23 @@ import { Gift } from "@/shared/types/supabase/supabase";
 export interface GiftFormData {
 	title: string;
 	price: string;
-	description: string;
+	description?: string;
+	rating: string;
 }
 
 export interface FormDataWithFileType extends GiftFormData {
 	image: File | null;
-	rating: string;
 }
 
-export type GiftFormNoFile = Omit<
-	Gift,
-	| "id"
-	| "created_at"
-	| "image_link"
-	| "questions"
-	| "profiles"
-	| "reserved"
-	| "reserved_by"
->;
+export interface FormPayloadType extends GiftFormData {
+	added_by: string;
+	profile_id: string;
+}
+
+export type AnswerFormType = {
+	answer: string;
+};
+
+export type QuestionFormType = {
+	question: string;
+};

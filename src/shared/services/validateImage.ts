@@ -1,9 +1,9 @@
 import { ValidationResult } from "@/shared/types/forms";
 import z from "zod";
-import { EventImageSchema } from "../schemas/eventImageSchema";
+import { imageSchema } from "../schemas/imageSchema";
 
-export const ValidateEventImage = (file: File): ValidationResult => {
-	const result = EventImageSchema.safeParse({ file: file });
+export const validateImage = (file: File): ValidationResult => {
+	const result = imageSchema.safeParse({ file: file });
 
 	if (!result.success) {
 		const { fieldErrors } = z.flattenError(result.error);

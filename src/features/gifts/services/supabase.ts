@@ -1,7 +1,7 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { Database } from "../../../shared/types/database.types";
 import { FormDataWithFileType, GiftFormNoFile } from "../types/form";
-import { Gift } from "@/shared/types/supabase/supabase";
+import { Gift, Questions } from "@/shared/types/supabase/supabase";
 
 export async function getGifts(
 	userId: string,
@@ -101,7 +101,7 @@ export async function addGiftQuestion(
 
 	if (error) throw error;
 
-	return data;
+	return data as Questions;
 }
 
 export async function addAnswer(
@@ -146,27 +146,6 @@ export async function deleteAnswer(
 	if (error) throw error;
 
 	return data;
-}
-
-export async function uploadImageFile(
-	giftId: string,
-	file: File,
-	supabase: SupabaseClient<Database>,
-) {
-	const fileName = giftId;
-	const { error } = await supabase.storage
-		.from("gift-images")
-		.upload(fileName, file, {
-			cacheControl: "no-store",
-			upsert: true,
-		});
-
-	if (error) throw error;
-
-	const publicUrl = supabase.storage.from("gift-images").getPublicUrl(fileName)
-		.data.publicUrl;
-
-	return publicUrl;
 }
 
 export async function addImageToGift(

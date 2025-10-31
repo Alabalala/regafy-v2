@@ -3,7 +3,6 @@ import EditSVG from "@/shared/components/SVGs/EditSVG";
 import Image from "next/image";
 import React from "react";
 import { ValidateProfileImage } from "../../services/validateProfileImage";
-import { updateProfileImage } from "../../services/supabase";
 import { createClient } from "@/shared/services/supabase/client";
 import { useUser } from "@/features/auth/hooks/useUser";
 import { getOptimizedImageUrl } from "@/shared/services/getOptimisedImageUrl";
@@ -11,6 +10,8 @@ import { useProfileStore } from "../../store/profileStore";
 import { Profile } from "../../types/supabase.types";
 import { useToastStore } from "@/shared/stores/toastStore";
 import ClientToaster from "@/shared/components/ClientToaster";
+import { uploadImageFile } from "@/shared/services/supabase/globals";
+import { addImageToProfile } from "../../services/supabase";
 
 interface Props {
 	profileImage: string | null;
@@ -43,7 +44,13 @@ const ProfileImage = ({
 
 		if (result.success && user) {
 			try {
-				const imageLink = await updateProfileImage(file, user.id, supabase);
+				const imageLink = await uploadImageFile(
+					user.id,
+					file,
+					supabase,
+					"profile-images",
+				);
+				await addImageToProfile(imageLink, user.id, supabase);
 				const newProfile = {
 					...profile,
 					profileImage: `${imageLink}?t=${Date.now()}`,
