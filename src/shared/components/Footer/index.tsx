@@ -1,13 +1,12 @@
 "use client";
 import { getPath } from "@/shared/services/getPath";
+import { usePathname } from "next/navigation";
 import { NextLink } from "../Link";
 import CalendarSVG from "../SVGs/calendarSVG";
 import FriendsSVG from "../SVGs/FriendsSVG";
 import GiftSVG from "../SVGs/GiftSVG";
-import GroupsSVG from "../SVGs/GroupsSVG";
-import { usePathname } from "next/navigation";
-import NewGiftSVG from "../SVGs/NewGiftSVG";
 import HomeSVG from "../SVGs/HomeSVG";
+import NewGiftSVG from "../SVGs/NewGiftSVG";
 
 export default function Footer({}) {
 	const pathName = usePathname();
@@ -38,7 +37,7 @@ export default function Footer({}) {
 			>
 				<div className={"flex flex-col items-center"}>
 					<GiftSVG
-						filled={pathName === getPath("Gifts")}
+						filled={pathName.startsWith(getPath("Gifts"))}
 						className={"w-8 h-8"}
 					/>
 					<p className={"text-sm"}>Gifts</p>
@@ -63,7 +62,7 @@ export default function Footer({}) {
 			>
 				<div className={"flex flex-col items-center"}>
 					<FriendsSVG
-						filled={pathName === getPath("Friends")}
+						filled={pathName.startsWith(getPath("Friends"))}
 						className={"w-8 h-8"}
 					/>
 					<p className={"text-sm"}>Friends</p>
@@ -76,7 +75,7 @@ export default function Footer({}) {
 			>
 				<div className={"flex flex-col items-center"}>
 					<CalendarSVG
-						filled={pathName === getPath("Calendar")}
+						filled={pathName.startsWith(getPath("Calendar"))}
 						className={"w-8 h-8"}
 					/>
 					<p className={"text-sm"}>Calendar</p>
