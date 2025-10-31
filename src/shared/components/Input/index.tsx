@@ -43,7 +43,7 @@ export default function Input({
 	return (
 		<div className="relative w-full">
 			<input
-				className={`${(input.type === "text" || input.type === "password") && "pr-10"} ${commonStyle}`}
+				className={`${(input.type === "text" || input.type === "password") && "pr-12"} ${commonStyle}`}
 				type={input.type}
 				accept={input.accept ?? ""}
 				{...commonProps}

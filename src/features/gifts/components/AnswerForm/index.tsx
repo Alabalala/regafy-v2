@@ -53,28 +53,28 @@ const AnswerForm = ({ questionId }: Props) => {
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
-			className="w-full flex flex-col items-center gap-5"
+			className="w-full flex flex-col gap-5 "
 		>
-			<div className="flex flex-row items-center gap-2">
-				{ANSWER_INPUT_FIELDS.map((input) => {
-					const fieldName = input.name as keyof AnswerFormType;
-					return (
-						<div
-							key={fieldName}
-							className={"flex flex-col gap-2"}
-						>
-							<p className={"font-bold"}>{input.label}</p>
+			{ANSWER_INPUT_FIELDS.map((input) => {
+				const fieldName = input.name as keyof AnswerFormType;
+				return (
+					<div
+						key={fieldName}
+						className={"flex flex-col gap-2"}
+					>
+						<p className={"font-bold"}>{input.label}</p>
 
-							<Input
-								{...register(fieldName)}
-								input={input}
-								currentValue={watch(fieldName) || ""}
-								error={!!errors[fieldName]}
-							/>
-							<div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
-						</div>
-					);
-				})}
+						<Input
+							{...register(fieldName)}
+							input={input}
+							currentValue={watch(fieldName) || ""}
+							error={!!errors[fieldName]}
+						/>
+						<div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
+					</div>
+				);
+			})}
+			<div className="flex justify-center">
 				<Button
 					type="submit"
 					disabled={isSubmitting}
