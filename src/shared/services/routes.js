@@ -1,6 +1,5 @@
 export const ROUTES = [
 	{ name: "Home", path: "/" },
-	{ name: "Profile", path: "/profile" },
 	{ name: "Profile settings", path: "/profile-settings" },
 	{ name: "Delete account", path: "/delete-account" },
 	{ name: "Account deleted", path: "/account-deleted" },
