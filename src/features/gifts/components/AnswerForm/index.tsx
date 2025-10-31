@@ -1,99 +1,89 @@
 import { Button } from "@/shared/components/Button";
 import Input from "@/shared/components/Input";
 
-import { useState } from "react";
-import { ValidationError } from "next/dist/compiled/amphtml-validator";
-import { addAnswer } from "../../services/supabase";
-import { createClient } from "@/shared/services/supabase/client";
-import { useGiftStore } from "../../stores/giftStore";
 import { Gift } from "@/shared/types/supabase/supabase";
-import { ANSWER_INPUT_FIELDS } from "../../constants/form";
-import { validateAnswerForm } from "../../services/validateAnswerForm";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { newAnswerAction } from "../../actions/newAnswser";
+import {
+	ANSWER_INITIAL_VALUES,
+	ANSWER_INPUT_FIELDS,
+} from "../../constants/form";
+import { answerSchema } from "../../schema/answerSchema";
+import { useGiftStore } from "../../stores/giftStore";
+import { AnswerFormType } from "../../types/form";
 
 interface Props {
 	questionId: string;
 }
 //TODO add delete functions - fix forms
 const AnswerForm = ({ questionId }: Props) => {
-	const [value, setValue] = useState("");
-	const [error, setError] = useState(false);
-	const [errorMessage, setErrorMessage] = useState<ValidationError>([]);
-	const supabase = createClient();
 	const { setGifts, gifts } = useGiftStore();
-	const [loading, setLoading] = useState(false);
-
-	const handleChange = (
-		e: React.ChangeEvent<
-			HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-		>,
-	) => {
-		const targetValue = e.target.value;
-		const normalisedValue = targetValue.replace(/^ +/, "");
-		setValue(normalisedValue);
-	};
-
-	const onSubmit = async () => {
-		setLoading(true);
-		setError(false);
-		setErrorMessage([]);
-		const validationResult = validateAnswerForm(value);
-
-		if (!validationResult.success) {
-			setError(true);
-			setErrorMessage(validationResult.errors[0]);
-			setLoading(false);
-			return;
-		}
-
-		setError(false);
-		setErrorMessage([]);
-
+	const {
+		register,
+		handleSubmit,
+		setError,
+		watch,
+		formState: { errors, isSubmitting },
+	} = useForm<AnswerFormType>({
+		resolver: zodResolver(answerSchema),
+		defaultValues: ANSWER_INITIAL_VALUES,
+	});
+	const onSubmit = async (data: AnswerFormType) => {
 		try {
-			const answer = await addAnswer(value, questionId, supabase);
-
+			const result = await newAnswerAction(data, questionId);
+			if (!result.data) return;
 			const newGifts: Gift[] = gifts.map((g) => {
 				return {
 					...g,
 					questions: g.questions.map((q) => {
 						return String(q.id) === String(questionId)
-							? { ...q, answers: [...q.answers, answer] }
+							? { ...q, answers: [...q.answers, result?.data] }
 							: q;
 					}),
 				};
 			});
 			setGifts(newGifts);
 		} catch (error) {
-			setError(true);
-			setErrorMessage("There's been a problem. Try again later.");
+			setError("root", { type: "server", message: "Failed to add answer" });
 			return;
-		} finally {
-			setLoading(false);
 		}
 	};
 
 	return (
-		<form className="w-full flex flex-col items-center gap-5">
+		<form
+			onSubmit={handleSubmit(onSubmit)}
+			className="w-full flex flex-col items-center gap-5"
+		>
 			<div className="flex flex-row items-center gap-2">
-				{ANSWER_INPUT_FIELDS.map((input) => (
-					<Input
-						error={error}
-						key={input.name}
-						value={value}
-						input={input}
-						onChange={handleChange}
-					/>
-				))}
+				{ANSWER_INPUT_FIELDS.map((input) => {
+					const fieldName = input.name as keyof AnswerFormType;
+					return (
+						<div
+							key={fieldName}
+							className={"flex flex-col gap-2"}
+						>
+							<p className={"font-bold"}>{input.label}</p>
+
+							<Input
+								{...register(fieldName)}
+								input={input}
+								currentValue={watch(fieldName) || ""}
+								error={!!errors[fieldName]}
+							/>
+							<div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
+						</div>
+					);
+				})}
 				<Button
-					onClick={onSubmit}
-					variant="primary"
-					disabled={loading}
-					loading={loading}
-					loadingText="Sending"
+					type="submit"
+					disabled={isSubmitting}
+					loading={isSubmitting}
+					loadingText={"Adding answer..."}
 				>
 					Submit
 				</Button>
 			</div>
-			{errorMessage && <p className="text-red-600">{errorMessage}</p>}
 		</form>
 	);
 };

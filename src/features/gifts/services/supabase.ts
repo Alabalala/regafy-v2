@@ -1,7 +1,7 @@
 import { SupabaseClient } from "@supabase/supabase-js";
 import { Database } from "../../../shared/types/database.types";
 import { FormDataWithFileType, GiftFormNoFile } from "../types/form";
-import { Gift } from "@/shared/types/supabase/supabase";
+import { Gift, Questions } from "@/shared/types/supabase/supabase";
 
 export async function getGifts(
 	userId: string,
@@ -101,7 +101,7 @@ export async function addGiftQuestion(
 
 	if (error) throw error;
 
-	return data;
+	return data as Questions;
 }
 
 export async function addAnswer(

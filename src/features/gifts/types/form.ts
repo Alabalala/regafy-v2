@@ -15,3 +15,11 @@ export interface FormPayloadType extends GiftFormData {
 	added_by: string;
 	profile_id: string;
 }
+
+export type AnswerFormType = {
+	answer: string;
+};
+
+export type QuestionFormType = {
+	question: string;
+};
