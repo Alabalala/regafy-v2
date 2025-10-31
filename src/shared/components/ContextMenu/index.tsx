@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import MoreVerticalSVG from "../SVGs/MoreVerticalSVG";
 import { MenuItem } from "@/shared/types/helperFunction.types";
 import { set } from "zod";
@@ -11,9 +11,26 @@ interface Props {
 export const ContextMenu = ({ helperFunction }: Props) => {
 	const [isOpen, setOpen] = useState(false);
 	const contextElements = helperFunction();
+	const menuRef = useRef<HTMLDivElement>(null);
+
+	useEffect(() => {
+		function handleClickOutside(event: MouseEvent) {
+			if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+				setOpen(false);
+			}
+		}
+
+		document.addEventListener("mousedown", handleClickOutside);
+		return () => {
+			document.removeEventListener("mousedown", handleClickOutside);
+		};
+	}, []);
 
 	return (
-		<div className="relative">
+		<div
+			ref={menuRef}
+			className="relative"
+		>
 			<div
 				className="cursor-pointer"
 				onClick={() => setOpen(!isOpen)}
