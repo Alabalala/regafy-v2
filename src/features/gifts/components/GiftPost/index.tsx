@@ -93,6 +93,7 @@ export default function GiftPost({
 				</div>
 				<div className={"flex flex-row justify-between"}>
 					<ProfileInfo
+						canEdit={false}
 						sided
 						profile={gift.profiles}
 					></ProfileInfo>
@@ -106,6 +107,7 @@ export default function GiftPost({
 						<p>Ha añadido un regalo para</p>
 						<div className={"flex flex-row "}>
 							<ProfileInfo
+								canEdit={false}
 								sided
 								profile={gift.owner}
 							></ProfileInfo>
@@ -144,12 +146,12 @@ export default function GiftPost({
 							onClick={() => changeReserve(gift.id)}
 						>
 							<div className="relative">
-								<div className={"flex flex-col items-center z-20 relative"}>
+								<div className={"flex flex-col items-center z-10 relative"}>
 									<BookMarkSVG filled={gift.reserved ?? false} />
 									<p>Reserve{gift.reserved && "d"}</p>
 								</div>
 								{reserver && (
-									<div className="absolute top-0 right-0 z-10">
+									<div className="absolute top-0 right-0 z-0">
 										<ProfileImage
 											xs
 											profileImage={reserver?.profileImage}
