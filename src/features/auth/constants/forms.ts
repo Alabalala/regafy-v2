@@ -48,12 +48,14 @@ export const CHANGE_EMAIL_FORM_INPUTS = [
 		type: "email",
 		required: true,
 		placeholder: "P. ej. youremail@email.com",
+		fullWidth: true,
 	},
 	{
 		name: "emailConfirmation",
 		label: "Confirm your new email",
 		type: "email",
 		required: true,
+		fullWidth: true,
 	},
 ];
 
@@ -70,12 +72,14 @@ export const UPDATE_PASSWORD_FORM_INPUTS = [
 		required: true,
 		maxLength: 30,
 		placeholder: "P. ej. youremail@email.com",
+		fullWidth: true,
 	},
 	{
 		name: "passwordConfirmation",
 		label: "Confirm your new password",
 		type: "password",
 		required: true,
+		fullWidth: true,
 	},
 ];
 
