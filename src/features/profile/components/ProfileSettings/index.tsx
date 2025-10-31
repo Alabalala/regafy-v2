@@ -27,6 +27,7 @@ export const ProfileSettings = ({}) => {
 			<div className="bg-tertiary p-2 border-2 flex flex-col gap-5 pb-6 border-b-2 ">
 				<ProfileInfo
 					canEdit
+					centered
 					profile={profile}
 				></ProfileInfo>
 

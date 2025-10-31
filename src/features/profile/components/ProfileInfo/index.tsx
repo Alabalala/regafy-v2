@@ -6,9 +6,10 @@ interface Props {
 	profile: Profile;
 	canEdit: boolean;
 	sided?: boolean;
+	centered?: boolean;
 }
 
-const ProfileInfo = ({ profile, canEdit, sided }: Props) => {
+const ProfileInfo = ({ profile, canEdit, sided, centered }: Props) => {
 	return (
 		<div
 			className={`flex ${sided ? "flex-row gap-2" : "flex-col"} justify-center items-center`}
@@ -18,7 +19,9 @@ const ProfileInfo = ({ profile, canEdit, sided }: Props) => {
 				canEdit={canEdit}
 				profileImage={profile.profileImage}
 			></ProfileImage>
-			<div className={`${sided ? "flex flex-col" : ""}`}>
+			<div
+				className={`${sided ? "flex flex-col" : centered ? "text-center" : ""}`}
+			>
 				<div className={`font-bold ${sided && "text-sm"}`}>{profile.name}</div>
 				<div className={`font-light ${sided && "text-sm"}`}>
 					@{profile.userName}
