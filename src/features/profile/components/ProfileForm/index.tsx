@@ -26,6 +26,7 @@ import { ProfileFormData } from "../../types/form.types";
 import { Profile } from "../../types/supabase.types";
 import updateProfileAction from "../../actions/updateProfile";
 import { useProfileStore } from "../../store/profileStore";
+import CloseSVG from "@/shared/components/SVGs/CloseSVG";
 
 interface Props {
 	profile?: Profile;
@@ -156,6 +157,17 @@ const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
 			className={"flex flex-col gap-4"}
 			onSubmit={handleSubmit(onSubmit)}
 		>
+			<div className="flex flex-row justify-between">
+				<h3 className={" font-bold uppercase"}>
+					{type === "create" ? "Create profile" : "Update profile"}
+				</h3>
+				<Button
+					isPlain
+					onClick={() => setIsProfileFormOpen(false)}
+				>
+					<CloseSVG></CloseSVG>
+				</Button>
+			</div>
 			{PROFILE_FORM_INPUTS.map((input) => {
 				const fieldName = input.name as keyof ProfileFormData;
 				return (
