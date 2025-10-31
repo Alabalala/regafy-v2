@@ -130,6 +130,7 @@ export default function GiftPost({
 							fill
 							className={"object-cover"}
 							alt={"Imagen del regalo"}
+							unoptimized={process.env.NODE_ENV === "development"}
 						/>
 					</div>
 				)}
