@@ -1,13 +1,12 @@
 "use client";
-import { BURGER_MENU_ITEMS } from "@/shared/constants/burgerMenuItems";
-import Hamburger from "hamburger-react";
-import { NextLink } from "../Link";
-import { Button } from "../Button";
 import { useLogout } from "@/features/auth/hooks/useLogout";
-import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
+import { BURGER_MENU_ITEMS } from "@/shared/constants/burgerMenuItems";
 import { getPath } from "@/shared/services/getPath";
-import LanguageSwitch from "../LanguageSwitch";
 import { useTranslations } from "next-intl";
+import { Button } from "../Button";
+import LanguageSwitch from "../LanguageSwitch";
+import { NextLink } from "../Link";
+import { ThemeSwitcher } from "../ThemeSwitcher/ThemeSwitcher";
 
 interface Props {
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,8 +16,7 @@ interface Props {
 export const BurgerMenu = ({ setIsOpen, isOpen }: Props) => {
 	const { logout } = useLogout();
 	const tBurger = useTranslations("burgerMenu");
-	const tButtons = useTranslations("buttons");
-	console.log(tBurger);
+	const tAuth = useTranslations("auth");
 
 	return (
 		<div
@@ -47,7 +45,7 @@ export const BurgerMenu = ({ setIsOpen, isOpen }: Props) => {
 						setIsOpen(false);
 					}}
 				>
-					{tButtons("logOut")}
+					{tAuth("logOut")}
 				</Button>
 			</div>
 

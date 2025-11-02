@@ -10,15 +10,8 @@ export default getRequestConfig(async ({ requestLocale }) => {
 		locale = routing.defaultLocale;
 	}
 
-	const messages = {
-		// Import from your feature folders
-		burgerMenu: (await import(`@/shared/messages/${locale}/burgerMenu.json`))
-			.default,
-		buttons: (await import(`@/shared/messages/${locale}/buttons.json`)).default, // etc. - add all your feature translation files
-	};
-
 	return {
 		locale,
-		messages,
+		messages: (await import(`../../messages/${locale}.json`)).default,
 	};
 });

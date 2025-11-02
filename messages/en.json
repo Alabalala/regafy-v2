@@ -1,0 +1,32 @@
+{
+	"auth": {
+		"logOut": "Log out",
+		"logIn": "Log in",
+		"signUp": "Sign up",
+		"loggingOut": "Logging out...",
+		"loggingIn": "Logging in...",
+		"signingUp": "Signing up..."
+	},
+	"navigation": {
+		"home": "Home",
+		"gifts": "Gifts",
+		"friends": "Friends",
+		"calendar": "Calendar"
+	},
+	"burgerMenu": {
+		"profileSettings": "Profile settings",
+		"help": "Help",
+		"messages": "Messages",
+		"switchTheme": "Switch theme",
+		"changeLanguage": "Change language"
+	},
+	"buttons": {
+		"addPerson": "Add person",
+		"savingFriend": "Saving friend...",
+		"addGift": "Add Gift",
+		"newGift": "New gift"
+	},
+	"home": {
+		"title": "Feed"
+	}
+}

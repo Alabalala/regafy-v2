@@ -12,6 +12,7 @@ import { useTranslations } from "next-intl";
 export default function Footer({}) {
 	const pathName = usePathname();
 	const tButtons = useTranslations("buttons");
+	const tNavigation = useTranslations("navigation");
 
 	return (
 		<footer
@@ -29,7 +30,7 @@ export default function Footer({}) {
 						filled={pathName === getPath("Home")}
 						className={"w-8 h-8"}
 					/>
-					<p className={"text-sm"}>{tButtons("home")}</p>
+					<p className={"text-sm"}>{tNavigation("home")}</p>
 				</div>
 			</NextLink>
 			<NextLink
@@ -42,7 +43,7 @@ export default function Footer({}) {
 						filled={pathName.startsWith(getPath("Gifts"))}
 						className={"w-8 h-8"}
 					/>
-					<p className={"text-sm"}>{tButtons("gifts")}</p>
+					<p className={"text-sm"}>{tNavigation("gifts")}</p>
 				</div>
 			</NextLink>
 
@@ -67,7 +68,7 @@ export default function Footer({}) {
 						filled={pathName.startsWith(getPath("Friends"))}
 						className={"w-8 h-8"}
 					/>
-					<p className={"text-sm"}>{tButtons("friends")}</p>
+					<p className={"text-sm"}>{tNavigation("friends")}</p>
 				</div>
 			</NextLink>
 			<NextLink
@@ -80,7 +81,7 @@ export default function Footer({}) {
 						filled={pathName.startsWith(getPath("Calendar"))}
 						className={"w-8 h-8"}
 					/>
-					<p className={"text-sm"}>{tButtons("calendar")}</p>
+					<p className={"text-sm"}>{tNavigation("calendar")}</p>
 				</div>
 			</NextLink>
 		</footer>

@@ -1,0 +1,32 @@
+{
+	"auth": {
+		"logOut": "Cerrar sesión",
+		"logIn": "Iniciar sesión",
+		"signUp": "Registrarse",
+		"loggingOut": "Cerrando sesión...",
+		"loggingIn": "Iniciando sesión...",
+		"signingUp": "Registrándose..."
+	},
+	"navigation": {
+		"home": "Inicio",
+		"gifts": "Regalos",
+		"friends": "Amigos",
+		"calendar": "Calendario"
+	},
+	"burgerMenu": {
+		"profileSettings": "Configuración de perfil",
+		"help": "Ayuda",
+		"messages": "Mensajes",
+		"switchTheme": "Cambiar tema",
+		"changeLanguage": "Cambiar idioma"
+	},
+	"buttons": {
+		"addPerson": "Añadir persona",
+		"savingFriend": "Guardando amigo...",
+		"addGift": "Añadir regalo",
+		"newGift": "Nuevo regalo"
+	},
+	"home": {
+		"title": "Muro"
+	}
+}
