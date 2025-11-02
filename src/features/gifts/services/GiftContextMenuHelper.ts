@@ -10,17 +10,17 @@ export const OwnGiftContextMenuHelper = (
 
 	return [
 		{
-			label: "Edit",
+			labelKey: "edit",
 			onClick: () => {
 				router.push(getPath("Edit gift", giftId));
 			},
 		},
 		{
-			label: "Delete Gift",
+			labelKey: "delete",
 			onClick: () => {},
 		},
 		{
-			label: "Go to your profile",
+			labelKey: "goToYourProfile",
 			onClick: () => {
 				router.push(getPath("Gifts"));
 			},
@@ -35,7 +35,7 @@ export const FriendGiftContextMenuHelper = (
 	const router = useRouter();
 	return [
 		{
-			label: "Go to user profile",
+			labelKey: "goToUserProfile",
 			onClick: () => {
 				router.push(getPath("Friend profile", profileId));
 			},

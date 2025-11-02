@@ -12,6 +12,7 @@ import {
 import { answerSchema } from "../../schema/answerSchema";
 import { useGiftStore } from "../../stores/giftStore";
 import { AnswerFormType } from "../../types/form";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	questionId: string;
@@ -29,6 +30,8 @@ const AnswerForm = ({ questionId }: Props) => {
 		resolver: zodResolver(answerSchema),
 		defaultValues: ANSWER_INITIAL_VALUES,
 	});
+	const t = useTranslations("gifts.post.Q&A");
+	const tButtons = useTranslations("buttons");
 	const onSubmit = async (data: AnswerFormType) => {
 		try {
 			const result = await newAnswerAction(data, questionId);
@@ -62,9 +65,10 @@ const AnswerForm = ({ questionId }: Props) => {
 						key={fieldName}
 						className={"flex flex-col gap-2"}
 					>
-						<p className={"font-bold"}>{input.label}</p>
+						<p className={"font-bold"}>{t(input.labelKey)}</p>
 
 						<Input
+							placeholder={t(input.placeholderKey)}
 							{...register(fieldName)}
 							input={input}
 							currentValue={watch(fieldName) || ""}
@@ -79,9 +83,9 @@ const AnswerForm = ({ questionId }: Props) => {
 					type="submit"
 					disabled={isSubmitting}
 					loading={isSubmitting}
-					loadingText={"Adding answer..."}
+					loadingText={tButtons("adding")}
 				>
-					Submit
+					{tButtons("submit")}
 				</Button>
 			</div>
 		</form>

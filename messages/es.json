@@ -14,7 +14,7 @@
 		"calendar": "Calendario"
 	},
 	"burgerMenu": {
-		"profileSettings": "Configuración de perfil",
+		"profileSettings": "Configuración del perfil",
 		"help": "Ayuda",
 		"messages": "Mensajes",
 		"switchTheme": "Cambiar tema",
@@ -24,9 +24,67 @@
 		"addPerson": "Añadir persona",
 		"savingFriend": "Guardando amigo...",
 		"addGift": "Añadir regalo",
-		"newGift": "Nuevo regalo"
+		"newGift": "Nuevo regalo",
+		"submit": "Enviar",
+		"share": "Compartir",
+		"reserve": "Reservar",
+		"reserved": "Reservado",
+		"adding": "Añadiendo..."
+	},
+	"timeAgo": {
+		"justNow": "justo ahora",
+		"moreThan4Months": "hace más de 4 meses"
 	},
 	"home": {
 		"title": "Muro"
+	},
+	"gifts": {
+		"giftList": "Lista de regalos",
+		"myGifts": "Mis regalos",
+		"noGifts": "Aún no hay regalos",
+		"post": {
+			"friendAddedGift": "ha añadido un regalo para",
+			"youAddedGift": "Has añadido un regalo para",
+
+			"Q&A": {
+				"noQuestions": "No hay preguntas todavía",
+				"questions": "Preguntas",
+				"question": "Pregunta",
+				"yourQuestion": "Tu pregunta",
+				"yourAnswer": "Tu respuesta",
+				"answer": "Respuesta",
+				"questionLabel": "Pregunta",
+				"questionPlaceholder": "Tu pregunta aquí",
+				"answerLabel": "Tu respuesta",
+				"answerPlaceholder": "Tu respuesta aquí"
+			},
+			"giftForm": {
+				"title": "Título",
+				"titlePlaceholder": "Ej. Zapatos",
+				"description": "Descripción",
+				"descriptionPlaceholder": "Aquí puedes escribir todo lo que quieras",
+				"price": "Precio",
+				"pricePlaceholder": "Ayuda a las personas a saber cuánto costará",
+				"image": "Imagen"
+			}
+		}
+	},
+	"share": {
+		"title": "¡Consigue este regalo para tu amigo!",
+		"giftText": "{name} quiere este regalo: {title}",
+		"notSupported": "El uso compartido no está disponible en este navegador.",
+		"button": "Compartir"
+	},
+	"images": {
+		"alt": {
+			"genericGiftImage": "Imagen del regalo",
+			"genericEventImage": "Imagen del evento"
+		}
+	},
+	"contextMenu": {
+		"edit": "Editar",
+		"delete": "Eliminar",
+		"goToYourProfile": "Ir a tu perfil",
+		"goToUserProfile": "Ir al perfil del amigo"
 	}
 }

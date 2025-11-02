@@ -6,8 +6,9 @@ import { useChangeReserve } from "@/features/gifts/hooks/useChangeReserve";
 import LoadingComponent from "@/shared/components/loadingModule";
 import { createClient } from "@/shared/services/supabase/client";
 import { Gift } from "@/shared/types/supabase/supabase";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { getFeed } from "../../services/supabase";
+import { useTranslations } from "next-intl";
 
 const Feed = () => {
 	const [feed, setFeed] = useState<Gift[]>([]);
@@ -18,6 +19,7 @@ const Feed = () => {
 	const [user] = useUser();
 	const { changeReserve } = useChangeReserve(feed, setFeed);
 	const loadMoreRef = useRef<HTMLDivElement>(null);
+	const t = useTranslations("home");
 
 	const loadMore = async () => {
 		if (!user || loading || !hasMore) return;
@@ -62,7 +64,7 @@ const Feed = () => {
 
 	return (
 		<div className="flex min-h-screen flex-col">
-			<h1 className="text-xl font-bold">Feed</h1>
+			<h1 className="text-xl font-bold">{t("title")}</h1>
 			<GiftList
 				setGifts={setFeed}
 				loadMoreRef={loadMoreRef}

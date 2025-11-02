@@ -1,4 +1,4 @@
 export interface MenuItem {
-	label: string;
+	labelKey: string;
 	onClick?: () => void;
 }

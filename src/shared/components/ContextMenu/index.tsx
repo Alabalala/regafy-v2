@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import MoreVerticalSVG from "../SVGs/MoreVerticalSVG";
 import { MenuItem } from "@/shared/types/helperFunction.types";
 import { set } from "zod";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	helperFunction: () => MenuItem[];
@@ -12,6 +13,7 @@ export const ContextMenu = ({ helperFunction }: Props) => {
 	const [isOpen, setOpen] = useState(false);
 	const contextElements = helperFunction();
 	const menuRef = useRef<HTMLDivElement>(null);
+	const t = useTranslations("contextMenu");
 
 	useEffect(() => {
 		function handleClickOutside(event: MouseEvent) {
@@ -42,14 +44,14 @@ export const ContextMenu = ({ helperFunction }: Props) => {
 				<div className="absolute w-50 right-0 bg-secondary dark:bg-secondary-dark border-2 rounded-lg flex flex-col z-20">
 					{contextElements.map((item) => (
 						<div
-							key={item.label}
+							key={item.labelKey}
 							className="cursor-pointer p-3 hover:bg-secondary-50 hover:text-on-secondary active:bg-secondary-100 active:text-on-secondary rounded-xl"
 							onClick={() => {
 								item.onClick && item.onClick();
 								setOpen(false);
 							}}
 						>
-							{item.label}
+							{t(item.labelKey)}
 						</div>
 					))}
 				</div>

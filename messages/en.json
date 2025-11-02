@@ -24,9 +24,66 @@
 		"addPerson": "Add person",
 		"savingFriend": "Saving friend...",
 		"addGift": "Add Gift",
-		"newGift": "New gift"
+		"newGift": "New gift",
+		"submit": "Submit",
+		"share": "Share",
+		"reserve": "Reserve",
+		"reserved": "Reserved",
+		"adding": "Adding..."
+	},
+	"timeAgo": {
+		"justNow": "just now",
+		"moreThan4Months": "over 4 months ago"
 	},
 	"home": {
 		"title": "Feed"
+	},
+	"gifts": {
+		"giftList": "Gift list",
+		"myGifts": "My gifts",
+		"noGifts": "No gifts yet",
+		"post": {
+			"friendAddedGift": "added a gift for",
+			"youAddedGift": "You added a gift for",
+			"Q&A": {
+				"noQuestions": "No questions yet",
+				"questions": "Questions",
+				"question": "Question",
+				"yourQuestion": "Your question",
+				"yourAnswer": "Your answer",
+				"answer": "Answer",
+				"questionLabel": "Question",
+				"questionPlaceholder": "Your question here",
+				"answerLabel": "Your answer",
+				"answerPlaceholder": "Your answer here"
+			},
+			"giftForm": {
+				"title": "Title",
+				"titlePlaceholder": "E.g. Shoes",
+				"description": "Description",
+				"descriptionPlaceholder": "Here you can write as much as you want",
+				"price": "Price",
+				"pricePlaceholder": "Help people know how much it will cost",
+				"image": "Image"
+			}
+		}
+	},
+	"share": {
+		"title": "Get this gift for your friend!",
+		"giftText": "{name} wants this gift: {title}",
+		"notSupported": "Sharing is not supported on this browser.",
+		"button": "Share"
+	},
+	"images": {
+		"alt": {
+			"genericGiftImage": "Gift image",
+			"genericEventImage": "Event image"
+		}
+	},
+	"contextMenu": {
+		"edit": "Edit",
+		"delete": "Delete",
+		"goToYourProfile": "Go to your profile",
+		"goToUserProfile": "Go to friend's profile"
 	}
 }
