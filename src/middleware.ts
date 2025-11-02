@@ -1,23 +1,15 @@
-import { NextResponse, type NextRequest } from "next/server";
 import { updateSession } from "@/shared/services/supabase/updateSession";
+import createMiddleware from "next-intl/middleware";
+import { NextRequest } from "next/server";
+import { routing } from "./i18n/routing";
+
+const intlMiddleware = createMiddleware(routing);
 
 export async function middleware(request: NextRequest) {
 	const authResponse = await updateSession(request);
 	if (authResponse?.status === 302) return authResponse;
 
-	const pathname = request.nextUrl.pathname;
-	if (pathname === "/") {
-		const acceptLanguage = request.headers.get("accept-language");
-		const userLang = acceptLanguage?.split(",")[0].split("-")[0]; // e.g. "es" from "es-ES"
-		const supportedLocales = ["en", "es", "fr"];
-		const locale = supportedLocales.includes(userLang ?? "") ? userLang : "en";
-
-		const url = request.nextUrl.clone();
-		url.pathname = `/${locale}`;
-		return NextResponse.redirect(url);
-	}
-
-	return NextResponse.next();
+	return intlMiddleware(request);
 }
 
 export const config = {
