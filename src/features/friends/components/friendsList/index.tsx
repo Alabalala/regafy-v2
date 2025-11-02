@@ -3,6 +3,7 @@
 import { Profile } from "@/features/profile/types/supabase.types";
 import FriendCard from "../FriendCard";
 import { Event } from "@/shared/types/supabase/supabase";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	friends: Profile[];
@@ -29,6 +30,7 @@ const FriendsList = ({
 }: Props) => {
 	const list =
 		searchResults ?? (type === "event" ? friends.slice(0, 3) : friends);
+	const t = useTranslations("friends");
 	return (
 		<div className="flex flex-col gap-2 relative">
 			{list.length === 0 ? (
@@ -37,8 +39,8 @@ const FriendsList = ({
 						{isSearching
 							? ""
 							: searchResults !== null && searchResults?.length === 0
-								? "No results"
-								: "No friends yet"}
+								? t("noResults")
+								: t("noFriends")}
 					</div>
 				</div>
 			) : (

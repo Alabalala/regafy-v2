@@ -29,7 +29,12 @@
 		"share": "Compartir",
 		"reserve": "Reservar",
 		"reserved": "Reservado",
-		"adding": "Añadiendo..."
+		"adding": "Añadiendo...",
+		"viewProfile": "Ver perfil",
+		"viewGift": "Ver regalo",
+		"invite": "Invitar",
+		"uninvite": "Cancelar",
+		"accept": "Aceptar"
 	},
 	"timeAgo": {
 		"justNow": "justo ahora",
@@ -66,6 +71,22 @@
 				"price": "Precio",
 				"pricePlaceholder": "Ayuda a las personas a saber cuánto costará",
 				"image": "Imagen"
+			}
+		}
+	},
+	"friends": {
+		"friends": "Amigos",
+		"friendsList": "Lista de amigos",
+		"noFriends": "Aún no tienes amigos",
+		"noResults": "No se encontraron resultados",
+		"results": "Resultados",
+		"suggestedFriends": "Amigos sugeridos",
+		"requests": {
+			"requests": "Friend requests",
+			"toast": {
+				"accepted": "Friend added!",
+				"declined": "Friend request declined",
+				"sent": "Friend request sent"
 			}
 		}
 	},

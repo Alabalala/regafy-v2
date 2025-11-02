@@ -29,7 +29,12 @@
 		"share": "Share",
 		"reserve": "Reserve",
 		"reserved": "Reserved",
-		"adding": "Adding..."
+		"adding": "Adding...",
+		"viewProfile": "View profile",
+		"viewGift": "View gift",
+		"invite": "Invite",
+		"uninvite": "Uninvite",
+		"accept": "Accept"
 	},
 	"timeAgo": {
 		"justNow": "just now",
@@ -65,6 +70,22 @@
 				"price": "Price",
 				"pricePlaceholder": "Help people know how much it will cost",
 				"image": "Image"
+			}
+		}
+	},
+	"friends": {
+		"friends": "Friends",
+		"friendsList": "Friends list",
+		"noFriends": "No friends yet",
+		"noResults": "No results",
+		"results": "Results",
+		"suggestedFriends": "Suggested friends",
+		"requests": {
+			"requests": "Friend requests",
+			"toast": {
+				"accepted": "Friend added!",
+				"declined": "Friend request declined",
+				"sent": "Friend request sent"
 			}
 		}
 	},
