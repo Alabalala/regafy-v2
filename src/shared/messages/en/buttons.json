@@ -7,5 +7,10 @@
 	"signingUp": "Signing up...",
 	"addPerson": "Add person",
 	"savingFriend": "Saving friend...",
-	"addGift": "Add Gift"
+	"addGift": "Add Gift",
+	"home": "Home",
+	"gifts": "Gifts",
+	"newGift": "New gift",
+	"friends": "Friends",
+	"calendar": "Calendar"
 }

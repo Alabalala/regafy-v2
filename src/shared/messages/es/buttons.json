@@ -7,5 +7,10 @@
 	"signingUp": "Registrándose...",
 	"addPerson": "Agregar persona",
 	"savingFriend": "Guardando amigo...",
-	"addGift": "Agregar regalo"
+	"addGift": "Agregar regalo",
+	"home": "Inicio",
+	"gifts": "Regalos",
+	"newGift": "Nuevo regalo",
+	"friends": "Amigos",
+	"calendar": "Calendario"
 }
