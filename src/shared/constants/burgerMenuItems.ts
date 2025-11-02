@@ -1,14 +1,14 @@
 export const BURGER_MENU_ITEMS = [
 	{
-		name: "Profile settings",
+		nameKey: "profileSettings",
 		pathName: "Profile settings",
 	},
 	{
-		name: "Help",
+		nameKey: "help",
 		pathName: "Help",
 	},
 	{
-		name: "Messages",
+		nameKey: "messages",
 		pathName: "Messages",
 	},
 ];

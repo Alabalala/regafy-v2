@@ -1,0 +1,11 @@
+{
+	"logOut": "Cerrar sesión",
+	"logIn": "Iniciar sesión",
+	"signUp": "Registrarse",
+	"loggingOut": "Cerrando sesión...",
+	"loggingIn": "Iniciando sesión...",
+	"signingUp": "Registrándose...",
+	"addPerson": "Agregar persona",
+	"savingFriend": "Guardando amigo...",
+	"addGift": "Agregar regalo"
+}
