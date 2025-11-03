@@ -25,6 +25,7 @@
 		"savingFriend": "Guardando amig@...",
 		"addGift": "Añadir regalo",
 		"newGift": "Nuevo regalo",
+		"newEvent": "Nuevo evento",
 		"submit": "Enviar",
 		"save": "Guardar",
 		"share": "Compartir",
@@ -142,5 +143,34 @@
 		"500": "Error interno del servidor",
 		"generic": "Algo no ha salido bien. Inténtalo de nuevo más tarde.",
 		"wrongFileType": "El tipo de archivo no es correcto"
+	},
+	"events": {
+		"calendar": "Calendario",
+		"upcomingEvents": "Próximos eventos",
+		"noEvents": "No hay eventos todavia",
+		"eventList": "Lista de eventos",
+		"eventsOn": "Eventos el ",
+		"birthdayTitle": "Cumpleaños de {name}",
+		"daysShort": {
+			"monday": "L",
+			"tuesday": "M",
+			"wednesday": "X",
+			"thursday": "J",
+			"friday": "V",
+			"saturday": "S",
+			"sunday": "D"
+		},
+		"form": {
+			"newEvent": "Nuevo evento",
+			"editEvent": "Editar evento",
+			"updateEvent": "Actualizar evento",
+			"title": "Título",
+			"titlePlaceholder": "Ej. Cumpleaños",
+			"description": "Descripción",
+			"descriptionPlaceholder": "Aquí puedes escribir todo lo que quieras",
+			"date": "Fecha",
+			"eventImage": "Imagen del evento",
+			"guests": "Invitad@s"
+		}
 	}
 }

@@ -1,19 +1,17 @@
 "use client";
 import { Button } from "@/shared/components/Button";
-import { Event } from "@/shared/types/supabase/supabase";
-import { useEffect, useState } from "react";
-import { WEEKDAYS } from "../../constants/calendar";
-import { createMonthArray } from "../../services/createMonthArray";
-import { EventsGroupedByDateType, normalisedEvent } from "../../types/events";
-import { set } from "zod";
-import EventsList from "../EventList";
-import EventCard from "../EventCard";
-import { getPrettyDate } from "../../services/getPrettyDate";
 import { NextLink } from "@/shared/components/Link";
 import { getPath } from "@/shared/services/getPath";
-import { padNumber } from "../../services/padNumber";
 import { useToastStore } from "@/shared/stores/toastStore";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { WEEKDAYS } from "../../constants/calendar";
+import { createMonthArray } from "../../services/createMonthArray";
+import { getPrettyDate } from "../../services/getPrettyDate";
+import { padNumber } from "../../services/padNumber";
+import { EventsGroupedByDateType, normalisedEvent } from "../../types/events";
+import EventCard from "../EventCard";
+import { useLocale, useTranslations } from "next-intl";
 
 interface Props {
 	events: EventsGroupedByDateType;
@@ -26,8 +24,9 @@ const Calendar = ({ events }: Props) => {
 	const [chosenDate, setChosenDate] = useState({ day: 0, type: "" });
 	const [isFading, setIsFading] = useState(false);
 	const [chosenDayEvents, setChosenDayEvents] = useState<normalisedEvent[]>([]);
-
+	const locale = useLocale();
 	const { message, clearMessage } = useToastStore();
+	const tButtons = useTranslations("buttons");
 	useEffect(() => {
 		if (message) {
 			toast.dismiss();
@@ -48,7 +47,7 @@ const Calendar = ({ events }: Props) => {
 	}, [month, year]);
 
 	const today = new Date();
-
+	const t = useTranslations("events");
 	const changeMonth = (direction: "forward" | "back") => {
 		setChosenDate({ day: 0, type: "" });
 		setIsFading(true);
@@ -85,8 +84,8 @@ const Calendar = ({ events }: Props) => {
 						</Button>
 					</div>
 					<div className="w-full">
-						<p className="text-center font-bold">
-							{new Date(year, month, 1).toLocaleDateString("en-GB", {
+						<p className="text-center font-bold uppercase">
+							{new Date(year, month, 1).toLocaleDateString(locale, {
 								month: "long",
 								year: "numeric",
 							})}
@@ -112,7 +111,7 @@ const Calendar = ({ events }: Props) => {
 							className="font-semibold"
 							key={weekday}
 						>
-							{weekday}
+							{t("daysShort." + weekday)}
 						</div>
 					))}
 					{monthArray.map((day) => {
@@ -157,7 +156,8 @@ const Calendar = ({ events }: Props) => {
 				{chosenDate.type === "current" && chosenDayEvents.length > 0 && (
 					<div className="flex flex-col gap-3 bg-tertiary dark:bg-tertiary-dark border-2 rounded-md p-4">
 						<p>
-							Events on {getPrettyDate(new Date(year, month, chosenDate.day), "en-UK")}
+							{t("eventsOn")}
+							{getPrettyDate(new Date(year, month, chosenDate.day), "en-UK")}
 						</p>
 						{chosenDayEvents.map((e) => (
 							<EventCard
@@ -170,7 +170,7 @@ const Calendar = ({ events }: Props) => {
 								variant="secondary"
 								href={`${getPath("New event")}?date=${year}-${padNumber(month + 1)}-${padNumber(chosenDate.day)}`}
 							>
-								New event
+								{tButtons("newEvent")}
 							</NextLink>
 						</div>
 					</div>

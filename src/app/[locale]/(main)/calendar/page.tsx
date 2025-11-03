@@ -8,12 +8,15 @@ import { NextLink } from "@/shared/components/Link";
 import LoadingComponent from "@/shared/components/loadingModule";
 import { getPath } from "@/shared/services/getPath";
 import { createClient } from "@/shared/services/supabase/server";
+import { getTranslations } from "next-intl/server";
 
 const CalendarPage = async () => {
 	const supabase = await createClient();
 	const user = await getCurrentUser(supabase);
 	let friends;
 	let events;
+	const t = await getTranslations("events");
+	const tButtons = await getTranslations("buttons");
 
 	try {
 		friends = await getFriendsWithProfile(user.id, supabase);
@@ -29,7 +32,7 @@ const CalendarPage = async () => {
 		return {
 			type: "birthday",
 			id: friend.id,
-			title: `${friend.name}'s birthday`,
+			title: t("birthdayTitle", { name: friend.name }),
 			image: friend.profileImage,
 			date: nextBirthday,
 		};
@@ -64,16 +67,16 @@ const CalendarPage = async () => {
 
 	return (
 		<div className="flex flex-col gap-5">
-			<h1 className="text-xl font-bold ">CALENDAR</h1>
+			<h1 className="text-xl font-bold uppercase">{t("calendar")}</h1>
 			<Calendar events={eventsGroupedByDate}></Calendar>
-			<h2 className="text-xl font-bold ">UPCOMING EVENTS</h2>
+			<h2 className="text-xl font-bold uppercase">{t("upcomingEvents")} EVENTS</h2>
 			<EventsList events={eventsGroupedByDate}></EventsList>
 			<NextLink
 				variant="primary"
 				floating
 				href={getPath("New event")}
 			>
-				New event
+				{tButtons("newEvent")}
 			</NextLink>
 		</div>
 	);

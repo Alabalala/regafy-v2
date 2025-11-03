@@ -1,3 +1,4 @@
+import { getLocale } from "next-intl/server";
 import { getPrettyDate } from "../../services/getPrettyDate";
 import { EventsGroupedByDateType } from "../../types/events";
 import EventCard from "../EventCard";
@@ -6,9 +7,10 @@ interface Props {
 	events: EventsGroupedByDateType;
 }
 
-const EventsList = ({ events }: Props) => {
+const EventsList = async ({ events }: Props) => {
 	const today = new Date();
 	const currentYear = new Date().getFullYear();
+	const locale = await getLocale();
 	return (
 		<div>
 			<div className="text-lg flex flex-col gap-6">
@@ -32,7 +34,7 @@ const EventsList = ({ events }: Props) => {
 										<div className="font-semibold">
 											{new Date(dayName) === today
 												? "Today"
-												: getPrettyDate(new Date(dayName))}
+												: getPrettyDate(new Date(dayName), locale)}
 										</div>
 										<div className={"flex flex-col gap-3"}>
 											{events.map((e) => {
