@@ -44,15 +44,16 @@ export const SIGNUP_FORM_INITIAL_DATA = {
 export const CHANGE_EMAIL_FORM_INPUTS = [
 	{
 		name: "email",
-		label: "New email",
+		labelKey: "newEmail",
 		type: "email",
 		required: true,
-		placeholder: "P. ej. youremail@email.com",
+		placeholderKey: "newEmailPlaceholder",
 		fullWidth: true,
 	},
 	{
 		name: "emailConfirmation",
-		label: "Confirm your new email",
+		labelKey: "confirmNewEmail",
+		placeholderKey: "newEmailPlaceholder",
 		type: "email",
 		required: true,
 		fullWidth: true,
@@ -67,16 +68,17 @@ export const INITIAL_CHANGE_EMAIL_FORM_DATA = {
 export const UPDATE_PASSWORD_FORM_INPUTS = [
 	{
 		name: "password",
-		label: "New password",
+		labelKey: "newPassword",
 		type: "password",
 		required: true,
 		maxLength: 30,
-		placeholder: "P. ej. youremail@email.com",
+		placeholderKey: "",
 		fullWidth: true,
 	},
 	{
 		name: "passwordConfirmation",
-		label: "Confirm your new password",
+		labelKey: "confirmNewPassword",
+		placeholderKey: "",
 		type: "password",
 		required: true,
 		fullWidth: true,

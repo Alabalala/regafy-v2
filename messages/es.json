@@ -1,12 +1,4 @@
 {
-	"auth": {
-		"logOut": "Cerrar sesión",
-		"logIn": "Iniciar sesión",
-		"signUp": "Registrarse",
-		"loggingOut": "Cerrando sesión...",
-		"loggingIn": "Iniciando sesión...",
-		"signingUp": "Registrándose..."
-	},
 	"navigation": {
 		"home": "Inicio",
 		"gifts": "Regalos",
@@ -46,7 +38,17 @@
 		"sendRequest": "Enviar solicitud",
 		"declineRequest": "Declinar solicitud",
 		"addImage": "Añadir foto",
-		"deleteImage": "Eliminar foto"
+		"deleteImage": "Eliminar foto",
+		"updateEmail": "Cambiar correo",
+		"updatePassword": "Cambiar contraseña",
+		"deleteAccount": "Eliminar cuenta",
+		"editProfileInfo": "Editar info perfil",
+		"logOut": "Cerrar sesión",
+		"logIn": "Iniciar sesión",
+		"signUp": "Registrarse",
+		"loggingOut": "Cerrando sesión...",
+		"loggingIn": "Iniciando sesión...",
+		"signingUp": "Registrándose..."
 	},
 	"timeAgo": {
 		"justNow": "justo ahora",
@@ -172,5 +174,31 @@
 			"eventImage": "Imagen del evento",
 			"guests": "Invitad@s"
 		}
+	},
+	"profileSettings": {
+		"profileSettings": "Ajustes de perfil",
+		"changePassword": "Cambiar tu contraseña",
+		"changeEmail": "Cambiar tu correo electrónico",
+		"yourEmail": "Tu correo electrónico",
+		"emailForm": {
+			"newEmail": "Nuevo correo electrónico",
+			"newEmailPlaceholder": "Ej. tucorreo@ejemplo.com",
+			"confirmNewEmail": "Confirmar nuevo correo electrónico",
+			"confirmNewEmailPlaceholder": "Ej. tucorreo@ejemplo.com",
+			"toast": {
+				"updated": "¡Correo electrónico actualizado!"
+			}
+		},
+		"passwordForm": {
+			"newPassword": "Nueva contraseña",
+			"confirmNewPassword": "Confirmar nueva contraseña",
+			"toast": {
+				"updated": "¡Contraseña actualizada!"
+			}
+		},
+		"logOut": "Cerrar sesión",
+		"logOutDescription": "Puedes cerrar sesión desde aquí, pero tendrás que volver a acceder con tu correo y contraseña.",
+
+		"deleteAccount": "Eliminar cuenta"
 	}
 }

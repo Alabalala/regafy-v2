@@ -1,12 +1,4 @@
 {
-	"auth": {
-		"logOut": "Log out",
-		"logIn": "Log in",
-		"signUp": "Sign up",
-		"loggingOut": "Logging out...",
-		"loggingIn": "Logging in...",
-		"signingUp": "Signing up..."
-	},
 	"navigation": {
 		"home": "Home",
 		"gifts": "Gifts",
@@ -46,7 +38,17 @@
 		"sendRequest": "Send request",
 		"declineRequest": "Decline request",
 		"addImage": "Add picture",
-		"deleteImage": "Delete picture"
+		"deleteImage": "Delete picture",
+		"updateEmail": "Update email",
+		"updatePassword": "Update password",
+		"deleteAccount": "Delete account",
+		"editProfileInfo": "Edit profile info",
+		"logOut": "Log out",
+		"logIn": "Log in",
+		"signUp": "Sign up",
+		"loggingOut": "Logging out...",
+		"loggingIn": "Logging in...",
+		"signingUp": "Signing up..."
 	},
 	"timeAgo": {
 		"justNow": "just now",
@@ -170,5 +172,24 @@
 			"eventImage": "Event image",
 			"guests": "Guests"
 		}
+	},
+	"profileSettings": {
+		"profileSettings": "Profile settings",
+		"changePassword": "Change your password",
+		"changeEmail": "Change your email",
+		"yourEmail": "Your email",
+		"emailForm": {
+			"newEmail": "New email",
+			"newEmailPlaceholder": "E. g. youremail@example.com",
+			"confirmNewEmail": "Confirm new email",
+			"confirmNewEmailPlaceholder": "E. g. youremail@example.com"
+		},
+		"passwordForm": {
+			"newPassword": "New password",
+			"confirmNewPassword": "Confirm new password"
+		},
+		"logOut": "Log out",
+		"logOutDescription": "You can log out from here, but you will need to log in again with your email and password.",
+		"deleteAccount": "Delete account"
 	}
 }

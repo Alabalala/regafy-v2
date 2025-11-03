@@ -13,6 +13,7 @@ import {
 } from "../../constants/forms";
 import { updateEmailFormSchema } from "../../schemas/updateEmail";
 import { UpdateEmailFormTypes } from "../../types/forms";
+import { useTranslations } from "next-intl";
 
 const UpdateEmailForm = () => {
 	const [supabaseToast, setsupabaseToast] = useState<string | undefined>("");
@@ -26,6 +27,8 @@ const UpdateEmailForm = () => {
 		resolver: zodResolver(updateEmailFormSchema),
 		defaultValues: INITIAL_CHANGE_EMAIL_FORM_DATA,
 	});
+	const t = useTranslations("profileSettings.emailForm");
+	const tButtons = useTranslations("buttons");
 
 	const onSubmit = async (data: UpdateEmailFormTypes) => {
 		const result = await updateEmailAction(data);
@@ -35,7 +38,7 @@ const UpdateEmailForm = () => {
 			}
 			return;
 		} else if (result.success) {
-			setMessage("Email changed successfully");
+			setMessage(t("toast.updated"));
 		}
 	};
 
@@ -51,8 +54,9 @@ const UpdateEmailForm = () => {
 						key={input.name}
 						className={"flex flex-col gap-2"}
 					>
-						<p className={"font-bold"}>{input.label}</p>
+						<p className={"font-bold"}>{t(input.labelKey)}</p>
 						<Input
+							placeholder={t(input.placeholderKey)}
 							{...register(fieldName)}
 							input={input}
 							currentValue={watch(fieldName) || ""}
@@ -72,9 +76,9 @@ const UpdateEmailForm = () => {
 					type="submit"
 					disabled={isSubmitting}
 					loading={isSubmitting}
-					loadingText={"Saving..."}
+					loadingText={tButtons("saving")}
 				>
-					Update email
+					{tButtons("updateEmail")}
 				</Button>
 			</div>
 		</form>
