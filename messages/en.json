@@ -34,7 +34,14 @@
 		"viewGift": "View gift",
 		"invite": "Invite",
 		"uninvite": "Uninvite",
-		"accept": "Accept"
+		"cancel": "Cancel",
+		"accept": "Accept",
+		"deleteFriend": "Delete friend",
+		"deleteGift": "Delete gift",
+		"addFriend": "Add friend",
+		"acceptRequest": "Accept request",
+		"sendRequest": "Send request",
+		"declineRequest": "Decline request"
 	},
 	"timeAgo": {
 		"justNow": "just now",
@@ -77,6 +84,8 @@
 		"friends": "Friends",
 		"friendsList": "Friends list",
 		"noFriends": "No friends yet",
+		"notYourFriend": "is not your friend yet.",
+		"sentYouFriendRequest": "sent you a friend request.",
 		"noResults": "No results",
 		"results": "Results",
 		"suggestedFriends": "Suggested friends",
@@ -87,7 +96,12 @@
 				"declined": "Friend request declined",
 				"sent": "Friend request sent"
 			}
-		}
+		},
+		"profile": {
+			"birthday": "Birthday"
+		},
+		"deleteModalTitle": "Delete friend?",
+		"deleteModalMessage": "Are you sure? This action cannot be undone."
 	},
 	"share": {
 		"title": "Get this gift for your friend!",
@@ -106,5 +120,10 @@
 		"delete": "Delete",
 		"goToYourProfile": "Go to your profile",
 		"goToUserProfile": "Go to friend's profile"
+	},
+	"errors": {
+		"404": "Page not found",
+		"500": "Internal server error",
+		"generic": "Something went wrong. Try again later."
 	}
 }

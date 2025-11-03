@@ -1,4 +1,5 @@
 "use client";
+import { useTranslations } from "next-intl";
 import { Profile } from "../../types/supabase.types";
 import ProfileImage from "../ProfileImage";
 

@@ -9,6 +9,7 @@ import { Button } from "@/shared/components/Button";
 import { createClient } from "@/shared/services/supabase/client";
 import { useToastStore } from "@/shared/stores/toastStore";
 import { FriendRequestType } from "@/shared/types/supabase/supabase";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -25,6 +26,9 @@ const NotAFriend = ({ userId, profile }: Props) => {
 	const [loading, setLoading] = useState(true);
 	const router = useRouter();
 	const { setMessage } = useToastStore();
+	const t = useTranslations("friends");
+	const tErrors = useTranslations("errors");
+	const tButtons = useTranslations("buttons");
 
 	useEffect(() => {
 		const checkFriendRequest = async () => {
@@ -41,10 +45,10 @@ const NotAFriend = ({ userId, profile }: Props) => {
 		try {
 			const request = await sendFriendRequest(profile.id, userId, supabase);
 			setHasFriendRequest(request);
-			setMessage("Friend request sent!");
+			setMessage(t("requests.toast.sent"));
 		} catch (err) {
 			console.log(err);
-			setErrorMessage("There's been an error, try again later.");
+			setErrorMessage(tErrors("generic"));
 		} finally {
 			setLoading(false);
 		}
@@ -59,29 +63,33 @@ const NotAFriend = ({ userId, profile }: Props) => {
 		try {
 			await acceptFriendRequest(userId, profile.id, hasFriendRequest.id, supabase);
 			router.refresh();
-			setMessage("Friend added!");
+			setMessage(t("requests.toast.accepted"));
 		} catch (err) {
 			console.log(err);
-			setErrorMessage("There's been an error, try again later.");
+			setErrorMessage(tErrors("generic"));
 		}
 	};
 
 	return (
 		<div className="flex flex-col items-center justify-center gap-2">
 			<div className="bg-tertiary dark:bg-tertiary-dark p-2 rounded border-2 opacity-60">
-				<p>You and {profile.name} are not friends yet.</p>
+				<p>
+					{profile.name} {t("notYourFriend")}
+				</p>
 			</div>
 			{hasFriendRequest && hasFriendRequest.sender_id === userId && (
-				<Button disabled={true}>Request sent</Button>
+				<Button disabled={true}>{t("requests.toast.sent")}</Button>
 			)}
 			{hasFriendRequest && hasFriendRequest.sender_id === profile.id && (
 				<div className="flex flex-col gap-2 items-center">
-					<p>{profile.name} has sent you a friend request</p>
+					<p>
+						{profile.name} {t("requests.sentYouFriendRequest")}
+					</p>
 					<Button
 						onClick={AcceptRequest}
 						loading={loading}
 					>
-						Accept request
+						{tButtons("acceptRequest")}
 					</Button>
 				</div>
 			)}
@@ -90,7 +98,7 @@ const NotAFriend = ({ userId, profile }: Props) => {
 					loading={loading}
 					onClick={sendRequest}
 				>
-					Send request
+					{tButtons("sendRequest")}
 				</Button>
 			)}
 			{errorMessage && <p className="text-red-500">{errorMessage}</p>}

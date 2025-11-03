@@ -9,13 +9,13 @@ import {
 	getProfile,
 } from "@/features/profile/services/supabase";
 import { Profile } from "@/features/profile/types/supabase.types";
-import { Button } from "@/shared/components/Button";
 import ClientToaster from "@/shared/components/ClientToaster";
 import LoadingComponent from "@/shared/components/loadingModule";
 import Modal from "@/shared/components/Modal";
 import { getPath } from "@/shared/services/getPath";
 import { createClient } from "@/shared/services/supabase/server";
 import { Gift } from "@/shared/types/supabase/supabase";
+import { getTranslations } from "next-intl/server";
 import { redirect } from "next/navigation";
 
 interface Props {
@@ -39,6 +39,9 @@ export default async function FriendProfile({ params }: Props) {
 	if (user.id === id) {
 		redirect(getPath("Gifts"));
 	}
+	const tGifts = await getTranslations("gifts");
+	const tButtons = await getTranslations("buttons");
+	const tFriends = await getTranslations("friends");
 	return (
 		<div className="flex flex-col gap-4">
 			<ClientToaster />
@@ -55,7 +58,7 @@ export default async function FriendProfile({ params }: Props) {
 			{isFriend && (
 				<div className="flex flex-col gap-6">
 					<div>
-						<h2 className="text-xl font-bold">Gift list</h2>
+						<h2 className="text-xl font-bold">{tGifts("giftList")}</h2>
 						<FriendGiftList gifts={gifts}></FriendGiftList>
 					</div>
 					<hr />
@@ -63,17 +66,17 @@ export default async function FriendProfile({ params }: Props) {
 					<div className="flex flex-row justify-center">
 						<Modal
 							buttons={{
-								initial: { variant: "delete", text: "Delete friend" },
+								initial: { variant: "delete", text: tButtons("deleteFriend") },
 								leftButton: { isPlain: true, text: "Cancel", isCancel: true },
 								rightButton: {
 									variant: "delete",
-									text: "Delete",
+									text: tButtons("deleteFriend"),
 									method: "DELETE",
 									apiRoute: "/api/friends/delete/" + id + "/" + user.id,
 								},
 							}}
-							modalTitle={"Delete friend?"}
-							modalContent={"Are you sure? You won't be able to undo this."}
+							modalTitle={tFriends("deleteModalTitle")}
+							modalContent={tFriends("deleteModalMessage")}
 							redirect={getPath("Friends")}
 						/>
 					</div>

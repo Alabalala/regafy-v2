@@ -22,7 +22,7 @@
 	},
 	"buttons": {
 		"addPerson": "Añadir persona",
-		"savingFriend": "Guardando amigo...",
+		"savingFriend": "Guardando amig@...",
 		"addGift": "Añadir regalo",
 		"newGift": "Nuevo regalo",
 		"submit": "Enviar",
@@ -34,7 +34,14 @@
 		"viewGift": "Ver regalo",
 		"invite": "Invitar",
 		"uninvite": "Cancelar",
-		"accept": "Aceptar"
+		"cancel": "Cancelar",
+		"accept": "Aceptar",
+		"deleteFriend": "Eliminar amig@",
+		"deleteGift": "Eliminar regalo",
+		"addFriend": "Añadir amig@",
+		"acceptRequest": "Aceptar solicitud",
+		"sendRequest": "Enviar solicitud",
+		"declineRequest": "Declinar solicitud"
 	},
 	"timeAgo": {
 		"justNow": "justo ahora",
@@ -78,6 +85,8 @@
 		"friends": "Amigos",
 		"friendsList": "Lista de amigos",
 		"noFriends": "Aún no tienes amigos",
+		"notYourFriend": "no es tu amig@ todavía.",
+		"sentYouFriendRequest": "te ha enviado una solicitud de amistad.",
 		"noResults": "No se encontraron resultados",
 		"results": "Resultados",
 		"suggestedFriends": "Amigos sugeridos",
@@ -88,7 +97,12 @@
 				"declined": "Friend request declined",
 				"sent": "Friend request sent"
 			}
-		}
+		},
+		"profile": {
+			"birthday": "Cumpleaños"
+		},
+		"deleteModalTitle": "¿Eliminar amig@?",
+		"deleteModalMessage": "¿Estás segur@? Está acción no puede deshacerse."
 	},
 	"share": {
 		"title": "¡Consigue este regalo para tu amigo!",
@@ -107,5 +121,10 @@
 		"delete": "Eliminar",
 		"goToYourProfile": "Ir a tu perfil",
 		"goToUserProfile": "Ir al perfil del amigo"
+	},
+	"errors": {
+		"404": "No se ha encontrado la página",
+		"500": "Error interno del servidor",
+		"generic": "Algo no ha salido bien. Inténtalo de nuevo más tarde."
 	}
 }
