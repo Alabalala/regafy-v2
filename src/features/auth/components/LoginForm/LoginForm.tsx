@@ -16,12 +16,14 @@ import { LoginFormTypes } from "../../types/forms";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema } from "../../schemas/loginForm";
 import { loginAction } from "../../actions/login";
+import { useTranslations } from "next-intl";
 
 const LoginForm = () => {
 	const [supabaseToast, setSupabaseToast] = useState<string | undefined>("");
 	const { user } = useUserStore();
 	const router = useRouter();
-
+	const t = useTranslations("auth");
+	const tButtons = useTranslations("buttons");
 	const {
 		register,
 		handleSubmit,
@@ -65,9 +67,10 @@ const LoginForm = () => {
 						key={fieldName}
 						className={"flex flex-col gap-2"}
 					>
-						<p className={"font-bold"}>{input.label}</p>
+						<p className={"font-bold"}>{t("loginForm." + input.labelKey)}</p>
 
 						<Input
+							placeholder={t("loginForm." + input.placeholderKey)}
 							{...register(fieldName)}
 							input={input}
 							currentValue={watch(fieldName) || ""}
@@ -87,19 +90,19 @@ const LoginForm = () => {
 					type="submit"
 					disabled={isSubmitting}
 					loading={isSubmitting}
-					loadingText={"Logging in..."}
+					loadingText={tButtons("loggingIn")}
 				>
-					Log in
+					{tButtons("logIn")}
 				</Button>
 			</div>
 
 			<div className={"flex flex-col items-center gap-2"}>
-				<p>Don&apos;t have an account?</p>
+				<p>{t("noAccount")}</p>
 				<NextLink
 					variant="secondary"
 					href={getPath("Sign up")}
 				>
-					Sign up now
+					{tButtons("signUp")}
 				</NextLink>
 			</div>
 		</form>

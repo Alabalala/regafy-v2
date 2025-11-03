@@ -15,7 +15,7 @@
 	"buttons": {
 		"addPerson": "Add person",
 		"savingFriend": "Saving friend...",
-		"addGift": "Add Gift",
+		"addGift": "Add gift",
 		"newGift": "New gift",
 		"newEvent": "New event",
 		"submit": "Submit",
@@ -28,7 +28,7 @@
 		"viewProfile": "View profile",
 		"viewGift": "View gift",
 		"invite": "Invite",
-		"uninvite": "Uninvite",
+		"uninvite": "Cancel invite",
 		"cancel": "Cancel",
 		"accept": "Accept",
 		"deleteFriend": "Delete friend",
@@ -37,8 +37,8 @@
 		"acceptRequest": "Accept request",
 		"sendRequest": "Send request",
 		"declineRequest": "Decline request",
-		"addImage": "Add picture",
-		"deleteImage": "Delete picture",
+		"addImage": "Add image",
+		"deleteImage": "Delete image",
 		"updateEmail": "Update email",
 		"updatePassword": "Update password",
 		"deleteAccount": "Delete account",
@@ -48,7 +48,11 @@
 		"signUp": "Sign up",
 		"loggingOut": "Logging out...",
 		"loggingIn": "Logging in...",
-		"signingUp": "Signing up..."
+		"signingUp": "Signing up...",
+		"resendEmail": "Resend email",
+		"resendingEmail": "Resending email...",
+		"backLogin": "Back to login",
+		"resending": "Resending..."
 	},
 	"timeAgo": {
 		"justNow": "just now",
@@ -90,7 +94,7 @@
 			"image": "Image",
 			"rateTitle": "Rate how much you want this gift",
 			"toast": {
-				"added": "Gift added!",
+				"added": "Gift created!",
 				"updated": "Gift updated!"
 			}
 		}
@@ -103,7 +107,7 @@
 		"noFriends": "No friends yet",
 		"notYourFriend": "is not your friend yet.",
 		"sentYouFriendRequest": "sent you a friend request.",
-		"noResults": "No results",
+		"noResults": "No results found",
 		"results": "Results",
 		"suggestedFriends": "Suggested friends",
 		"requests": {
@@ -123,10 +127,11 @@
 	"share": {
 		"title": "Get this gift for your friend!",
 		"giftText": "{name} wants this gift: {title}",
-		"notSupported": "Sharing is not supported on this browser.",
+		"notSupported": "Sharing is not available on this browser.",
 		"button": "Share"
 	},
 	"images": {
+		"yourImage": "Your image",
 		"alt": {
 			"genericGiftImage": "Gift image",
 			"genericEventImage": "Event image"
@@ -141,24 +146,24 @@
 	"errors": {
 		"404": "Page not found",
 		"500": "Internal server error",
-		"generic": "Something went wrong. Try again later.",
-		"wrongFileType": "Wrong file type"
+		"generic": "Something went wrong. Please try again later.",
+		"wrongFileType": "Incorrect file type"
 	},
 	"events": {
 		"calendar": "Calendar",
 		"upcomingEvents": "Upcoming events",
 		"noEvents": "No events yet",
 		"eventList": "Event list",
-		"birthdayTitle": "{name}'s birthday",
 		"eventsOn": "Events on ",
+		"birthdayTitle": "{name}'s birthday",
 		"daysShort": {
-			"monday": "Mon",
-			"tuesday": "Tue",
-			"wednesday": "Wed",
-			"thursday": "Thu",
-			"friday": "Fri",
-			"saturday": "Sat",
-			"sunday": "Sun"
+			"monday": "M",
+			"tuesday": "T",
+			"wednesday": "W",
+			"thursday": "T",
+			"friday": "F",
+			"saturday": "S",
+			"sunday": "S"
 		},
 		"form": {
 			"newEvent": "New event",
@@ -180,16 +185,51 @@
 		"yourEmail": "Your email",
 		"emailForm": {
 			"newEmail": "New email",
-			"newEmailPlaceholder": "E. g. youremail@example.com",
+			"newEmailPlaceholder": "E.g. youremail@example.com",
 			"confirmNewEmail": "Confirm new email",
-			"confirmNewEmailPlaceholder": "E. g. youremail@example.com"
+			"confirmNewEmailPlaceholder": "E.g. youremail@example.com",
+			"toast": {
+				"updated": "Email updated!"
+			}
 		},
 		"passwordForm": {
 			"newPassword": "New password",
-			"confirmNewPassword": "Confirm new password"
+			"confirmNewPassword": "Confirm new password",
+			"toast": {
+				"updated": "Password updated!"
+			}
 		},
 		"logOut": "Log out",
-		"logOutDescription": "You can log out from here, but you will need to log in again with your email and password.",
+		"logOutDescription": "You can log out from here, but you'll need to log in again with your email and password.",
 		"deleteAccount": "Delete account"
+	},
+	"auth": {
+		"loginWithAccount": "Log in with your account",
+		"loginForm": {
+			"email": "Email",
+			"emailPlaceholder": "E.g. youremail@example.com",
+			"password": "Password",
+			"passwordPlaceholder": "Your password"
+		},
+		"noAccount": "Don't have an account yet?",
+		"yesAccount": "Already have an account?",
+		"signUp": "Create a new account",
+		"signUpForm": {
+			"email": "Email",
+			"emailPlaceholder": "E.g. youremail@example.com",
+			"password": "Password",
+			"passwordPlaceholder": "Your password",
+			"passwordInstructions": "Password must be at least 6 characters long and contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+			"toast": {
+				"created": "Account created!"
+			},
+			"completedSignup": "Account created! Check your email to activate your account."
+		},
+		"forgotPassword": "Forgot your password?",
+		"confirmationForm": {
+			"toast": {
+				"resent": "Email resent!"
+			}
+		}
 	}
 }

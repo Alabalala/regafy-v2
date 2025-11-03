@@ -28,7 +28,7 @@
 		"viewProfile": "Ver perfil",
 		"viewGift": "Ver regalo",
 		"invite": "Invitar",
-		"uninvite": "Cancelar",
+		"uninvite": "Cancelar invitación",
 		"cancel": "Cancelar",
 		"accept": "Aceptar",
 		"deleteFriend": "Eliminar amig@",
@@ -36,19 +36,23 @@
 		"addFriend": "Añadir amig@",
 		"acceptRequest": "Aceptar solicitud",
 		"sendRequest": "Enviar solicitud",
-		"declineRequest": "Declinar solicitud",
+		"declineRequest": "Rechazar solicitud",
 		"addImage": "Añadir foto",
 		"deleteImage": "Eliminar foto",
 		"updateEmail": "Cambiar correo",
 		"updatePassword": "Cambiar contraseña",
 		"deleteAccount": "Eliminar cuenta",
-		"editProfileInfo": "Editar info perfil",
+		"editProfileInfo": "Editar info. del perfil",
 		"logOut": "Cerrar sesión",
 		"logIn": "Iniciar sesión",
 		"signUp": "Registrarse",
 		"loggingOut": "Cerrando sesión...",
 		"loggingIn": "Iniciando sesión...",
-		"signingUp": "Registrándose..."
+		"signingUp": "Registrándose...",
+		"resendEmail": "Reenviar correo",
+		"resendingEmail": "Reenviando correo...",
+		"backLogin": "Volver al inicio de sesión",
+		"resending": "Reenviando..."
 	},
 	"timeAgo": {
 		"justNow": "justo ahora",
@@ -64,7 +68,6 @@
 		"post": {
 			"friendAddedGift": "ha añadido un regalo para",
 			"youAddedGift": "Has añadido un regalo para",
-
 			"Q&A": {
 				"noQuestions": "No hay preguntas todavía",
 				"questions": "Preguntas",
@@ -97,8 +100,8 @@
 		}
 	},
 	"friends": {
-		"findFriends": "Encuentra a tu amig@s",
-		"inviteFriends": "Invita a amig@s",
+		"findFriends": "Encuentra a tus amig@s",
+		"inviteFriends": "Invita a tus amig@s",
 		"friends": "Amigos",
 		"friendsList": "Lista de amigos",
 		"noFriends": "Aún no tienes amigos",
@@ -108,21 +111,21 @@
 		"results": "Resultados",
 		"suggestedFriends": "Amigos sugeridos",
 		"requests": {
-			"requests": "Friend requests",
+			"requests": "Solicitudes de amistad",
 			"toast": {
-				"accepted": "Friend added!",
-				"declined": "Friend request declined",
-				"sent": "Friend request sent"
+				"accepted": "¡Amig@ añadido!",
+				"declined": "Solicitud de amistad rechazada",
+				"sent": "Solicitud de amistad enviada"
 			}
 		},
 		"profile": {
 			"birthday": "Cumpleaños"
 		},
 		"deleteModalTitle": "¿Eliminar amig@?",
-		"deleteModalMessage": "¿Estás segur@? Está acción no puede deshacerse."
+		"deleteModalMessage": "¿Estás segur@? Esta acción no puede deshacerse."
 	},
 	"share": {
-		"title": "¡Consigue este regalo para tu amigo!",
+		"title": "¡Consigue este regalo para tu amig@!",
 		"giftText": "{name} quiere este regalo: {title}",
 		"notSupported": "El uso compartido no está disponible en este navegador.",
 		"button": "Compartir"
@@ -138,7 +141,7 @@
 		"edit": "Editar",
 		"delete": "Eliminar",
 		"goToYourProfile": "Ir a tu perfil",
-		"goToUserProfile": "Ir al perfil del amigo"
+		"goToUserProfile": "Ir al perfil del amig@"
 	},
 	"errors": {
 		"404": "No se ha encontrado la página",
@@ -149,7 +152,7 @@
 	"events": {
 		"calendar": "Calendario",
 		"upcomingEvents": "Próximos eventos",
-		"noEvents": "No hay eventos todavia",
+		"noEvents": "No hay eventos todavía",
 		"eventList": "Lista de eventos",
 		"eventsOn": "Eventos el ",
 		"birthdayTitle": "Cumpleaños de {name}",
@@ -198,7 +201,35 @@
 		},
 		"logOut": "Cerrar sesión",
 		"logOutDescription": "Puedes cerrar sesión desde aquí, pero tendrás que volver a acceder con tu correo y contraseña.",
-
 		"deleteAccount": "Eliminar cuenta"
+	},
+	"auth": {
+		"loginWithAccount": "Inicia sesión con tu cuenta",
+		"loginForm": {
+			"email": "Correo",
+			"emailPlaceholder": "Ej. tucorreo@ejemplo.com",
+			"password": "Contraseña",
+			"passwordPlaceholder": "Tu contraseña"
+		},
+		"noAccount": "¿No tienes una cuenta todavía?",
+		"yesAccount": "¿Ya tienes una cuenta?",
+		"signUp": "Crea una cuenta nueva",
+		"signUpForm": {
+			"email": "Correo",
+			"emailPlaceholder": "Ej. tucorreo@ejemplo.com",
+			"password": "Contraseña",
+			"passwordPlaceholder": "Tu contraseña",
+			"passwordInstructions": "La contraseña debe tener al menos 6 caracteres y contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.",
+			"toast": {
+				"created": "¡Cuenta creada!"
+			},
+			"completedSignup": "¡Cuenta creada! Comprueba tu correo para activar tu cuenta."
+		},
+		"forgotPassword": "¿Olvidaste tu contraseña?",
+		"confirmationForm": {
+			"toast": {
+				"resent": "¡Correo reenviado!"
+			}
+		}
 	}
 }

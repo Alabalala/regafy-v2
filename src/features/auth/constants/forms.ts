@@ -3,13 +3,15 @@ import { maxLength } from "zod";
 export const LOGIN_FORM_INPUTS = [
 	{
 		name: "email",
-		label: "Email",
+		labelKey: "email",
+		placeholderKey: "emailPlaceholder",
 		type: "email",
 		required: true,
 	},
 	{
 		name: "password",
-		label: "Password",
+		labelKey: "password",
+		placeholderKey: "passwordPlaceholder",
 		type: "password",
 		required: true,
 	},
@@ -23,13 +25,15 @@ export const LOGIN_FORM_INITIAL_DATA = {
 export const SIGNUP_FORM_INPUTS = [
 	{
 		name: "email",
-		label: "Email",
+		labelKey: "email",
+		placeholderKey: "emailPlaceholder",
 		type: "email",
 		required: true,
 	},
 	{
 		name: "password",
-		label: "Password",
+		labelKey: "password",
+		placeholderKey: "passwordPlaceholder",
 		type: "password",
 		required: true,
 		maxLength: 30,
