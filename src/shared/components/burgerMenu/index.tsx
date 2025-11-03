@@ -16,7 +16,7 @@ interface Props {
 export const BurgerMenu = ({ setIsOpen, isOpen }: Props) => {
 	const { logout } = useLogout();
 	const tBurger = useTranslations("burgerMenu");
-	const tAuth = useTranslations("auth");
+	const tButtons = useTranslations("buttons");
 
 	return (
 		<div
@@ -45,7 +45,7 @@ export const BurgerMenu = ({ setIsOpen, isOpen }: Props) => {
 						setIsOpen(false);
 					}}
 				>
-					{tAuth("logOut")}
+					{tButtons("logOut")}
 				</Button>
 			</div>
 
