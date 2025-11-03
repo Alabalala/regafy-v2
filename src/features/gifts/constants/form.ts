@@ -30,6 +30,7 @@ export const GIFT_FORM_FIELDS = [
 		labelKey: "image",
 		type: "file",
 		required: false,
+		placeholderKey: "",
 		accept: "image/*",
 		fullWidth: true,
 	},

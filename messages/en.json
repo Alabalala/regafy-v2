@@ -26,10 +26,12 @@
 		"addGift": "Add Gift",
 		"newGift": "New gift",
 		"submit": "Submit",
+		"save": "Save",
 		"share": "Share",
 		"reserve": "Reserve",
 		"reserved": "Reserved",
 		"adding": "Adding...",
+		"saving": "Saving...",
 		"viewProfile": "View profile",
 		"viewGift": "View gift",
 		"invite": "Invite",
@@ -41,7 +43,9 @@
 		"addFriend": "Add friend",
 		"acceptRequest": "Accept request",
 		"sendRequest": "Send request",
-		"declineRequest": "Decline request"
+		"declineRequest": "Decline request",
+		"addImage": "Add picture",
+		"deleteImage": "Delete picture"
 	},
 	"timeAgo": {
 		"justNow": "just now",
@@ -68,15 +72,23 @@
 				"questionPlaceholder": "Your question here",
 				"answerLabel": "Your answer",
 				"answerPlaceholder": "Your answer here"
-			},
-			"giftForm": {
-				"title": "Title",
-				"titlePlaceholder": "E.g. Shoes",
-				"description": "Description",
-				"descriptionPlaceholder": "Here you can write as much as you want",
-				"price": "Price",
-				"pricePlaceholder": "Help people know how much it will cost",
-				"image": "Image"
+			}
+		},
+		"form": {
+			"newGift": "New gift",
+			"editGift": "Edit gift",
+			"updateGift": "Update gift",
+			"title": "Title",
+			"titlePlaceholder": "E.g. Shoes",
+			"description": "Description",
+			"descriptionPlaceholder": "Here you can write as much as you want",
+			"price": "Price",
+			"pricePlaceholder": "Help people know how much it will cost",
+			"image": "Image",
+			"rateTitle": "Rate how much you want this gift",
+			"toast": {
+				"added": "Gift added!",
+				"updated": "Gift updated!"
 			}
 		}
 	},
@@ -124,6 +136,7 @@
 	"errors": {
 		"404": "Page not found",
 		"500": "Internal server error",
-		"generic": "Something went wrong. Try again later."
+		"generic": "Something went wrong. Try again later.",
+		"wrongFileType": "Wrong file type"
 	}
 }

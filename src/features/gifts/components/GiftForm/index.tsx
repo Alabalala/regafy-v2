@@ -26,6 +26,7 @@ import { FormPayloadType, GiftFormData } from "../../types/form";
 import StarRateInput from "../StarRateInput";
 import { validateImage } from "@/shared/services/validateImage";
 import { uploadImageFile } from "@/shared/services/supabase/globals";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	gift?: SingleGift;
@@ -33,6 +34,9 @@ interface Props {
 }
 
 const GiftForm = ({ gift, type }: Props) => {
+	const t = useTranslations("gifts.form");
+	const tButtons = useTranslations("buttons");
+
 	const toGiftFormData = (gift: SingleGift): GiftFormData => {
 		return {
 			title: gift.title,
@@ -117,7 +121,7 @@ const GiftForm = ({ gift, type }: Props) => {
 						);
 						await addImageToGift(createResult.data.id, img, supabase);
 					}
-					setMessage("Gift created!");
+					setMessage(t("toast.added"));
 					const path = friendId
 						? getPath("Profile", String(friendId))
 						: getPath("Gifts");
@@ -141,7 +145,7 @@ const GiftForm = ({ gift, type }: Props) => {
 					);
 					await addImageToGift(gift.id, img, supabase);
 				}
-				setMessage("Gift updated!");
+				setMessage(t("toast.updated"));
 				router.push(getPath("Gift", String(gift.id)));
 			} else {
 				setError("root", {
@@ -164,7 +168,7 @@ const GiftForm = ({ gift, type }: Props) => {
 						key={fieldName}
 						className={"flex flex-col gap-2"}
 					>
-						<p className={"font-bold"}>{input.label}</p>
+						<p className={"font-bold"}>{t(input.labelKey)}</p>
 
 						{input.type === "file" ? (
 							<div className="flex flex-col gap-2">
@@ -179,6 +183,7 @@ const GiftForm = ({ gift, type }: Props) => {
 							</div>
 						) : (
 							<Input
+								placeholder={t(input.placeholderKey)}
 								{...register(fieldName)}
 								input={input}
 								currentValue={watch(fieldName) || ""}
@@ -192,7 +197,7 @@ const GiftForm = ({ gift, type }: Props) => {
 
 			{!friendId && (
 				<div className={"flex flex-col gap-2"}>
-					<p className={"font-bold"}>Rate how much you want this gift</p>
+					<p className={"font-bold"}>{t("rateTitle")}</p>
 					<StarRateInput
 						watch={watch}
 						setValue={setValue}
@@ -207,9 +212,9 @@ const GiftForm = ({ gift, type }: Props) => {
 					type="submit"
 					disabled={isSubmitting}
 					loading={isSubmitting}
-					loadingText={"Saving..."}
+					loadingText={tButtons("saving")}
 				>
-					Save event
+					{tButtons("save")}
 				</Button>
 			</div>
 		</form>

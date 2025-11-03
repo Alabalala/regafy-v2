@@ -26,10 +26,12 @@
 		"addGift": "Añadir regalo",
 		"newGift": "Nuevo regalo",
 		"submit": "Enviar",
+		"save": "Guardar",
 		"share": "Compartir",
 		"reserve": "Reservar",
 		"reserved": "Reservado",
 		"adding": "Añadiendo...",
+		"saving": "Guardando...",
 		"viewProfile": "Ver perfil",
 		"viewGift": "Ver regalo",
 		"invite": "Invitar",
@@ -41,7 +43,9 @@
 		"addFriend": "Añadir amig@",
 		"acceptRequest": "Aceptar solicitud",
 		"sendRequest": "Enviar solicitud",
-		"declineRequest": "Declinar solicitud"
+		"declineRequest": "Declinar solicitud",
+		"addImage": "Añadir foto",
+		"deleteImage": "Eliminar foto"
 	},
 	"timeAgo": {
 		"justNow": "justo ahora",
@@ -69,15 +73,23 @@
 				"questionPlaceholder": "Tu pregunta aquí",
 				"answerLabel": "Tu respuesta",
 				"answerPlaceholder": "Tu respuesta aquí"
-			},
-			"giftForm": {
-				"title": "Título",
-				"titlePlaceholder": "Ej. Zapatos",
-				"description": "Descripción",
-				"descriptionPlaceholder": "Aquí puedes escribir todo lo que quieras",
-				"price": "Precio",
-				"pricePlaceholder": "Ayuda a las personas a saber cuánto costará",
-				"image": "Imagen"
+			}
+		},
+		"form": {
+			"newGift": "Nuevo regalo",
+			"editGift": "Editar regalo",
+			"updateGift": "Actualizar regalo",
+			"title": "Título",
+			"titlePlaceholder": "Ej. Zapatos",
+			"description": "Descripción",
+			"descriptionPlaceholder": "Aquí puedes escribir todo lo que quieras",
+			"price": "Precio",
+			"pricePlaceholder": "Ayuda a las personas a saber cuánto costará",
+			"image": "Imagen",
+			"rateTitle": "Puntúa cuánto quieres este regalo",
+			"toast": {
+				"added": "¡Regalo creado!",
+				"updated": "¡Regalo actualizado!"
 			}
 		}
 	},
@@ -111,6 +123,7 @@
 		"button": "Compartir"
 	},
 	"images": {
+		"yourImage": "Tu imagen",
 		"alt": {
 			"genericGiftImage": "Imagen del regalo",
 			"genericEventImage": "Imagen del evento"
@@ -125,6 +138,7 @@
 	"errors": {
 		"404": "No se ha encontrado la página",
 		"500": "Error interno del servidor",
-		"generic": "Algo no ha salido bien. Inténtalo de nuevo más tarde."
+		"generic": "Algo no ha salido bien. Inténtalo de nuevo más tarde.",
+		"wrongFileType": "El tipo de archivo no es correcto"
 	}
 }
