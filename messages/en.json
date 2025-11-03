@@ -93,6 +93,8 @@
 		}
 	},
 	"friends": {
+		"findFriends": "Find your friends",
+		"inviteFriends": "Invite friends",
 		"friends": "Friends",
 		"friendsList": "Friends list",
 		"noFriends": "No friends yet",

@@ -40,7 +40,7 @@ const FriendsPanel = ({
 		<div className="flex flex-col gap-5">
 			<div className={"flex flex-col gap-5"}>
 				<h1 className="text-xl font-bold">
-					{event ? "Invite friends" : "Find people"}
+					{event ? t("inviteFriends") : t("findFriends")}
 				</h1>
 				<div>
 					<div className="flex flex-row relative">

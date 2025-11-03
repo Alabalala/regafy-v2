@@ -94,6 +94,8 @@
 		}
 	},
 	"friends": {
+		"findFriends": "Encuentra a tu amig@s",
+		"inviteFriends": "Invita a amig@s",
 		"friends": "Amigos",
 		"friendsList": "Lista de amigos",
 		"noFriends": "Aún no tienes amigos",
