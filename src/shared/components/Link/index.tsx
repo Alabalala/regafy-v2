@@ -1,6 +1,6 @@
+import { Link } from "@/i18n/routing";
 import { buttonVariants, variant } from "@/shared/styles/buttonVariant";
 import { plainButtonVariants } from "@/shared/styles/plainButtonVariants";
-import Link from "next/link";
 
 interface Props {
 	href: string;

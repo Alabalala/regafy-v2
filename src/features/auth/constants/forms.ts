@@ -7,6 +7,7 @@ export const LOGIN_FORM_INPUTS = [
 		placeholderKey: "emailPlaceholder",
 		type: "email",
 		required: true,
+		fullWidth: true,
 	},
 	{
 		name: "password",
@@ -14,6 +15,7 @@ export const LOGIN_FORM_INPUTS = [
 		placeholderKey: "passwordPlaceholder",
 		type: "password",
 		required: true,
+		fullWidth: true,
 	},
 ];
 
@@ -29,6 +31,7 @@ export const SIGNUP_FORM_INPUTS = [
 		placeholderKey: "emailPlaceholder",
 		type: "email",
 		required: true,
+		fullWidth: true,
 	},
 	{
 		name: "password",
@@ -37,6 +40,7 @@ export const SIGNUP_FORM_INPUTS = [
 		type: "password",
 		required: true,
 		maxLength: 30,
+		fullWidth: true,
 	},
 ];
 
