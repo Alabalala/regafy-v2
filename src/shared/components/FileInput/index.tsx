@@ -3,6 +3,7 @@ import AddDocumentSVG from "../SVGs/AddDocumentSVG";
 
 import { Button } from "../Button";
 import { FileInputDataType, InputType } from "@/shared/types/forms";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	input: InputType;
@@ -22,6 +23,9 @@ export default function FileInput({
 	const onClick = () => {
 		setFile((prev) => ({ ...prev, file: null, preview: null }));
 	};
+	const tButtons = useTranslations("buttons");
+	const tErrors = useTranslations("errors");
+	const tImages = useTranslations("images");
 
 	return (
 		<div>
@@ -43,7 +47,7 @@ export default function FileInput({
 							height={"40px"}
 							width={"40px"}
 						/>
-						<p>Add picture</p>
+						<p>{tButtons("addImage")}</p>
 					</div>
 				</label>
 			) : (
@@ -51,9 +55,9 @@ export default function FileInput({
 					className={`flex flex-col gap-2 border-2 border-dashed justify-center items-center p-10 relative ${error && "border-red-600"}`}
 				>
 					{error ? (
-						<p className="text-red-600">Wrong file type</p>
+						<p className="text-red-600">{tErrors("wrongFileType")}</p>
 					) : (
-						<p>Your image</p>
+						<p>{tImages("yourImage")}</p>
 					)}
 					{!error && (
 						<Image
@@ -69,7 +73,7 @@ export default function FileInput({
 						onClick={onClick}
 						type={"button"}
 					>
-						Remove
+						{tButtons("deleteImage")}
 					</Button>
 				</div>
 			)}

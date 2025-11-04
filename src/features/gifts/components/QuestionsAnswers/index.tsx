@@ -3,6 +3,7 @@ import QuestionForm from "../QuestionForm";
 import { QuestionItem } from "../QuestionItem";
 import { AnswerItem } from "../AnswerItem";
 import AnswerForm from "../AnswerForm";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	questions: QuestionWithAnswers[];
@@ -21,10 +22,11 @@ const QuestionsAnswers = ({
 	gifts,
 	setGifts,
 }: Props) => {
+	const t = useTranslations("gifts.post.Q&A");
 	if (questions.length === 0)
 		return (
 			<div className="flex flex-col items-center gap-2 w-full">
-				<p>No questions yet </p>
+				<p>{t("noQuestions")}</p>
 				{createdBy !== userId && (
 					<QuestionForm
 						gifts={gifts}
@@ -46,7 +48,7 @@ const QuestionsAnswers = ({
 							className="flex flex-col gap-2"
 							key={q.id}
 						>
-							<p>{`Question ${index + 1}`}</p>
+							<p>{`${t("question")} ${index + 1}`}</p>
 							<QuestionItem
 								id={String(q.id)}
 								question={q.content}

@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import FriendsList from "../friendsList";
 import { useToastStore } from "@/shared/stores/toastStore";
 import toast from "react-hot-toast";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	friendRequests: allFriendRequests[];
@@ -22,6 +23,7 @@ const FriendsRequests = ({ friendRequests, userId }: Props) => {
 	);
 	const router = useRouter();
 	const { message, setMessage, clearMessage } = useToastStore();
+	const t = useTranslations("friends.requests");
 
 	const acceptRequest = (index: number) => {
 		setLoading({ [index]: true });
@@ -32,7 +34,7 @@ const FriendsRequests = ({ friendRequests, userId }: Props) => {
 				friendRequests[index].id,
 				supabase,
 			);
-			setMessage("Friend added!");
+			setMessage(t("toast.accepted"));
 			router.refresh();
 		} catch (err) {
 			console.log(err);
@@ -49,7 +51,7 @@ const FriendsRequests = ({ friendRequests, userId }: Props) => {
 
 	return (
 		<div className="flex flex-col gap-5">
-			<h2 className="text-xl font-bold">Friend requests</h2>
+			<h2 className="text-xl font-bold">{t("requests")}</h2>
 			<FriendsList
 				loading={loading}
 				onClickRequest={acceptRequest}

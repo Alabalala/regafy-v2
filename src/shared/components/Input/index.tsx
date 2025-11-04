@@ -7,17 +7,18 @@ interface Props
 	error: boolean;
 	preview?: string;
 	currentValue: string;
+	placeholder: string;
 }
 
 export default function Input({
 	input,
 	error = false,
 	currentValue,
+	placeholder,
 	...rhfProps
 }: Props) {
 	const commonStyle = `border-2 rounded-md p-2 focus:outline-accent ${error && "border-red-600 focus:border-red-800"} ${input.fullWidth && "w-full"}`;
 	const commonProps = {
-		placeholder: input.placeholder,
 		disabled: input.disabled ?? false,
 	};
 	if (input.type === "textarea") {
@@ -28,6 +29,7 @@ export default function Input({
 					className={`${input.maxLength && "pb-10"} ${commonStyle}`}
 					{...commonProps}
 					{...rhfProps}
+					placeholder={placeholder}
 				/>
 				{input.maxLength && (
 					<div
@@ -45,6 +47,7 @@ export default function Input({
 			<input
 				className={`${(input.type === "text" || input.type === "password") && "pr-12"} ${commonStyle}`}
 				type={input.type}
+				placeholder={placeholder}
 				accept={input.accept ?? ""}
 				{...commonProps}
 				{...rhfProps}

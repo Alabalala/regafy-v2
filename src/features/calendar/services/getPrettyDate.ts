@@ -1,6 +1,6 @@
 export function getPrettyDate(
 	date: Date,
-	locale: string = "en-UK",
+	locale: string,
 	fullTime: boolean = false,
 ): string {
 	return date.toLocaleDateString(locale, {

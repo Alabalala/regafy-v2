@@ -1,0 +1,244 @@
+{
+	"navigation": {
+		"home": "Inicio",
+		"gifts": "Regalos",
+		"friends": "Amigos",
+		"calendar": "Calendario"
+	},
+	"burgerMenu": {
+		"profileSettings": "Configuración del perfil",
+		"help": "Ayuda",
+		"messages": "Mensajes",
+		"switchTheme": "Cambiar tema",
+		"changeLanguage": "Cambiar idioma"
+	},
+	"buttons": {
+		"addPerson": "Añadir persona",
+		"savingFriend": "Guardando amig@...",
+		"addGift": "Añadir regalo",
+		"newGift": "Nuevo regalo",
+		"newEvent": "Nuevo evento",
+		"submit": "Enviar",
+		"save": "Guardar",
+		"share": "Compartir",
+		"reserve": "Reservar",
+		"reserved": "Reservado",
+		"adding": "Añadiendo...",
+		"saving": "Guardando...",
+		"viewProfile": "Ver perfil",
+		"viewGift": "Ver regalo",
+		"invite": "Invitar",
+		"uninvite": "Cancelar invitación",
+		"cancel": "Cancelar",
+		"accept": "Aceptar",
+		"deleteFriend": "Eliminar amig@",
+		"deleteGift": "Eliminar regalo",
+		"addFriend": "Añadir amig@",
+		"acceptRequest": "Aceptar solicitud",
+		"sendRequest": "Enviar solicitud",
+		"declineRequest": "Rechazar solicitud",
+		"addImage": "Añadir foto",
+		"deleteImage": "Eliminar foto",
+		"updateEmail": "Cambiar correo",
+		"updatePassword": "Cambiar contraseña",
+		"deleteAccount": "Eliminar cuenta",
+		"editProfileInfo": "Editar info. del perfil",
+		"logOut": "Cerrar sesión",
+		"logIn": "Iniciar sesión",
+		"signUp": "Registrarse",
+		"loggingOut": "Cerrando sesión...",
+		"loggingIn": "Iniciando sesión...",
+		"signingUp": "Registrándose...",
+		"resendEmail": "Reenviar correo",
+		"resendingEmail": "Reenviando correo...",
+		"backLogin": "Volver al inicio de sesión",
+		"resending": "Reenviando..."
+	},
+	"timeAgo": {
+		"justNow": "justo ahora",
+		"moreThan4Months": "hace más de 4 meses"
+	},
+	"home": {
+		"title": "Muro"
+	},
+	"gifts": {
+		"giftList": "Lista de regalos",
+		"myGifts": "Mis regalos",
+		"noGifts": "Aún no hay regalos",
+		"post": {
+			"friendAddedGift": "ha añadido un regalo para",
+			"youAddedGift": "Has añadido un regalo para",
+			"Q&A": {
+				"noQuestions": "No hay preguntas todavía",
+				"questions": "Preguntas",
+				"question": "Pregunta",
+				"yourQuestion": "Tu pregunta",
+				"yourAnswer": "Tu respuesta",
+				"answer": "Respuesta",
+				"questionLabel": "Pregunta",
+				"questionPlaceholder": "Tu pregunta aquí",
+				"answerLabel": "Tu respuesta",
+				"answerPlaceholder": "Tu respuesta aquí"
+			}
+		},
+		"form": {
+			"newGift": "Nuevo regalo",
+			"editGift": "Editar regalo",
+			"updateGift": "Actualizar regalo",
+			"title": "Título",
+			"titlePlaceholder": "Ej. Zapatos",
+			"description": "Descripción",
+			"descriptionPlaceholder": "Aquí puedes escribir todo lo que quieras",
+			"price": "Precio",
+			"pricePlaceholder": "Ayuda a las personas a saber cuánto costará",
+			"image": "Imagen",
+			"rateTitle": "Puntúa cuánto quieres este regalo",
+			"toast": {
+				"added": "¡Regalo creado!",
+				"updated": "¡Regalo actualizado!"
+			}
+		}
+	},
+	"friends": {
+		"findFriends": "Encuentra a tus amig@s",
+		"inviteFriends": "Invita a tus amig@s",
+		"friends": "Amigos",
+		"friendsList": "Lista de amigos",
+		"noFriends": "Aún no tienes amigos",
+		"notYourFriend": "no es tu amig@ todavía.",
+		"sentYouFriendRequest": "te ha enviado una solicitud de amistad.",
+		"noResults": "No se encontraron resultados",
+		"results": "Resultados",
+		"suggestedFriends": "Amigos sugeridos",
+		"requests": {
+			"requests": "Solicitudes de amistad",
+			"toast": {
+				"accepted": "¡Amig@ añadido!",
+				"declined": "Solicitud de amistad rechazada",
+				"sent": "Solicitud de amistad enviada"
+			}
+		},
+		"profile": {
+			"birthday": "Cumpleaños"
+		},
+		"deleteModalTitle": "¿Eliminar amig@?",
+		"deleteModalMessage": "¿Estás segur@? Esta acción no puede deshacerse."
+	},
+	"share": {
+		"title": "¡Consigue este regalo para tu amig@!",
+		"giftText": "{name} quiere este regalo: {title}",
+		"notSupported": "El uso compartido no está disponible en este navegador.",
+		"button": "Compartir"
+	},
+	"images": {
+		"yourImage": "Tu imagen",
+		"alt": {
+			"genericGiftImage": "Imagen del regalo",
+			"genericEventImage": "Imagen del evento"
+		}
+	},
+	"contextMenu": {
+		"edit": "Editar",
+		"delete": "Eliminar",
+		"goToYourProfile": "Ir a tu perfil",
+		"goToUserProfile": "Ir al perfil del amig@"
+	},
+	"errors": {
+		"404": "No se ha encontrado la página",
+		"500": "Error interno del servidor",
+		"generic": "Algo no ha salido bien. Inténtalo de nuevo más tarde.",
+		"wrongFileType": "El tipo de archivo no es correcto"
+	},
+	"events": {
+		"calendar": "Calendario",
+		"upcomingEvents": "Próximos eventos",
+		"noEvents": "No hay eventos todavía",
+		"eventList": "Lista de eventos",
+		"eventsOn": "Eventos el ",
+		"birthdayTitle": "Cumpleaños de {name}",
+		"daysShort": {
+			"monday": "L",
+			"tuesday": "M",
+			"wednesday": "X",
+			"thursday": "J",
+			"friday": "V",
+			"saturday": "S",
+			"sunday": "D"
+		},
+		"form": {
+			"newEvent": "Nuevo evento",
+			"editEvent": "Editar evento",
+			"updateEvent": "Actualizar evento",
+			"title": "Título",
+			"titlePlaceholder": "Ej. Cumpleaños",
+			"description": "Descripción",
+			"descriptionPlaceholder": "Aquí puedes escribir todo lo que quieras",
+			"date": "Fecha",
+			"eventImage": "Imagen del evento",
+			"guests": "Invitad@s"
+		}
+	},
+	"profileSettings": {
+		"profileSettings": "Ajustes de perfil",
+		"changePassword": "Cambiar tu contraseña",
+		"changeEmail": "Cambiar tu correo electrónico",
+		"yourEmail": "Tu correo electrónico",
+		"emailForm": {
+			"newEmail": "Nuevo correo electrónico",
+			"newEmailPlaceholder": "Ej. tucorreo@ejemplo.com",
+			"confirmNewEmail": "Confirmar nuevo correo electrónico",
+			"confirmNewEmailPlaceholder": "Ej. tucorreo@ejemplo.com",
+			"toast": {
+				"updated": "¡Correo electrónico actualizado!"
+			}
+		},
+		"passwordForm": {
+			"newPassword": "Nueva contraseña",
+			"confirmNewPassword": "Confirmar nueva contraseña",
+			"toast": {
+				"updated": "¡Contraseña actualizada!"
+			}
+		},
+		"logOut": "Cerrar sesión",
+		"logOutDescription": "Puedes cerrar sesión desde aquí, pero tendrás que volver a acceder con tu correo y contraseña.",
+		"deleteAccount": "Eliminar cuenta"
+	},
+	"auth": {
+		"loginWithAccount": "Inicia sesión con tu cuenta",
+		"loginForm": {
+			"email": "Correo",
+			"emailPlaceholder": "Ej. tucorreo@ejemplo.com",
+			"password": "Contraseña",
+			"passwordPlaceholder": "Tu contraseña"
+		},
+		"noAccount": "¿No tienes una cuenta todavía?",
+		"yesAccount": "¿Ya tienes una cuenta?",
+		"signUp": "Crea una cuenta nueva",
+		"signUpForm": {
+			"email": "Correo",
+			"emailPlaceholder": "Ej. tucorreo@ejemplo.com",
+			"password": "Contraseña",
+			"passwordPlaceholder": "Tu contraseña",
+			"passwordInstructions": "La contraseña debe tener al menos 6 caracteres y contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.",
+			"toast": {
+				"created": "¡Cuenta creada!"
+			},
+			"completedSignup": "¡Cuenta creada! Comprueba tu correo para activar tu cuenta."
+		},
+		"forgotPassword": "¿Olvidaste tu contraseña?",
+		"confirmationForm": {
+			"toast": {
+				"resent": "¡Correo reenviado!"
+			}
+		}
+	},
+	"loader": {
+		"loading": "Cargando..."
+	},
+	"notifications": {
+		"notifications": "Notificaciones",
+		"noNotifications": "No tienes notificaciones todavía",
+		"notificationList": "Lista de notificaciones",
+		"notification": "Notificación"
+	}
+}

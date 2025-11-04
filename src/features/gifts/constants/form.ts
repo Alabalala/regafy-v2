@@ -1,37 +1,36 @@
-import { maxLength } from "zod";
-
 export const GIFT_FORM_FIELDS = [
 	{
 		name: "title",
-		label: "Title",
+		labelKey: "title",
 		type: "text",
 		required: true,
-		placeholder: "E. g. Shoes",
+		placeholderKey: "titlePlaceholder",
 		maxLength: 30,
 		fullWidth: true,
 	},
 	{
 		name: "description",
-		label: "Description",
+		labelKey: "description",
 		type: "textarea",
 		required: false,
-		placeholder: "Here you can write as much as you want",
+		placeholderKey: "descriptionPlaceholder",
 		maxLength: 400,
 		fullWidth: true,
 	},
 	{
 		name: "price",
-		label: "Price",
+		labelKey: "price",
 		type: "string",
 		required: true,
-		placeholder: "Help people know how much it will cost",
+		placeholderKey: "pricePlaceholder",
 		fullWidth: true,
 	},
 	{
 		name: "image",
-		label: "Image",
+		labelKey: "image",
 		type: "file",
 		required: false,
+		placeholderKey: "",
 		accept: "image/*",
 		fullWidth: true,
 	},
@@ -53,12 +52,12 @@ export const FILE_INPUT_INITIAL_VALUES = {
 
 export const QUESTION_INPUT_FIELDS = [
 	{
-		label: "Your question",
+		labelKey: "questionLabel",
 		text: "",
 		name: "question",
 		type: "text",
 		required: true,
-		placeholder: "Your question here",
+		placeholderKey: "questionPlaceholder",
 		fullWidth: true,
 		maxLength: 100,
 	},
@@ -70,12 +69,12 @@ export const QUESTION_INITIAL_VALUES = {
 
 export const ANSWER_INPUT_FIELDS = [
 	{
-		label: "Your answer",
+		labelKey: "yourAnswer",
 		text: "",
 		name: "answer",
 		type: "text",
 		required: true,
-		placeholder: "Your answer here",
+		placeholderKey: "answerPlaceholder",
 		fullWidth: true,
 		maxLength: 100,
 	},

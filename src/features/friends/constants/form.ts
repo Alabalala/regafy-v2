@@ -1,9 +1,9 @@
 export const FIND_PEOPLE_FORM_INPUTS = [
 	{
 		name: "userName",
-		label: "Username",
+		labelKey: "username",
 		type: "text",
-		placeholder: "E. g. johndoe",
+		placeholderKey: "usernamePlaceholder",
 		required: true,
 		fullWidth: true,
 	},

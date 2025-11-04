@@ -7,9 +7,12 @@ import FriendsSVG from "../SVGs/FriendsSVG";
 import GiftSVG from "../SVGs/GiftSVG";
 import HomeSVG from "../SVGs/HomeSVG";
 import NewGiftSVG from "../SVGs/NewGiftSVG";
+import { useTranslations } from "next-intl";
 
 export default function Footer({}) {
 	const pathName = usePathname();
+	const tButtons = useTranslations("buttons");
+	const tNavigation = useTranslations("navigation");
 
 	return (
 		<footer
@@ -27,7 +30,7 @@ export default function Footer({}) {
 						filled={pathName === getPath("Home")}
 						className={"w-8 h-8"}
 					/>
-					<p className={"text-sm"}>Home</p>
+					<p className={"text-sm"}>{tNavigation("home")}</p>
 				</div>
 			</NextLink>
 			<NextLink
@@ -40,7 +43,7 @@ export default function Footer({}) {
 						filled={pathName.startsWith(getPath("Gifts"))}
 						className={"w-8 h-8"}
 					/>
-					<p className={"text-sm"}>Gifts</p>
+					<p className={"text-sm"}>{tNavigation("gifts")}</p>
 				</div>
 			</NextLink>
 
@@ -51,7 +54,7 @@ export default function Footer({}) {
 			>
 				<div className={"flex flex-col items-center"}>
 					<NewGiftSVG className={"w-8 h-8"} />
-					<p className={"text-sm"}>New Gift</p>
+					<p className={"text-sm"}>{tButtons("newGift")}</p>
 				</div>
 			</NextLink>
 
@@ -65,7 +68,7 @@ export default function Footer({}) {
 						filled={pathName.startsWith(getPath("Friends"))}
 						className={"w-8 h-8"}
 					/>
-					<p className={"text-sm"}>Friends</p>
+					<p className={"text-sm"}>{tNavigation("friends")}</p>
 				</div>
 			</NextLink>
 			<NextLink
@@ -78,7 +81,7 @@ export default function Footer({}) {
 						filled={pathName.startsWith(getPath("Calendar"))}
 						className={"w-8 h-8"}
 					/>
-					<p className={"text-sm"}>Calendar</p>
+					<p className={"text-sm"}>{tNavigation("calendar")}</p>
 				</div>
 			</NextLink>
 		</footer>

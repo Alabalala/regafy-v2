@@ -29,6 +29,7 @@ import { EventFormData, EventFormPayload } from "../../types/events";
 import { addImageToEvent } from "../../services/supabase";
 import { validateImage } from "@/shared/services/validateImage";
 import { uploadImageFile } from "@/shared/services/supabase/globals";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	event?: Event;
@@ -66,6 +67,8 @@ const EventForm = ({ event, type, friends }: Props) => {
 	const date = searchParams.get("date");
 	const { setMessage } = useToastStore();
 	const supabase = createClient();
+	const t = useTranslations("events.form");
+	const tButtons = useTranslations("buttons");
 
 	useEffect(() => {
 		if (event && event.event_image_link) {
@@ -195,7 +198,7 @@ const EventForm = ({ event, type, friends }: Props) => {
 						key={fieldName}
 						className={"flex flex-col gap-2"}
 					>
-						<p className={"font-bold"}>{input.label}</p>
+						<p className={"font-bold"}>{t(input.labelKey)}</p>
 
 						{input.type === "file" ? (
 							<div className="flex flex-col gap-2">
@@ -210,6 +213,7 @@ const EventForm = ({ event, type, friends }: Props) => {
 							</div>
 						) : (
 							<Input
+								placeholder={t(input.placeholderKey)}
 								{...register(fieldName)}
 								input={input}
 								currentValue={watch(fieldName) || ""}
@@ -228,7 +232,7 @@ const EventForm = ({ event, type, friends }: Props) => {
 				guests={guests}
 			></FriendsPanel>
 			<div>
-				<p className={"text-xl font-bold"}>Guests</p>
+				<p className={"text-xl font-bold"}>{t("guests")}</p>
 				<FriendsList
 					friends={guests}
 					onClick={onFriendClick}
@@ -244,9 +248,9 @@ const EventForm = ({ event, type, friends }: Props) => {
 					type="submit"
 					disabled={isSubmitting}
 					loading={isSubmitting}
-					loadingText={"Saving..."}
+					loadingText={tButtons("saving")}
 				>
-					Save event
+					{tButtons("save")}
 				</Button>
 			</div>
 		</form>

@@ -1,7 +1,5 @@
 import { useEffect } from "react";
 import { useUserStore } from "../stores/userStore";
-
-import { getCurrentUser } from "../services/supabase";
 import { createClient } from "@/shared/services/supabase/client";
 
 export function useUser() {
@@ -17,22 +15,22 @@ export function useUser() {
 
 		fetchUser();
 
-		const { data: listener } = supabase.auth.onAuthStateChange(
-			async (_event, session) => {
-				if (session) {
-					const {
-						data: { user },
-						error,
-					} = await supabase.auth.getUser();
-					setUser(user ?? null);
-				} else {
-					setUser(null);
-				}
-			},
-		);
+		const {
+			data: { subscription },
+		} = supabase.auth.onAuthStateChange(async (_event, session) => {
+			if (session) {
+				const {
+					data: { user },
+					error,
+				} = await supabase.auth.getUser();
+				setUser(user ?? null);
+			} else {
+				setUser(null);
+			}
+		});
 
 		return () => {
-			listener.subscription.unsubscribe();
+			subscription.unsubscribe();
 		};
 	}, [setUser]);
 

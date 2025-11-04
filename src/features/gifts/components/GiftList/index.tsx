@@ -2,6 +2,7 @@ import { Gift } from "@/shared/types/supabase/supabase";
 import GiftPost from "../GiftPost";
 import { NextLink } from "@/shared/components/Link";
 import { Ref } from "react";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	gifts: Gift[];
@@ -18,6 +19,7 @@ const GiftList = ({
 	newGiftLink,
 	loadMoreRef,
 }: Props) => {
+	const tButtons = useTranslations("buttons");
 	return (
 		<div>
 			<div className={"flex flex-col gap-5 mt-5 relative"}>
@@ -40,7 +42,7 @@ const GiftList = ({
 						floating
 						href={newGiftLink}
 					>
-						New gift
+						{tButtons("newGift")}
 					</NextLink>
 				)}
 			</div>

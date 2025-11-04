@@ -1,7 +1,8 @@
 export const EVENT_FORM_FIELDS = [
 	{
 		name: "title",
-		label: "Title",
+		labelKey: "title",
+		placeholderKey: "titlePlaceholder",
 		type: "text",
 		required: true,
 		maxLength: 30,
@@ -9,7 +10,8 @@ export const EVENT_FORM_FIELDS = [
 	},
 	{
 		name: "description",
-		label: "Description",
+		labelKey: "description",
+		placeholderKey: "descriptionPlaceholder",
 		type: "textarea",
 		required: false,
 		maxLength: 500,
@@ -17,14 +19,16 @@ export const EVENT_FORM_FIELDS = [
 	},
 	{
 		name: "date",
-		label: "Date",
+		labelKey: "date",
+		placeholderKey: "",
 		type: "date",
 		required: true,
 		fullWidth: true,
 	},
 	{
 		name: "image",
-		label: "Event image",
+		labelKey: "eventImage",
+		placeholderKey: "",
 		type: "file",
 		required: false,
 		fullWidth: true,

@@ -1,10 +1,10 @@
-import { useUser } from "@/features/auth/hooks/useUser";
 import ProfileInfo from "@/features/profile/components/ProfileInfo";
 import { Profile } from "@/features/profile/types/supabase.types";
 import { Button } from "@/shared/components/Button";
 import { NextLink } from "@/shared/components/Link";
 import { getPath } from "@/shared/services/getPath";
 import { Event } from "@/shared/types/supabase/supabase";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	friend: Profile;
@@ -27,6 +27,8 @@ const FriendCard = ({
 	loading,
 	index,
 }: Props) => {
+	const tButtons = useTranslations("buttons");
+
 	return (
 		<div className="flex flex-row justify-between border-2 px-5 py-2 items-center rounded-lg">
 			<ProfileInfo
@@ -40,9 +42,10 @@ const FriendCard = ({
 						onClick={() => onClick?.(friend as Profile)}
 						shrink
 						loading={loading}
+						loadingText={tButtons("adding")}
 						variant={isInvited ? "delete" : "primary"}
 					>
-						{isInvited ? "Uninvite" : "Invite"}
+						{isInvited ? tButtons("uninvite") : tButtons("invite")}
 					</Button>
 				)}
 				{type === "link" && (
@@ -51,7 +54,7 @@ const FriendCard = ({
 						shrink
 						href={getPath("Friend profile", friend.id)}
 					>
-						View Profile
+						{tButtons("viewProfile")}
 					</NextLink>
 				)}
 				{type === "request" && (
@@ -61,7 +64,7 @@ const FriendCard = ({
 						shrink
 						variant={"primary"}
 					>
-						Accept
+						{tButtons("accept")}
 					</Button>
 				)}
 			</div>

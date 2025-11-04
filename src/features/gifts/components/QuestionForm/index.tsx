@@ -11,6 +11,8 @@ import {
 } from "../../constants/form";
 import { questionSchema } from "../../schema/questionSchema";
 import { QuestionFormType } from "../../types/form";
+import { useTranslations } from "next-intl";
+import { getTranslations } from "next-intl/server";
 
 interface Props {
 	userId: string;
@@ -30,7 +32,8 @@ const QuestionForm = ({ userId, giftId, gifts, setGifts }: Props) => {
 		resolver: zodResolver(questionSchema),
 		defaultValues: QUESTION_INITIAL_VALUES,
 	});
-
+	const t = useTranslations("gifts.post.Q&A");
+	const tButtons = useTranslations("buttons");
 	const onSubmit = async (data: QuestionFormType) => {
 		try {
 			const result = await newQuestionAction(data, giftId, userId);
@@ -68,13 +71,14 @@ const QuestionForm = ({ userId, giftId, gifts, setGifts }: Props) => {
 						key={fieldName}
 						className={"flex flex-col gap-2"}
 					>
-						<p className={"font-bold"}>{input.label}</p>
+						<p className={"font-bold"}>{t(input.labelKey)}</p>
 
 						<Input
 							{...register(fieldName)}
 							input={input}
 							currentValue={watch(fieldName) || ""}
 							error={!!errors[fieldName]}
+							placeholder={t(input.placeholderKey)}
 						/>
 						<div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
 					</div>
@@ -85,9 +89,9 @@ const QuestionForm = ({ userId, giftId, gifts, setGifts }: Props) => {
 					type="submit"
 					disabled={isSubmitting}
 					loading={isSubmitting}
-					loadingText={"Adding answer..."}
+					loadingText={tButtons("adding")}
 				>
-					Submit
+					{tButtons("submit")}
 				</Button>
 			</div>
 		</form>

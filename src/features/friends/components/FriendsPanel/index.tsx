@@ -9,6 +9,7 @@ import { FIND_PEOPLE_FORM_INPUTS } from "../../constants/form";
 import useSearchFriends from "../../hooks/useSearchFriends";
 import FriendsList from "../friendsList";
 import { Event } from "@/shared/types/supabase/supabase";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	friends: Profile[];
@@ -33,16 +34,18 @@ const FriendsPanel = ({
 		friends,
 		supabase,
 	});
+	const t = useTranslations("friends");
 
 	return (
 		<div className="flex flex-col gap-5">
 			<div className={"flex flex-col gap-5"}>
 				<h1 className="text-xl font-bold">
-					{event ? "Invite friends" : "Find people"}
+					{event ? t("inviteFriends") : t("findFriends")}
 				</h1>
 				<div>
 					<div className="flex flex-row relative">
 						<Input
+							placeholder={FIND_PEOPLE_FORM_INPUTS[0].placeholderKey}
 							error={error}
 							value={query}
 							onChange={(e) => setQuery(e.target.value)}
@@ -79,11 +82,12 @@ const FriendsPanel = ({
 			<div className={"flex flex-col gap-5"}>
 				<h1 className="text-xl font-bold">
 					{type === "event" && !query && !searchResults
-						? "Suggested friends"
+						? t("suggestedFriends")
 						: searchResults !== undefined
-							? "Results"
-							: "Friends"}
+							? t("results")
+							: t("friends")}
 				</h1>
+
 				<FriendsList
 					guests={guests}
 					isSearching={loading}

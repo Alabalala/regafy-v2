@@ -13,12 +13,15 @@ import useProfile from "../../store/hooks/useProfile";
 import UpdateEmailForm from "@/features/auth/components/UpdateEmailForm";
 import UpdatePasswordForm from "@/features/auth/components/UpdatePasswordForm";
 import LoadingComponent from "@/shared/components/loadingModule";
+import { useTranslations } from "next-intl";
 
 export const ProfileSettings = ({}) => {
 	const [profile] = useProfile();
 	const [isProfileFormOpen, setIsProfileFormOpen] = useState(false);
 	const [user] = useUser();
 	const { logout } = useLogout();
+	const t = useTranslations("profileSettings");
+	const tButtons = useTranslations("buttons");
 
 	if (!profile || !user) return <LoadingComponent />;
 
@@ -39,7 +42,7 @@ export const ProfileSettings = ({}) => {
 							variant="secondary"
 							onClick={() => setIsProfileFormOpen(true)}
 						>
-							Edit profile info
+							{tButtons("editProfileInfo")}
 						</Button>
 					</div>
 				)}
@@ -54,8 +57,10 @@ export const ProfileSettings = ({}) => {
 			</div>
 			<div className="flex flex-col gap-5">
 				<div className="flex flex-col gap-2">
-					<h2 className="font-bold uppercase">Change your email</h2>
-					<p>Your email: {user.email}</p>
+					<h2 className="font-bold uppercase">{t("changeEmail")}</h2>
+					<p>
+						{t("yourEmail")}: {user.email}
+					</p>
 					<div>
 						<UpdateEmailForm></UpdateEmailForm>
 					</div>
@@ -64,7 +69,7 @@ export const ProfileSettings = ({}) => {
 				<hr />
 
 				<div className="flex flex-col gap-2">
-					<h2 className="font-bold uppercase">Change your password</h2>
+					<h2 className="font-bold uppercase">{t("changePassword")}</h2>
 					<div>
 						<UpdatePasswordForm></UpdatePasswordForm>
 					</div>
@@ -72,13 +77,10 @@ export const ProfileSettings = ({}) => {
 
 				<hr />
 				<div className="flex flex-col gap-2">
-					<h2 className="font-bold">Logout</h2>
-					<p>
-						You can log out from here, but you will need to log in again with your
-						email and password.
-					</p>
+					<h2 className="font-bold">{t("logOut")}</h2>
+					<p>{t("logOutDescription")}</p>
 					<div className="w-fit mx-auto">
-						<Button onClick={() => logout()}>Log out</Button>
+						<Button onClick={() => logout()}>{tButtons("logOut")}</Button>
 					</div>
 				</div>
 
@@ -86,13 +88,13 @@ export const ProfileSettings = ({}) => {
 
 				{/*TODO*/}
 				<div className="flex flex-col gap-2">
-					<h2 className="font-bold">Delete account</h2>
+					<h2 className="font-bold">{t("deleteAccount")}</h2>
 					<div className="flex justify-center">
 						<NextLink
 							href={getPath("Delete account")}
 							variant="delete"
 						>
-							Delete account
+							{tButtons("deleteAccount")}
 						</NextLink>
 					</div>
 				</div>

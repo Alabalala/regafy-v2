@@ -17,6 +17,7 @@ import {
 import { SingupFormSchema } from "../../schemas/signupForm";
 import { resendConfirmationEmail } from "../../services/supabase";
 import { SignUpFormTypes } from "../../types/forms";
+import { useTranslations } from "next-intl";
 
 const SignUpForm = () => {
 	const [message, setMessage] = useState<string | undefined>("");
@@ -33,13 +34,15 @@ const SignUpForm = () => {
 		resolver: zodResolver(SingupFormSchema),
 		defaultValues: SIGNUP_FORM_INITIAL_DATA,
 	});
-	console.log(errors);
+
 	useEffect(() => {
 		if (user) {
 			router.push(getPath("Home"));
 		}
 	}, [user, router]);
 	const email = watch("email");
+	const t = useTranslations("auth");
+	const tButtons = useTranslations("buttons");
 
 	const onSubmit = async (formData: SignUpFormTypes) => {
 		setMessage("");
@@ -63,7 +66,7 @@ const SignUpForm = () => {
 		if (!result.success) {
 			setMessage(result.error);
 		} else {
-			setMessage("Email resent! Check your inbox.");
+			setMessage(t("confirmationForm.toast.resent"));
 		}
 
 		setResendLoading(false);
@@ -76,16 +79,16 @@ const SignUpForm = () => {
 		>
 			{singupComplete ? (
 				<div className="flex flex-col gap-4 items-center">
-					<p>Sign up complete! Check your email to verify your account.</p>
+					<p>{t("signUpForm.completedSignup")}</p>
 					<Button
 						loading={resendLoading}
 						onClick={handleEmailResend}
 						variant="primary"
-						loadingText="Resending..."
+						loadingText={tButtons("resending")}
 					>
-						Resend email
+						{tButtons("resendEmail")}
 					</Button>
-					<NextLink href={getPath("Login")}>Go back to Login</NextLink>
+					<NextLink href={getPath("Login")}>{tButtons("backLogin")}</NextLink>
 				</div>
 			) : (
 				<div className={"flex flex-col gap-4"}>
@@ -96,9 +99,10 @@ const SignUpForm = () => {
 								key={fieldName}
 								className={"flex flex-col gap-2"}
 							>
-								<p className={"font-bold"}>{input.label}</p>
+								<p className={"font-bold"}>{t("signUpForm." + input.labelKey)}</p>
 
 								<Input
+									placeholder={t("signUpForm." + input.placeholderKey)}
 									{...register(fieldName)}
 									input={input}
 									currentValue={watch(fieldName) || ""}
@@ -110,8 +114,7 @@ const SignUpForm = () => {
 					})}
 
 					<p className="text-sm text-gray-400">
-						Password must be at least 6 characters, contain at least one uppercase
-						letter, one lowercase letter, one number and one special character.{" "}
+						{t("signUpForm.passwordInstructions")}
 					</p>
 
 					<div className={"flex justify-center"}>
@@ -119,20 +122,20 @@ const SignUpForm = () => {
 							type="submit"
 							disabled={isSubmitting}
 							loading={isSubmitting}
-							loadingText={"Logging in..."}
+							loadingText={tButtons("signingUp")}
 						>
-							Sign up
+							{tButtons("signUp")}
 						</Button>
 					</div>
 
 					<div className={"flex flex-row justify-center items-center gap-2"}>
-						<p>Already have an account?</p>
+						<p>{t("yesAccount")}</p>
 						<NextLink
 							isPlain
 							variant="primary"
 							href={getPath("Login")}
 						>
-							Log in
+							{tButtons("logIn")}
 						</NextLink>
 					</div>
 				</div>

@@ -1,7 +1,7 @@
 export const AnswerContextHelper = (id: string, onDelete: () => void) => {
 	return [
 		{
-			label: "Delete",
+			labelKey: "delete",
 			onClick: onDelete,
 		},
 	];

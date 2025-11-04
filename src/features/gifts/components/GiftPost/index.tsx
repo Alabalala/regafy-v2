@@ -5,7 +5,7 @@ import BookMarkSVG from "../../../../shared/components/SVGs/BookMarkSVG";
 import { Gift } from "@/shared/types/supabase/supabase";
 import { poppins } from "@/shared/services/fonts";
 import { ContextMenu } from "@/shared/components/ContextMenu";
-import { getTimeAgo } from "@/shared/services/getTimeAgo";
+import { useTimeAgo } from "@/shared/hooks/useTimeAgo";
 import {
 	FriendGiftContextMenuHelper,
 	OwnGiftContextMenuHelper,
@@ -23,6 +23,7 @@ import { createClient } from "@/shared/services/supabase/client";
 import { getProfile } from "@/features/profile/services/supabase";
 import { Profile } from "@/features/profile/types/supabase.types";
 import ProfileImage from "@/features/profile/components/ProfileImage";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	gift: Gift;
@@ -37,7 +38,11 @@ export default function GiftPost({
 	gifts,
 	setGifts,
 }: Props) {
-	const timeAgo = getTimeAgo(gift.created_at);
+	const timeAgo = useTimeAgo(gift.created_at);
+	const t = useTranslations("gifts");
+	const tShare = useTranslations("share");
+	const tImages = useTranslations("images");
+	const tButtons = useTranslations("buttons");
 	const [user] = useUser();
 	const [isCommentsOpen, setIsCommentsOpen] = useState(false);
 	const [reserver, setReserver] = useState<Profile | null>(null);
@@ -56,13 +61,16 @@ export default function GiftPost({
 	const isOwnGift = gift.profile_id === user.id;
 
 	const handleShare = async () => {
-		const giftText = `${gift.profiles.name} wants this gift: ${gift.title}`;
+		const giftText = tShare("giftText", {
+			name: gift.profiles.name,
+			title: gift.title,
+		});
 		const giftUrl = `${window.location.origin}/friends/${gift.profile_id}`;
 
 		if (navigator.share) {
 			try {
 				await navigator.share({
-					title: "Get this gift for your friend!",
+					title: tShare("title"),
 					text: giftText,
 					url: giftUrl,
 				});
@@ -70,7 +78,7 @@ export default function GiftPost({
 				console.error("Error sharing", err);
 			}
 		} else {
-			alert("Sharing not supported on this browser.");
+			alert(tShare("notSupported"));
 		}
 	};
 
@@ -81,7 +89,7 @@ export default function GiftPost({
 			>
 				<div className="absolute top-4 right-0 flex flex-row gap-3">
 					<div className={"flex items-center text-xs"}>
-						<p>{timeAgo} ago</p>
+						<p>{timeAgo}</p>
 					</div>
 					<ContextMenu
 						helperFunction={() =>
@@ -104,7 +112,7 @@ export default function GiftPost({
 							"flex flex-col gap-2 border-2 p-2 rounded-md bg-secondary dark:bg-secondary-dark"
 						}
 					>
-						<p>Ha añadido un regalo para</p>
+						<p>{t("post.friendAddedGift")}</p>
 						<div className={"flex flex-row "}>
 							<ProfileInfo
 								canEdit={false}
@@ -129,7 +137,8 @@ export default function GiftPost({
 							src={`${getOptimizedImageUrl(gift.image_link)}?t=${Date.now()}`}
 							fill
 							className={"object-cover"}
-							alt={"Imagen del regalo"}
+							alt={tImages("alt.genericGiftImage")}
+							unoptimized={process.env.NODE_ENV === "development"}
 						/>
 					</div>
 				)}
@@ -148,7 +157,7 @@ export default function GiftPost({
 							<div className="relative">
 								<div className={"flex flex-col items-center z-10 relative"}>
 									<BookMarkSVG filled={gift.reserved ?? false} />
-									<p>Reserve{gift.reserved && "d"}</p>
+									<p>{gift.reserved ? tButtons("reserved") : tButtons("reserve")}</p>
 								</div>
 								{reserver && (
 									<div className="absolute top-0 right-0 z-0">
@@ -169,7 +178,7 @@ export default function GiftPost({
 					>
 						<div className={"flex flex-col items-center"}>
 							<QuestionChatSVG filled={isCommentsOpen} />
-							<p>Questions</p>
+							<p>{t("post.Q&A.questions")}</p>
 						</div>
 					</Button>
 					<Button
@@ -180,7 +189,7 @@ export default function GiftPost({
 					>
 						<div className={"flex flex-col items-center"}>
 							<ShareSVG />
-							<p>Share</p>
+							<p>{tButtons("share")}</p>
 						</div>
 					</Button>
 				</div>

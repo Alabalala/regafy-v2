@@ -4,7 +4,7 @@ export const QuestionContextMenu = (
 ) => {
 	return [
 		{
-			label: "Delete question",
+			labelKey: "delete",
 			onClick: onDelete,
 		},
 	];

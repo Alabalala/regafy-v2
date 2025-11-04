@@ -13,6 +13,7 @@ import {
 } from "../../constants/forms";
 import { updatePasswordFormSchema } from "../../schemas/updatePassword";
 import { UpdatePasswordFormTypes } from "../../types/forms";
+import { useTranslations } from "next-intl";
 
 const UpdatePasswordForm = () => {
 	const [supabaseToast, setsupabaseToast] = useState<string | undefined>("");
@@ -26,6 +27,8 @@ const UpdatePasswordForm = () => {
 		resolver: zodResolver(updatePasswordFormSchema),
 		defaultValues: INITIAL_UPDATE_PASSWORD_FORM_DATA,
 	});
+	const t = useTranslations("profileSettings.passwordForm");
+	const tButtons = useTranslations("buttons");
 
 	const onSubmit = async (data: UpdatePasswordFormTypes) => {
 		const result = await updatePasswordAction(data);
@@ -35,7 +38,7 @@ const UpdatePasswordForm = () => {
 			}
 			return;
 		} else if (result.success) {
-			setMessage("Password changed successfully");
+			setMessage(t("toast.updated"));
 		}
 	};
 
@@ -51,8 +54,9 @@ const UpdatePasswordForm = () => {
 						key={input.name}
 						className={"flex flex-col gap-2"}
 					>
-						<p className={"font-bold"}>{input.label}</p>
+						<p className={"font-bold"}>{t(input.labelKey)}</p>
 						<Input
+							placeholder=""
 							{...register(fieldName)}
 							input={input}
 							currentValue={watch(fieldName) || ""}
@@ -72,9 +76,9 @@ const UpdatePasswordForm = () => {
 					type="submit"
 					disabled={isSubmitting}
 					loading={isSubmitting}
-					loadingText={"Saving..."}
+					loadingText={tButtons("saving")}
 				>
-					Update email
+					{tButtons("updatePassword")}
 				</Button>
 			</div>
 		</form>
