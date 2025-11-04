@@ -231,5 +231,8 @@
 				"resent": "¡Correo reenviado!"
 			}
 		}
+	},
+	"loader": {
+		"loading": "Cargando..."
 	}
 }
