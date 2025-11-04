@@ -1,15 +1,12 @@
-import { NotificationWithSender } from "@/shared/types/supabase/supabase";
-import { Button } from "../Button";
-import CloseSVG from "../SVGs/CloseSVG";
-import ProfileImage from "@/features/profile/components/ProfileImage";
-import { NextLink } from "../Link";
 import { getPath } from "@/shared/services/getPath";
-import { useRouter } from "next/navigation";
-import { markNotificationAsRead } from "@/shared/services/supabase/notifications";
 import { createClient } from "@/shared/services/supabase/client";
-import { set } from "zod";
-import { useState } from "react";
+import { markNotificationAsRead } from "@/shared/services/supabase/notifications";
+import { NotificationWithSender } from "@/shared/types/supabase/supabase";
+import { useRouter } from "next/navigation";
+import { Button } from "../Button";
 import Notification from "../Notification";
+import CloseSVG from "../SVGs/CloseSVG";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,7 +42,7 @@ export const NotificationsMenu = ({
 			console.error("marking notification as read error:", error);
 		}
 	};
-
+	const t = useTranslations("notifications");
 	const handleClick = async (
 		type: string,
 		referenceId: string,
@@ -63,7 +60,7 @@ export const NotificationsMenu = ({
 			className={`flex flex-col border-2 gap-10 p-4 left-0 top-20 bg-tertiary dark:bg-tertiary-dark fixed h-full w-full z-30 transition-transform duration-500 ${isOpen ? "translate-x-0" : "translate-x-full"}`}
 		>
 			<div className="flex justify-between items-center">
-				<h2 className="font-bold text-xl">Notifications</h2>
+				<h2 className="font-bold text-xl">{t("notifications")}</h2>
 				<Button
 					isPlain
 					onClick={() => setIsOpen(false)}
@@ -73,7 +70,7 @@ export const NotificationsMenu = ({
 			</div>
 
 			{notifications.length === 0 ? (
-				<div className="flex justify-center">No new notifications</div>
+				<div className="flex justify-center">{t("noNotifications")}</div>
 			) : (
 				<div className="flex flex-col pb-20 gap-4 overflow-y-scroll">
 					{notifications.map((notification) => (

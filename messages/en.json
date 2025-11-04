@@ -233,6 +233,12 @@
 		}
 	},
 	"loader": {
-		"loading": "Cargando..."
+		"loading": "Loading..."
+	},
+	"notifications": {
+		"notifications": "Notifications",
+		"noNotifications": "No new notifications",
+		"notificationList": "Notifications list",
+		"notification": "Notification"
 	}
 }

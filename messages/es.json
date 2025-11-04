@@ -234,5 +234,11 @@
 	},
 	"loader": {
 		"loading": "Cargando..."
+	},
+	"notifications": {
+		"notifications": "Notificaciones",
+		"noNotifications": "No tienes notificaciones todavía",
+		"notificationList": "Lista de notificaciones",
+		"notification": "Notificación"
 	}
 }
