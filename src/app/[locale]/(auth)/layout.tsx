@@ -1,3 +1,4 @@
+import { NavBar } from "@/shared/components/NavBar";
 import "@/shared/styles/globals.css";
 
 export const metadata = {
@@ -10,5 +11,10 @@ export default function AuthLayout({
 }: {
 	children: React.ReactNode;
 }) {
-	return <main>{children}</main>;
+	return (
+		<main>
+			<NavBar type={"auth"}></NavBar>
+			{children}
+		</main>
+	);
 }
