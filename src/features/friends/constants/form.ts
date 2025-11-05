@@ -3,7 +3,7 @@ export const FIND_PEOPLE_FORM_INPUTS = [
 		name: "userName",
 		labelKey: "username",
 		type: "text",
-		placeholderKey: "usernamePlaceholder",
+		placeholderKey: "findFriendPlaceholder",
 		required: true,
 		fullWidth: true,
 	},

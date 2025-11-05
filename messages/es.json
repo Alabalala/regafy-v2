@@ -103,6 +103,8 @@
 		"findFriends": "Encuentra a tus amig@s",
 		"inviteFriends": "Invita a tus amig@s",
 		"friends": "Amigos",
+		"findFriendPlaceholder": "Escribe el nombre o el nombre de usuario de tu amig@ aqui",
+
 		"friendsList": "Lista de amigos",
 		"noFriends": "Aún no tienes amigos",
 		"notYourFriend": "no es tu amig@ todavía.",

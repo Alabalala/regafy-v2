@@ -10,6 +10,7 @@ import useSearchFriends from "../../hooks/useSearchFriends";
 import FriendsList from "../friendsList";
 import { Event } from "@/shared/types/supabase/supabase";
 import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
 
 interface Props {
 	friends: Profile[];
@@ -26,7 +27,10 @@ const FriendsPanel = ({
 	onClick,
 	guests,
 }: Props) => {
-	const [query, setQuery] = useState("");
+	const { register, watch, setValue } = useForm({
+		defaultValues: { query: "" },
+	});
+	const query = watch("query");
 	const supabase = createClient();
 	const { searchResults, error, errorMessage, loading } = useSearchFriends({
 		query,
@@ -35,7 +39,7 @@ const FriendsPanel = ({
 		supabase,
 	});
 	const t = useTranslations("friends");
-
+	console.log(query);
 	return (
 		<div className="flex flex-col gap-5">
 			<div className={"flex flex-col gap-5"}>
@@ -45,10 +49,10 @@ const FriendsPanel = ({
 				<div>
 					<div className="flex flex-row relative">
 						<Input
-							placeholder={FIND_PEOPLE_FORM_INPUTS[0].placeholderKey}
+							currentValue={query}
+							placeholder={t(FIND_PEOPLE_FORM_INPUTS[0].placeholderKey)}
 							error={error}
-							value={query}
-							onChange={(e) => setQuery(e.target.value)}
+							{...register("query")}
 							input={FIND_PEOPLE_FORM_INPUTS[0]}
 						></Input>
 						<div
@@ -62,7 +66,7 @@ const FriendsPanel = ({
 						<div className="absolute right-2 top-2">
 							<Button
 								isPlain
-								onClick={() => setQuery("")}
+								onClick={() => setValue("query", "")}
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +87,7 @@ const FriendsPanel = ({
 				<h1 className="text-xl font-bold">
 					{type === "event" && !query && !searchResults
 						? t("suggestedFriends")
-						: searchResults !== undefined
+						: searchResults && searchResults.length > 0
 							? t("results")
 							: t("friends")}
 				</h1>

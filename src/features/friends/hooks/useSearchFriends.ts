@@ -70,6 +70,5 @@ export default function useSearchFriends({
 
 		fetchResults();
 	}, [query, debouncedValue, type, friends, supabase]);
-
 	return { searchResults, error, errorMessage, loading };
 }
