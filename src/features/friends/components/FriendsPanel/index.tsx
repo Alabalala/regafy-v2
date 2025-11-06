@@ -39,7 +39,7 @@ const FriendsPanel = ({
 		supabase,
 	});
 	const t = useTranslations("friends");
-	console.log(query);
+
 	return (
 		<div className="flex flex-col gap-5">
 			<div className={"flex flex-col gap-5"}>

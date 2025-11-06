@@ -11,6 +11,7 @@ import { createEventComment } from "../../services/supabase";
 import { useParams } from "next/navigation";
 import { createClient } from "@/shared/services/supabase/client";
 import LoadingComponent from "@/shared/components/loadingModule";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	comments: Comments[];
@@ -27,6 +28,9 @@ const CommentsList = ({ comments }: Props) => {
 
 	const { id } = params;
 	const supabase = createClient();
+	const t = useTranslations("events.event");
+	const tButtons = useTranslations("buttons");
+	const tErrors = useTranslations("errors");
 
 	useEffect(() => {
 		setCommentsList(comments);
@@ -76,7 +80,7 @@ const CommentsList = ({ comments }: Props) => {
 			setCommentsList([...commentsList, comment]);
 			setNewComment("");
 		} catch (err) {
-			setErrorMessage("There's been a problem. Try again later.");
+			setErrorMessage(tErrors("generic"));
 		} finally {
 			setLoading(false);
 		}
@@ -84,8 +88,8 @@ const CommentsList = ({ comments }: Props) => {
 
 	return (
 		<div className="flex flex-col gap-3">
-			<h2 className="text-xl font-bold">Comments</h2>
-			{commentsList.length === 0 && <p>No comments yet</p>}
+			<h2 className="text-xl font-bold">{t("comments")}</h2>
+			{commentsList.length === 0 && <p>{t("noComments")}</p>}
 			<div className="flex flex-col gap-5">
 				{commentsList.map((comment) => (
 					<EventComment
@@ -98,10 +102,11 @@ const CommentsList = ({ comments }: Props) => {
 					/>
 				))}
 			</div>
-			<h3 className="font-semibold">New comment</h3>
+			<h3 className="font-semibold">{t("formComment.comment")}</h3>
 			<div className="flex flex-col gap-2 items-end">
 				<div className="relative w-full">
 					<Input
+						placeholder={t("formComment.commentPlaceholder")}
 						onChange={onChange}
 						value={newComment}
 						input={COMMENT_FORM_FIELDS}
@@ -114,7 +119,7 @@ const CommentsList = ({ comments }: Props) => {
 					variant="primary"
 					loading={loading}
 				>
-					Add comment
+					{tButtons("addComment")}
 				</Button>
 			</div>
 		</div>

@@ -13,6 +13,7 @@ import { addAssignment, updateAssigments } from "../../services/supabase";
 import { g } from "vitest/dist/chunks/suite.d.FvehnV49.js";
 import { isEveryoneIncluded } from "../../services/isEveryoneIncluded";
 import { useToastStore } from "@/shared/stores/toastStore";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	guests: Profile[];
@@ -41,7 +42,9 @@ const SecretFriend = ({
 	const [errorMessage, setErrorMessage] = useState("");
 	const [isFlipped, setIsFlipped] = useState(false);
 	const { setMessage } = useToastStore();
-
+	const t = useTranslations("events.event.secretFriend");
+	const tErrors = useTranslations("errors");
+	const tButtons = useTranslations("buttons");
 	useEffect(() => {
 		if (secretFriend) {
 			const asignment = secretFriend.find((s) => s.user_id === userId);
@@ -67,7 +70,7 @@ const SecretFriend = ({
 		)
 			return;
 		if (!userId) {
-			setErrorMessage("There's been an error. Try again later.");
+			setErrorMessage(tErrors("generic"));
 			return;
 		}
 		setLoading(true);
@@ -94,12 +97,12 @@ const SecretFriend = ({
 				);
 				setIsUserIncluded(userIncluded);
 				setIsAllIncluded(allIncluded);
-				setMessage(`Secret friend assignment ${mode}d successfully`);
+				setMessage(t("toast.assigmentDone"));
 			}
 		} catch (error) {
 			console.log(error);
 
-			setErrorMessage("There's been an error. Try again later.");
+			setErrorMessage(tErrors("generic"));
 		} finally {
 			setLoading(false);
 		}
@@ -108,7 +111,8 @@ const SecretFriend = ({
 	if (!hasSecretFriend && !assigmentProfile)
 		return (
 			<div className="flex flex-col gap-5">
-				<p>Wanna start a secret friend gift exchange?</p>
+				<h2 className="text-xl font-bold">{t("secretFriend")}</h2>
+				<p>{t("startMessage")}</p>
 				{errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
 				<div className="flex justify-center">
@@ -116,7 +120,7 @@ const SecretFriend = ({
 						loading={loading}
 						onClick={() => assignSecretFriend("create")}
 					>
-						Start
+						{tButtons("start")}
 					</Button>
 				</div>
 			</div>
@@ -125,16 +129,14 @@ const SecretFriend = ({
 	if (!isUserCreator && !isUserIncluded) {
 		return (
 			<div className="flex flex-col gap-5">
-				<p>
-					There is an ongoing secret friend gift exchange. If you wanna be included,
-					ask the organiser to restart.
-				</p>
+				<h2 className="text-xl font-bold">{t("secretFriend")}</h2>
+				<p>{t("onGoingSecretFriend")}</p>
 			</div>
 		);
 	}
 	return (
 		<div className="flex flex-col gap-5 ">
-			<h2 className="text-xl font-bold">Secret friends</h2>
+			<h2 className="text-xl font-bold">{t("secretFriend")}</h2>
 
 			{assigmentProfile && (
 				<div className="flex flex-col justify-center gap-2">
@@ -159,7 +161,7 @@ const SecretFriend = ({
 										className="w-1/2 h-full object-contain"
 										width={100}
 										height={200}
-										alt="Caddy, our mascot, incognito"
+										alt={t("imageAlt")}
 										src={"/illustrations/incognito-caddy.webp"}
 									/>
 								</div>
@@ -172,23 +174,21 @@ const SecretFriend = ({
 										profile={assigmentProfile}
 									/>
 									<NextLink href={getPath("Friend profile", assigmentProfile.id)}>
-										View profile
+										{tButtons("viewProfile")}
 									</NextLink>
 								</div>
 							</div>
 						</div>
 					</Button>
-					<p className="text-center font-semibold">
-						Flip the card to see your secret friend!
-					</p>
+					<p className="text-center font-semibold">{t("flipCardMessage")}</p>
 				</div>
 			)}
 
 			{isUserCreator && !isAllIncluded && (
 				<div className="flex flex-col gap-5">
 					<div>
-						<p>👀 psst!</p>
-						<p>Not all guests are included in the secret friend, wanna restart?</p>
+						<p>{t("psst")}</p>
+						<p>{t("everyoneNotIncluded")}</p>
 					</div>
 					{errorMessage && <p className="text-red-500">{errorMessage}</p>}
 
@@ -197,7 +197,7 @@ const SecretFriend = ({
 							loading={loading}
 							onClick={() => assignSecretFriend("update")}
 						>
-							Restart
+							t{tButtons("restart")}
 						</Button>
 					</div>
 				</div>

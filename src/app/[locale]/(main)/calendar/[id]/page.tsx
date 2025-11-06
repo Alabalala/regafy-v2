@@ -17,6 +17,7 @@ import LoadingComponent from "@/shared/components/loadingModule";
 import Modal from "@/shared/components/Modal";
 import { getPath } from "@/shared/services/getPath";
 import { createClient } from "@/shared/services/supabase/server";
+import { getTranslations } from "next-intl/server";
 
 const EventPage = async ({ params }: { params: { id: string } }) => {
 	const supabase = await createClient();
@@ -27,7 +28,8 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 	const comments = await getEventComments(Number(id), supabase);
 	if (!event) return <LoadingComponent />;
 	const user = await getCurrentUser(supabase);
-
+	const t = await getTranslations("events");
+	const tButtons = await getTranslations("buttons");
 	return (
 		<div className="flex flex-col gap-5">
 			<EventInfo
@@ -42,22 +44,24 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 					variant="secondary"
 					href={getPath("Edit event", String(event.id))}
 				>
-					Edit event
+					{tButtons("editEvent")}
 				</NextLink>
 				<Modal
-					modalTitle={"Delete event?"}
-					modalContent={
-						"Are you sure you want to delete this event? This is irreversible. The event will be deleted for ever."
-					}
+					modalTitle={t("event.modal.deleteModalTitle")}
+					modalContent={t("event.modal.deleteModalMessage")}
 					buttons={{
-						initial: { text: "Delete event", variant: "delete", shrink: true },
+						initial: {
+							text: tButtons("deleteEvent"),
+							variant: "delete",
+							shrink: true,
+						},
 						leftButton: {
-							text: "Cancel",
+							text: tButtons("cancel"),
 							isPlain: true,
 							isCancel: true,
 						},
 						rightButton: {
-							text: "Confirm delete",
+							text: tButtons("confirmDelete"),
 							apiRoute: "/api/events/delete/" + String(event.id),
 							method: "DELETE",
 							variant: "delete",
@@ -74,7 +78,7 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 				messageTime={event.created_at}
 			></EventComment>
 			<hr />
-			<h2 className="text-xl font-bold">Guests</h2>
+			<h2 className="text-xl font-bold">{t("event.guests")}</h2>
 			<FriendsList friends={event.guests}></FriendsList>
 			<hr />
 			<SecretFriend

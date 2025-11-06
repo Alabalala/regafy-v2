@@ -1,6 +1,7 @@
 "use client";
 import ProfileImage from "@/features/profile/components/ProfileImage";
 import { getPrettyDate } from "../../services/getPrettyDate";
+import { useLocale } from "next-intl";
 
 interface Props {
 	message: string;
@@ -19,6 +20,7 @@ const EventComment = ({
 	isDescription,
 	isOwner,
 }: Props) => {
+	const locale = useLocale();
 	return (
 		<div className={`${isOwner && "w-fit ml-auto mr-0"}`}>
 			<div
@@ -43,7 +45,7 @@ const EventComment = ({
 						className={`flex flex-row gap-2 items-center ${isOwner ? "justify-end" : "justify-start"}`}
 					>
 						<span className={`text-[10px] text-gray-600 `}>
-							{getPrettyDate(new Date(messageTime), "en-UK", true)}
+							{getPrettyDate(new Date(messageTime), locale, true)}
 						</span>
 					</div>
 				</div>

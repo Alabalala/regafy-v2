@@ -20,7 +20,7 @@ export const EVENT_FORM_FIELDS = [
 	{
 		name: "date",
 		labelKey: "date",
-		placeholderKey: "",
+		placeholderKey: "datePlaceholder",
 		type: "date",
 		required: true,
 		fullWidth: true,
@@ -28,7 +28,7 @@ export const EVENT_FORM_FIELDS = [
 	{
 		name: "image",
 		labelKey: "eventImage",
-		placeholderKey: "",
+		placeholderKey: "imagePlaceholder",
 		type: "file",
 		required: false,
 		fullWidth: true,

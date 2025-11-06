@@ -18,6 +18,8 @@
 		"addGift": "Add gift",
 		"newGift": "New gift",
 		"newEvent": "New event",
+		"editEvent": "Edit event",
+		"deleteEvent": "Delete event",
 		"submit": "Submit",
 		"save": "Save",
 		"share": "Share",
@@ -52,7 +54,12 @@
 		"resendEmail": "Resend email",
 		"resendingEmail": "Resending email...",
 		"backLogin": "Back to login",
-		"resending": "Resending..."
+		"resending": "Resending...",
+		"addComment": "Add a comment",
+		"confirmDelete": "Confirm delete",
+		"start": "Start",
+		"restart": "Restart",
+		"addComment": "Add a comment"
 	},
 	"timeAgo": {
 		"justNow": "just now",
@@ -147,6 +154,7 @@
 	"errors": {
 		"404": "Page not found",
 		"500": "Internal server error",
+		"networkError": "Network error. Please try again later.",
 		"generic": "Something went wrong. Please try again later.",
 		"wrongFileType": "Incorrect file type"
 	},
@@ -175,8 +183,38 @@
 			"description": "Description",
 			"descriptionPlaceholder": "Here you can write as much as you want",
 			"date": "Date",
+			"datePlaceholder": "",
+			"imagePlaceholder": "",
 			"eventImage": "Event image",
 			"guests": "Guests"
+		},
+		"event": {
+			"guests": "Guests",
+
+			"Comments": "Comments",
+			"noComments": "No comments yet",
+			"formComment": {
+				"comment": "New comment",
+				"commentPlaceholder": "Your coment here"
+			},
+
+			"modal": {
+				"deleteModalTitle": "Delete event?",
+				"deleteModalMessage": "Are you sure you want to delete this event? This is irreversible. The event will be deleted for ever."
+			},
+			"secretFriend": {
+				"secretFriend": "Secret friend",
+				"startMessage": "Wanna start a secret gift exchange assigment?",
+				"onGoingSecretFriend": "There is an ongoing secret friend gift exchange. If you wanna be included, ask the organiser to restart.",
+				"flipCardMessage": "Flip the card to see the secret friend!",
+				"imageAlt": "Caddy, our mascot, incognito",
+				"psst": "👀 psst",
+				"everyoneNotIncluded": "Not all guests are included in the secret friend, wanna restart?",
+
+				"toast": {
+					"assigmentDone": "New secret friend assigment done!"
+				}
+			}
 		}
 	},
 	"profileSettings": {

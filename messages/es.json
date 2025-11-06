@@ -18,6 +18,8 @@
 		"addGift": "Añadir regalo",
 		"newGift": "Nuevo regalo",
 		"newEvent": "Nuevo evento",
+		"editEvent": "Editar evento",
+		"deleteEvent": "Borrar evento",
 		"submit": "Enviar",
 		"save": "Guardar",
 		"share": "Compartir",
@@ -52,7 +54,11 @@
 		"resendEmail": "Reenviar correo",
 		"resendingEmail": "Reenviando correo...",
 		"backLogin": "Volver al inicio de sesión",
-		"resending": "Reenviando..."
+		"resending": "Reenviando...",
+		"confirmDelete": "Confirmar eliminación",
+		"start": "Empezar",
+		"restart": "Reiniciar",
+		"addComment": "Añadir comentario"
 	},
 	"timeAgo": {
 		"justNow": "justo ahora",
@@ -123,6 +129,7 @@
 		"profile": {
 			"birthday": "Cumpleaños"
 		},
+
 		"deleteModalTitle": "¿Eliminar amig@?",
 		"deleteModalMessage": "¿Estás segur@? Esta acción no puede deshacerse."
 	},
@@ -148,6 +155,7 @@
 	"errors": {
 		"404": "No se ha encontrado la página",
 		"500": "Error interno del servidor",
+		"networkError": "Error de red. Prueba de nuevo más tarde.",
 		"generic": "Algo no ha salido bien. Inténtalo de nuevo más tarde.",
 		"wrongFileType": "El tipo de archivo no es correcto"
 	},
@@ -176,8 +184,36 @@
 			"description": "Descripción",
 			"descriptionPlaceholder": "Aquí puedes escribir todo lo que quieras",
 			"date": "Fecha",
+			"datePlaceholder": "",
+			"imagePlaceholder": "",
 			"eventImage": "Imagen del evento",
 			"guests": "Invitad@s"
+		},
+		"event": {
+			"guests": "Invitad@s",
+			"comments": "Comentarios",
+			"noComments": "No hay comentarios todavía",
+			"formComment": {
+				"comment": "Nuevo comentario",
+				"commentPlaceholder": "Tu comentario aquí"
+			},
+
+			"modal": {
+				"deleteModalTitle": "¿Quieres borrar el evento?",
+				"deleteModalMessage": "¿Estás segur@ de que quieres borrar este evento?. Está accion no puede deshacerse. El evento se borrará para siempre."
+			},
+			"secretFriend": {
+				"secretFriend": "Amigo invisible",
+				"startMessage": "¿Quieres empezar y crear un amig@ invisible?",
+				"onGoingSecretFriend": "Ya hay un amig@ invisible en curso. Si quieres unirte, pídele al creador del evento que te meta.",
+				"imageAlt": "Caddy, nuestro mascota, incognito",
+				"flipCardMessage": "¡Dale a la tarjeta para girarla y ver quién es tu amig@ invisible!",
+				"psst": "👀 ¡Oye!",
+				"everyoneNotIncluded": "¡No están incluid@s tod@s los invitad@s del evento! ¿Quieres reiniciar?",
+				"toast": {
+					"assigmentDone": "¡Nuev@s amig@os invisibles asignad@s!"
+				}
+			}
 		}
 	},
 	"profileSettings": {

@@ -4,6 +4,7 @@ import { Button } from "../Button";
 import CloseSVG from "../SVGs/CloseSVG";
 import LoadingComponent from "../loadingModule";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	buttons: {
@@ -41,6 +42,8 @@ const Modal = ({ buttons, modalTitle, modalContent, redirect }: Props) => {
 	const [loading, setLoading] = useState(false);
 	const [errorText, setErrorText] = useState("");
 	const router = useRouter();
+	const tButtons = useTranslations("buttons");
+	const tErrors = useTranslations("errors");
 
 	const handleClick = async (api: string, method: string) => {
 		setLoading(true);
@@ -51,10 +54,10 @@ const Modal = ({ buttons, modalTitle, modalContent, redirect }: Props) => {
 				setIsOpen(false);
 				if (redirect) router.replace(redirect);
 			} else {
-				setErrorText("There's been a problem. Try again later.");
+				setErrorText(tErrors("generic"));
 			}
 		} catch (err) {
-			setErrorText("Network error. Try again later.");
+			setErrorText(tErrors("networkError"));
 		}
 	};
 
@@ -113,7 +116,7 @@ const Modal = ({ buttons, modalTitle, modalContent, redirect }: Props) => {
 								}
 								disabled={loading}
 							>
-								Cancel
+								{tButtons("cancel")}
 							</Button>
 
 							<Button
