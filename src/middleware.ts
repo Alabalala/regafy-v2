@@ -6,12 +6,11 @@ import { routing } from "./i18n/routing";
 const intlMiddleware = createMiddleware(routing);
 
 export async function middleware(request: NextRequest) {
+	const intlResponse = intlMiddleware(request) as NextResponse;
 	const authResponse = await updateSession(request);
 	if (authResponse.status === 307 || authResponse.status === 302) {
 		return authResponse;
 	}
-
-	const intlResponse = intlMiddleware(request) as NextResponse;
 
 	authResponse.cookies.getAll().forEach((cookie) => {
 		intlResponse.cookies.set(cookie.name, cookie.value);
