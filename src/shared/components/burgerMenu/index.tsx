@@ -57,7 +57,7 @@ export const BurgerMenu = ({ setIsOpen, isOpen, type }: Props) => {
 				</div>
 			)}
 
-			<div className="h-full flex flex-col gap-15 justify-center">
+			<div className="flex flex-col gap-15 justify-center">
 				<div className="flex flex-col justify-center items-center gap-4">
 					<p>{tBurger("switchTheme")}</p>
 					<ThemeSwitcher></ThemeSwitcher>
