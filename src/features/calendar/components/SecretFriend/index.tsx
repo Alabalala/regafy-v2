@@ -14,6 +14,8 @@ import { g } from "vitest/dist/chunks/suite.d.FvehnV49.js";
 import { isEveryoneIncluded } from "../../services/isEveryoneIncluded";
 import { useToastStore } from "@/shared/stores/toastStore";
 import { useTranslations } from "next-intl";
+import { createNotification } from "@/shared/services/supabase/notifications";
+import { createNotificationAction } from "@/shared/actions/createNotification";
 
 interface Props {
 	guests: Profile[];
@@ -98,6 +100,7 @@ const SecretFriend = ({
 				setIsUserIncluded(userIncluded);
 				setIsAllIncluded(allIncluded);
 				setMessage(t("toast.assigmentDone"));
+				await createNotificationAction(guestsId, "secret_friend", userId, eventId);
 			}
 		} catch (error) {
 			console.log(error);

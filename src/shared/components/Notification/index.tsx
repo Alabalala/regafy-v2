@@ -1,7 +1,14 @@
 import ProfileImage from "@/features/profile/components/ProfileImage";
 import CloseSVG from "../SVGs/CloseSVG";
-import { NotificationWithSender } from "@/shared/types/supabase/supabase";
-import { useState } from "react";
+import {
+	Event,
+	NotificationWithSender,
+} from "@/shared/types/supabase/supabase";
+import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { getSingleEvent } from "@/features/calendar/services/supabase";
+import { createClient } from "@/shared/services/supabase/client";
+import LoadingComponent from "../loadingModule";
 
 interface Props {
 	notification: NotificationWithSender;
@@ -15,10 +22,34 @@ interface Props {
 
 const Notification = ({ notification, handleRead, handleClick }: Props) => {
 	const [isReading, setIsReading] = useState(false);
+	const [event, setEvent] = useState<Event | null>(null);
+	const t = useTranslations("notifications");
+	const supabase = createClient();
+	useEffect(() => {
+		if (notification.type !== "event" || event) return;
+
+		const fetchEvent = async () => {
+			try {
+				const newEvent = await getSingleEvent(
+					Number(notification.reference_id),
+					supabase,
+				);
+				setEvent(newEvent);
+			} catch (error) {
+				console.error(error);
+			}
+		};
+
+		fetchEvent();
+	}, [notification.type, notification.reference_id, event]);
+
+	if (notification.type === "event" && !event) {
+		return <LoadingComponent />;
+	}
 
 	return (
 		<div
-			className={`relative w-full transition duration-200 ${isReading && "-translate-x-full"}`}
+			className={`relative w-full transition duration-200 ${isReading && "-translate-x-full"} bg-background dark:bg-background-dark`}
 		>
 			<button
 				onClick={() =>
@@ -33,8 +64,17 @@ const Notification = ({ notification, handleRead, handleClick }: Props) => {
 						profileImage={notification.sender.profileImage}
 					/>
 					<div className="flex flex-col ">
-						<p className="font-bold">{notification.subject}</p>
-						<p>{notification.message}</p>
+						<p className="font-bold">
+							{t("templates." + notification.type + ".title")}
+						</p>
+						<p>
+							{t("templates." + notification.type + ".body", {
+								sender: notification.sender.userName,
+								...(notification.type === "event" && event
+									? { event: event.title }
+									: {}),
+							})}
+						</p>
 					</div>
 				</div>
 				<div></div>

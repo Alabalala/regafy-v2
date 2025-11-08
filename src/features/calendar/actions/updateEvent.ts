@@ -6,6 +6,7 @@ import { validateForm } from "@/shared/services/validateData";
 import { eventFormSchema } from "../schemas/eventFormSchema";
 import { updateEvent } from "../services/supabase";
 import { EventFormPayload } from "../types/events";
+import { createNotificationAction } from "@/shared/actions/createNotification";
 
 export const updateEventAction = async (
 	formData: EventFormPayload,
@@ -26,12 +27,18 @@ export const updateEventAction = async (
 	const newGuests = guests.filter((id) => !oldGuests.some((g) => g.id === id));
 
 	try {
-		await updateEvent(
+		const updatedEvent = await updateEvent(
 			eventId,
 			eventWithoutImage,
 			newGuests,
 			deletedGuests,
 			supabase,
+		);
+		await createNotificationAction(
+			newGuests,
+			"event",
+			updatedEvent.created_by,
+			String(eventId),
 		);
 		return { success: true };
 	} catch (error) {

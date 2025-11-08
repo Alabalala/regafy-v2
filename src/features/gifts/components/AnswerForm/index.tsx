@@ -13,12 +13,16 @@ import { answerSchema } from "../../schema/answerSchema";
 import { useGiftStore } from "../../stores/giftStore";
 import { AnswerFormType } from "../../types/form";
 import { useTranslations } from "next-intl";
+import { createNotificationAction } from "@/shared/actions/createNotification";
 
 interface Props {
 	questionId: string;
+	giftId: string;
+	questionOwnerId: string;
+	userId: string;
 }
 //TODO add delete functions - fix forms
-const AnswerForm = ({ questionId }: Props) => {
+const AnswerForm = ({ questionId, giftId, questionOwnerId, userId }: Props) => {
 	const { setGifts, gifts } = useGiftStore();
 	const {
 		register,
@@ -47,6 +51,7 @@ const AnswerForm = ({ questionId }: Props) => {
 				};
 			});
 			setGifts(newGifts);
+			await createNotificationAction([questionOwnerId], "answer", userId, giftId);
 		} catch (error) {
 			setError("root", { type: "server", message: "Failed to add answer" });
 			return;

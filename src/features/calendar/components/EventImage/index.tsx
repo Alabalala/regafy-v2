@@ -88,9 +88,7 @@ const EventImage = ({
 				<Image
 					alt="Profile image"
 					src={
-						image
-							? `${getOptimizedImageUrl(image)}?t=${Date.now()}`
-							: "/illustrations/caddy.webp"
+						image ? `${getOptimizedImageUrl(image)}` : "/illustrations/caddy.webp"
 					}
 					fill
 					sizes="100px"

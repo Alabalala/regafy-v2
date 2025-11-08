@@ -5,6 +5,7 @@ import { validateForm } from "@/shared/services/validateData";
 import { eventFormSchema } from "../schemas/eventFormSchema";
 import { createEvent } from "../services/supabase";
 import { EventFormPayload } from "../types/events";
+import { createNotificationAction } from "@/shared/actions/createNotification";
 
 export const createEventAction = async (formData: EventFormPayload) => {
 	const supabase = await createClient();
@@ -14,7 +15,12 @@ export const createEventAction = async (formData: EventFormPayload) => {
 
 	try {
 		const newEvent = await createEvent(formData, supabase);
-
+		await createNotificationAction(
+			formData.guests,
+			"event",
+			newEvent.created_by,
+			String(newEvent.id),
+		);
 		return { success: true, data: newEvent };
 	} catch (error) {
 		return {

@@ -29,6 +29,7 @@ const QuestionsAnswers = ({
 				<p>{t("noQuestions")}</p>
 				{createdBy !== userId && (
 					<QuestionForm
+						giftOwnerId={createdBy}
 						gifts={gifts}
 						setGifts={setGifts}
 						userId={userId}
@@ -65,7 +66,12 @@ const QuestionsAnswers = ({
 							) : (
 								<div>
 									{createdBy === userId && (
-										<AnswerForm questionId={String(q.id)}></AnswerForm>
+										<AnswerForm
+											userId={userId}
+											questionOwnerId={q.asked_by}
+											giftId={giftId}
+											questionId={String(q.id)}
+										></AnswerForm>
 									)}
 								</div>
 							)}
@@ -76,6 +82,7 @@ const QuestionsAnswers = ({
 			<div>
 				{questions.length < 3 && createdBy !== userId && (
 					<QuestionForm
+						giftOwnerId={createdBy}
 						gifts={gifts}
 						setGifts={setGifts}
 						userId={userId}

@@ -53,7 +53,7 @@ const ProfileImage = ({
 				await addImageToProfile(imageLink, user.id, supabase);
 				const newProfile = {
 					...profile,
-					profileImage: `${imageLink}?t=${Date.now()}`,
+					profileImage: `${imageLink}`,
 				};
 				setProfile(newProfile as Profile);
 				setMessage("Profile image updated!");

@@ -134,11 +134,10 @@ export default function GiftPost({
 				{gift.image_link && (
 					<div className={"border-2 relative w-full h-50"}>
 						<Image
-							src={`${getOptimizedImageUrl(gift.image_link)}?t=${Date.now()}`}
+							src={`${getOptimizedImageUrl(gift.image_link)}`}
 							fill
 							className={"object-cover"}
 							alt={tImages("alt.genericGiftImage")}
-							unoptimized={process.env.NODE_ENV === "development"}
 						/>
 					</div>
 				)}

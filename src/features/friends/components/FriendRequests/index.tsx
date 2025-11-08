@@ -1,13 +1,14 @@
 "use client";
 import { acceptFriendRequest } from "@/features/profile/services/supabase";
+import { createNotificationAction } from "@/shared/actions/createNotification";
 import { createClient } from "@/shared/services/supabase/client";
+import { useToastStore } from "@/shared/stores/toastStore";
 import { allFriendRequests } from "@/shared/types/supabase/supabase";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import FriendsList from "../friendsList";
-import { useToastStore } from "@/shared/stores/toastStore";
 import toast from "react-hot-toast";
-import { useTranslations } from "next-intl";
+import FriendsList from "../friendsList";
 
 interface Props {
 	friendRequests: allFriendRequests[];
@@ -25,14 +26,20 @@ const FriendsRequests = ({ friendRequests, userId }: Props) => {
 	const { message, setMessage, clearMessage } = useToastStore();
 	const t = useTranslations("friends.requests");
 
-	const acceptRequest = (index: number) => {
+	const acceptRequest = async (index: number) => {
 		setLoading({ [index]: true });
 		try {
-			acceptFriendRequest(
+			await acceptFriendRequest(
 				userId,
 				FilteredRequestsProfiles[index].id,
 				friendRequests[index].id,
 				supabase,
+			);
+			await createNotificationAction(
+				[userId],
+				"request_accepted",
+				FilteredRequestsProfiles[index].id,
+				userId,
 			);
 			setMessage(t("toast.accepted"));
 			router.refresh();

@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useUserStore } from "../stores/userStore";
+
 import { createClient } from "@/shared/services/supabase/client";
 
 export function useUser() {
@@ -8,31 +9,25 @@ export function useUser() {
 	const supabase = createClient();
 
 	useEffect(() => {
-		const fetchUser = async () => {
-			const { data, error } = await supabase.auth.getUser();
-			if (data?.user) setUser(data.user);
-		};
+		if (!user) {
+			const fetchUser = async () => {
+				const { data, error } = await supabase.auth.getUser();
+				if (data?.user) setUser(data.user);
+			};
 
-		fetchUser();
+			fetchUser();
 
-		const {
-			data: { subscription },
-		} = supabase.auth.onAuthStateChange(async (_event, session) => {
-			if (session) {
-				const {
-					data: { user },
-					error,
-				} = await supabase.auth.getUser();
-				setUser(user ?? null);
-			} else {
-				setUser(null);
-			}
-		});
+			const { data: listener } = supabase.auth.onAuthStateChange(
+				(_event, session) => {
+					setUser(session?.user ?? null);
+				},
+			);
 
-		return () => {
-			subscription.unsubscribe();
-		};
-	}, [setUser]);
+			return () => {
+				listener.subscription.unsubscribe();
+			};
+		}
+	}, [user, setUser]);
 
 	return [user];
 }

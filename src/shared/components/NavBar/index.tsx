@@ -47,7 +47,7 @@ export const NavBar = ({ type }: { type: "user" | "auth" }) => {
 		};
 
 		fetchNotifications();
-	}, [user, supabase]);
+	}, [user]);
 
 	return (
 		<nav

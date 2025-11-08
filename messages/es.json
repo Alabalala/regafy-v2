@@ -277,6 +277,36 @@
 		"notifications": "Notificaciones",
 		"noNotifications": "No tienes notificaciones todavía",
 		"notificationList": "Lista de notificaciones",
-		"notification": "Notificación"
+		"notification": "Notificación",
+		"templates": {
+			"comment": {
+				"title": "Nuevo comentario",
+				"body": "¡{sender} ha dejado un nuevo comentario en {event}!"
+			},
+			"event": {
+				"title": "Nueva invitación",
+				"body": "¡{sender} te ha invitado a {event}!"
+			},
+			"request_sent": {
+				"title": "Nueva solicitud de amistad",
+				"body": "¡{sender} quiere ser tu amig@!"
+			},
+			"request_accepted": {
+				"title": "Solicitud de amistad aceptada",
+				"body": "¡{sender} te ha aceptado como amig@!"
+			},
+			"secretFriend": {
+				"title": "Nuevo amigo secreto",
+				"body": "¡{sender} te ha asignado un amig@ secreto en {event}!"
+			},
+			"question": {
+				"title": "Nueva pregunta",
+				"body": "{sender} ha dejado una pregunta nueva en tu regalo"
+			},
+			"answer": {
+				"title": "Nueva respuesta",
+				"body": "{sender} ha respondido a tu pregunta"
+			}
+		}
 	}
 }

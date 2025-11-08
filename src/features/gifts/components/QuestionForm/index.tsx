@@ -1,8 +1,10 @@
 import { Button } from "@/shared/components/Button";
 import Input from "@/shared/components/Input";
 
+import { createNotificationAction } from "@/shared/actions/createNotification";
 import { Gift, QuestionWithAnswers } from "@/shared/types/supabase/supabase";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { newQuestionAction } from "../../actions/newQuestion";
 import {
@@ -11,17 +13,22 @@ import {
 } from "../../constants/form";
 import { questionSchema } from "../../schema/questionSchema";
 import { QuestionFormType } from "../../types/form";
-import { useTranslations } from "next-intl";
-import { getTranslations } from "next-intl/server";
 
 interface Props {
 	userId: string;
 	giftId: string;
 	gifts: Gift[];
 	setGifts: (gifts: Gift[]) => void;
+	giftOwnerId: string;
 }
 
-const QuestionForm = ({ userId, giftId, gifts, setGifts }: Props) => {
+const QuestionForm = ({
+	userId,
+	giftId,
+	gifts,
+	setGifts,
+	giftOwnerId,
+}: Props) => {
 	const {
 		register,
 		handleSubmit,
@@ -53,6 +60,9 @@ const QuestionForm = ({ userId, giftId, gifts, setGifts }: Props) => {
 					: g;
 			});
 			setGifts(newGifts);
+			if (giftOwnerId !== userId) {
+				await createNotificationAction([giftOwnerId], "question", userId, giftId);
+			}
 		} catch (error) {
 			setError("root", { type: "serve r", message: "Failed to add answer" });
 			return;

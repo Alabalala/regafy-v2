@@ -12,12 +12,15 @@ import { useParams } from "next/navigation";
 import { createClient } from "@/shared/services/supabase/client";
 import LoadingComponent from "@/shared/components/loadingModule";
 import { useTranslations } from "next-intl";
+import { createNotificationAction } from "@/shared/actions/createNotification";
 
 interface Props {
 	comments: Comments[];
+	guestIds: string[];
+	eventId: string;
 }
 
-const CommentsList = ({ comments }: Props) => {
+const CommentsList = ({ comments, guestIds, eventId }: Props) => {
 	const [commentsList, setCommentsList] = useState(comments);
 	const [newComment, setNewComment] = useState("");
 	const [errorMessage, setErrorMessage] = useState<string>("");
@@ -79,6 +82,7 @@ const CommentsList = ({ comments }: Props) => {
 			);
 			setCommentsList([...commentsList, comment]);
 			setNewComment("");
+			createNotificationAction(guestIds, "comment", user.id, eventId);
 		} catch (err) {
 			setErrorMessage(tErrors("generic"));
 		} finally {

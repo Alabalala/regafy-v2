@@ -278,6 +278,36 @@
 		"notifications": "Notifications",
 		"noNotifications": "No new notifications",
 		"notificationList": "Notifications list",
-		"notification": "Notification"
+		"notification": "Notification",
+		"templates": {
+			"comment": {
+				"title": "New comments",
+				"body": "@{sender} left a new comment in {event}!"
+			},
+			"event": {
+				"title": "New invitation",
+				"body": "@{sender} invited you to {event}!"
+			},
+			"request": {
+				"title": "New friend request",
+				"body": "@{sender} wants to be your friend!"
+			},
+			"request_accepted": {
+				"title": "Friend request accepted",
+				"body": "¡@{sender} accepted your friend request!"
+			},
+			"secretFriend": {
+				"title": "New secret friend",
+				"body": "@{sender} assigned you a secret friend in {event}!"
+			},
+			"question": {
+				"title": "New question",
+				"body": "@{sender} left a new question in your gift!"
+			},
+			"answer": {
+				"title": "New answer",
+				"body": "@{sender} left a new answer to your question!"
+			}
+		}
 	}
 }

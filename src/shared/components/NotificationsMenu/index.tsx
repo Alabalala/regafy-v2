@@ -54,6 +54,7 @@ export const NotificationsMenu = ({
 			getPath(type === "event" ? "Event" : "Friend profile", String(referenceId)),
 		);
 	};
+	console.log(notifications);
 
 	return (
 		<div

@@ -5,10 +5,12 @@ import {
 	sendFriendRequest,
 } from "@/features/profile/services/supabase";
 import { Profile } from "@/features/profile/types/supabase.types";
+import { createNotificationAction } from "@/shared/actions/createNotification";
 import { Button } from "@/shared/components/Button";
 import { createClient } from "@/shared/services/supabase/client";
 import { useToastStore } from "@/shared/stores/toastStore";
 import { FriendRequestType } from "@/shared/types/supabase/supabase";
+import { create } from "domain";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -45,6 +47,7 @@ const NotAFriend = ({ userId, profile }: Props) => {
 		try {
 			const request = await sendFriendRequest(profile.id, userId, supabase);
 			setHasFriendRequest(request);
+			await createNotificationAction([userId], "request_sent", profile.id, userId);
 			setMessage(t("requests.toast.sent"));
 		} catch (err) {
 			console.log(err);

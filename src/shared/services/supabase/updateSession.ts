@@ -40,12 +40,9 @@ export async function updateSession(request: NextRequest) {
 	const pathSegments = request.nextUrl.pathname.split("/").filter(Boolean);
 	const locale = pathSegments[0];
 	const pathWithoutLocale = "/" + pathSegments.slice(1).join("/");
-	console.log("🔍 Full path:", request.nextUrl.pathname);
-	console.log("📍 Path without locale:", pathWithoutLocale);
 
 	const isAuthPage =
 		pathWithoutLocale === "/login" || pathWithoutLocale === "/sign-up";
-	console.log("🔐 Is auth page?", isAuthPage);
 	if (!user && !isAuthPage) {
 		const url = request.nextUrl.clone();
 		url.pathname = `/${locale}/login`;
