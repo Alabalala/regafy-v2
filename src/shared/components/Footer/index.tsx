@@ -1,5 +1,6 @@
 "use client";
 import { getPath } from "@/shared/services/getPath";
+import { useLocale, useTranslations } from "next-intl";
 import { usePathname } from "next/navigation";
 import { NextLink } from "../Link";
 import CalendarSVG from "../SVGs/calendarSVG";
@@ -7,12 +8,12 @@ import FriendsSVG from "../SVGs/FriendsSVG";
 import GiftSVG from "../SVGs/GiftSVG";
 import HomeSVG from "../SVGs/HomeSVG";
 import NewGiftSVG from "../SVGs/NewGiftSVG";
-import { useTranslations } from "next-intl";
 
 export default function Footer({}) {
 	const pathName = usePathname();
 	const tButtons = useTranslations("buttons");
 	const tNavigation = useTranslations("navigation");
+	const locale = useLocale();
 
 	return (
 		<footer
@@ -27,7 +28,7 @@ export default function Footer({}) {
 			>
 				<div className={"flex flex-col items-center"}>
 					<HomeSVG
-						filled={pathName === getPath("Home")}
+						filled={pathName === getPath("Home") + locale}
 						className={"w-8 h-8"}
 					/>
 					<p className={"text-sm"}>{tNavigation("home")}</p>
@@ -40,7 +41,7 @@ export default function Footer({}) {
 			>
 				<div className={"flex flex-col items-center"}>
 					<GiftSVG
-						filled={pathName.startsWith(getPath("Gifts"))}
+						filled={pathName.includes(getPath("Gifts"))}
 						className={"w-8 h-8"}
 					/>
 					<p className={"text-sm"}>{tNavigation("gifts")}</p>
@@ -65,7 +66,7 @@ export default function Footer({}) {
 			>
 				<div className={"flex flex-col items-center"}>
 					<FriendsSVG
-						filled={pathName.startsWith(getPath("Friends"))}
+						filled={pathName.includes(getPath("Friends"))}
 						className={"w-8 h-8"}
 					/>
 					<p className={"text-sm"}>{tNavigation("friends")}</p>
@@ -78,7 +79,7 @@ export default function Footer({}) {
 			>
 				<div className={"flex flex-col items-center"}>
 					<CalendarSVG
-						filled={pathName.startsWith(getPath("Calendar"))}
+						filled={pathName.includes(getPath("Calendar"))}
 						className={"w-8 h-8"}
 					/>
 					<p className={"text-sm"}>{tNavigation("calendar")}</p>
