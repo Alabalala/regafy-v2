@@ -1,18 +1,17 @@
 "use client";
-import { useEffect, useState } from "react";
-import LogoSVG from "../SVGs/LogoSVG";
-import Hamburger from "hamburger-react";
-import { BurgerMenu } from "../burgerMenu";
-import NotificationSVG from "../SVGs/NotificationSVG";
-import { Button } from "../Button";
-import { NotificationsMenu } from "../NotificationsMenu";
-import { getAllNotifications } from "@/shared/services/supabase/notifications";
 import { useUser } from "@/features/auth/hooks/useUser";
-import { createClient } from "@/shared/services/supabase/client";
-import { NotificationWithSender } from "@/shared/types/supabase/supabase";
-import { NextLink } from "../Link";
 import { getPath } from "@/shared/services/getPath";
+import { createClient } from "@/shared/services/supabase/client";
+import { getAllNotifications } from "@/shared/services/supabase/notifications";
+import { NotificationWithSender } from "@/shared/types/supabase/supabase";
+import Hamburger from "hamburger-react";
+import { useEffect, useState } from "react";
+import { BurgerMenu } from "../burgerMenu";
+import { Button } from "../Button";
+import { NextLink } from "../Link";
+import { NotificationsMenu } from "../NotificationsMenu";
 import Regafy from "../Regafy";
+import NotificationSVG from "../SVGs/NotificationSVG";
 
 export const NavBar = ({ type }: { type: "user" | "auth" }) => {
 	const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);

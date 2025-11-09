@@ -191,7 +191,7 @@
 		"event": {
 			"guests": "Guests",
 
-			"Comments": "Comments",
+			"comments": "Comments",
 			"noComments": "No comments yet",
 			"formComment": {
 				"comment": "New comment",
@@ -280,7 +280,7 @@
 		"notificationList": "Notifications list",
 		"notification": "Notification",
 		"templates": {
-			"comment": {
+			"event_comment": {
 				"title": "New comments",
 				"body": "@{sender} left a new comment in {event}!"
 			},
@@ -296,7 +296,7 @@
 				"title": "Friend request accepted",
 				"body": "¡@{sender} accepted your friend request!"
 			},
-			"secretFriend": {
+			"event_secret_friend": {
 				"title": "New secret friend",
 				"body": "@{sender} assigned you a secret friend in {event}!"
 			},

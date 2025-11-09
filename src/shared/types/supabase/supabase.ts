@@ -42,3 +42,7 @@ export type NotificationWithSender =
 	Database["public"]["Tables"]["notifications"]["Row"] & {
 		sender: Database["public"]["Tables"]["profiles"]["Row"];
 	};
+
+export type NotificationWithOptionalEvent = NotificationWithSender & {
+	event?: Event | null;
+};

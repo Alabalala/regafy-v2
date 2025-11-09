@@ -1,12 +1,17 @@
 import { getPath } from "@/shared/services/getPath";
 import { createClient } from "@/shared/services/supabase/client";
 import { markNotificationAsRead } from "@/shared/services/supabase/notifications";
-import { NotificationWithSender } from "@/shared/types/supabase/supabase";
+import {
+	NotificationWithOptionalEvent,
+	NotificationWithSender,
+} from "@/shared/types/supabase/supabase";
 import { useRouter } from "next/navigation";
 import { Button } from "../Button";
 import Notification from "../Notification";
 import CloseSVG from "../SVGs/CloseSVG";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import { getSingleEvent } from "@/features/calendar/services/supabase";
 
 interface Props {
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,6 +32,24 @@ export const NotificationsMenu = ({
 }: Props) => {
 	const supabase = createClient();
 	const router = useRouter();
+	const [items, setItems] = useState<NotificationWithOptionalEvent[]>([]);
+
+	useEffect(() => {
+		const fetchEvents = async () => {
+			const results = await Promise.all(
+				notifications.map(async (n) => {
+					if (n.type.includes("event")) {
+						const event = await getSingleEvent(Number(n.reference_id), supabase);
+						return { ...n, event };
+					}
+					return n;
+				}),
+			);
+			setItems(results);
+		};
+
+		fetchEvents();
+	}, [notifications]);
 
 	const handleRead = async (notificationId: number) => {
 		try {
@@ -54,7 +77,6 @@ export const NotificationsMenu = ({
 			getPath(type === "event" ? "Event" : "Friend profile", String(referenceId)),
 		);
 	};
-	console.log(notifications);
 
 	return (
 		<div
@@ -74,7 +96,7 @@ export const NotificationsMenu = ({
 				<div className="flex justify-center">{t("noNotifications")}</div>
 			) : (
 				<div className="flex flex-col pb-20 gap-4 overflow-y-scroll">
-					{notifications.map((notification) => (
+					{items.map((notification) => (
 						<Notification
 							key={notification.id}
 							notification={notification}

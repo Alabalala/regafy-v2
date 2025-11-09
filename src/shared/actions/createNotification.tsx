@@ -6,10 +6,10 @@ export async function createNotificationAction(
 	userIds: string[],
 	type:
 		| "event"
-		| "secret_friend"
+		| "event_secret_friend"
 		| "request_sent"
 		| "request_accepted"
-		| "comment"
+		| "event_comment"
 		| "question"
 		| "answer",
 	senderId: string,

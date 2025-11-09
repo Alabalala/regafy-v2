@@ -279,7 +279,7 @@
 		"notificationList": "Lista de notificaciones",
 		"notification": "Notificación",
 		"templates": {
-			"comment": {
+			"event_comment": {
 				"title": "Nuevo comentario",
 				"body": "¡{sender} ha dejado un nuevo comentario en {event}!"
 			},
@@ -295,7 +295,7 @@
 				"title": "Solicitud de amistad aceptada",
 				"body": "¡{sender} te ha aceptado como amig@!"
 			},
-			"secretFriend": {
+			"event_secret_friend": {
 				"title": "Nuevo amigo secreto",
 				"body": "¡{sender} te ha asignado un amig@ secreto en {event}!"
 			},
