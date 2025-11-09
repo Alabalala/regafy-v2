@@ -30,6 +30,9 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 	const user = await getCurrentUser(supabase);
 	const t = await getTranslations("events");
 	const tButtons = await getTranslations("buttons");
+	const guestIds = event.guests.map((g) => {
+		return g.id;
+	});
 	return (
 		<div className="flex flex-col gap-5">
 			<EventInfo
@@ -90,7 +93,11 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 				userId={user.id}
 			></SecretFriend>
 			<hr />
-			<CommentsList comments={comments}></CommentsList>
+			<CommentsList
+				eventId={id}
+				guestIds={guestIds}
+				comments={comments}
+			></CommentsList>
 		</div>
 	);
 };

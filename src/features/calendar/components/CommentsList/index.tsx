@@ -1,36 +1,40 @@
 "use client";
-import { Comments } from "@/shared/types/supabase/supabase";
-import EventComment from "../Comment";
-import { useEffect, useState } from "react";
 import { useUser } from "@/features/auth/hooks/useUser";
-import Input from "@/shared/components/Input";
-import { COMMENT_FORM_FIELDS } from "../../constants/form";
 import { Button } from "@/shared/components/Button";
-import { ValidateCommentForm } from "../../services/validateCommentForm";
-import { createEventComment } from "../../services/supabase";
-import { useParams } from "next/navigation";
-import { createClient } from "@/shared/services/supabase/client";
+import Input from "@/shared/components/Input";
 import LoadingComponent from "@/shared/components/loadingModule";
+import { Comments } from "@/shared/types/supabase/supabase";
 import { useTranslations } from "next-intl";
-import { createNotificationAction } from "@/shared/actions/createNotification";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { createCommentAction } from "../../actions/createComment";
+import { COMMENT_FORM_FIELDS } from "../../constants/form";
+import EventComment from "../Comment";
 
 interface Props {
 	comments: Comments[];
 	guestIds: string[];
-	eventId: string;
 }
 
-const CommentsList = ({ comments, guestIds, eventId }: Props) => {
+const CommentsList = ({ comments, guestIds }: Props) => {
 	const [commentsList, setCommentsList] = useState(comments);
-	const [newComment, setNewComment] = useState("");
-	const [errorMessage, setErrorMessage] = useState<string>("");
-	const [commentError, setCommentError] = useState(false);
+	const {
+		register,
+		watch,
+		reset,
+		handleSubmit,
+		formState: { errors, isSubmitting },
+	} = useForm({
+		defaultValues: { comment: "" },
+	});
+	const comment = watch("comment");
+	const [errorMessage, setErrorMessage] = useState("");
+
 	const [user] = useUser();
-	const [loading, setLoading] = useState(false);
 	const params = useParams();
 
 	const { id } = params;
-	const supabase = createClient();
 	const t = useTranslations("events.event");
 	const tButtons = useTranslations("buttons");
 	const tErrors = useTranslations("errors");
@@ -41,52 +45,21 @@ const CommentsList = ({ comments, guestIds, eventId }: Props) => {
 
 	if (!user) return <LoadingComponent />;
 
-	const onChange = (
-		e: React.ChangeEvent<
-			HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-		>,
-	) => {
-		const { name, value } = e.target as HTMLInputElement;
-		if (newComment === "") {
-			setErrorMessage("");
-		}
-
-		setNewComment(value);
-		const result = ValidateCommentForm(e.target.value);
-		if (!result.success) {
-			setCommentError(true);
-			setErrorMessage(result.errors[name]?.[0] ?? "");
-			return;
-		}
-
-		setCommentError(false);
-		setErrorMessage("");
-	};
-
-	const onSubmit = async () => {
-		setLoading(true);
-		const result = ValidateCommentForm(newComment);
-
-		if (!result.success) {
-			setCommentError(true);
-			setErrorMessage(result.errors[newComment]?.[0] ?? "");
-			setLoading(false);
-		}
-
+	const onSubmit = async (data: { comment: string }) => {
+		const { comment } = data;
 		try {
-			const comment = await createEventComment(
+			const commentResult = await createCommentAction(
+				comment,
 				Number(id),
-				newComment,
 				user.id,
-				supabase,
+				guestIds,
 			);
-			setCommentsList([...commentsList, comment]);
-			setNewComment("");
-			createNotificationAction(guestIds, "comment", user.id, eventId);
+			if (commentResult.data) {
+				setCommentsList([...commentsList, commentResult.data]);
+				reset();
+			}
 		} catch (err) {
 			setErrorMessage(tErrors("generic"));
-		} finally {
-			setLoading(false);
 		}
 	};
 
@@ -107,25 +80,28 @@ const CommentsList = ({ comments, guestIds, eventId }: Props) => {
 				))}
 			</div>
 			<h3 className="font-semibold">{t("formComment.comment")}</h3>
-			<div className="flex flex-col gap-2 items-end">
+			<form
+				onSubmit={handleSubmit(onSubmit)}
+				className="flex flex-col gap-2 items-end"
+			>
 				<div className="relative w-full">
 					<Input
+						currentValue={comment}
+						error={!!errors.comment}
 						placeholder={t("formComment.commentPlaceholder")}
-						onChange={onChange}
-						value={newComment}
+						{...register("comment")}
 						input={COMMENT_FORM_FIELDS}
-						error={commentError}
 					></Input>
 				</div>
 				{errorMessage && <p className="text-red-600">{errorMessage}</p>}
 				<Button
-					onClick={onSubmit}
+					type="submit"
 					variant="primary"
-					loading={loading}
+					loading={isSubmitting}
 				>
 					{tButtons("addComment")}
 				</Button>
-			</div>
+			</form>
 		</div>
 	);
 };

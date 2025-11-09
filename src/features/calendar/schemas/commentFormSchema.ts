@@ -1,7 +1,7 @@
 import z from "zod";
 
-export const comentSchema = z.object({
-	newComment: z
+export const commentSchema = z.object({
+	comment: z
 		.string()
 		.trim()
 		.min(3, "Comment must be at least 3 characters long")
