@@ -55,11 +55,13 @@
 		"resendingEmail": "Resending email...",
 		"backLogin": "Back to login",
 		"resending": "Resending...",
-		"addComment": "Add a comment",
 		"confirmDelete": "Confirm delete",
 		"start": "Start",
 		"restart": "Restart",
-		"addComment": "Add a comment"
+		"addComment": "Add a comment",
+		"send": "Send",
+		"sending": "Sending...",
+		"go": "Go"
 	},
 	"timeAgo": {
 		"justNow": "just now",
@@ -264,10 +266,37 @@
 			},
 			"completedSignup": "Account created! Check your email to activate your account."
 		},
-		"forgotPassword": "Forgot your password?",
+
 		"confirmationForm": {
 			"toast": {
 				"resent": "Email resent!"
+			}
+		},
+		"forgotPassword": {
+			"title": "Recover password",
+			"link": "I can't remember my password",
+			"form": {
+				"resend": "You can resend in ",
+				"description": "Enter your email and we'll send you an email so that you can recover your account.",
+				"email": "Email",
+				"emailPlaceholder": "E.g. youremail@example.com",
+				"toast": {
+					"emailSent": "Recovery email sent! Check your email."
+				}
+			}
+		},
+		"passwordRecovery": {
+			"title": "Redirecting to password change page...",
+			"form": {
+				"expired": "Your password recovery link has expired. Click below to request a new one.",
+				"description": "You can change your password here, but you'll need to log in again with your email and new password.",
+				"newPassword": "New password",
+				"confirmNewPassword": "Confirm new password",
+				"newPasswordPlaceholder": "Your password",
+				"confirmNewPasswordPlaceholder": "Confirm your password here",
+				"toast": {
+					"updated": "Password updated! Log in with your new password."
+				}
 			}
 		}
 	},

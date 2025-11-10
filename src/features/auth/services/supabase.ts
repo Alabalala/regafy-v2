@@ -3,6 +3,7 @@ import { Database } from "@/shared/types/database.types";
 import { createClient } from "@/shared/services/supabase/server";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { LoginFormTypes, SignUpFormTypes } from "../types/forms";
+import { getPath } from "@/shared/services/getPath";
 
 export async function login(formData: LoginFormTypes) {
 	const supabase = await createClient();
@@ -27,10 +28,16 @@ export async function login(formData: LoginFormTypes) {
 	return { success: true, user: data.user };
 }
 
-export async function resetPassword(email: string) {
+export async function sendPasswordRecoveryEmail(email: string) {
+	const redirectTo =
+		process.env.NODE_ENV === "development"
+			? `http://localhost:3000`
+			: `https://regafy.netlify.app`;
+	const fullLink = redirectTo + getPath("Recover password");
 	const supabase = await createClient();
+	console.log(fullLink);
 	const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
-		redirectTo: `https://regafy.netlify.app/restablecerContrasena`,
+		redirectTo: fullLink,
 	});
 
 	if (error) {
@@ -101,10 +108,22 @@ export async function updateEmail(newEmail: string) {
 
 export async function updatePassword(newPassword: string) {
 	const supabase = await createClient();
-	const { error } = await supabase.auth.updateUser({
+	const { data, error } = await supabase.auth.updateUser({
 		password: newPassword,
 	});
 	if (error) throw error;
+
+	return true;
+}
+
+export async function recoverPassword(newPassword: string) {
+	const supabase = await createClient();
+	const { data, error } = await supabase.auth.updateUser({
+		password: newPassword,
+	});
+	if (error) throw error;
+
+	return data;
 }
 
 // export async function deleteUser(userId) {

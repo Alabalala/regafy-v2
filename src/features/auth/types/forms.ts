@@ -17,3 +17,7 @@ export interface UpdatePasswordFormTypes {
 	password: string;
 	passwordConfirmation: string;
 }
+
+export interface ForgotPasswordFormTypes {
+	email: string;
+}

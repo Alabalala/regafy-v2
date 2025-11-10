@@ -68,7 +68,10 @@ export const ProfileSettings = ({}) => {
 
 				<hr />
 
-				<div className="flex flex-col gap-2">
+				<div
+					className="flex flex-col gap-2"
+					id="password-change"
+				>
 					<h2 className="font-bold uppercase">{t("changePassword")}</h2>
 					<div>
 						<UpdatePasswordForm></UpdatePasswordForm>

@@ -96,13 +96,22 @@ const LoginForm = () => {
 				</Button>
 			</div>
 
-			<div className={"flex flex-col items-center gap-2"}>
+			<div className={"flex flex-row justify-center gap-2"}>
 				<p>{t("noAccount")}</p>
 				<NextLink
-					variant="secondary"
+					isPlain
 					href={getPath("Sign up")}
 				>
 					{tButtons("signUp")}
+				</NextLink>
+			</div>
+
+			<div className={"flex flex-row justify-center gap-2"}>
+				<NextLink
+					isPlain
+					href={getPath("Forgot password")}
+				>
+					{t("forgotPassword.link")}
 				</NextLink>
 			</div>
 		</form>

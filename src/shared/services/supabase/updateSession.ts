@@ -37,12 +37,31 @@ export async function updateSession(request: NextRequest) {
 	const { data, error } = await supabase.auth.getClaims();
 	const user = data?.claims;
 
-	const pathSegments = request.nextUrl.pathname.split("/").filter(Boolean);
-	const locale = pathSegments[0];
-	const pathWithoutLocale = "/" + pathSegments.slice(1).join("/");
+	const locales = ["en", "es"];
+	const defaultLocale = "en";
+	const segments = request.nextUrl.pathname.split("/").filter(Boolean);
+	let locale: string = defaultLocale;
+	let pathWithoutLocale = request.nextUrl.pathname;
+
+	if (segments.length > 0 && locales.includes(segments[0])) {
+		locale = segments[0];
+		pathWithoutLocale = "/" + segments.slice(1).join("/");
+	}
+
+	if (!locale) {
+		const cookieLocale = request.cookies.get("NEXT_LOCALE")?.value;
+		locale =
+			cookieLocale && locales.includes(cookieLocale)
+				? cookieLocale
+				: defaultLocale;
+	}
 
 	const isAuthPage =
-		pathWithoutLocale === "/login" || pathWithoutLocale === "/sign-up";
+		pathWithoutLocale === "/login" ||
+		pathWithoutLocale === "/sign-up" ||
+		pathWithoutLocale === "/forgot-password" ||
+		pathWithoutLocale.startsWith("/password-recovery");
+
 	if (!user && !isAuthPage) {
 		const url = request.nextUrl.clone();
 		url.pathname = `/${locale}/login`;

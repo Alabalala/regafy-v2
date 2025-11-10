@@ -1,10 +1,9 @@
 "use server";
 
 import { validateForm } from "@/shared/services/validateData";
-import { LoginFormSchema } from "../schemas/loginForm";
-import { login, resetPassword } from "../services/supabase";
-import { LoginFormTypes, UpdatePasswordFormTypes } from "../types/forms";
 import { updatePasswordFormSchema } from "../schemas/updatePassword";
+import { updatePassword } from "../services/supabase";
+import { UpdatePasswordFormTypes } from "../types/forms";
 
 export const updatePasswordAction = async (
 	formData: UpdatePasswordFormTypes,
@@ -15,17 +14,7 @@ export const updatePasswordAction = async (
 
 	const { password } = formData;
 	try {
-		const passwordUpdateResult = await resetPassword(password);
-
-		if (passwordUpdateResult.error) {
-			return {
-				success: false,
-				errors: {
-					root: passwordUpdateResult.error,
-				},
-			};
-		}
-
+		await updatePassword(password);
 		return {
 			success: true,
 		};

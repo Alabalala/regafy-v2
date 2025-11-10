@@ -97,3 +97,43 @@ export const INITIAL_UPDATE_PASSWORD_FORM_DATA = {
 	password: "",
 	passwordConfirmation: "",
 };
+
+export const FORGOT_PASSWORD_FORM_INPUTS = [
+	{
+		name: "email",
+		labelKey: "email",
+		type: "email",
+		required: true,
+		placeholderKey: "emailPlaceholder",
+		fullWidth: true,
+	},
+];
+
+export const INITIAL_FORGOT_PASSWORD_FORM_DATA = {
+	email: "",
+};
+
+export const RECOVER_PASSWORD_FORM_INPUTS = [
+	{
+		name: "password",
+		labelKey: "newPassword",
+		type: "password",
+		required: true,
+		maxLength: 30,
+		placeholderKey: "newPasswordPlaceholder",
+		fullWidth: true,
+	},
+	{
+		name: "passwordConfirmation",
+		labelKey: "confirmNewPassword",
+		placeholderKey: "confirmNewPasswordPlaceholder",
+		type: "password",
+		required: true,
+		fullWidth: true,
+	},
+];
+
+export const INITAL_RECOVER_PASSWORD_FORM_DATA = {
+	password: "",
+	passwordConfirmation: "",
+};

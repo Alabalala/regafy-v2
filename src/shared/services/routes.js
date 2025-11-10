@@ -22,6 +22,6 @@ export const ROUTES = [
 	{ name: "Create secret friend", path: "/calendar/:id/create-secret-friend" },
 	{ name: "Help", path: "/help" },
 	{ name: "Forgot password", path: "/forgot-password" },
-	{ name: "Reset password", path: "/reset-password" },
+	{ name: "Recover password", path: "/password-recovery" },
 	{ name: "Messages", path: "/messages" },
 ];

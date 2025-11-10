@@ -58,7 +58,10 @@
 		"confirmDelete": "Confirmar eliminación",
 		"start": "Empezar",
 		"restart": "Reiniciar",
-		"addComment": "Añadir comentario"
+		"addComment": "Añadir comentario",
+		"send": "Enviar",
+		"sending": "Enviando...",
+		"go": "Ir"
 	},
 	"timeAgo": {
 		"justNow": "justo ahora",
@@ -110,7 +113,6 @@
 		"inviteFriends": "Invita a tus amig@s",
 		"friends": "Amigos",
 		"findFriendPlaceholder": "Escribe el nombre o el nombre de usuario de tu amig@ aqui",
-
 		"friendsList": "Lista de amigos",
 		"noFriends": "Aún no tienes amigos",
 		"notYourFriend": "no es tu amig@ todavía.",
@@ -129,7 +131,6 @@
 		"profile": {
 			"birthday": "Cumpleaños"
 		},
-
 		"deleteModalTitle": "¿Eliminar amig@?",
 		"deleteModalMessage": "¿Estás segur@? Esta acción no puede deshacerse."
 	},
@@ -197,7 +198,6 @@
 				"comment": "Nuevo comentario",
 				"commentPlaceholder": "Tu comentario aquí"
 			},
-
 			"modal": {
 				"deleteModalTitle": "¿Quieres borrar el evento?",
 				"deleteModalMessage": "¿Estás segur@ de que quieres borrar este evento?. Está accion no puede deshacerse. El evento se borrará para siempre."
@@ -206,8 +206,8 @@
 				"secretFriend": "Amigo invisible",
 				"startMessage": "¿Quieres empezar y crear un amig@ invisible?",
 				"onGoingSecretFriend": "Ya hay un amig@ invisible en curso. Si quieres unirte, pídele al creador del evento que te meta.",
-				"imageAlt": "Caddy, nuestro mascota, incognito",
 				"flipCardMessage": "¡Dale a la tarjeta para girarla y ver quién es tu amig@ invisible!",
+				"imageAlt": "Caddy, nuestro mascota, incognito",
 				"psst": "👀 ¡Oye!",
 				"everyoneNotIncluded": "¡No están incluid@s tod@s los invitad@s del evento! ¿Quieres reiniciar?",
 				"toast": {
@@ -263,10 +263,38 @@
 			},
 			"completedSignup": "¡Cuenta creada! Comprueba tu correo para activar tu cuenta."
 		},
-		"forgotPassword": "¿Olvidaste tu contraseña?",
 		"confirmationForm": {
 			"toast": {
 				"resent": "¡Correo reenviado!"
+			}
+		},
+		"forgotPassword": {
+			"title": "Recupera tu contraseña",
+			"link": "He olvidado mi contraseña",
+			"form": {
+				"resend": "Puedes reenviar en ",
+				"description": "Escribe tu mail y te mandaremos un correo para que puedas recuperar tu contraseña.",
+
+				"email": "Email",
+				"emailPlaceholder": "Ej. tucorreo@ejemplo.com",
+				"toast": {
+					"emailSent": "¡Te hemos enviado el mail de recuperación! Mira tu correo."
+				}
+			}
+		},
+		"passwordRecovery": {
+			"title": "Redireccionándote a la página de ajustes para cambiar contraseña...",
+			"form": {
+				"expired": "El enlace de recuperación de contraseña ha caducado. Haz clic en el enlace para solicitar uno nuevo.",
+
+				"description": "Puedes cambiar tu contraseña desde aqui, pero tendrás que volver a acceder con tu correo y contraseña.",
+				"newPassword": "Nueva contraseña",
+				"confirmNewPassword": "Confirmar nueva contraseña",
+				"newPasswordPlaceholder": "Tu contraseña",
+				"confirmNewPasswordPlaceholder": "Confirma la contraseña aquí",
+				"toast": {
+					"updated": "¡Contraseña actualizada! Entra con tu nueva contraseña."
+				}
 			}
 		}
 	},
@@ -287,7 +315,7 @@
 				"title": "Nueva invitación",
 				"body": "¡{sender} te ha invitado a {event}!"
 			},
-			"request_sent": {
+			"request": {
 				"title": "Nueva solicitud de amistad",
 				"body": "¡{sender} quiere ser tu amig@!"
 			},
