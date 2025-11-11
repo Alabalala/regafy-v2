@@ -158,7 +158,19 @@
 		"500": "Internal server error",
 		"networkError": "Network error. Please try again later.",
 		"generic": "Something went wrong. Please try again later.",
-		"wrongFileType": "Incorrect file type"
+		"wrongFileType": "Incorrect file type",
+		"invalidData": "Invalid data",
+		"eventForm": {
+			"titleTooShort": "Title must be at least 3 characters long",
+			"titleTooLong": "Title must be at most 30 characters long",
+			"descriptionTooShort": "Description must be at least 5 characters long",
+			"descriptionTooLong": "Description must be at most 500 characters long",
+			"dateInPast": "Your event can't be in the past"
+		},
+		"image": {
+			"fileMustBeImage": "File must be an image",
+			"fileMaxSize5MB": "File must be less than 5MB"
+		}
 	},
 	"events": {
 		"calendar": "Calendar",

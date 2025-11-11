@@ -158,7 +158,19 @@
 		"500": "Error interno del servidor",
 		"networkError": "Error de red. Prueba de nuevo más tarde.",
 		"generic": "Algo no ha salido bien. Inténtalo de nuevo más tarde.",
-		"wrongFileType": "El tipo de archivo no es correcto"
+		"wrongFileType": "El tipo de archivo no es correcto",
+		"invalidData": "Datos no válidos",
+		"eventForm": {
+			"titleTooShort": "El título debe tener al menos 3 caracteres",
+			"titleTooLong": "El título debe tener como máximo 30 caracteres",
+			"descriptionTooShort": "La descripción debe tener al menos 5 caracteres",
+			"descriptionTooLong": "La descripción debe tener como máximo 500 caracteres",
+			"dateInPast": "Tu evento no puede estar en el pasado"
+		},
+		"image": {
+			"fileMustBeImage": "El archivo debe ser una imagen",
+			"fileMaxSize5MB": "El archivo debe ser menor de 5MB"
+		}
 	},
 	"events": {
 		"calendar": "Calendario",

@@ -30,6 +30,7 @@ import { addImageToEvent } from "../../services/supabase";
 import { validateImage } from "@/shared/services/validateImage";
 import { uploadImageFile } from "@/shared/services/supabase/globals";
 import { useTranslations } from "next-intl";
+import MessageBox from "@/shared/components/MessageBox";
 
 interface Props {
 	event?: Event;
@@ -69,6 +70,7 @@ const EventForm = ({ event, type, friends }: Props) => {
 	const supabase = createClient();
 	const t = useTranslations("events.form");
 	const tButtons = useTranslations("buttons");
+	const tErrors = useTranslations("errors.eventForm");
 
 	useEffect(() => {
 		if (event && event.event_image_link) {
@@ -221,7 +223,11 @@ const EventForm = ({ event, type, friends }: Props) => {
 							/>
 						)}
 
-						<div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
+						{errors[fieldName]?.message && (
+							<MessageBox type="error">
+								{tErrors(errors[fieldName]?.message)}
+							</MessageBox>
+						)}
 					</div>
 				);
 			})}
@@ -240,8 +246,8 @@ const EventForm = ({ event, type, friends }: Props) => {
 					type="event"
 				></FriendsList>
 			</div>
-			{errors.root && (
-				<div className="text-red-500 text-sm">{errors.root.message}</div>
+			{errors.root?.message && (
+				<MessageBox type="error">{tErrors(errors.root.message)}</MessageBox>
 			)}
 			<div className={"flex justify-center"}>
 				<Button

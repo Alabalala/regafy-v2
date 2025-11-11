@@ -11,7 +11,7 @@ export const createEventAction = async (formData: EventFormPayload) => {
 	const supabase = await createClient();
 	const result = validateForm(eventFormSchema, formData);
 	if (!result.success)
-		return { success: false, errors: { root: "Invalid data." } };
+		return { success: false, errors: { root: "invalidData" } };
 
 	try {
 		const newEvent = await createEvent(formData, supabase);
@@ -26,7 +26,7 @@ export const createEventAction = async (formData: EventFormPayload) => {
 		return {
 			success: false,
 			errors: {
-				root: (error as Error).message ?? "There's been an error, try again later.",
+				root: (error as Error).message ?? "generic",
 			},
 		};
 	}
