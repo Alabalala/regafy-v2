@@ -14,10 +14,11 @@ import {
 	SIGNUP_FORM_INITIAL_DATA,
 	SIGNUP_FORM_INPUTS,
 } from "../../constants/forms";
-import { SingupFormSchema } from "../../schemas/signupForm";
+import { SignupFormSchema } from "../../schemas/signupForm";
 import { resendConfirmationEmail } from "../../services/supabase";
 import { SignUpFormTypes } from "../../types/forms";
 import { useTranslations } from "next-intl";
+import MessageBox from "@/shared/components/MessageBox";
 
 const SignUpForm = () => {
 	const [message, setMessage] = useState<string | undefined>("");
@@ -31,7 +32,7 @@ const SignUpForm = () => {
 		watch,
 		formState: { errors, isSubmitting },
 	} = useForm<SignUpFormTypes>({
-		resolver: zodResolver(SingupFormSchema),
+		resolver: zodResolver(SignupFormSchema),
 		defaultValues: SIGNUP_FORM_INITIAL_DATA,
 	});
 
@@ -43,6 +44,7 @@ const SignUpForm = () => {
 	const email = watch("email");
 	const t = useTranslations("auth");
 	const tButtons = useTranslations("buttons");
+	const tErrors = useTranslations("errors");
 
 	const onSubmit = async (formData: SignUpFormTypes) => {
 		setMessage("");
@@ -108,7 +110,13 @@ const SignUpForm = () => {
 									currentValue={watch(fieldName) || ""}
 									error={!!errors[fieldName]}
 								/>
-								<div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
+								{errors[fieldName]?.message && (
+									<MessageBox type={"error"}>
+										{tErrors("signUpForm." + errors[fieldName]?.message)}
+									</MessageBox>
+								)}
+
+								<div className="text-red-500 text-sm"></div>
 							</div>
 						);
 					})}
@@ -140,7 +148,7 @@ const SignUpForm = () => {
 					</div>
 				</div>
 			)}
-			{message && <div className="text-red-500 text-sm">{message}</div>}
+			{message && <MessageBox type={"error"}>{message}</MessageBox>}
 		</form>
 	);
 };

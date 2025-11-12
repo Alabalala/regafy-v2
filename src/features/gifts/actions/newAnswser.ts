@@ -2,7 +2,7 @@
 
 import { createClient } from "@/shared/services/supabase/server";
 import { validateForm } from "@/shared/services/validateData";
-import { giftFormScheme } from "../services/giftFormScheme";
+import { giftFormScheme } from "../schema/giftForm";
 
 import { addAnswer, createGift } from "../services/supabase";
 import { AnswerFormType, FormPayloadType } from "../types/form";

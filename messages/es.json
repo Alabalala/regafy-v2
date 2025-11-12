@@ -170,6 +170,14 @@
 		"image": {
 			"fileMustBeImage": "El archivo debe ser una imagen",
 			"fileMaxSize5MB": "El archivo debe ser menor de 5MB"
+		},
+		"giftForm": {
+			"titleMin": "El título debe tener al menos 3 caracteres",
+			"titleMax": "El título no puede tener más de 30 caracteres",
+			"descriptionMin": "La descripción debe tener al menos 3 caracteres. Si no quieres añadir una, déjala vacía.",
+			"descriptionMax": "La descripción no puede tener más de 300 caracteres.",
+			"priceInvalid": "El precio debe ser un número positivo",
+			"ratingInvalid": "Error con las valoraciones"
 		}
 	},
 	"events": {

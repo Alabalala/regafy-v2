@@ -13,6 +13,7 @@ import {
 } from "../../constants/form";
 import { questionSchema } from "../../schema/questionSchema";
 import { QuestionFormType } from "../../types/form";
+import MessageBox from "@/shared/components/MessageBox";
 
 interface Props {
 	userId: string;
@@ -41,6 +42,7 @@ const QuestionForm = ({
 	});
 	const t = useTranslations("gifts.post.Q&A");
 	const tButtons = useTranslations("buttons");
+	const tErrors = useTranslations("errors");
 	const onSubmit = async (data: QuestionFormType) => {
 		try {
 			const result = await newQuestionAction(data, giftId, userId);
@@ -64,7 +66,7 @@ const QuestionForm = ({
 				await createNotificationAction([giftOwnerId], "question", userId, giftId);
 			}
 		} catch (error) {
-			setError("root", { type: "serve r", message: "Failed to add answer" });
+			setError("root", { type: "server", message: tErrors("generic") });
 			return;
 		}
 	};
@@ -82,7 +84,6 @@ const QuestionForm = ({
 						className={"flex flex-col gap-2"}
 					>
 						<p className={"font-bold"}>{t(input.labelKey)}</p>
-
 						<Input
 							{...register(fieldName)}
 							input={input}
@@ -90,7 +91,11 @@ const QuestionForm = ({
 							error={!!errors[fieldName]}
 							placeholder={t(input.placeholderKey)}
 						/>
-						<div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
+						{errors[fieldName]?.message && (
+							<MessageBox type="error">
+								{tErrors(errors[fieldName]?.message)}
+							</MessageBox>
+						)}{" "}
 					</div>
 				);
 			})}

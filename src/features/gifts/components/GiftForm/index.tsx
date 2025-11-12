@@ -5,7 +5,7 @@ import {
 	GIFT_FORM_FIELDS,
 	GIFT_FORM_INITIAL_VALUES,
 } from "@/features/gifts/constants/form";
-import { giftFormScheme } from "@/features/gifts/services/giftFormScheme";
+import { giftFormSchema } from "@/features/gifts/schema/giftForm";
 import LoadingComponent from "@/shared/components/loadingModule";
 import { getPath } from "@/shared/services/getPath";
 import { createClient } from "@/shared/services/supabase/client";
@@ -27,6 +27,7 @@ import StarRateInput from "../StarRateInput";
 import { validateImage } from "@/shared/services/validateImage";
 import { uploadImageFile } from "@/shared/services/supabase/globals";
 import { useTranslations } from "next-intl";
+import MessageBox from "@/shared/components/MessageBox";
 
 interface Props {
 	gift?: SingleGift;
@@ -36,6 +37,7 @@ interface Props {
 const GiftForm = ({ gift, type }: Props) => {
 	const t = useTranslations("gifts.form");
 	const tButtons = useTranslations("buttons");
+	const tErrors = useTranslations("errors");
 
 	const toGiftFormData = (gift: SingleGift): GiftFormData => {
 		return {
@@ -54,7 +56,7 @@ const GiftForm = ({ gift, type }: Props) => {
 		watch,
 		formState: { errors, isSubmitting },
 	} = useForm<GiftFormData>({
-		resolver: zodResolver(giftFormScheme),
+		resolver: zodResolver(giftFormSchema),
 		defaultValues: gift ? toGiftFormData(gift) : GIFT_FORM_INITIAL_VALUES,
 	});
 
@@ -66,6 +68,7 @@ const GiftForm = ({ gift, type }: Props) => {
 	const router = useRouter();
 	const { setMessage } = useToastStore();
 	const [fileError, setFileError] = useState<string>("");
+
 	useEffect(() => {
 		if (gift && gift.image_link) {
 			setFile((prev) => ({
@@ -129,7 +132,7 @@ const GiftForm = ({ gift, type }: Props) => {
 					router.push(path);
 				}
 			} catch (err) {
-				setError("root", { type: "server", message: "Failed to create gift" });
+				setError("root", { type: "server", message: tErrors("networkError") });
 			}
 		}
 
@@ -150,7 +153,7 @@ const GiftForm = ({ gift, type }: Props) => {
 			} else {
 				setError("root", {
 					type: "server",
-					message: updateResult.errors?.root?.[0] ?? "",
+					message: tErrors("networkError"),
 				});
 			}
 		}
@@ -179,7 +182,9 @@ const GiftForm = ({ gift, type }: Props) => {
 									preview={file.preview ?? ""}
 									error={!!fileError}
 								/>
-								{fileError && <div className="text-red-500 text-sm">{fileError}</div>}
+								{fileError && (
+									<MessageBox type="error">{tErrors("image." + fileError)}</MessageBox>
+								)}
 							</div>
 						) : (
 							<Input
@@ -190,7 +195,11 @@ const GiftForm = ({ gift, type }: Props) => {
 								error={!!errors[fieldName]}
 							/>
 						)}
-						<div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
+						{errors[fieldName]?.message && (
+							<MessageBox type="error">
+								{tErrors("giftForm." + errors[fieldName]?.message)}
+							</MessageBox>
+						)}
 					</div>
 				);
 			})}
@@ -205,8 +214,9 @@ const GiftForm = ({ gift, type }: Props) => {
 				</div>
 			)}
 			{errors.root && (
-				<div className="text-red-500 text-sm">{errors.root.message}</div>
+				<MessageBox type="error">{tErrors("giftForm." + errors.root)}</MessageBox>
 			)}
+
 			<div className={"flex justify-center"}>
 				<Button
 					type="submit"

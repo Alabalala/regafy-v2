@@ -2,9 +2,10 @@
 
 import { createClient } from "@/shared/services/supabase/server";
 import { updateProfile } from "../services/supabase";
-import { ValidateProfileFormData } from "../services/validateProfileFormData";
 import { ProfileFormData } from "../types/form.types";
 import { Profile } from "../types/supabase.types";
+import { ProfileFormSchema } from "../schemas/profileFormSchema";
+import { validateForm } from "@/shared/services/validateData";
 
 export default async function updateProfileAction(
 	formData: ProfileFormData,
@@ -14,7 +15,7 @@ export default async function updateProfileAction(
 	| { success: false; errors: Record<string, string[] | undefined> }
 > {
 	const supabase = await createClient();
-	const validationResult = await ValidateProfileFormData(formData);
+	const validationResult = await validateForm(ProfileFormSchema, formData);
 
 	if (!validationResult.success) {
 		return { success: false, errors: validationResult.errors };

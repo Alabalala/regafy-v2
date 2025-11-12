@@ -2,7 +2,7 @@
 
 import { createClient } from "@/shared/services/supabase/server";
 import { validateForm } from "@/shared/services/validateData";
-import { giftFormScheme } from "../services/giftFormScheme";
+import { giftFormSchema } from "../schema/giftForm";
 import { updateGift } from "../services/supabase";
 import { FormPayloadType } from "../types/form";
 
@@ -11,9 +11,9 @@ export const updateGiftAction = async (
 	giftId: string,
 ) => {
 	const supabase = await createClient();
-	const result = validateForm(giftFormScheme, formData);
+	const result = validateForm(giftFormSchema, formData);
 	if (!result.success)
-		return { success: false, errors: { root: "Invalid data." } };
+		return { success: false, errors: { root: "invalidData" } };
 
 	try {
 		await updateGift(formData, giftId, supabase);
@@ -22,7 +22,7 @@ export const updateGiftAction = async (
 		return {
 			success: false,
 			errors: {
-				root: (error as Error).message ?? "There's been an error, try again later.",
+				root: "generic",
 			},
 		};
 	}

@@ -1,8 +1,9 @@
 "use server";
 
 import { createClient } from "@/shared/services/supabase/server";
+import { validateForm } from "@/shared/services/validateData";
+import { ProfileFormSchema } from "../schemas/profileFormSchema";
 import { createProfile } from "../services/supabase";
-import { ValidateProfileFormData } from "../services/validateProfileFormData";
 import { ProfileFormData } from "../types/form.types";
 
 export default async function createProfileAction(
@@ -10,7 +11,7 @@ export default async function createProfileAction(
 	id: string,
 ) {
 	const supabase = await createClient();
-	const validationResult = await ValidateProfileFormData(formData);
+	const validationResult = await validateForm(ProfileFormSchema, formData);
 
 	if (!validationResult.success) {
 		return { success: false, errors: validationResult.errors };

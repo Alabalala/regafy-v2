@@ -24,6 +24,7 @@ const LoginForm = () => {
 	const router = useRouter();
 	const t = useTranslations("auth");
 	const tButtons = useTranslations("buttons");
+	const tErrors = useTranslations("errors");
 	const {
 		register,
 		handleSubmit,
@@ -44,8 +45,8 @@ const LoginForm = () => {
 		setSupabaseToast("");
 		const result = await loginAction(formData);
 		console.log(result);
-		if (!result.success) {
-			setSupabaseToast(result.errors?.root);
+		if (!result.success && result.errors?.root) {
+			setSupabaseToast(tErrors(result.errors?.root) ?? tErrors("generic"));
 			return;
 		}
 

@@ -2,14 +2,14 @@
 
 import { createClient } from "@/shared/services/supabase/server";
 import { validateForm } from "@/shared/services/validateData";
-import { giftFormScheme } from "../services/giftFormScheme";
+import { giftFormSchema } from "../schema/giftForm";
 
 import { createGift } from "../services/supabase";
 import { FormPayloadType } from "../types/form";
 
 export const createGiftAction = async (formData: FormPayloadType) => {
 	const supabase = await createClient();
-	const result = validateForm(giftFormScheme, formData);
+	const result = validateForm(giftFormSchema, formData);
 	if (!result.success)
 		return { success: false, errors: { root: "Invalid data." } };
 

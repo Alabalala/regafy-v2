@@ -169,7 +169,54 @@
 		},
 		"image": {
 			"fileMustBeImage": "File must be an image",
-			"fileMaxSize5MB": "File must be less than 5MB"
+			"fileMaxSize5MB": "File must be less than 5MB",
+			"failedToUpload": "Failed to upload image"
+		},
+		"giftForm": {
+			"titleMin": "Title must be at least 3 characters long",
+			"titleMax": "Title must be at most 30 characters",
+			"descriptionMin": "Description must be at least 3 characters long. If you don't want a description, leave it empty!",
+			"descriptionMax": "Description must be at most 300 characters.",
+			"priceInvalid": "Price must be a positive number",
+			"ratingInvalid": "Error with ratings"
+		},
+		"profileForm": {
+			"nameTooShort": "Name must be at least 3 characters long",
+			"nameTooLong": "Name must be at most 30 characters long",
+			"usernameInvalidCharacters": "Only lowercase letters and numbers, no spaces",
+			"usernameTooShort": "Username must be at least 3 characters long",
+			"usernameTooLong": "Username must be at most 20 characters long",
+			"ageTooYoung": "You need to be over 18 to create an account."
+		},
+		"questionForm": {
+			"questionTooShort": "Question must be at least 3 characters long",
+			"questionTooLong": "Question must be at most 100 characters long"
+		},
+		"answerForm": {
+			"answerTooShort": "Answer must be at least 3 characters long",
+			"answerTooLong": "Answer must be at most 100 characters long"
+		},
+		"signUpForm": {
+			"invalidEmail": "Enter a valid email address",
+			"minLength": "Password must be at least 6 characters long",
+			"maxLength": "Password must be at most 30 characters long",
+			"uppercaseRequired": "Password must contain at least one uppercase letter",
+			"lowercaseRequired": "Password must contain at least one lowercase letter",
+			"numberRequired": "Password must contain at least one number",
+			"specialRequired": "Password must contain at least one special character",
+			"wrongEmail": "Invalid email address",
+			"emailExists": "User with this email already exists"
+		},
+		"logInForm": {
+			"invalidEmail": "enter a valid email address",
+			"minLength": "password must be at least 6 characters long",
+			"maxLength": "password must be at most 30 characters long",
+			"invalidCredentials": "Incorrect email or password",
+			"emailNotConfirmed": "Please confirm your email before logging in."
+		},
+		"commentForm": {
+			"minLength": "Comment must be at least 3 characters long",
+			"maxLength": "Comment must be at most 300 characters long"
 		}
 	},
 	"events": {
@@ -228,6 +275,24 @@
 				"toast": {
 					"assigmentDone": "New secret friend assigment done!"
 				}
+			}
+		}
+	},
+	"profile": {
+		"form": {
+			"editProfile": "Edit profile",
+			"updateProfile": "Update profile",
+			"name": "Name",
+			"namePlaceholder": "E.g. John Doe",
+			"userName": "User name",
+			"userNamePlaceholder": "E.g. johndoe",
+			"birthday": "Your birthday",
+			"birthdayPlaceholder": "E.g. 1990-01-01",
+			"imagePlaceholder": "",
+			"profileImage": "Profile image",
+			"toast": {
+				"updated": "Profile updated!",
+				"created": "Profile created!"
 			}
 		}
 	},

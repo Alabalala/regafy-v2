@@ -14,6 +14,7 @@ import { useGiftStore } from "../../stores/giftStore";
 import { AnswerFormType } from "../../types/form";
 import { useTranslations } from "next-intl";
 import { createNotificationAction } from "@/shared/actions/createNotification";
+import MessageBox from "@/shared/components/MessageBox";
 
 interface Props {
 	questionId: string;
@@ -35,6 +36,7 @@ const AnswerForm = ({ questionId, giftId, questionOwnerId, userId }: Props) => {
 		defaultValues: ANSWER_INITIAL_VALUES,
 	});
 	const t = useTranslations("gifts.post.Q&A");
+	const tErrors = useTranslations("errors");
 	const tButtons = useTranslations("buttons");
 	const onSubmit = async (data: AnswerFormType) => {
 		try {
@@ -53,7 +55,7 @@ const AnswerForm = ({ questionId, giftId, questionOwnerId, userId }: Props) => {
 			setGifts(newGifts);
 			await createNotificationAction([questionOwnerId], "answer", userId, giftId);
 		} catch (error) {
-			setError("root", { type: "server", message: "Failed to add answer" });
+			setError("root", { type: "server", message: tErrors("generic") });
 			return;
 		}
 	};
@@ -79,7 +81,11 @@ const AnswerForm = ({ questionId, giftId, questionOwnerId, userId }: Props) => {
 							currentValue={watch(fieldName) || ""}
 							error={!!errors[fieldName]}
 						/>
-						<div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
+						{errors[fieldName]?.message && (
+							<MessageBox type="error">
+								{tErrors(errors[fieldName]?.message)}
+							</MessageBox>
+						)}
 					</div>
 				);
 			})}

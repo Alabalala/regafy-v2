@@ -1,21 +1,21 @@
 import z from "zod";
 
-export const SingupFormSchema = z.object({
-	email: z.email(),
+export const SignupFormSchema = z.object({
+	email: z.email("invalidEmail"),
 	password: z
 		.string()
-		.min(6, "Password must be at least 6 characters long")
-		.max(30, "Password must be at most 30 characters long")
+		.min(6, "minLength")
+		.max(30, "maxLength")
 		.refine((password) => /[A-Z]/.test(password), {
-			message: "Password must contain at least one uppercase letter",
+			message: "uppercaseRequired",
 		})
 		.refine((password) => /[a-z]/.test(password), {
-			message: "Password must contain at least one lowercase letter",
+			message: "lowercaseRequired",
 		})
 		.refine((password) => /[0-9]/.test(password), {
-			message: "Password must contain at least one number",
+			message: "numberRequired",
 		})
 		.refine((password) => /[!@#$%^&*]/.test(password), {
-			message: "Password must contain at least one special character",
+			message: "specialRequired",
 		}),
 });

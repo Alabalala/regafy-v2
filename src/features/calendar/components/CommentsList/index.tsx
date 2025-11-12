@@ -9,8 +9,14 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { createCommentAction } from "../../actions/createComment";
-import { COMMENT_FORM_FIELDS } from "../../constants/form";
+import {
+	COMMENT_FORM_FIELDS,
+	INITIAL_COMMENT_FORM_DATA,
+} from "../../constants/form";
 import EventComment from "../Comment";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { commentSchema } from "../../schemas/commentFormSchema";
+import MessageBox from "@/shared/components/MessageBox";
 
 interface Props {
 	comments: Comments[];
@@ -26,7 +32,8 @@ const CommentsList = ({ comments, guestIds }: Props) => {
 		handleSubmit,
 		formState: { errors, isSubmitting },
 	} = useForm({
-		defaultValues: { comment: "" },
+		defaultValues: INITIAL_COMMENT_FORM_DATA,
+		resolver: zodResolver(commentSchema),
 	});
 	const comment = watch("comment");
 	const [errorMessage, setErrorMessage] = useState("");
@@ -93,7 +100,14 @@ const CommentsList = ({ comments, guestIds }: Props) => {
 						input={COMMENT_FORM_FIELDS}
 					></Input>
 				</div>
-				{errorMessage && <p className="text-red-600">{errorMessage}</p>}
+				{errorMessage && (
+					<MessageBox type="error">{tErrors(errorMessage)}</MessageBox>
+				)}
+				{errors["comment"]?.message && (
+					<MessageBox type="error">
+						{tErrors("commentForm." + errors["comment"].message)}
+					</MessageBox>
+				)}
 				<Button
 					type="submit"
 					variant="primary"

@@ -11,18 +11,8 @@ export async function login(formData: LoginFormTypes) {
 	const { error, data } = await supabase.auth.signInWithPassword(formData);
 
 	if (error) {
-		let errorMessage = error.message;
-		switch (error.code) {
-			case "invalid_credentials":
-				errorMessage = "Login error: wrong email or password";
-				break;
-			case "email_not_confirmed":
-				errorMessage = "You need to confirm your email first";
-				break;
-			default:
-				break;
-		}
-		return { success: false, error: errorMessage };
+		console.log(error);
+		return { success: false, error: error.code };
 	}
 
 	return { success: true, user: data.user };
@@ -54,23 +44,8 @@ export async function signup(formData: SignUpFormTypes) {
 	const { error } = await supabase.auth.signUp(formData);
 
 	if (error) {
-		let errorMessage =
-			"Error signing up. Try again later or check email isn't already registered";
-		switch (error.code) {
-			case "email_exists":
-				errorMessage = "Email is already registered";
-				break;
-			case "email_not_confirmed":
-				errorMessage = "You need to confirm your email first";
-				break;
-			case "user_already_exists":
-				errorMessage = "User already exists";
-				break;
-			default:
-				break;
-		}
 		console.log(error.code, ": ", error.message);
-		return { success: false, error: errorMessage };
+		return { success: false, error: error.code };
 	}
 
 	return { success: true };

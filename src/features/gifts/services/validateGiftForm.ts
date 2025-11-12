@@ -1,10 +1,10 @@
-import { giftFormScheme } from "./giftFormScheme";
+import { giftFormSchema } from "../schema/giftForm";
 import { GiftFormData } from "../types/form";
 import { ValidationResult } from "@/shared/types/forms";
 import z from "zod";
 
 export const validateGiftForm = (formData: GiftFormData): ValidationResult => {
-	const result = giftFormScheme.safeParse(formData);
+	const result = giftFormSchema.safeParse(formData);
 
 	if (!result.success) {
 		const { fieldErrors } = z.flattenError(result.error);

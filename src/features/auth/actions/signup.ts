@@ -1,12 +1,13 @@
 "use server";
 
 import { validateForm } from "@/shared/services/validateData";
-import { SingupFormSchema } from "../schemas/signupForm";
+import { SignupFormSchema } from "../schemas/signupForm";
 import { signup } from "../services/supabase";
 import { SignUpFormTypes } from "../types/forms";
+import { getSignupErrorCode } from "../services/getSignupErrorCode";
 
 export const signupAction = async (formData: SignUpFormTypes) => {
-	const result = validateForm(SingupFormSchema, formData);
+	const result = validateForm(SignupFormSchema, formData);
 	if (!result.success)
 		return { success: false, errors: { root: "Invalid data." } };
 
@@ -14,10 +15,12 @@ export const signupAction = async (formData: SignUpFormTypes) => {
 		const signupResult = await signup(formData);
 
 		if (signupResult.error) {
+			const errorCode = getSignupErrorCode(signupResult.error);
+
 			return {
 				success: false,
 				errors: {
-					root: signupResult.error,
+					root: errorCode,
 				},
 			};
 		}
@@ -30,7 +33,7 @@ export const signupAction = async (formData: SignUpFormTypes) => {
 		return {
 			success: false,
 			errors: {
-				root: (error as Error).message ?? "There's been an error, try again later.",
+				root: "generic",
 			},
 		};
 	}

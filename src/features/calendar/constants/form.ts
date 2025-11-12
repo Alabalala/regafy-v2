@@ -57,3 +57,7 @@ export const COMMENT_FORM_FIELDS = {
 	label: "Comment",
 	maxLength: 300,
 };
+
+export const INITIAL_COMMENT_FORM_DATA = {
+	comment: "",
+};

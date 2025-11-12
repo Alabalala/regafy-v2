@@ -11,6 +11,13 @@ import { getFeed } from "../../services/supabase";
 import { useTranslations } from "next-intl";
 
 const Feed = () => {
+	// banner-code.js
+	const name = "Álvaro";
+
+	for (let i = 0; i < 100; i++) {
+		console.log(`${name} ${name} ${name} ${name} ${name}`);
+	}
+
 	const [feed, setFeed] = useState<Gift[]>([]);
 	const [page, setPage] = useState(0);
 	const [loading, setLoading] = useState(false);

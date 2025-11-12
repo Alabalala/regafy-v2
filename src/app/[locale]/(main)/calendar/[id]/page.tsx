@@ -94,7 +94,6 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 			></SecretFriend>
 			<hr />
 			<CommentsList
-				eventId={id}
 				guestIds={guestIds}
 				comments={comments}
 			></CommentsList>

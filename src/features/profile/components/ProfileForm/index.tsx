@@ -27,6 +27,8 @@ import { Profile } from "../../types/supabase.types";
 import updateProfileAction from "../../actions/updateProfile";
 import { useProfileStore } from "../../store/profileStore";
 import CloseSVG from "@/shared/components/SVGs/CloseSVG";
+import MessageBox from "@/shared/components/MessageBox";
+import { useTranslations } from "next-intl";
 
 interface Props {
 	profile?: Profile;
@@ -52,6 +54,9 @@ const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
 	const { setMessage } = useToastStore();
 	const [fileError, setFileError] = useState<string>("");
 	const { setProfile } = useProfileStore();
+	const t = useTranslations("profile.form");
+	const tErrors = useTranslations("errors");
+	const tButtons = useTranslations("buttons");
 	useEffect(() => {
 		if (profile && profile.profileImage) {
 			setFile((prev) => ({
@@ -103,18 +108,18 @@ const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
 					} else {
 						setError("root", {
 							type: "server",
-							message: "Failed to upload image",
+							message: tErrors("image.failedToUpload"),
 						});
 					}
 					router.push(getPath("Home"));
 				} else {
 					setError("root", {
 						type: "server",
-						message: createResult.errors?.root?.[0] ?? "",
+						message: tErrors("generic"),
 					});
 				}
 			} catch (err) {
-				setError("root", { type: "server", message: "Failed to create profile" });
+				setError("root", { type: "server", message: tErrors("generic") });
 			}
 		}
 
@@ -123,7 +128,7 @@ const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
 			if (!updateResult.success) {
 				setError("root", {
 					type: "server",
-					message: updateResult.errors?.root?.[0] ?? "",
+					message: tErrors("generic"),
 				});
 				return;
 			}
@@ -147,7 +152,7 @@ const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
 				};
 			}
 			setProfile(updatedProfile);
-			setMessage("Profile updated!");
+			setMessage(t("toast.updated"));
 			setIsProfileFormOpen(false);
 		}
 	};
@@ -175,8 +180,7 @@ const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
 						key={fieldName}
 						className={"flex flex-col gap-2"}
 					>
-						<p className={"font-bold"}>{input.label}</p>
-
+						<p className={"font-bold"}>{t(input.labelKey)}</p>
 						{input.type === "file" ? (
 							<div className="flex flex-col gap-2">
 								<FileInput
@@ -186,32 +190,41 @@ const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
 									preview={file.preview ?? ""}
 									error={!!fileError}
 								/>
-								{fileError && <div className="text-red-500 text-sm">{fileError}</div>}
+								{fileError && (
+									<MessageBox type="error">{tErrors("image." + fileError)}</MessageBox>
+								)}
 							</div>
 						) : (
 							<Input
+								placeholder={t(input.placeholderKey)}
 								{...register(fieldName)}
 								input={input}
 								currentValue={watch(fieldName) || ""}
 								error={!!errors[fieldName]}
 							/>
 						)}
-						<div className="text-red-500 text-sm">{errors[fieldName]?.message}</div>
+						{errors[fieldName]?.message && (
+							<MessageBox type="error">
+								{tErrors("profileForm." + errors[fieldName]?.message)}
+							</MessageBox>
+						)}{" "}
 					</div>
 				);
 			})}
 
 			{errors.root && (
-				<div className="text-red-500 text-sm">{errors.root.message}</div>
+				<MessageBox type="error">
+					{tErrors("profileForm." + errors.root.message)}
+				</MessageBox>
 			)}
 			<div className={"flex justify-center"}>
 				<Button
 					type="submit"
 					disabled={isSubmitting}
 					loading={isSubmitting}
-					loadingText={"Saving..."}
+					loadingText={tButtons("saving")}
 				>
-					Save profile
+					{tButtons("save")}
 				</Button>
 			</div>
 		</form>
