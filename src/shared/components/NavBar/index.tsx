@@ -51,7 +51,7 @@ export const NavBar = ({ type }: { type: "user" | "auth" }) => {
 	return (
 		<nav
 			className={
-				"flex justify-between items-center p-4 bg-secondary dark:bg-secondary-dark border-b-2 z-30"
+				"flex justify-between items-center p-4 bg-secondary dark:bg-secondary-dark border-b-2 sticky top-0 z-50"
 			}
 		>
 			<NextLink

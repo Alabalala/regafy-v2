@@ -18,7 +18,7 @@ export default function Footer({}) {
 	return (
 		<footer
 			className={
-				"flex justify-around items-center p-2 bg-secondary dark:bg-secondary-dark border-t-2"
+				"flex justify-around items-center p-2 bg-secondary dark:bg-secondary-dark border-t-2 sticky top-0 z-40"
 			}
 		>
 			<NextLink
