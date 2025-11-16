@@ -27,7 +27,12 @@ export const createCommentAction = async (
 			supabase,
 		);
 		const guestsWithoutUser = guestIds.filter((id) => id !== userId);
-		await createNotificationAction(guestsWithoutUser, "comment", userId, eventId);
+		await createNotificationAction(
+			guestsWithoutUser,
+			"event_comment",
+			userId,
+			eventId,
+		);
 		return { success: true, data: newComment };
 	} catch (error) {
 		return {
