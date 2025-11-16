@@ -11,6 +11,7 @@ export const ProfileFormSchema = z.object({
 	name: z.string().min(3, { message: "nameTooShort" }).max(30, "nameTooLong"),
 	userName: z
 		.string()
+		.trim()
 		.min(3, { message: "usernameTooShort" })
 		.max(20, "usernameTooLong")
 		.regex(/^[a-z0-9]+$/, "usernameInvalidCharacters")
