@@ -17,6 +17,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormSchema } from "../../schemas/loginForm";
 import { loginAction } from "../../actions/login";
 import { useTranslations } from "next-intl";
+import { getProfile } from "@/features/profile/services/supabase";
+import { createClient } from "@/shared/services/supabase/client";
 
 const LoginForm = () => {
 	const [supabaseToast, setSupabaseToast] = useState<string | undefined>("");
@@ -44,6 +46,7 @@ const LoginForm = () => {
 	const onSubmit = async (formData: LoginFormTypes) => {
 		setSupabaseToast("");
 		const result = await loginAction(formData);
+		const supabase = await createClient();
 		console.log(result);
 		if (!result.success && result.errors?.root) {
 			setSupabaseToast(tErrors(result.errors?.root) ?? tErrors("generic"));
@@ -51,8 +54,16 @@ const LoginForm = () => {
 		}
 
 		if (result.success) {
-			router.push(getPath("Home"));
-			return;
+			if (result.data?.user?.id) {
+				const profile = await getProfile(result.data.user.id, supabase);
+				if (new Date(profile.updated_at) < new Date(2025, 1, 1)) {
+					router.push(getPath("Create profile") + "?type=update");
+				}
+				return;
+			} else {
+				router.push(getPath("Home"));
+				return;
+			}
 		}
 	};
 
