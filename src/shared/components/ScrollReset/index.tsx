@@ -8,8 +8,8 @@ export default function ScrollReset() {
 
 	useEffect(() => {
 		const main = document.querySelector("main");
-		if (main) main.scrollTop = 0;
-		else window.scrollTo(0, 0);
+		if (main) main.scrollTo({ top: 0, behavior: "auto" });
+		window.scrollTo({ top: 0, behavior: "auto" });
 	}, [pathname]);
 
 	return null;
