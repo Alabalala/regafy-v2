@@ -6,18 +6,11 @@ import { useChangeReserve } from "@/features/gifts/hooks/useChangeReserve";
 import LoadingComponent from "@/shared/components/loadingModule";
 import { createClient } from "@/shared/services/supabase/client";
 import { Gift } from "@/shared/types/supabase/supabase";
-import { useEffect, useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getFeed } from "../../services/supabase";
 import { useTranslations } from "next-intl";
 
 const Feed = () => {
-	// banner-code.js
-	const name = "Álvaro";
-
-	for (let i = 0; i < 100; i++) {
-		console.log(`${name} ${name} ${name} ${name} ${name}`);
-	}
-
 	const [feed, setFeed] = useState<Gift[]>([]);
 	const [page, setPage] = useState(0);
 	const [loading, setLoading] = useState(false);

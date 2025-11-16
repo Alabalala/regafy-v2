@@ -70,7 +70,7 @@ const EventForm = ({ event, type, friends }: Props) => {
 	const supabase = createClient();
 	const t = useTranslations("events.form");
 	const tButtons = useTranslations("buttons");
-	const tErrors = useTranslations("errors.eventForm");
+	const tErrors = useTranslations("errors");
 
 	useEffect(() => {
 		if (event && event.event_image_link) {
@@ -113,7 +113,9 @@ const EventForm = ({ event, type, friends }: Props) => {
 			return;
 		}
 		if (!result.success) {
-			setFileError(result.errors.file?.[0] ?? "");
+			setFileError(
+				result.errors.file?.[0] ? tErrors(result.errors.file?.[0]) : "",
+			);
 			return;
 		}
 
@@ -148,7 +150,7 @@ const EventForm = ({ event, type, friends }: Props) => {
 			} else {
 				setError("root", {
 					type: "server",
-					message: createResult.errors?.root?.[0] ?? "",
+					message: tErrors("generic"),
 				});
 			}
 		}
@@ -174,7 +176,7 @@ const EventForm = ({ event, type, friends }: Props) => {
 			} else {
 				setError("root", {
 					type: "server",
-					message: updateResult.errors?.root?.[0] ?? "",
+					message: tErrors("generic"),
 				});
 			}
 		}
@@ -225,7 +227,7 @@ const EventForm = ({ event, type, friends }: Props) => {
 
 						{errors[fieldName]?.message && (
 							<MessageBox type="error">
-								{tErrors(errors[fieldName]?.message)}
+								{tErrors("eventForm." + errors[fieldName]?.message)}
 							</MessageBox>
 						)}
 					</div>
