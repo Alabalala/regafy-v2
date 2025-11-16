@@ -5,7 +5,7 @@ export const ROUTES = [
 	{ name: "Account deleted", path: "/account-deleted" },
 	{ name: "Sign up", path: "/sign-up" },
 	{ name: "Login", path: "/login" },
-	{ name: "New profile", path: "/new-profile" },
+	{ name: "Create profile", path: "/create-profile" },
 	{ name: "Remove friend", path: "/:id/remove-friend" },
 	{ name: "Add person", path: "/add-person" },
 	{ name: "Friends", path: "/friends" },
