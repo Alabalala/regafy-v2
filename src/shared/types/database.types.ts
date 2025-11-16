@@ -375,33 +375,27 @@ export type Database = {
 				Row: {
 					created_at: string;
 					id: number;
-					message: string;
 					read: boolean | null;
 					reference_id: string;
 					sender_id: string;
-					subject: string;
 					type: string;
 					user_id: string;
 				};
 				Insert: {
 					created_at?: string;
 					id?: number;
-					message: string;
 					read?: boolean | null;
 					reference_id: string;
 					sender_id: string;
-					subject: string;
 					type: string;
 					user_id: string;
 				};
 				Update: {
 					created_at?: string;
 					id?: number;
-					message?: string;
 					read?: boolean | null;
 					reference_id?: string;
 					sender_id?: string;
-					subject?: string;
 					type?: string;
 					user_id?: string;
 				};
@@ -429,6 +423,7 @@ export type Database = {
 					id: string;
 					name: string;
 					profileImage: string | null;
+					updated_at: string;
 					userName: string;
 				};
 				Insert: {
@@ -437,6 +432,7 @@ export type Database = {
 					id?: string;
 					name: string;
 					profileImage?: string | null;
+					updated_at?: string;
 					userName: string;
 				};
 				Update: {
@@ -445,6 +441,7 @@ export type Database = {
 					id?: string;
 					name?: string;
 					profileImage?: string | null;
+					updated_at?: string;
 					userName?: string;
 				};
 				Relationships: [];
