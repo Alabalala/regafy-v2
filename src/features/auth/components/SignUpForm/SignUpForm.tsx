@@ -61,7 +61,7 @@ const SignUpForm = () => {
 	};
 
 	const handleEmailResend = async () => {
-		if (!email) return; // safeguard
+		if (!email) return;
 
 		setResendLoading(true);
 		const result = await resendConfirmationEmail(email);
