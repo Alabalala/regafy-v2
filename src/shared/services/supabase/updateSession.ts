@@ -60,7 +60,8 @@ export async function updateSession(request: NextRequest) {
 		pathWithoutLocale === "/login" ||
 		pathWithoutLocale === "/sign-up" ||
 		pathWithoutLocale === "/forgot-password" ||
-		pathWithoutLocale.startsWith("/password-recovery");
+		pathWithoutLocale.startsWith("/password-recovery") ||
+		pathWithoutLocale.startsWith("/confirm");
 
 	if (!user && !isAuthPage) {
 		const url = request.nextUrl.clone();
