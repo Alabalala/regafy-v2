@@ -64,12 +64,10 @@
 		"go": "Ir"
 	},
 	"timeAgo": {
-		"justNow": "justo ahora",
-		"moreThan4Months": "hace más de 4 meses"
+		"justNow": "Justo ahora",
+		"moreThan4Months": "Hace más de 4 meses"
 	},
-	"home": {
-		"title": "Muro"
-	},
+	"home": { "title": "Muro" },
 	"gifts": {
 		"giftList": "Lista de regalos",
 		"myGifts": "Mis regalos",
@@ -102,17 +100,14 @@
 			"pricePlaceholder": "Ayuda a las personas a saber cuánto costará",
 			"image": "Imagen",
 			"rateTitle": "Puntúa cuánto quieres este regalo",
-			"toast": {
-				"added": "¡Regalo creado!",
-				"updated": "¡Regalo actualizado!"
-			}
+			"toast": { "added": "¡Regalo creado!", "updated": "¡Regalo actualizado!" }
 		}
 	},
 	"friends": {
 		"findFriends": "Encuentra a tus amig@s",
 		"inviteFriends": "Invita a tus amig@s",
 		"friends": "Amigos",
-		"findFriendPlaceholder": "Escribe el nombre o el nombre de usuario de tu amig@ aqui",
+		"findFriendPlaceholder": "Escribe el nombre o el nombre de usuario de tu amig@ aquí",
 		"friendsList": "Lista de amigos",
 		"noFriends": "Aún no tienes amigos",
 		"notYourFriend": "no es tu amig@ todavía.",
@@ -128,9 +123,7 @@
 				"sent": "Solicitud de amistad enviada"
 			}
 		},
-		"profile": {
-			"birthday": "Cumpleaños"
-		},
+		"profile": { "birthday": "Cumpleaños" },
 		"deleteModalTitle": "¿Eliminar amig@?",
 		"deleteModalMessage": "¿Estás segur@? Esta acción no puede deshacerse."
 	},
@@ -169,7 +162,8 @@
 		},
 		"image": {
 			"fileMustBeImage": "El archivo debe ser una imagen",
-			"fileMaxSize5MB": "El archivo debe ser menor de 5MB"
+			"fileMaxSize5MB": "El archivo debe ser menor de 5MB",
+			"failedToUpload": "Error al subir la imagen"
 		},
 		"giftForm": {
 			"titleMin": "El título debe tener al menos 3 caracteres",
@@ -178,6 +172,44 @@
 			"descriptionMax": "La descripción no puede tener más de 300 caracteres.",
 			"priceInvalid": "El precio debe ser un número positivo",
 			"ratingInvalid": "Error con las valoraciones"
+		},
+		"profileForm": {
+			"nameTooShort": "El nombre debe tener al menos 3 caracteres",
+			"nameTooLong": "El nombre debe tener como máximo 30 caracteres",
+			"usernameInvalidCharacters": "Solo letras minúsculas y números, sin espacios",
+			"usernameTooShort": "El nombre de usuario debe tener al menos 3 caracteres",
+			"usernameTooLong": "El nombre de usuario debe tener como máximo 20 caracteres",
+			"ageTooYoung": "Debes tener más de 18 años para crear una cuenta"
+		},
+		"questionForm": {
+			"questionTooShort": "La pregunta debe tener al menos 3 caracteres",
+			"questionTooLong": "La pregunta no puede tener más de 100 caracteres"
+		},
+		"answerForm": {
+			"answerTooShort": "La respuesta debe tener al menos 3 caracteres",
+			"answerTooLong": "La respuesta no puede tener más de 100 caracteres"
+		},
+		"signUpForm": {
+			"invalidEmail": "Introduce un correo válido",
+			"minLength": "La contraseña debe tener al menos 6 caracteres",
+			"maxLength": "La contraseña debe tener como máximo 30 caracteres",
+			"uppercaseRequired": "La contraseña debe contener al menos una letra mayúscula",
+			"lowercaseRequired": "La contraseña debe contener al menos una letra minúscula",
+			"numberRequired": "La contraseña debe contener al menos un número",
+			"specialRequired": "La contraseña debe contener al menos un carácter especial",
+			"wrongEmail": "Correo electrónico no válido",
+			"emailExists": "Ya existe un usuario con este correo"
+		},
+		"logInForm": {
+			"invalidEmail": "Introduce un correo válido",
+			"minLength": "La contraseña debe tener al menos 6 caracteres",
+			"maxLength": "La contraseña debe tener como máximo 30 caracteres",
+			"invalidCredentials": "Correo o contraseña incorrectos",
+			"emailNotConfirmed": "Confirma tu correo antes de iniciar sesión"
+		},
+		"commentForm": {
+			"minLength": "El comentario debe tener al menos 3 caracteres",
+			"maxLength": "El comentario no puede tener más de 300 caracteres"
 		}
 	},
 	"events": {
@@ -220,20 +252,33 @@
 			},
 			"modal": {
 				"deleteModalTitle": "¿Quieres borrar el evento?",
-				"deleteModalMessage": "¿Estás segur@ de que quieres borrar este evento?. Está accion no puede deshacerse. El evento se borrará para siempre."
+				"deleteModalMessage": "¿Estás segur@ de que quieres borrar este evento? Esta acción no puede deshacerse. El evento se borrará para siempre."
 			},
 			"secretFriend": {
 				"secretFriend": "Amigo invisible",
 				"startMessage": "¿Quieres empezar y crear un amig@ invisible?",
 				"onGoingSecretFriend": "Ya hay un amig@ invisible en curso. Si quieres unirte, pídele al creador del evento que te meta.",
 				"flipCardMessage": "¡Dale a la tarjeta para girarla y ver quién es tu amig@ invisible!",
-				"imageAlt": "Caddy, nuestro mascota, incognito",
+				"imageAlt": "Caddy, nuestra mascota, incógnito",
 				"psst": "👀 ¡Oye!",
 				"everyoneNotIncluded": "¡No están incluid@s tod@s los invitad@s del evento! ¿Quieres reiniciar?",
-				"toast": {
-					"assigmentDone": "¡Nuev@s amig@os invisibles asignad@s!"
-				}
+				"toast": { "assigmentDone": "¡Nuev@s amig@s invisibles asignad@s!" }
 			}
+		}
+	},
+	"profile": {
+		"form": {
+			"editProfile": "Editar perfil",
+			"updateProfile": "Actualizar perfil",
+			"name": "Nombre",
+			"namePlaceholder": "Ej. Juan Pérez",
+			"userName": "Nombre de usuario",
+			"userNamePlaceholder": "Ej. juanperez",
+			"birthday": "Tu cumpleaños",
+			"birthdayPlaceholder": "Ej. 1990-01-01",
+			"imagePlaceholder": "",
+			"profileImage": "Imagen del perfil",
+			"toast": { "updated": "¡Perfil actualizado!", "created": "¡Perfil creado!" }
 		}
 	},
 	"profileSettings": {
@@ -246,16 +291,12 @@
 			"newEmailPlaceholder": "Ej. tucorreo@ejemplo.com",
 			"confirmNewEmail": "Confirmar nuevo correo electrónico",
 			"confirmNewEmailPlaceholder": "Ej. tucorreo@ejemplo.com",
-			"toast": {
-				"updated": "¡Correo electrónico actualizado!"
-			}
+			"toast": { "updated": "¡Correo electrónico actualizado!" }
 		},
 		"passwordForm": {
 			"newPassword": "Nueva contraseña",
 			"confirmNewPassword": "Confirmar nueva contraseña",
-			"toast": {
-				"updated": "¡Contraseña actualizada!"
-			}
+			"toast": { "updated": "¡Contraseña actualizada!" }
 		},
 		"logOut": "Cerrar sesión",
 		"logOutDescription": "Puedes cerrar sesión desde aquí, pero tendrás que volver a acceder con tu correo y contraseña.",
@@ -278,82 +319,70 @@
 			"password": "Contraseña",
 			"passwordPlaceholder": "Tu contraseña",
 			"passwordInstructions": "La contraseña debe tener al menos 6 caracteres y contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial.",
-			"toast": {
-				"created": "¡Cuenta creada!"
-			},
+			"toast": { "created": "¡Cuenta creada!" },
 			"completedSignup": "¡Cuenta creada! Comprueba tu correo para activar tu cuenta."
 		},
-		"confirmationForm": {
-			"toast": {
-				"resent": "¡Correo reenviado!"
-			}
-		},
+		"confirmationForm": { "toast": { "resent": "¡Correo reenviado!" } },
 		"forgotPassword": {
 			"title": "Recupera tu contraseña",
 			"link": "He olvidado mi contraseña",
 			"form": {
 				"resend": "Puedes reenviar en ",
 				"description": "Escribe tu mail y te mandaremos un correo para que puedas recuperar tu contraseña.",
-
-				"email": "Email",
+				"email": "Correo",
 				"emailPlaceholder": "Ej. tucorreo@ejemplo.com",
-				"toast": {
-					"emailSent": "¡Te hemos enviado el mail de recuperación! Mira tu correo."
-				}
+				"toast": { "emailSent": "¡Correo enviado! Comprueba tu correo." }
 			}
 		},
 		"passwordRecovery": {
-			"title": "Redireccionándote a la página de ajustes para cambiar contraseña...",
+			"title": "Redirigiendo a la página de cambio de contraseña...",
 			"form": {
-				"expired": "El enlace de recuperación de contraseña ha caducado. Haz clic en el enlace para solicitar uno nuevo.",
-
-				"description": "Puedes cambiar tu contraseña desde aqui, pero tendrás que volver a acceder con tu correo y contraseña.",
+				"expired": "Tu enlace de recuperación de contraseña ha caducado. Haz clic abajo para solicitar uno nuevo.",
+				"description": "Puedes cambiar tu contraseña aquí, pero tendrás que iniciar sesión de nuevo con tu correo y nueva contraseña.",
 				"newPassword": "Nueva contraseña",
 				"confirmNewPassword": "Confirmar nueva contraseña",
 				"newPasswordPlaceholder": "Tu contraseña",
-				"confirmNewPasswordPlaceholder": "Confirma la contraseña aquí",
+				"confirmNewPasswordPlaceholder": "Confirma tu contraseña aquí",
 				"toast": {
-					"updated": "¡Contraseña actualizada! Entra con tu nueva contraseña."
+					"updated": "¡Contraseña actualizada! Inicia sesión con tu nueva contraseña."
 				}
 			}
 		}
 	},
-	"loader": {
-		"loading": "Cargando..."
-	},
+	"loader": { "loading": "Cargando..." },
 	"notifications": {
 		"notifications": "Notificaciones",
-		"noNotifications": "No tienes notificaciones todavía",
+		"noNotifications": "No hay nuevas notificaciones",
 		"notificationList": "Lista de notificaciones",
 		"notification": "Notificación",
 		"templates": {
 			"event_comment": {
-				"title": "Nuevo comentario",
-				"body": "¡{sender} ha dejado un nuevo comentario en {event}!"
+				"title": "Nuevos comentarios",
+				"body": "@{sender} dejó un nuevo comentario en {event}!"
 			},
 			"event": {
 				"title": "Nueva invitación",
-				"body": "¡{sender} te ha invitado a {event}!"
+				"body": "@{sender} te invitó a {event}!"
 			},
 			"request": {
 				"title": "Nueva solicitud de amistad",
-				"body": "¡{sender} quiere ser tu amig@!"
+				"body": "@{sender} quiere ser tu amig@!"
 			},
 			"request_accepted": {
 				"title": "Solicitud de amistad aceptada",
-				"body": "¡{sender} te ha aceptado como amig@!"
+				"body": "¡@{sender} aceptó tu solicitud de amistad!"
 			},
 			"event_secret_friend": {
-				"title": "Nuevo amigo secreto",
-				"body": "¡{sender} te ha asignado un amig@ secreto en {event}!"
+				"title": "Nuevo amigo invisible",
+				"body": "@{sender} te asignó un amigo invisible en {event}!"
 			},
 			"question": {
 				"title": "Nueva pregunta",
-				"body": "{sender} ha dejado una pregunta nueva en tu regalo"
+				"body": "@{sender} dejó una nueva pregunta en tu regalo!"
 			},
 			"answer": {
 				"title": "Nueva respuesta",
-				"body": "{sender} ha respondido a tu pregunta"
+				"body": "@{sender} dejó una nueva respuesta a tu pregunta!"
 			}
 		}
 	}
