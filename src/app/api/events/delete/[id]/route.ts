@@ -6,7 +6,6 @@ export async function DELETE(
 	request: NextRequest,
 	{ params }: { params: Promise<{ id: string }> },
 ) {
-	console.log("working");
 	try {
 		const { id } = await params;
 

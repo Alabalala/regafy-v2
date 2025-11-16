@@ -25,7 +25,6 @@ export async function sendPasswordRecoveryEmail(email: string) {
 			: `https://regafy.netlify.app`;
 	const fullLink = redirectTo + getPath("Recover password");
 	const supabase = await createClient();
-	console.log(fullLink);
 	const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
 		redirectTo: fullLink,
 	});
