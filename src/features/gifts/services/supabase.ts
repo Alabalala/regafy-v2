@@ -1,7 +1,7 @@
+import { Gift, Questions } from "@/shared/types/supabase/supabase";
 import { SupabaseClient } from "@supabase/supabase-js";
 import { Database } from "../../../shared/types/database.types";
-import { FormDataWithFileType, GiftFormNoFile } from "../types/form";
-import { Gift, Questions } from "@/shared/types/supabase/supabase";
+import { FormPayloadType, GiftFormData, GiftFormNoFile } from "../types/form";
 
 export async function getGifts(
 	userId: string,
@@ -30,12 +30,17 @@ export async function getGifts(
 }
 
 export async function createGift(
-	giftData: GiftFormNoFile,
+	giftData: FormPayloadType,
 	supabase: SupabaseClient<Database>,
 ) {
+	const payload = {
+		...giftData,
+		rating: Number(giftData.rating),
+	};
+
 	const { data, error } = await supabase
 		.from("gifts")
-		.insert(giftData)
+		.insert(payload)
 		.select("*")
 		.single();
 
@@ -52,7 +57,7 @@ export async function updateGift(
 
 	const { error, data } = await supabase
 		.from("gifts")
-		.update({ title, description, price, rating })
+		.update({ title, description, price, rating: Number(rating) })
 		.eq("id", giftId)
 		.select("*");
 
@@ -79,7 +84,10 @@ export async function reserveGift(
 	}
 }
 
-export async function deleteGift(giftId, supabase) {
+export async function deleteGift(
+	giftId: string,
+	supabase: SupabaseClient<Database>,
+) {
 	const { data, error } = await supabase.from("gifts").delete().eq("id", giftId);
 
 	if (error) throw error;
