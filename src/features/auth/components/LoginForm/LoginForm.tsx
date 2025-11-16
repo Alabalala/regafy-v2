@@ -47,7 +47,6 @@ const LoginForm = () => {
 		setSupabaseToast("");
 		const result = await loginAction(formData);
 		const supabase = await createClient();
-		console.log(result);
 		if (!result.success && result.errors?.root) {
 			setSupabaseToast(tErrors(result.errors?.root) ?? tErrors("generic"));
 			return;
@@ -58,11 +57,10 @@ const LoginForm = () => {
 				const profile = await getProfile(result.data.user.id, supabase);
 				if (new Date(profile.updated_at) < new Date(2025, 1, 1)) {
 					router.push(getPath("Create profile") + "?type=update");
+				} else {
+					router.push(getPath("Home"));
+					return;
 				}
-				return;
-			} else {
-				router.push(getPath("Home"));
-				return;
 			}
 		}
 	};
