@@ -33,7 +33,7 @@ import { useTranslations } from "next-intl";
 interface Props {
 	profile?: Profile;
 	type: "create" | "update";
-	setIsProfileFormOpen: (isOpen: boolean) => void;
+	setIsProfileFormOpen?: (isOpen: boolean) => void;
 }
 
 const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
@@ -42,6 +42,7 @@ const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
 		handleSubmit,
 		setError,
 		watch,
+		reset,
 		formState: { errors, isSubmitting },
 	} = useForm<ProfileFormData>({
 		resolver: zodResolver(ProfileFormSchema),
@@ -65,6 +66,12 @@ const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
 			}));
 		}
 	}, [profile]);
+
+	useEffect(() => {
+		if (profile) {
+			reset(profile);
+		}
+	}, [profile, reset]);
 
 	if (!user) {
 		return <LoadingComponent />;
@@ -153,7 +160,11 @@ const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
 			}
 			setProfile(updatedProfile);
 			setMessage(t("toast.updated"));
-			setIsProfileFormOpen(false);
+			if (setIsProfileFormOpen) {
+				setIsProfileFormOpen(false);
+			} else {
+				router.push(getPath("Profile settings"));
+			}
 		}
 	};
 
@@ -166,12 +177,14 @@ const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
 				<h3 className={" font-bold uppercase"}>
 					{type === "create" ? "Create profile" : "Update profile"}
 				</h3>
-				<Button
-					isPlain
-					onClick={() => setIsProfileFormOpen(false)}
-				>
-					<CloseSVG></CloseSVG>
-				</Button>
+				{setIsProfileFormOpen && (
+					<Button
+						isPlain
+						onClick={() => setIsProfileFormOpen(false)}
+					>
+						<CloseSVG></CloseSVG>
+					</Button>
+				)}
 			</div>
 			{PROFILE_FORM_INPUTS.map((input) => {
 				const fieldName = input.name as keyof ProfileFormData;
@@ -212,11 +225,7 @@ const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
 				);
 			})}
 
-			{errors.root && (
-				<MessageBox type="error">
-					{tErrors("profileForm." + errors.root.message)}
-				</MessageBox>
-			)}
+			{errors.root && <MessageBox type="error">{errors.root.message}</MessageBox>}
 			<div className={"flex justify-center"}>
 				<Button
 					type="submit"
