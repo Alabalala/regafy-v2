@@ -8,8 +8,8 @@ export const USER_BURGER_MENU_ITEMS = [
 		pathName: "Help",
 	},
 	{
-		nameKey: "messages",
-		pathName: "Messages",
+		nameKey: "news",
+		pathName: "News",
 	},
 ];
 

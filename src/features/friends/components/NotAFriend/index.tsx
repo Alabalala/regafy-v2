@@ -47,7 +47,7 @@ const NotAFriend = ({ userId, profile }: Props) => {
 		try {
 			const request = await sendFriendRequest(profile.id, userId, supabase);
 			setHasFriendRequest(request);
-			await createNotificationAction([userId], "request_sent", profile.id, userId);
+			await createNotificationAction([profile.id], "request_sent", userId, userId);
 			setMessage(t("requests.toast.sent"));
 		} catch (err) {
 			console.log(err);

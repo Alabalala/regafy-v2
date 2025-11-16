@@ -8,7 +8,7 @@
 	"burgerMenu": {
 		"profileSettings": "Profile settings",
 		"help": "Help",
-		"messages": "Messages",
+		"news": "News",
 		"switchTheme": "Switch theme",
 		"changeLanguage": "Change language"
 	},
@@ -116,11 +116,11 @@
 		"friendsList": "Friends list",
 		"noFriends": "No friends yet",
 		"notYourFriend": "is not your friend yet.",
-		"sentYouFriendRequest": "sent you a friend request.",
 		"noResults": "No results found",
 		"results": "Results",
 		"suggestedFriends": "Suggested friends",
 		"requests": {
+			"sentYouFriendRequest": "sent you a friend request.",
 			"requests": "Friend requests",
 			"toast": {
 				"accepted": "Friend added!",
@@ -406,6 +406,10 @@
 				"title": "Friend request accepted",
 				"body": "¡@{sender} accepted your friend request!"
 			},
+			"request_sent": {
+				"title": "Friend request sent",
+				"body": "¡@{sender} sent you a friend request!"
+			},
 			"event_secret_friend": {
 				"title": "New secret friend",
 				"body": "@{sender} assigned you a secret friend in {event}!"
@@ -419,5 +423,8 @@
 				"body": "@{sender} left a new answer to your question!"
 			}
 		}
+	},
+	"news": {
+		"news": "News"
 	}
 }

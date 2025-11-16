@@ -23,5 +23,5 @@ export const ROUTES = [
 	{ name: "Help", path: "/help" },
 	{ name: "Forgot password", path: "/forgot-password" },
 	{ name: "Recover password", path: "/password-recovery" },
-	{ name: "Messages", path: "/messages" },
+	{ name: "News", path: "/news" },
 ];
