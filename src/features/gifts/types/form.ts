@@ -7,6 +7,8 @@ export interface GiftFormData {
 	rating: string;
 }
 
+export type GiftFormNoFile = Omit<GiftFormData, "image">;
+
 export interface FormDataWithFileType extends GiftFormData {
 	image: File | null;
 }

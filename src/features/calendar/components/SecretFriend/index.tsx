@@ -100,7 +100,12 @@ const SecretFriend = ({
 				setIsUserIncluded(userIncluded);
 				setIsAllIncluded(allIncluded);
 				setMessage(t("toast.assigmentDone"));
-				await createNotificationAction(guestsId, "secret_friend", userId, eventId);
+				await createNotificationAction(
+					guestsId,
+					"event_secret_friend",
+					userId,
+					eventId,
+				);
 			}
 		} catch (error) {
 			console.log(error);
