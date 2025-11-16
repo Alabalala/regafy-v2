@@ -8,7 +8,7 @@
 	"burgerMenu": {
 		"profileSettings": "Configuración del perfil",
 		"help": "Ayuda",
-		"messages": "Mensajes",
+		"news": "Noticias",
 		"switchTheme": "Cambiar tema",
 		"changeLanguage": "Cambiar idioma"
 	},
@@ -120,7 +120,7 @@
 			"toast": {
 				"accepted": "¡Amig@ añadido!",
 				"declined": "Solicitud de amistad rechazada",
-				"sent": "Solicitud de amistad enviada"
+				"sent": "Solicitud enviada"
 			}
 		},
 		"profile": { "birthday": "Cumpleaños" },
@@ -377,6 +377,10 @@
 				"title": "Solicitud de amistad aceptada",
 				"body": "¡@{sender} aceptó tu solicitud de amistad!"
 			},
+			"request_sent": {
+				"title": "Solicitud de amistad enviada",
+				"body": "¡@{sender} te ha enviado una solicitud de amistad!"
+			},
 			"event_secret_friend": {
 				"title": "Nuevo amigo invisible",
 				"body": "@{sender} te asignó un amigo invisible en {event}!"
@@ -390,5 +394,8 @@
 				"body": "@{sender} dejó una nueva respuesta a tu pregunta!"
 			}
 		}
+	},
+	"news": {
+		"news": "Noticias"
 	}
 }

@@ -346,28 +346,43 @@ export type Database = {
 			};
 			news: {
 				Row: {
-					body: string;
-					buttonText: string;
+					active: boolean;
+					body_en: string;
+					body_es: string;
 					created_at: string;
+					CTA_en: string;
+					CTA_es: string;
+					CTA_link: string;
 					id: number;
 					image: string;
-					title: string;
+					title_en: string;
+					title_es: string;
 				};
 				Insert: {
-					body: string;
-					buttonText: string;
+					active?: boolean;
+					body_en: string;
+					body_es: string;
 					created_at?: string;
+					CTA_en: string;
+					CTA_es: string;
+					CTA_link: string;
 					id?: number;
 					image: string;
-					title: string;
+					title_en: string;
+					title_es: string;
 				};
 				Update: {
-					body?: string;
-					buttonText?: string;
+					active?: boolean;
+					body_en?: string;
+					body_es?: string;
 					created_at?: string;
+					CTA_en?: string;
+					CTA_es?: string;
+					CTA_link?: string;
 					id?: number;
 					image?: string;
-					title?: string;
+					title_en?: string;
+					title_es?: string;
 				};
 				Relationships: [];
 			};
