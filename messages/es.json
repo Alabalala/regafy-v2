@@ -111,11 +111,11 @@
 		"friendsList": "Lista de amigos",
 		"noFriends": "Aún no tienes amigos",
 		"notYourFriend": "no es tu amig@ todavía.",
-		"sentYouFriendRequest": "te ha enviado una solicitud de amistad.",
 		"noResults": "No se encontraron resultados",
 		"results": "Resultados",
 		"suggestedFriends": "Amigos sugeridos",
 		"requests": {
+			"sentYouFriendRequest": "te ha enviado una solicitud de amistad.",
 			"requests": "Solicitudes de amistad",
 			"toast": {
 				"accepted": "¡Amig@ añadido!",
