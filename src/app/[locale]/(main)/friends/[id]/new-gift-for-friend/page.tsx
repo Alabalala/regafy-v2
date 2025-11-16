@@ -30,11 +30,12 @@ export default async function FriendProfile({ params }: Props) {
 			</H1WithExit>
 			<div className="w-fit">
 				<ProfileInfo
+					canEdit={false}
 					sided
 					profile={profile}
 				/>
 			</div>
-			<GiftForm></GiftForm>
+			<GiftForm type={"create"}></GiftForm>
 		</div>
 	);
 }
