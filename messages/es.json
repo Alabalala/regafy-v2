@@ -13,6 +13,7 @@
 		"changeLanguage": "Cambiar idioma"
 	},
 	"buttons": {
+		"sendEmail": "Enviar correo",
 		"addPerson": "Añadir persona",
 		"savingFriend": "Guardando amig@...",
 		"addGift": "Añadir regalo",
@@ -397,5 +398,9 @@
 	},
 	"news": {
 		"news": "Noticias"
+	},
+	"help": {
+		"title": "Centro de ayuda",
+		"description": "He creado esta app con mucho amor y esfuerzo 💛. Seguramente hay algún que otro error por ahí, así que si ves algo, por favor envíame un correo a regafy.info@gmail.com. ¡Te agradecería mucho tu ayuda!"
 	}
 }

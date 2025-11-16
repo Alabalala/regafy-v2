@@ -13,6 +13,7 @@
 		"changeLanguage": "Change language"
 	},
 	"buttons": {
+		"sendEmail": "Send email",
 		"addPerson": "Add person",
 		"savingFriend": "Saving friend...",
 		"addGift": "Add gift",
@@ -426,5 +427,9 @@
 	},
 	"news": {
 		"news": "News"
+	},
+	"help": {
+		"title": "Help Center",
+		"description": "I created this app with lots of love and effort 💛. There are probably some bugs hiding around, so if you spot anything, please email me at regafy.info@gmail.com. I’d really appreciate your help!"
 	}
 }
