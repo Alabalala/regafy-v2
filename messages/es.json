@@ -322,6 +322,11 @@
 			"toast": { "created": "¡Cuenta creada!" },
 			"completedSignup": "¡Cuenta creada! Comprueba tu correo para activar tu cuenta."
 		},
+		"confirm": {
+			"confirmed": "¡Cuenta confirmada! Redirigiendo a la página de inicio...",
+			"error": "Ha ocurrido un error, por favor inténtalo de nuevo más tarde.",
+			"expired": "Este enlace ha caducado, haz clic abajo para obtener uno nuevo."
+		},
 		"confirmationForm": { "toast": { "resent": "¡Correo reenviado!" } },
 		"forgotPassword": {
 			"title": "Recupera tu contraseña",

@@ -343,7 +343,11 @@
 			},
 			"completedSignup": "Account created! Check your email to activate your account."
 		},
-
+		"confirm": {
+			"confirmed": "Account confirmed! Redirecting to home page...",
+			"error": "There's been an error, please try again later.",
+			"expired": "This link has expired or is broken, click below to get a new one."
+		},
 		"confirmationForm": {
 			"toast": {
 				"resent": "Email resent!"
