@@ -8,7 +8,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 		<div className={"flex flex-col h-dvh"}>
 			<NavBar type={"user"} />
 			<ScrollReset></ScrollReset>
-			<main className={"flex-1 overflow-y-auto p-4"}>{children}</main>
+			<main
+				className={"flex-1 overflow-y-auto p-4 max-w-[800px] mx-auto no-scrollbar"}
+			>
+				{children}
+			</main>
 			<Footer />
 		</div>
 	);
