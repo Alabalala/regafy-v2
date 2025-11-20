@@ -1,12 +1,23 @@
+## 👋 Foreword
+
+Hi, my name is Álvaro and I'm a web developer.
+
+If you like what you see, please feel free to get in touch. I would be happy to show you a live demo and explain how everything works.
+
+---
+
 # Regafy 🎁
 
 **Regafy** is a social network for gifts! Connect with friends, explore their wishlists, reserve gifts, ask questions, create events, organize secret gift exchanges, and much more.  
 
 Built with **React**, **Next.js**, **Supabase**, **next-intl**, **Zod**, **React Hook Form**, and more, Regafy makes giving and sharing gifts fun, easy, and social.  
 
-![Regafy Demo](public/promo.png)
+<p align="center">
+  <img src="public/promo.png" alt="Promo image" width="400"/>
+</p>
 
 ---
+
 
 ## 🚀 Features
 
@@ -34,18 +45,13 @@ Built with **React**, **Next.js**, **Supabase**, **next-intl**, **Zod**, **React
 ## 🎨 Showcase
 Here are some screenshots.
 
-Event calendar:  
-![Screenshot 1](public/screenshot1.png)  
+<p align="center">
+  <img src="public/screenshot1.png" alt="Event Calendar" width="400"/>
+</p>
 
-Secret gift exchange:  
-![Screenshot 2](public/screenshot2.png)  
-
----
-
-## 💡 Notes
-
-This repository is a showcase of Regafy’s features and architecture.  
-It demonstrates how a social gifting platform can be built with modern web technologies.  
+<p align="center">
+  <img src="public/screenshot2.png" alt="Secret Gift Exchange" width="400"/>
+</p>
 
 ---
 
