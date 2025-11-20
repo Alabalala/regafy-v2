@@ -5,12 +5,13 @@ import React from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<div className={"flex flex-col h-dvh"}>
-			{" "}
+		<div className={"flex flex-col h-dvh overflow-hidden"}>
 			<NavBar type={"user"} />
 			<ScrollReset></ScrollReset>
 			<main
-				className={"flex-1 overflow-y-auto p-4 max-w-[800px] mx-auto no-scrollbar"}
+				className={
+					"flex-1 overflow-y-auto p-4 md:max-w-[800px] md:mx-auto no-scrollbar"
+				}
 			>
 				{children}
 			</main>
