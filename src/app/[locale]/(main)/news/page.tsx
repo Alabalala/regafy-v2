@@ -38,7 +38,7 @@ export default async function NewsPage() {
 						<div className="flex flex-col items-center gap-5 p-4">
 							<h2 className="text-lg font-bold">{news.title}</h2>
 							<p>{news.body}</p>
-							<NextLink href={getPath(news.CTA_link)}>{news.CTA}</NextLink>
+							<NextLink href={getPath(news.CTA_link)}>{getPath(news.CTA)}</NextLink>
 						</div>
 					</div>
 				))}
