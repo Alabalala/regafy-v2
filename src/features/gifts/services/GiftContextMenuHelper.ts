@@ -1,10 +1,13 @@
 import { useRouter } from "next/navigation";
 import { getPath } from "@/shared/services/getPath";
 import { MenuItem } from "../../../shared/types/helperFunction.types";
+import { SupabaseClient } from "@supabase/supabase-js";
+import { Database } from "@/shared/types/database.types";
+import { deleteGift } from "./supabase";
 
 export const OwnGiftContextMenuHelper = (
 	giftId: string,
-	profileId: string,
+	deleteGift: (giftId: string) => void,
 ): MenuItem[] => {
 	const router = useRouter();
 
@@ -17,7 +20,9 @@ export const OwnGiftContextMenuHelper = (
 		},
 		{
 			labelKey: "delete",
-			onClick: () => {},
+			onClick: () => {
+				deleteGift(giftId);
+			},
 		},
 		{
 			labelKey: "goToYourProfile",
