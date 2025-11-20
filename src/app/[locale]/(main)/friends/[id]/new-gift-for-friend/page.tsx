@@ -30,7 +30,7 @@ export default async function FriendProfile({ params }: Props) {
 			</H1WithExit>
 			<div className="w-fit">
 				<ProfileInfo
-					canEdit
+					canEdit={false}
 					sided
 					profile={profile}
 				/>
