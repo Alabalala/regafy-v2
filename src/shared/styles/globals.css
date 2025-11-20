@@ -52,6 +52,14 @@
 	--color-on-secondary-accent-dark: #ffffff;
 }
 
+body {
+	overflow: hidden;
+}
+
+body > div {
+	height: 100dvh;
+}
+
 @layer utilities {
 	.no-scrollbar::-webkit-scrollbar {
 		display: none;
