@@ -1,11 +1,12 @@
 import Footer from "@/shared/components/Footer";
 import { NavBar } from "@/shared/components/NavBar";
 import ScrollReset from "@/shared/components/ScrollReset";
+import ViewportWrapper from "@/shared/components/ViewpoertContainer";
 import React from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<div className={"flex flex-col min-h-screen"}>
+		<ViewportWrapper>
 			<NavBar type={"user"} />
 			<ScrollReset></ScrollReset>
 			<main
@@ -14,6 +15,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 				{children}
 			</main>
 			<Footer />
-		</div>
+		</ViewportWrapper>
 	);
 }
