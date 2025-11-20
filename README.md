@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Regafy 🎁
 
-## Getting Started
+**Regafy** is a social network for gifts! Connect with friends, explore their wishlists, reserve gifts, ask questions, create events, organize secret gift exchanges, and much more.  
 
-First, run the development server:
+Built with **React**, **Next.js**, **Supabase**, **next-intl**, **Zod**, **React Hook Form**, and more, Regafy makes giving and sharing gifts fun, easy, and social.  
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Regafy Demo](public/promo.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Features
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- **Friends & Profiles**: Add friends and view their profiles.  
+- **Gift Management**: Browse gifts, reserve items, and ask questions.  
+- **Events & Exchanges**: Create events and organize secret gift exchanges.  
+- **Real-time Updates**: Powered by Supabase for instant interactions.  
+- **Forms & Validation**: Smooth forms with React Hook Form + Zod.  
+- **Multi-language Support**: Built with next-intl for localization.  
+- **Responsive Design**: Works on desktop, tablet, and mobile devices.  
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 🛠 Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Frontend**: React, Next.js, Sass  
+- **Backend / Database**: Supabase (PostgreSQL)  
+- **Authentication**: Supabase Auth  
+- **Form Validation**: React Hook Form + Zod  
+- **Internationalization (i18n)**: next-intl  
+- **Hosting**: Vercel / Netlify  
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🎨 Showcase
+Here are some screenshots.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Event calendar:  
+![Screenshot 1](public/screenshot1.png)  
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Secret gift exchange:  
+![Screenshot 2](public/screenshot2.png)  
+
+---
+
+## 💡 Notes
+
+This repository is a showcase of Regafy’s features and architecture.  
+It demonstrates how a social gifting platform can be built with modern web technologies.  
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
+
