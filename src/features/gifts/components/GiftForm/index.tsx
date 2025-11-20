@@ -126,7 +126,7 @@ const GiftForm = ({ gift, type }: Props) => {
 					}
 					setMessage(t("toast.added"));
 					const path = friendId
-						? getPath("Profile", String(friendId))
+						? getPath("Friend profile", String(friendId))
 						: getPath("Gifts");
 
 					router.push(path);
