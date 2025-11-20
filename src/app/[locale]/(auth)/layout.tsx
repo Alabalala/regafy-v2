@@ -14,7 +14,7 @@ export default function AuthLayout({
 	return (
 		<main>
 			<NavBar type={"auth"}></NavBar>
-			<div className="max-w-[800px] mx-auto">{children}</div>
+			<div className="md:max-w-[800px] md:mx-auto">{children}</div>
 		</main>
 	);
 }
