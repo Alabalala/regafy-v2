@@ -5,7 +5,7 @@ import React from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
-		<div className={"flex flex-col h-dvh"}>
+		<div className={"flex flex-col h-dvh overflow-hidden"}>
 			<NavBar type={"user"} />
 			<ScrollReset></ScrollReset>
 			<main
