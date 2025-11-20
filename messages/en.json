@@ -434,5 +434,9 @@
 	"help": {
 		"title": "Help Center",
 		"description": "I created this app with lots of love and effort 💛. There are probably some bugs hiding around, so if you spot anything, please email me at regafy.info@gmail.com. I’d really appreciate your help!"
+	},
+	"metadata": {
+		"title": "Regafy",
+		"description": "Create gift lists, events, secret gift exchanges and more!"
 	}
 }

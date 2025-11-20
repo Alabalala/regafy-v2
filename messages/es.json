@@ -405,5 +405,9 @@
 	"help": {
 		"title": "Centro de ayuda",
 		"description": "He creado esta app con mucho amor y esfuerzo 💛. Seguramente hay algún que otro error por ahí, así que si ves algo, por favor envíame un correo a regafy.info@gmail.com. ¡Te agradecería mucho tu ayuda!"
+	},
+	"metadata": {
+		"title": "Regafy",
+		"description": "Crea listas de regalos, eventos, intercambios de regalos secretos ¡y mucho más!"
 	}
 }
