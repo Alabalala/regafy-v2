@@ -87,6 +87,9 @@
 				"questionPlaceholder": "Tu pregunta aquí",
 				"answerLabel": "Tu respuesta",
 				"answerPlaceholder": "Tu respuesta aquí"
+			},
+			"toast": {
+				"deleted": "¡Regalo eliminado!"
 			}
 		},
 		"form": {
