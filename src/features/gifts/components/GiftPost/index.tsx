@@ -142,7 +142,9 @@ export default function GiftPost({
 					</div>
 				)}
 
-				<StarRate rating={String(gift.rating)}></StarRate>
+				{gift.owner.id === gift.added_by && (
+					<StarRate rating={String(gift.rating)}></StarRate>
+				)}
 				<hr />
 				<div className={`flex flex-row justify-around`}>
 					{!isOwnGift && (
