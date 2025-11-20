@@ -24,6 +24,8 @@ import { getProfile } from "@/features/profile/services/supabase";
 import { Profile } from "@/features/profile/types/supabase.types";
 import ProfileImage from "@/features/profile/components/ProfileImage";
 import { useTranslations } from "next-intl";
+import { deleteGift } from "../../services/supabase";
+import { useToastStore } from "@/shared/stores/toastStore";
 
 interface Props {
 	gift: Gift;
@@ -47,6 +49,7 @@ export default function GiftPost({
 	const [isCommentsOpen, setIsCommentsOpen] = useState(false);
 	const [reserver, setReserver] = useState<Profile | null>(null);
 	const supabase = createClient();
+	const { setMessage } = useToastStore();
 
 	useEffect(() => {
 		const getReserverProfile = async () => {
@@ -82,6 +85,17 @@ export default function GiftPost({
 		}
 	};
 
+	const handleDelete = async () => {
+		try {
+			await deleteGift(gift.id, supabase);
+			const newGifts = gifts.filter((g) => g.id !== gift.id);
+			setGifts(newGifts);
+			setMessage(t("post.toast.deleted"));
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
 	return (
 		<article className={"border-2 rounded-md"}>
 			<div
@@ -94,7 +108,7 @@ export default function GiftPost({
 					<ContextMenu
 						helperFunction={() =>
 							isOwnGift || user.id === gift.added_by
-								? OwnGiftContextMenuHelper(gift.id, gift.profile_id)
+								? OwnGiftContextMenuHelper(gift.id, handleDelete)
 								: FriendGiftContextMenuHelper(gift.id, gift.profile_id)
 						}
 					/>

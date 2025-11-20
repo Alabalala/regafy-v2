@@ -9,6 +9,8 @@ import { Gift } from "@/shared/types/supabase/supabase";
 import { useEffect, useRef, useState } from "react";
 import { getFeed } from "../../services/supabase";
 import { useTranslations } from "next-intl";
+import { useToastStore } from "@/shared/stores/toastStore";
+import toast from "react-hot-toast";
 
 const Feed = () => {
 	const [feed, setFeed] = useState<Gift[]>([]);
@@ -20,6 +22,15 @@ const Feed = () => {
 	const { changeReserve } = useChangeReserve(feed, setFeed);
 	const loadMoreRef = useRef<HTMLDivElement>(null);
 	const t = useTranslations("home");
+	const { message, clearMessage } = useToastStore();
+
+	useEffect(() => {
+		if (message) {
+			toast.dismiss();
+			toast.success(message);
+			clearMessage();
+		}
+	}, [message, clearMessage]);
 
 	const loadMore = async () => {
 		if (!user || loading || !hasMore) return;
