@@ -89,7 +89,6 @@ export const ProfileSettings = ({}) => {
 
 				<hr />
 
-				{/*TODO*/}
 				<div className="flex flex-col gap-2">
 					<h2 className="font-bold">{t("deleteAccount")}</h2>
 					<div className="flex justify-center">

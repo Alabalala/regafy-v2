@@ -3,9 +3,7 @@ import { createAdminClient } from "@/shared/services/supabase/adminClient";
 export const deleteAccountAction = async (userId: string) => {
 	const supabase = await createAdminClient();
 
-	const { error } = await supabase.auth.admin.deleteUser(
-		"715ed5db-f090-4b8c-a067-640ecee36aa0",
-	);
+	const { error } = await supabase.auth.admin.deleteUser(userId);
 
 	if (error) throw error;
 
