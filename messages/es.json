@@ -62,7 +62,8 @@
 		"addComment": "Añadir comentario",
 		"send": "Enviar",
 		"sending": "Enviando...",
-		"go": "Ir"
+		"go": "Ir",
+		"goBack": "Volver"
 	},
 	"timeAgo": {
 		"justNow": "Justo ahora",
@@ -301,6 +302,10 @@
 			"newPassword": "Nueva contraseña",
 			"confirmNewPassword": "Confirmar nueva contraseña",
 			"toast": { "updated": "¡Contraseña actualizada!" }
+		},
+		"deleteAccountPage": {
+			"title": "Eliminar cuenta",
+			"body": "Lamentamos verte ir, pero queremos asegurarnos de que estás tomando la acción correcta. Esto es irreversible y perderás todos tus datos. Siempre puedes volver y crear una nueva cuenta, pero tendrás que empezar desde cero."
 		},
 		"logOut": "Cerrar sesión",
 		"logOutDescription": "Puedes cerrar sesión desde aquí, pero tendrás que volver a acceder con tu correo y contraseña.",
