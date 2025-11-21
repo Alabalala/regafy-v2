@@ -84,15 +84,20 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 			<h2 className="text-xl font-bold">{t("event.guests")}</h2>
 			<FriendsList friends={event.guests}></FriendsList>
 			<hr />
-			<SecretFriend
-				hasSecretFriend={event.hasSecretFriend}
-				isUserCreator={user.id === event.created_by}
-				secretFriend={event.secret_friends}
-				eventId={event.id}
-				guests={event.guests}
-				userId={user.id}
-			></SecretFriend>
-			<hr />
+
+			{event.guests.length >= 2 && (
+				<div className="flex flex-col gap-4">
+					<SecretFriend
+						hasSecretFriend={event.hasSecretFriend}
+						isUserCreator={user.id === event.created_by}
+						secretFriend={event.secret_friends}
+						eventId={event.id}
+						guests={event.guests}
+						userId={user.id}
+					></SecretFriend>
+					<hr />
+				</div>
+			)}
 			<CommentsList
 				guestIds={guestIds}
 				comments={comments}

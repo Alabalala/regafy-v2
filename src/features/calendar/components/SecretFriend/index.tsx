@@ -1,21 +1,19 @@
 "use client";
 import ProfileInfo from "@/features/profile/components/ProfileInfo";
 import { Profile } from "@/features/profile/types/supabase.types";
+import { createNotificationAction } from "@/shared/actions/createNotification";
 import { Button } from "@/shared/components/Button";
 import { NextLink } from "@/shared/components/Link";
 import { getPath } from "@/shared/services/getPath";
 import { createClient } from "@/shared/services/supabase/client";
+import { useToastStore } from "@/shared/stores/toastStore";
 import { SecretFriendType } from "@/shared/types/supabase/supabase";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { createAssignments } from "../../services/createAssignments";
-import { addAssignment, updateAssigments } from "../../services/supabase";
-import { g } from "vitest/dist/chunks/suite.d.FvehnV49.js";
 import { isEveryoneIncluded } from "../../services/isEveryoneIncluded";
-import { useToastStore } from "@/shared/stores/toastStore";
-import { useTranslations } from "next-intl";
-import { createNotification } from "@/shared/services/supabase/notifications";
-import { createNotificationAction } from "@/shared/actions/createNotification";
+import { addAssignment, updateAssigments } from "../../services/supabase";
 
 interface Props {
 	guests: Profile[];
@@ -205,7 +203,7 @@ const SecretFriend = ({
 							loading={loading}
 							onClick={() => assignSecretFriend("update")}
 						>
-							t{tButtons("restart")}
+							{tButtons("restart")}
 						</Button>
 					</div>
 				</div>
