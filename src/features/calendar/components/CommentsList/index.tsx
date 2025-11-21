@@ -71,7 +71,10 @@ const CommentsList = ({ comments, guestIds }: Props) => {
 	};
 
 	return (
-		<div className="flex flex-col gap-3">
+		<div
+			className="flex flex-col gap-3"
+			id="comments"
+		>
 			<h2 className="text-xl font-bold">{t("comments")}</h2>
 			{commentsList.length === 0 && <p>{t("noComments")}</p>}
 			<div className="flex flex-col gap-5">
