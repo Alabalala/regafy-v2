@@ -12,6 +12,23 @@ export async function middleware(request: NextRequest) {
 		return authResponse;
 	}
 
+	const localeCookie = request.cookies.get("NEXT_LOCALE");
+	if (!localeCookie) {
+		const acceptLang = request.headers.get("accept-language");
+		const supportedLocales = ["en", "es"];
+		const preferredLocale = acceptLang
+			? acceptLang
+					.split(",")
+					.map((l) => l.split(";")[0])[0]
+					.split("-")[0]
+			: "en";
+
+		const locale = supportedLocales.includes(preferredLocale)
+			? preferredLocale
+			: "en";
+		intlResponse.cookies.set("NEXT_LOCALE", locale);
+	}
+
 	authResponse.cookies.getAll().forEach((cookie) => {
 		intlResponse.cookies.set(cookie.name, cookie.value);
 	});

@@ -5,13 +5,14 @@ import {
 	NotificationWithOptionalEvent,
 	NotificationWithSender,
 } from "@/shared/types/supabase/supabase";
-import { useRouter } from "next/navigation";
 import { Button } from "../Button";
 import Notification from "../Notification";
 import CloseSVG from "../SVGs/CloseSVG";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { getSingleEvent } from "@/features/calendar/services/supabase";
+import { getPathFromType } from "@/shared/services/getPathFromType";
+import { useRouter } from "@/i18n/routing";
 
 interface Props {
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -70,12 +71,13 @@ export const NotificationsMenu = ({
 		type: string,
 		referenceId: string,
 		notificationId: number,
+		senderId: string,
 	) => {
 		handleRead(notificationId);
 		setIsOpen(false);
-		router.push(
-			getPath(type === "event" ? "Event" : "Friend profile", String(referenceId)),
-		);
+		const path = getPathFromType(type, referenceId, senderId);
+		console.log(path);
+		router.push(path);
 	};
 
 	return (

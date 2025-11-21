@@ -43,6 +43,7 @@ export const GIFT_FORM_INITIAL_VALUES = {
 	image: null,
 	profile_id: "",
 	added_by: "",
+	rating: "1",
 };
 
 export const FILE_INPUT_INITIAL_VALUES = {

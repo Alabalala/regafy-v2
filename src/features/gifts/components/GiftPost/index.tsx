@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import ShareSVG from "../../../../shared/components/SVGs/ShareSVG";
 import QuestionChatSVG from "../../../../shared/components/SVGs/QuestionChatSVG";
@@ -24,12 +25,15 @@ import { getProfile } from "@/features/profile/services/supabase";
 import { Profile } from "@/features/profile/types/supabase.types";
 import ProfileImage from "@/features/profile/components/ProfileImage";
 import { useTranslations } from "next-intl";
+import { deleteGift } from "../../services/supabase";
+import { useToastStore } from "@/shared/stores/toastStore";
 
 interface Props {
 	gift: Gift;
 	changeReserve: (giftId: string) => void;
 	gifts: Gift[];
 	setGifts: (gifts: Gift[]) => void;
+	hash?: string;
 }
 
 export default function GiftPost({
@@ -37,6 +41,7 @@ export default function GiftPost({
 	changeReserve,
 	gifts,
 	setGifts,
+	hash,
 }: Props) {
 	const timeAgo = useTimeAgo(gift.created_at);
 	const t = useTranslations("gifts");
@@ -47,6 +52,13 @@ export default function GiftPost({
 	const [isCommentsOpen, setIsCommentsOpen] = useState(false);
 	const [reserver, setReserver] = useState<Profile | null>(null);
 	const supabase = createClient();
+	const { setMessage } = useToastStore();
+
+	useEffect(() => {
+		if (!isCommentsOpen && hash === gift.id) {
+			setIsCommentsOpen(true);
+		}
+	}, [hash, gift.id, isCommentsOpen]);
 
 	useEffect(() => {
 		const getReserverProfile = async () => {
@@ -82,8 +94,22 @@ export default function GiftPost({
 		}
 	};
 
+	const handleDelete = async () => {
+		try {
+			await deleteGift(gift.id, supabase);
+			const newGifts = gifts.filter((g) => g.id !== gift.id);
+			setGifts(newGifts);
+			setMessage(t("post.toast.deleted"));
+		} catch (err) {
+			console.error(err);
+		}
+	};
+
 	return (
-		<article className={"border-2 rounded-md"}>
+		<article
+			id={gift.id}
+			className={"border-2 rounded-md"}
+		>
 			<div
 				className={`flex flex-col bg-tertiary dark:bg-tertiary-dark p-4 w-full gap-6 relative ${isCommentsOpen ? "rounded-t-md" : "rounded-md"}`}
 			>
@@ -94,7 +120,7 @@ export default function GiftPost({
 					<ContextMenu
 						helperFunction={() =>
 							isOwnGift || user.id === gift.added_by
-								? OwnGiftContextMenuHelper(gift.id, gift.profile_id)
+								? OwnGiftContextMenuHelper(gift.id, handleDelete)
 								: FriendGiftContextMenuHelper(gift.id, gift.profile_id)
 						}
 					/>
@@ -142,7 +168,9 @@ export default function GiftPost({
 					</div>
 				)}
 
-				<StarRate rating={String(gift.rating)}></StarRate>
+				{gift.owner.id === gift.added_by && (
+					<StarRate rating={String(gift.rating)}></StarRate>
+				)}
 				<hr />
 				<div className={`flex flex-row justify-around`}>
 					{!isOwnGift && (

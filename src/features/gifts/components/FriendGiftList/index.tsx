@@ -31,7 +31,7 @@ const FriendGiftList = ({ gifts, loadMoreRef }: Props) => {
 			gifts={friendGifts}
 			changeReserve={changeReserve}
 			loadMoreRef={loadMoreRef}
-			newGiftLink={getPath("Friend new gift", normalisedFriendId)}
+			newGiftLink={getPath("New gift for friend", normalisedFriendId)}
 		/>
 	);
 };

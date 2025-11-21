@@ -62,7 +62,8 @@
 		"addComment": "Add a comment",
 		"send": "Send",
 		"sending": "Sending...",
-		"go": "Go"
+		"go": "Go",
+		"goBack": "Go back"
 	},
 	"timeAgo": {
 		"justNow": "just now",
@@ -89,6 +90,9 @@
 				"questionPlaceholder": "Your question here",
 				"answerLabel": "Your answer",
 				"answerPlaceholder": "Your answer here"
+			},
+			"toast": {
+				"deleted": "Gift deleted!"
 			}
 		},
 		"form": {
@@ -311,6 +315,10 @@
 				"updated": "Email updated!"
 			}
 		},
+		"deleteAccountPage": {
+			"title": "Delete account",
+			"body": "We're sorry to see you go, but we want to make sure you're taking the right action. This is irreversible and you will lose all your data. You can always come back and create a new account but you'll have to start from scratch."
+		},
 		"passwordForm": {
 			"newPassword": "New password",
 			"confirmNewPassword": "Confirm new password",
@@ -431,5 +439,9 @@
 	"help": {
 		"title": "Help Center",
 		"description": "I created this app with lots of love and effort 💛. There are probably some bugs hiding around, so if you spot anything, please email me at regafy.info@gmail.com. I’d really appreciate your help!"
+	},
+	"metadata": {
+		"title": "Regafy",
+		"description": "Create gift lists, events, secret gift exchanges and more!"
 	}
 }

@@ -8,19 +8,19 @@ export function useTimeAgo(date: string) {
 	const rtf = new Intl.RelativeTimeFormat(locale, { numeric: "auto" });
 	const created = new Date(date).getTime();
 	const now = Date.now();
-	const diff = created - now;
+	const diff = now - created;
 
 	const seconds = Math.floor(diff / 1000);
-	const minutes = Math.floor(seconds / 60);
-	const hours = Math.floor(minutes / 60);
-	const days = Math.floor(hours / 24);
-	const months = Math.floor(days / 30);
+	const minutes = Math.floor(diff / (1000 * 60));
+	const hours = Math.floor(diff / (1000 * 60 * 60));
+	const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+	const months = Math.floor(diff / (1000 * 60 * 60 * 24 * 30));
 
-	if (Math.abs(months) > 4) return t("moreThan4Months");
-	if (Math.abs(seconds) < 60) return t("justNow");
-	if (Math.abs(months) >= 1) return rtf.format(months, "month");
-	if (Math.abs(days) >= 1) return rtf.format(days, "day");
-	if (Math.abs(hours) >= 1) return rtf.format(hours, "hour");
-	if (Math.abs(minutes) >= 1) return rtf.format(minutes, "minute");
-	return rtf.format(seconds, "second");
+	if (months > 4) return t("moreThan4Months");
+	if (seconds < 60) return t("justNow");
+	if (months >= 1) return rtf.format(-months, "month");
+	if (days >= 1) return rtf.format(-days, "day");
+	if (hours >= 1) return rtf.format(-hours, "hour");
+	if (minutes >= 1) return rtf.format(-minutes, "minute");
+	return rtf.format(-seconds, "second");
 }

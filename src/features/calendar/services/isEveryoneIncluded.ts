@@ -7,7 +7,7 @@ export const isEveryoneIncluded = (
 	guests: Profile[],
 	userId: string,
 ) => {
-	const guestsIncluded = secretFriend.some((s) =>
+	const guestsIncluded = secretFriend.every((s) =>
 		guests.some((g) => g.id === s.assignee_id),
 	);
 

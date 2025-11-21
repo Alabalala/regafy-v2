@@ -62,7 +62,8 @@
 		"addComment": "Añadir comentario",
 		"send": "Enviar",
 		"sending": "Enviando...",
-		"go": "Ir"
+		"go": "Ir",
+		"goBack": "Volver"
 	},
 	"timeAgo": {
 		"justNow": "Justo ahora",
@@ -87,6 +88,9 @@
 				"questionPlaceholder": "Tu pregunta aquí",
 				"answerLabel": "Tu respuesta",
 				"answerPlaceholder": "Tu respuesta aquí"
+			},
+			"toast": {
+				"deleted": "¡Regalo eliminado!"
 			}
 		},
 		"form": {
@@ -299,6 +303,10 @@
 			"confirmNewPassword": "Confirmar nueva contraseña",
 			"toast": { "updated": "¡Contraseña actualizada!" }
 		},
+		"deleteAccountPage": {
+			"title": "Eliminar cuenta",
+			"body": "Lamentamos verte ir, pero queremos asegurarnos de que estás tomando la acción correcta. Esto es irreversible y perderás todos tus datos. Siempre puedes volver y crear una nueva cuenta, pero tendrás que empezar desde cero."
+		},
 		"logOut": "Cerrar sesión",
 		"logOutDescription": "Puedes cerrar sesión desde aquí, pero tendrás que volver a acceder con tu correo y contraseña.",
 		"deleteAccount": "Eliminar cuenta"
@@ -402,5 +410,9 @@
 	"help": {
 		"title": "Centro de ayuda",
 		"description": "He creado esta app con mucho amor y esfuerzo 💛. Seguramente hay algún que otro error por ahí, así que si ves algo, por favor envíame un correo a regafy.info@gmail.com. ¡Te agradecería mucho tu ayuda!"
+	},
+	"metadata": {
+		"title": "Regafy",
+		"description": "Crea listas de regalos, eventos, intercambios de regalos secretos ¡y mucho más!"
 	}
 }

@@ -11,6 +11,7 @@ interface Props {
 		type: string,
 		referenceId: string,
 		notificationId: number,
+		senderId: string,
 	) => void;
 }
 
@@ -32,7 +33,12 @@ const Notification = ({ notification, handleRead, handleClick }: Props) => {
 		>
 			<button
 				onClick={() =>
-					handleClick(notification.type, notification.reference_id, notification.id)
+					handleClick(
+						notification.type,
+						notification.reference_id,
+						notification.id,
+						notification.sender.id,
+					)
 				}
 				className="w-full pr-10 border-2 rounded-md "
 			>

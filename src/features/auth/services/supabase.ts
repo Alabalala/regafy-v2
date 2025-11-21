@@ -100,27 +100,6 @@ export async function recoverPassword(newPassword: string) {
 	return data;
 }
 
-// export async function deleteUser(userId) {
-// 	const supabase = await createClient();
-
-// 	const { data, error } = await supabase.auth.api.deleteUser(userId);
-
-// 	if (error) {
-// 		console.log(error);
-// 	}
-
-// 	const { error: deleteProfileError } = await supabase
-// 		.from("profiles")
-// 		.delete()
-// 		.eq("id", userId);
-
-// 	if (deleteProfileError) {
-// 		console.log(deleteProfileError);
-// 	}
-
-// 	return data;
-// }
-
 export async function getCurrentUser(supabase: SupabaseClient<Database>) {
 	const { data, error } = await supabase.auth.getUser();
 
