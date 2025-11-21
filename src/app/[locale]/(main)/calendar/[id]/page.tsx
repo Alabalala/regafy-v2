@@ -86,7 +86,10 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 			<hr />
 
 			{event.guests.length >= 2 && (
-				<div className="flex flex-col gap-4">
+				<div
+					id="secret_friend"
+					className="flex flex-col gap-4"
+				>
 					<SecretFriend
 						hasSecretFriend={event.hasSecretFriend}
 						isUserCreator={user.id === event.created_by}
