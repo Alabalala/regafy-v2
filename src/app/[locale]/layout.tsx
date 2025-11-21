@@ -24,6 +24,51 @@ export default async function Layout({
 	const messages = await getMessages();
 	return (
 		<html lang={locale}>
+			<head>
+				{locale === "es" ? (
+					<>
+						<meta
+							property="og:locale"
+							content="es_ES"
+						/>
+						<meta
+							property="og:title"
+							content="Regafy – Descubre el regalo perfecto al instante"
+						/>
+						<meta
+							property="og:description"
+							content="Regafy te ayuda a descubrir qué regalar a cualquiera en segundos."
+						/>
+						<meta
+							property="og:url"
+							content="https://regafy.netlify.app/es"
+						/>
+					</>
+				) : (
+					<>
+						<meta
+							property="og:locale"
+							content="en_US"
+						/>
+						<meta
+							property="og:title"
+							content="Regafy – Find the Perfect Gift Instantly"
+						/>
+						<meta
+							property="og:description"
+							content="Regafy helps you discover what to buy for anyone in seconds."
+						/>
+						<meta
+							property="og:url"
+							content="https://regafy.netlify.app/en"
+						/>
+					</>
+				)}
+				<meta
+					property="og:image"
+					content="https://regafy.netlify.app/OG/regafy.png"
+				/>
+			</head>
 			<body
 				className={
 					"bg-background dark:bg-background-dark text-on-background dark:text-on-background-dark h-screen font-sans overflow-clip"
