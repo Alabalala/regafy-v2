@@ -1,8 +1,7 @@
 export const ROUTES = [
 	{ name: "Home", path: "/" },
 	{ name: "Profile settings", path: "/profile-settings" },
-	{ name: "Delete account", path: "/delete-account" },
-	{ name: "Account deleted", path: "/account-deleted" },
+	{ name: "Delete account", path: "/profile-settings/delete-account" },
 	{ name: "Sign up", path: "/sign-up" },
 	{ name: "Login", path: "/login" },
 	{ name: "Create profile", path: "/create-profile" },
