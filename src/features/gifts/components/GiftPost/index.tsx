@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import ShareSVG from "../../../../shared/components/SVGs/ShareSVG";
 import QuestionChatSVG from "../../../../shared/components/SVGs/QuestionChatSVG";
@@ -32,6 +33,7 @@ interface Props {
 	changeReserve: (giftId: string) => void;
 	gifts: Gift[];
 	setGifts: (gifts: Gift[]) => void;
+	hash?: string;
 }
 
 export default function GiftPost({
@@ -39,6 +41,7 @@ export default function GiftPost({
 	changeReserve,
 	gifts,
 	setGifts,
+	hash,
 }: Props) {
 	const timeAgo = useTimeAgo(gift.created_at);
 	const t = useTranslations("gifts");
@@ -50,6 +53,12 @@ export default function GiftPost({
 	const [reserver, setReserver] = useState<Profile | null>(null);
 	const supabase = createClient();
 	const { setMessage } = useToastStore();
+
+	useEffect(() => {
+		if (!isCommentsOpen && hash === gift.id) {
+			setIsCommentsOpen(true);
+		}
+	}, [hash, gift.id, isCommentsOpen]);
 
 	useEffect(() => {
 		const getReserverProfile = async () => {
@@ -97,7 +106,10 @@ export default function GiftPost({
 	};
 
 	return (
-		<article className={"border-2 rounded-md"}>
+		<article
+			id={gift.id}
+			className={"border-2 rounded-md"}
+		>
 			<div
 				className={`flex flex-col bg-tertiary dark:bg-tertiary-dark p-4 w-full gap-6 relative ${isCommentsOpen ? "rounded-t-md" : "rounded-md"}`}
 			>
