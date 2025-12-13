@@ -22,6 +22,7 @@ interface Props {
 	hasSecretFriend?: boolean;
 	userId: string;
 	isUserCreator: boolean;
+	creatorProfile: Profile;
 }
 
 //to do, fix create assignments to add user too!<
@@ -33,6 +34,7 @@ const SecretFriend = ({
 	hasSecretFriend,
 	userId,
 	isUserCreator,
+	creatorProfile,
 }: Props) => {
 	const supabase = createClient();
 	const [assigmentProfile, setAsignmentProfile] = useState<Profile>();
@@ -47,8 +49,12 @@ const SecretFriend = ({
 	const tButtons = useTranslations("buttons");
 	useEffect(() => {
 		if (secretFriend) {
-			const asignment = secretFriend.find((s) => s.user_id === userId);
-			const asignee = guests.find((g) => g.id === asignment?.assignee_id);
+			const assignment = secretFriend.find((s) => s.user_id === userId);
+			if (!assignment) return;
+
+			const asignee =
+				guests.find((g) => g.id === assignment?.assignee_id) ||
+				(assignment.assignee_id === userId ? creatorProfile : undefined);
 
 			setAsignmentProfile(asignee);
 
@@ -57,10 +63,11 @@ const SecretFriend = ({
 				guests,
 				userId,
 			);
+
 			setIsUserIncluded(userIncluded);
 			setIsAllIncluded(allIncluded);
 		}
-	}, [secretFriend, userId, guests]);
+	}, [secretFriend, userId, guests, creatorProfile]);
 
 	const assignSecretFriend = async (mode: "create" | "update") => {
 		if (

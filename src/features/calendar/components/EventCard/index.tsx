@@ -23,7 +23,7 @@ const EventCard = ({ event }: { event: normalisedEvent }) => {
 					<div className="flex flex-row gap-2 items-center">
 						<ProfileImage
 							small
-							profileImage={event.image ?? "/illustrations/caddy.webp"}
+							profileImage={event.image || ""}
 						></ProfileImage>
 						<div className="text-sm font-normal">{event.title}</div>
 					</div>
