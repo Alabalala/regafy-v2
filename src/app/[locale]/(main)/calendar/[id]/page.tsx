@@ -97,6 +97,7 @@ const EventPage = async ({ params }: { params: { id: string } }) => {
 						eventId={event.id}
 						guests={event.guests}
 						userId={user.id}
+						creatorProfile={createdByProfile}
 					></SecretFriend>
 					<hr />
 				</div>
