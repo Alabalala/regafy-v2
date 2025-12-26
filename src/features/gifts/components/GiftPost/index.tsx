@@ -158,11 +158,11 @@ export default function GiftPost({
 					<p>{gift.description}</p>
 				</div>
 				{gift.image_link && (
-					<div className={"border-2 relative w-full h-50"}>
+					<div className={"border-2 relative md:h-[400px] w-full aspect-2/3 bg-tertiary-100"}>
 						<Image
 							src={`${getOptimizedImageUrl(gift.image_link)}`}
 							fill
-							className={"object-cover"}
+							className={"object-contain "}
 							alt={tImages("alt.genericGiftImage")}
 						/>
 					</div>
