@@ -5,6 +5,7 @@ import { validateForm } from "@/shared/services/validateData";
 import { ProfileFormSchema } from "../schemas/profileFormSchema";
 import { createProfile } from "../services/supabase";
 import { ProfileFormData } from "../types/form.types";
+import { revalidatePath } from "next/cache";
 
 export default async function createProfileAction(
 	formData: ProfileFormData,
@@ -19,6 +20,8 @@ export default async function createProfileAction(
 
 	try {
 		const profile = await createProfile(formData, supabase, id);
+		revalidatePath("/", "layout");
+		
 		return { success: true, data: profile };
 	} catch (error) {
 		return {
