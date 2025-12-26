@@ -79,7 +79,7 @@ export async function updateSession(request: NextRequest) {
 
 	const hasProfile = user?.user_metadata?.has_profile === true;
 	
-	if (!hasProfile && !isCreateProfilePage) {
+	if (!hasProfile && !isCreateProfilePage && !isAuthPage) {
             const url = request.nextUrl.clone();
             url.pathname = `/${locale}/create-profile`;
             url.searchParams.set("type", "create");
