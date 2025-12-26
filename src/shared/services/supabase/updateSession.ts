@@ -63,6 +63,8 @@ export async function updateSession(request: NextRequest) {
 		pathWithoutLocale.startsWith("/password-recovery") ||
 		pathWithoutLocale.startsWith("/confirm");
 
+	const isCreateProfilePage = pathWithoutLocale === "/create-profile";
+
 	if (!user && !isAuthPage) {
 		const url = request.nextUrl.clone();
 		url.pathname = `/${locale}/login`;
@@ -74,5 +76,15 @@ export async function updateSession(request: NextRequest) {
 		url.pathname = `/${locale}`;
 		return NextResponse.redirect(url);
 	}
+
+	const hasProfile = user?.user_metadata?.has_profile === true;
+	
+	if (!hasProfile && !isCreateProfilePage) {
+            const url = request.nextUrl.clone();
+            url.pathname = `/${locale}/create-profile`;
+            url.searchParams.set("type", "create");
+            return NextResponse.redirect(url);
+        }
+
 	return supabaseResponse;
 }

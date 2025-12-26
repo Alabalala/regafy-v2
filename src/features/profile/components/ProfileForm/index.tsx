@@ -118,6 +118,7 @@ const ProfileForm = ({ profile, type, setIsProfileFormOpen }: Props) => {
 							message: tErrors("image.failedToUpload"),
 						});
 					}
+					await supabase.auth.refreshSession();
 					router.push(getPath("Home"));
 				} else {
 					setError("root", {
