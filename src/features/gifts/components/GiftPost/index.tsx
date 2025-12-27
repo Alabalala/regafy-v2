@@ -21,9 +21,6 @@ import { getOptimizedImageUrl } from "@/shared/services/getOptimisedImageUrl";
 import ProfileInfo from "@/features/profile/components/ProfileInfo";
 import LoadingComponent from "@/shared/components/loadingModule";
 import { createClient } from "@/shared/services/supabase/client";
-import { getProfile } from "@/features/profile/services/supabase";
-import { Profile } from "@/features/profile/types/supabase.types";
-import ProfileImage from "@/features/profile/components/ProfileImage";
 import { useTranslations } from "next-intl";
 import { deleteGift } from "../../services/supabase";
 import { useToastStore } from "@/shared/stores/toastStore";
@@ -50,24 +47,15 @@ export default function GiftPost({
 	const tButtons = useTranslations("buttons");
 	const [user] = useUser();
 	const [isCommentsOpen, setIsCommentsOpen] = useState(false);
-	const [reserver, setReserver] = useState<Profile | null>(null);
 	const supabase = createClient();
 	const { setMessage } = useToastStore();
+const reservedByUser = gift.reserved_by === user?.id;
 
 	useEffect(() => {
 		if (!isCommentsOpen && hash === gift.id) {
 			setIsCommentsOpen(true);
 		}
 	}, [hash, gift.id, isCommentsOpen]);
-
-	useEffect(() => {
-		const getReserverProfile = async () => {
-			if (!gift.reserved_by) return;
-			const profile = await getProfile(gift.reserved_by, supabase);
-			setReserver(profile);
-		};
-		getReserverProfile();
-	}, [gift.reserved_by, supabase]);
 
 	if (!user || !gift || !gift.owner) return <LoadingComponent />;
 	const isOwnGift = gift.profile_id === user.id;
@@ -107,12 +95,20 @@ export default function GiftPost({
 
 	return (
 		<article
-			id={gift.id}
-			className={"border-2 rounded-md"}
+		id={gift.id}
+		className={`border-2 relative rounded-md overflow-hidden`}
 		>
 			<div
 				className={`flex flex-col bg-tertiary dark:bg-tertiary-dark p-4 w-full gap-6 relative ${isCommentsOpen ? "rounded-t-md" : "rounded-md"}`}
 			>
+	{ gift.reserved && !isOwnGift && !reservedByUser &&
+	<>
+		<div className="absolute w-full top-1/2 -translate-y-1/2 font-bold p-2 shadow-2xl uppercase transform  text-center bg-secondary dark:bg-secondary-dark left-0   border-t-2 border-b-2 z-30">{t("post.reservedBySomeoneElse")}</div>
+		<div className="absolute inset-0 bg-white/10 dark:bg-black/20 backdrop-filter backdrop-blur-[1px] transition-all z-20" />
+	</>
+
+	}			
+				
 				<div className="absolute top-4 right-0 flex flex-row gap-3">
 					<div className={"flex items-center text-xs"}>
 						<p>{timeAgo}</p>
@@ -149,6 +145,10 @@ export default function GiftPost({
 					</div>
 				)}
 
+				{gift.reserved && reservedByUser &&
+				 <div className="w-full border-2 rounded-md text-center font-bold p-2 shadow-2xl uppercase bg-accent dark:bg-accent-dark">{t("post.reservedByYou")}</div>
+					}
+
 				<div className={"flex flex-col gap-3"}>
 					<div className={"flex flex-col justify-between font-bold text-md"}>
 						<p className={`${poppins.className} `}>{gift.title}</p>
@@ -175,7 +175,7 @@ export default function GiftPost({
 				<div className={`flex flex-row justify-around`}>
 					{!isOwnGift && (
 						<Button
-							disabled={(gift.reserved ?? false) || gift.added_by === user?.id}
+							disabled={(gift.reserved && !reservedByUser) || gift.added_by === user?.id}
 							isGroup
 							isPlain
 							variant="primary"
@@ -186,14 +186,14 @@ export default function GiftPost({
 									<BookMarkSVG filled={gift.reserved ?? false} />
 									<p>{gift.reserved ? tButtons("reserved") : tButtons("reserve")}</p>
 								</div>
-								{reserver && (
+								{/* {reserver && (
 									<div className="absolute top-0 right-0 z-0">
 										<ProfileImage
 											xs
 											profileImage={reserver?.profileImage}
 										/>
 									</div>
-								)}
+								)} */}
 							</div>
 						</Button>
 					)}
