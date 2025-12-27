@@ -77,6 +77,8 @@
 		"post": {
 			"friendAddedGift": "ha añadido un regalo para",
 			"youAddedGift": "Has añadido un regalo para",
+			"reservedByYou": "Reservado por ti",
+			"reservedBySomeoneElse": "Reservado por otra persona",
 			"Q&A": {
 				"noQuestions": "No hay preguntas todavía",
 				"questions": "Preguntas",
