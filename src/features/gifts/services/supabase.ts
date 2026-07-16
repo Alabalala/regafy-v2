@@ -71,17 +71,19 @@ export async function reserveGift(
 	isReserved: boolean,
 	reservedById?: string,
 ) {
+	console.log(isReserved, reservedById);
 	const { error, data } = await supabase
 		.from("gifts")
 		.update({
 			reserved: isReserved,
 			reserved_by: isReserved ? reservedById : null,
 		})
-		.eq("id", giftId);
+		.eq("id", giftId)
+		.select("*");
 
-	if (error) {
-		console.error("Error reserving gift:", error);
-	}
+	if (error) throw error;
+
+	return data;
 }
 
 export async function deleteGift(

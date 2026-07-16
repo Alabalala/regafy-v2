@@ -25,8 +25,6 @@ interface Props {
 	creatorProfile: Profile;
 }
 
-//to do, fix create assignments to add user too!<
-
 const SecretFriend = ({
 	guests,
 	secretFriend,
@@ -37,7 +35,7 @@ const SecretFriend = ({
 	creatorProfile,
 }: Props) => {
 	const supabase = createClient();
-	const [assigmentProfile, setAsignmentProfile] = useState<Profile>();
+	const [assigmentProfile, setAssignmentProfile] = useState<Profile>();
 	const [loading, setLoading] = useState(false);
 	const [isAllIncluded, setIsAllIncluded] = useState(false);
 	const [isUserIncluded, setIsUserIncluded] = useState(false);
@@ -47,6 +45,11 @@ const SecretFriend = ({
 	const t = useTranslations("events.event.secretFriend");
 	const tErrors = useTranslations("errors");
 	const tButtons = useTranslations("buttons");
+	
+useEffect(() => {
+		console.log({assigmentProfile})
+	}, [assigmentProfile]);
+
 	useEffect(() => {
 		if (secretFriend) {
 			const assignment = secretFriend.find((s) => s.user_id === userId);
@@ -54,14 +57,15 @@ const SecretFriend = ({
 
 			const asignee =
 				guests.find((g) => g.id === assignment?.assignee_id) ||
-				(assignment.assignee_id === userId ? creatorProfile : undefined);
+				(assignment.assignee_id === creatorProfile.id ? creatorProfile : undefined);
 
-			setAsignmentProfile(asignee);
+			setAssignmentProfile(asignee);
 
 			const { userIncluded, allIncluded } = isEveryoneIncluded(
 				secretFriend,
 				guests,
 				userId,
+				creatorProfile.id
 			);
 
 			setIsUserIncluded(userIncluded);
@@ -96,11 +100,12 @@ const SecretFriend = ({
 				const asigneeProfile = guests.find(
 					(guest) => guest.id === assignment?.assignee_id,
 				);
-				setAsignmentProfile(asigneeProfile);
+				setAssignmentProfile(asigneeProfile);
 				const { userIncluded, allIncluded } = isEveryoneIncluded(
 					result,
 					guests,
 					userId,
+					creatorProfile.id
 				);
 				setIsUserIncluded(userIncluded);
 				setIsAllIncluded(allIncluded);

@@ -9,12 +9,17 @@ import { getPath } from "@/shared/services/getPath";
 
 export default function useProfile() {
 	const [user] = useUser();
-	const { profile, setProfile } = useProfileStore();
+	const { profile, setProfile, clearProfile } = useProfileStore();
 	const supabase = createClient();
 	const router = useRouter();
 
 	useEffect(() => {
 		const fetchData = async () => {
+			if (profile && user && profile.id !== user.id) {
+				clearProfile();
+				return
+			}
+
 			if (!profile && user) {
 				try {
 					const fetchedProfile = await getProfile(user.id, supabase);
@@ -28,7 +33,7 @@ export default function useProfile() {
 			}
 		};
 		fetchData();
-	}, [profile, user]);
+	}, [profile, user, setProfile, supabase, router]);
 
 	return [profile];
 }

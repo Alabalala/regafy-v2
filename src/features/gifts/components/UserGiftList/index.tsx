@@ -16,8 +16,9 @@ interface Props {
 const UserGiftList = ({ gifts, loadMoreRef }: Props) => {
 	const { setGifts } = useGiftStore();
 	const { gifts: storeGifts } = useGiftStore();
-	const { changeReserve } = useChangeReserve(gifts, setGifts);
 	const { message, clearMessage } = useToastStore();
+	const handleNoOp = () => {};
+
 	useEffect(() => {
 		setGifts(gifts);
 	}, [gifts, setGifts]);
@@ -34,7 +35,7 @@ const UserGiftList = ({ gifts, loadMoreRef }: Props) => {
 		<GiftList
 			setGifts={setGifts}
 			gifts={storeGifts}
-			changeReserve={changeReserve}
+			changeReserve={handleNoOp}
 			loadMoreRef={loadMoreRef}
 			newGiftLink={getPath("New gift")}
 		/>
