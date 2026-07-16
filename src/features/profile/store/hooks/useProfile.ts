@@ -17,14 +17,14 @@ export default function useProfile() {
 		const fetchData = async () => {
 			if (profile && user && profile.id !== user.id) {
 				clearProfile();
-				return
+				return;
 			}
 
 			if (!profile && user) {
 				try {
 					const fetchedProfile = await getProfile(user.id, supabase);
 					if (!fetchedProfile) {
-						router.push(getPath("New profile"));
+						router.push(getPath("Create profile"));
 					}
 					setProfile(fetchedProfile);
 				} catch (err) {
